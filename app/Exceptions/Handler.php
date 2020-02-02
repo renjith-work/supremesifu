@@ -45,7 +45,10 @@ class Handler extends ExceptionHandler
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
-    {
+    {   
+        if ($exception instanceof \Illuminate\Http\Exceptions\PostTooLargeException) {
+            return response()->view('admin.partials.posttoolarge');
+        }
         return parent::render($request, $exception);
     }
 }
