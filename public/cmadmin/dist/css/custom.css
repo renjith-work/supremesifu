@@ -913,3 +913,10 @@ vertical-align: middle;
 .admin-footer-error{
 	/*padding: 50px 20px;*/
 }
+
+.form-box-body h5 b{
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 600;
+    font-size: 13px;
+}

@@ -21,6 +21,9 @@ use File;
 
 class PostController extends Controller
 {
+    public function __construct() {
+        $this->middleware(['auth', 'post']);
+    }
     /**
      * Display a listing of the resource.
      *

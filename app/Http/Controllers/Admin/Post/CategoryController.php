@@ -16,6 +16,9 @@ use File;
 
 class CategoryController extends Controller
 {
+    public function __construct() {
+        $this->middleware(['auth', 'postCategory']);
+    }
     /**
      * Display a listing of the resource.
      *

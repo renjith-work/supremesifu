@@ -15,11 +15,26 @@
 //     return view('welcome');
 // });
 
+// Auth Routes
 Auth::routes();
+Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
+	// User Routes
+	Route::resource('auth/users', 'Admin\Auth\UserController',  ['as' => 'auth']);
+	Route::get('auth/users/{id}/delete', 'Admin\Auth\UserController@delete')->name('auth.users.delete');
+	// Permission Routes
+	Route::resource('auth/permissions', 'Admin\Auth\PermissionController', ['as' => 'auth']);
+	Route::get('auth/permissions/{id}/delete', 'Admin\Auth\PermissionController@delete')->name('auth.permissions.delete');
+	// Roles Routes
+	Route::resource('auth/roles', 'Admin\Auth\RoleController', ['as' => 'auth']);
+	Route::get('auth/roles/{id}/delete', 'Admin\Auth\RoleController@delete')->name('auth.roles.delete');
+});
 
+// Initial Routes
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard', 'Admin\Dashboard\DashboardController@index')->name('dashboard');
 
+
+// Blog Post Routes
 Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 	// Post Category Routes
 	Route::resource('post/category', 'Admin\Post\CategoryController',  ['as' => 'post']);

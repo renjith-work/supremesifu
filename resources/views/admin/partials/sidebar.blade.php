@@ -10,10 +10,16 @@
                     <li class="header">MAIN NAVIGATION</li>
                     <li class=""><a href="/dashboard"> <i class="fa fa-dashboard"></i> <span>Dashboard</span> <span class="pull-right-container"></span> </a></li>
                     <li class="header">POST MANAGEMENT</li>
-                    <li class=""><a href="/admin/post"> <i class="fa fa-circle-o""></i> <span>Post management</span> <span class="pull-right-container"></span> </a></li>
-                    <li class=""><a href="/admin/post/category"> <i class="fa fa-circle-o""></i> <span>Category management</span> <span class="pull-right-container"></span> </a></li>
-                    <li class=""><a href="/admin/post/tag"> <i class="fa fa-circle-o""></i> <span>Tag management</span> <span class="pull-right-container"></span> </a></li>
-                    <li class=""><a href="/admin/post/status"> <i class="fa fa-circle-o""></i> <span>Status management</span> <span class="pull-right-container"></span> </a></li>
+                    @can('List Post')<li class=""><a href="/admin/post"> <i class="fa fa-circle-o""></i> <span>Post management</span> <span class="pull-right-container"></span> </a></li>@endcan
+                    @can('List Post Category')<li class=""><a href="/admin/post/category"> <i class="fa fa-circle-o""></i> <span>Category management</span> <span class="pull-right-container"></span> </a></li>@endcan
+                    @can('List Post Tag')<li class=""><a href="/admin/post/tag"> <i class="fa fa-circle-o""></i> <span>Tag management</span> <span class="pull-right-container"></span> </a></li>@endcan
+                    @can('List Post Status')<li class=""><a href="/admin/post/status"> <i class="fa fa-circle-o""></i> <span>Status management</span> <span class="pull-right-container"></span> </a></li>@endcan
+                    @hasrole('Super Admin')
+                    <li class="header">ADMIN ROLES & PERMISSIONS</li>
+                    <li class="{{ Active::checkRoute('admin.auth.users.*') }}"><a href="/admin/auth/users"><i class="fa fa-circle-o"></i> User Management</a></li>
+                    <li class="{{ Active::checkRoute('admin.auth.roles.*') }}"><a href="/admin/auth/roles"><i class="fa fa-circle-o"></i> Role Management</a></li>
+                    <li class="{{ Active::checkRoute('admin.auth.permissions.*') }}"><a href="/admin/auth/permissions"><i class="fa fa-circle-o"></i> Permission Management</a></li>
+                    @endhasrole  
                     {{-- <li class="{{ Active::check('dashboard') }}"><a href="/dashboard"> <i class="fa fa-dashboard"></i> <span>Dashboard</span> <span class="pull-right-container"></span> </a></li> --}}
                     {{-- <li class="{{ Active::check('settings') }}"><a href="/settings"> <i class="fa fa-cogs"></i> <span>Global Settings</span> <span class="pull-right-container"></span> </a></li>
                     <li class="header">FABRIC MANAGEMENT</li>
@@ -78,3 +84,4 @@
                 </ul>
             </section>
         </aside>
+        

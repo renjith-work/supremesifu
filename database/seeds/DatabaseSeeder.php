@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
         	PostStatusTableSeeder::class,
         	PostTagTableSeeder::class,
             PostDesignTableSeeder::class,
+            // Roles and Permissions Seeder
+            PermissionsTableSeeder::class,
+            RolesTableSeeder::class,
         ]);
     }
 }

@@ -12,6 +12,9 @@ use Session;
 
 class TagController extends Controller
 {
+    public function __construct() {
+        $this->middleware(['auth', 'postTag']);
+    }
     /**
      * Display a listing of the resource.
      *
