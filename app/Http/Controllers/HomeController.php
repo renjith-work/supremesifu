@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Mail;
+use App\Mail\NewUserWelcome;
 use Illuminate\Http\Request;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -13,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware(['auth', 'verified']);
     }
 
     /**
@@ -23,6 +25,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('front.demo.home');
+    }
+
+    public function test()
+    {
+        return view('front.demo.test');
+    }
+        
+    public function mail()
+    {
+        Mail::to(Auth::user()->email)->send(new NewUserWelcome());
+        return redirect()->back();
     }
 }

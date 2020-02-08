@@ -17,6 +17,8 @@
 
 // Auth Routes
 Auth::routes();
+Auth::routes(['verify' => true]);
+
 Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 	// User Routes
 	Route::resource('auth/users', 'Admin\Auth\UserController',  ['as' => 'auth']);
@@ -29,8 +31,27 @@ Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 	Route::get('auth/roles/{id}/delete', 'Admin\Auth\RoleController@delete')->name('auth.roles.delete');
 });
 
+Route::get('/register', 'Front\Auth\RegisterController@register');
+Route::post('/user/register', 'Front\Auth\RegisterController@store')->name('front.auth.user.store');
+Route::get('/login', 'Front\Auth\LoginController@login');
+Route::post('/user/login', 'Front\Auth\LoginController@loginUser')->name('front.auth.user.login');
+
+
+//Socialite
+//Google
+Route::get('/login/google', 'Front\Auth\LoginController@redirectToGoogle');
+Route::get('/login/google/callback', 'Front\Auth\LoginController@handleGoogleCallback');
+// Facebook
+Route::get('login/facebook', 'Front\Auth\LoginController@redirectToFacebook');
+Route::get('login/facebook/callback', 'Front\Auth\LoginController@handleFacebookCallback');
+
+// Email Verification
+Route::get('/email-verified', 'Front\Auth\EmailController@verified')->name('verification.redirect');
+
 // Initial Routes
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index');
+Route::get('/test', 'HomeController@test')->middleware('verified');
+Route::get('/email', 'HomeController@mail')->name('sendEmail');
 Route::get('/dashboard', 'Admin\Dashboard\DashboardController@index')->name('dashboard');
 
 

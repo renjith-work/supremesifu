@@ -1,0 +1,225 @@
+.px-auth-box-cover{
+	-webkit-box-shadow: 0px 0px 11px 1px rgba(135,135,135,1);
+	-moz-box-shadow: 0px 0px 11px 1px rgba(135,135,135,1);
+	box-shadow: 0px 0px 11px 1px rgba(135,135,135,1);
+	margin: 50px 0px 50px 0px;
+}
+
+.px-auth-box-head{
+	background: #000;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0px 20px 0px;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.px-auth-box-head-title{
+	background: #000;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.px-auth-box-body input{
+	padding: 19px 12px;
+}
+
+.px-auth-box-body label{
+	font-weight: 600;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	font-size: 11px;
+}
+
+.px-atuh-box-check-cover {
+	margin: 30px 0px 30px 0px;
+}
+
+.px-atuh-box-check-cover label{
+	font-weight: 500;
+	letter-spacing: 0.5px;
+	text-transform: none;
+	padding-left: 15px;
+    margin-bottom: 0;
+    font-size: 13px;
+}
+
+.px-atuh-box-check-cover label > a{
+	font-weight: 600;
+	color: #000;
+}
+
+.px-atuh-box-check-cover  .form-check-input {
+    position: absolute;
+    margin-top: 6px !important;
+}
+
+.px-black-btn{
+	width: 100%;
+	background: #000;
+	color: #fff;
+	font-size: 15px;
+	font-weight: 600;
+	letter-spacing: 2px;
+	text-align: center;
+	text-transform: uppercase;
+	padding: 10px 20px 10px 20px;
+}
+
+.px-black-btn:hover, .px-black-btn:active{
+	color: #d4d0d0;
+}
+
+.error-p{
+	font-size: 11px;
+	color: #dc3545;
+	margin-top: 5px;
+	letter-spacing: 1px;
+}
+
+.is-invalid {
+    border: red !important;
+    background-color: #f2dede !important;
+    border-color: #ebccd1 !important;
+}
+
+.email-verify-body h3{
+	margin: 0px 0px 40px 0px;
+	text-align: center;
+	font-weight: 600;
+}
+.email-verify-body p{
+	line-height: 30px;
+}
+
+.email-verify-first-line{
+	font-size: 15px;
+	font-weight: 600;
+}
+
+.email-verify-body a{
+	color: #000;
+	font-weight: 600;
+	text-decoration: underline;
+}
+
+.login-forgot-pass-link{
+	text-align: right;
+}
+
+.login-forgot-pass-link a{
+	color: #212529;
+	text-decoration: none;
+	font-size: 13px;
+}
+
+.px-auth-login-button-cover input{
+	padding: 10px;
+}
+
+.px-auth-social-media-login-cover{
+	margin: 40px 0px 40px 0px;
+}
+
+.px-auth-social-media-login-item{
+	margin: 0px 0px 20px 0px;
+}
+
+.px-btn-fb-social{
+	width: 100%;
+	color: #fff;
+	font-size: 15px;
+	font-weight: 600;
+	letter-spacing: 2px;
+	text-align: center;
+
+	background: rgba(0, 0, 0, 0) -webkit-linear-gradient(rgb(86, 120, 188), rgb(49, 74, 123)) repeat scroll 0% 0% / auto padding-box border-box;
+	background: rgba(0, 0, 0, 0) linear-gradient(rgb(86, 120, 188), rgb(49, 74, 123)) repeat scroll 0% 0% / auto padding-box border-box;
+	border-top: 1px solid rgb(49, 74, 123);
+	border-right: 1px solid rgb(42, 64, 105);
+	border-bottom: 1px solid rgb(42, 64, 105);
+	border-left: 1px solid rgb(42, 64, 105);
+}
+
+.px-btn-gp-social{
+	width: 100%;
+	color: #fff;
+	font-size: 15px;
+	font-weight: 600;
+	letter-spacing: 2px;
+	text-align: center;
+
+	background-color: #DD4B39;
+    background: -webkit-linear-gradient(#DD4B39,#D14836);
+    background: linear-gradient(#DD4B39,#D14836);
+    border-top: 1px solid rgb(230, 88, 88);
+    border-right: 1px solid rgb(227, 66, 66);
+    border-bottom: 1px solid rgb(227, 66, 66);
+    border-left: 1px solid rgb(227, 66, 66);
+}
+
+.px-auth-social-media-login-item a:hover{
+	color: #fff;
+}
+
+.px-btn-social-icon{
+	font-size: 20px;
+	text-align: center;
+}
+
+.px-social-icon-border{
+	border-right: 1px solid #fff;
+}
+
+.px-social-icon-text{
+	padding-top: 4px;
+	padding-left: 30px;
+	text-align: left;
+	font-size: 14px;
+}
+
+.px-auth-login-register-account{
+	margin: 20px;
+	text-align: center;
+}
+
+.px-auth-login-register-account a{
+	color: #212529;
+	text-decoration: underline;
+}
+
+/*Responsive Styles*/
+
+@media only screen and (min-width : 320px) {
+	.px-auth-box-body{
+		padding: 60px 20px 30px 20px;
+	}
+
+	.px-auth-box-footer{
+		padding: 0px 20px 60px 20px;
+	}
+
+}
+@media only screen and (min-width : 480px) {
+
+}
+@media only screen and (min-width : 768px) {
+	.px-auth-box-body{
+		padding: 60px 60px 30px 60px;
+	}
+
+	.px-auth-box-footer{
+		padding: 0px 60px 60px 60px;
+	}
+}
+@media only screen and (min-width : 992px) {
+
+}
+@media only screen and (min-width : 1200px) {
+
+}
