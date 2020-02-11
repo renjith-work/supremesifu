@@ -36,18 +36,18 @@ Route::post('/user/register', 'Front\Auth\RegisterController@store')->name('fron
 Route::get('/login', 'Front\Auth\LoginController@login')->name('login');
 Route::post('/user/login', 'Front\Auth\LoginController@loginUser')->name('front.auth.user.login');
 
+// Settings Routes
+Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
+Route::get('settings', 'Admin\Settings\SettingController@index')->name('settings');
+Route::post('settings', 'Admin\Settings\SettingController@update')->name('settings.update');
+});
+
 // User Dashboard
 Route::group(['prefix'  =>   'user', 'as' => 'user.'], function() {
 	Route::get('dashboard','Front\User\DashController@customer')->name('dashboard')->middleware('verified');
 	Route::resource('account-details', 'Front\User\AccountController');
 	Route::resource('password-reset', 'Front\User\PasswordController');
 	Route::get('pasword/reset/email', 'Front\User\PasswordController@forgot');
-	// Route::get('account-details','Front\User\AccountController@form')->middleware('verified');
-	// Route::put('account-details','Front\User\AccountController@update')->name('account.details');
-	// Route::any('password-reset','Front\User\PasswordController@index');
-	// Route::post('password/reset','Front\User\PasswordController@reset')->name('password.reset');
-	// Route::get('password/reset/email','Front\User\PasswordController@email');
-	// Route::get('password/reset/confirm','Front\User\PasswordController@confirm')->name('password.emailConfirm');
 });
 
 //Socialite
