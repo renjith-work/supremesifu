@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 
+
 class AdminMiddleware
 {
     /**

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use Auth;
+use URL;
 use Validator;
 use Socialite;
 use Session;
@@ -19,6 +20,7 @@ class LoginController extends Controller
         if(Auth::check()){
             return redirect()->back();
         }else{
+
             return view('front.auth.login');
         }
     }
@@ -45,9 +47,9 @@ class LoginController extends Controller
             if (Auth::attempt(['email' => $email, 'password' => $password], $remember)) {
                 if (Session::has('url.intended')){
                   return redirect(session('url.intended'));
-                }else{
-                  return redirect('/');
                 }
+                return redirect()->route('home');
+                
             }else{
                 $error =[ 'message' => "Sorry, we couldn't find an account the matches the credentials you provided. You can try and login with another account or try to retrieve your password by clicking this link.",];
                 return back()->withInput()->withErrors($error);

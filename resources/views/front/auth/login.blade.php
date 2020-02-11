@@ -12,9 +12,9 @@
 					<div class="px-auth-box-head">
 						<div class="px-auth-box-head-title">Login</div>
 					</div>
-					<form method="POST" action="{{route('front.auth.user.login')}}">
-	                    {{ csrf_field() }}
 						<div class="px-auth-box-body">
+						<form method="POST" action="{{route('front.auth.user.login')}}">
+	                	{{ csrf_field() }}
 							<div class="form-group">
 								<label for="email">Email address</label>
 								<input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" id="emai1" name="email" placeholder="Please enter your email...">
@@ -48,6 +48,7 @@
 							<div class="px-auth-login-button-cover">
 								<input type="Submit" value="Login" class="btn px-black-btn">
 							</div>
+						</form>
 							<div class="px-auth-social-media-login-cover">
 								<div class="px-auth-social-media-login-item">
 									<a href="/login/facebook" class="btn px-btn-fb-social">
@@ -69,8 +70,6 @@
 							</div>
 							<div class="px-auth-login-register-account">Don't have an account? <a href="/register">Register Here</a></div>
 						</div>
-						
-					</form>
 				</div>
 			</div>
 		</div>

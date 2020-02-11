@@ -31,11 +31,24 @@ Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 	Route::get('auth/roles/{id}/delete', 'Admin\Auth\RoleController@delete')->name('auth.roles.delete');
 });
 
-Route::get('/register', 'Front\Auth\RegisterController@register');
+Route::get('/register', 'Front\Auth\RegisterController@register')->name('register');
 Route::post('/user/register', 'Front\Auth\RegisterController@store')->name('front.auth.user.store');
-Route::get('/login', 'Front\Auth\LoginController@login');
+Route::get('/login', 'Front\Auth\LoginController@login')->name('login');
 Route::post('/user/login', 'Front\Auth\LoginController@loginUser')->name('front.auth.user.login');
 
+// User Dashboard
+Route::group(['prefix'  =>   'user', 'as' => 'user.'], function() {
+	Route::get('dashboard','Front\User\DashController@customer')->name('dashboard')->middleware('verified');
+	Route::resource('account-details', 'Front\User\AccountController');
+	Route::resource('password-reset', 'Front\User\PasswordController');
+	Route::get('pasword/reset/email', 'Front\User\PasswordController@forgot');
+	// Route::get('account-details','Front\User\AccountController@form')->middleware('verified');
+	// Route::put('account-details','Front\User\AccountController@update')->name('account.details');
+	// Route::any('password-reset','Front\User\PasswordController@index');
+	// Route::post('password/reset','Front\User\PasswordController@reset')->name('password.reset');
+	// Route::get('password/reset/email','Front\User\PasswordController@email');
+	// Route::get('password/reset/confirm','Front\User\PasswordController@confirm')->name('password.emailConfirm');
+});
 
 //Socialite
 //Google
@@ -49,7 +62,7 @@ Route::get('login/facebook/callback', 'Front\Auth\LoginController@handleFacebook
 Route::get('/email-verified', 'Front\Auth\EmailController@verified')->name('verification.redirect');
 
 // Initial Routes
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/test', 'HomeController@test')->middleware('verified');
 Route::get('/email', 'HomeController@mail')->name('sendEmail');
 Route::get('/dashboard', 'Admin\Dashboard\DashboardController@index')->name('dashboard');

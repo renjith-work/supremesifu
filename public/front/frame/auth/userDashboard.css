@@ -1,0 +1,97 @@
+.error-p{
+    font-size: 11px;
+    color: #dc3545;
+    margin-top: 5px;
+    letter-spacing: 1px;
+}
+
+.px-account-dashboard{
+	margin: 100px 0px 100px 0px;
+}
+
+.px-dashboard-list {
+    border: 1px solid #ebebeb;
+}
+
+.px-dashboard-list li:first-child {
+    border-top: 1px solid #ebebeb;
+}
+
+.px-dashboard-list li a {
+    border-bottom: 1px solid #ebebeb;
+    color: #222222;
+    display: block;
+    font-size: 14px;
+    padding: 12px 0px 12px 20px;
+    text-transform: capitalize;
+}
+
+.px-dashboard-list li a:hover{
+	text-decoration: none;
+	color: #fff;
+	background: #000;
+}
+
+.px-dashboard-list li .active {
+    background: #000;
+    color: #fff;
+}
+
+.px-dashboard-content {
+    border: 1px solid #ebebeb;
+    padding: 30px 5px !important;
+}
+
+#px-dashboard > h3 {
+    margin: 0px 0px 0px 20px;
+}
+
+.px-dashboard-content h3 {
+    border-bottom: 1px solid #ebebeb;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    text-transform: capitalize;
+}
+
+.px-dashboard-instruciton {
+    margin: 30px 0px 30px 0px;
+}
+
+.px-dashboard-instruciton a {
+    color: #000;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.px-customer-dasboard-body{
+	padding: 0px 20px 0px 20px;
+}
+
+.px-customer-dashboard-form-cover label{
+	font-weight: 600;
+}
+
+.px-customer-dashboard-form-cover input{
+	padding: 20px 10px;
+}
+
+.px-customer-dashboard-form-cover .form-group{
+	margin-bottom: 30px;
+}
+
+.px-customer-dashboard-submit-cover{
+	margin: 40px 0px 0px 0px;
+	text-align: right;
+}
+
+.px-black-btn{
+	background: #000;
+	color: #fff;
+	font-weight: 600;
+	text-transform: uppercase;
+	padding: 10px 40px 10px 40px !important;
+	letter-spacing: 1px;
+}
