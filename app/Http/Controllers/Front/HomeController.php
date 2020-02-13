@@ -11,6 +11,7 @@ class HomeController extends Controller
     public function index()
     {
         $posts = Post::where('featured', 1)->orderBy('id', 'desc')->take(3)->get();
+        return response()->json($posts);
         return view('front.pages.home')->with('posts', $posts);
     }
 }
