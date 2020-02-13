@@ -62,7 +62,6 @@ Route::get('login/facebook/callback', 'Front\Auth\LoginController@handleFacebook
 Route::get('/email-verified', 'Front\Auth\EmailController@verified')->name('verification.redirect');
 
 // Initial Routes
-Route::get('/', 'HomeController@index')->name('home');
 Route::get('/test', 'HomeController@test')->middleware('verified');
 Route::get('/email', 'HomeController@mail')->name('sendEmail');
 Route::get('/dashboard', 'Admin\Dashboard\DashboardController@index')->name('dashboard');
@@ -85,3 +84,10 @@ Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 });
 
 // Route::get('/admin/post/category', 'Admin\Post\CategoryController@index');
+
+
+// Front End Routes
+Route::get('/', 'Front\HomeController@index')->name('home');
+Route::group(['prefix'  =>   'blog', 'as' => 'blog.'], function() {
+	Route::get('/posts/{slug}', ['as'=>'front.post.single', 'uses'=>'Front\Post\PostController@single'])->where('slug', '[\w\d\-\_]+');
+});

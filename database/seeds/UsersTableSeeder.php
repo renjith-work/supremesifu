@@ -2,6 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factory;
+use App\User;
+use Faker\Generator as Faker;
 
 
 class UsersTableSeeder extends Seeder
@@ -23,5 +26,7 @@ class UsersTableSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
+
+        factory(App\User::class, 10)->create();
     }
 }

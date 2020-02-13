@@ -1,0 +1,418 @@
+.justify-text{
+	text-align: justify;
+}
+
+.justify-text p{
+	text-align: justify;
+}
+
+#mobile-load-class{
+	margin: 30px 0px 30px 0px;
+}
+
+.mobile-container{
+	padding: 0px 20px 0px 20px;
+}
+
+#load-class-dropdown{    
+	margin: 30px 0px;
+    padding: 0px 20px;
+    display: none;
+}
+
+.mob-next-button{
+	background: #000;
+    color: #fff;
+    text-transform: uppercase;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    letter-spacing: 1px;
+    font-size: 16px;
+    font-weight: 500;
+    border: 1px solid #000;
+}
+
+#saveFabric{
+	display: none;
+}
+
+.single-fabric-cover{
+	margin: 0px 0px 30px 0px;
+}
+
+.single-fabric-content{
+	border: 1px solid #cccaca;
+    padding: 10px;
+}
+
+.single-fabric-name{
+	font-weight: 700;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+
+.single-fabric-price{
+	text-align: right;
+	font-size: 13px;
+	font-weight: 500;
+}
+
+.single-fabric-details{
+	border-top: 1px solid #cccaca;
+	padding: 10px 0px 0px;
+	font-size: 12px;
+	margin: 5px 0px 0px 0px;
+}
+
+#loadFabrics a:hover{
+	color: #191919;
+}
+
+.modal-fabric-detail-content-title{
+	text-transform: uppercase;
+	font-size: 10px;
+	letter-spacing: 1px;
+	font-weight: 600;
+}
+
+.modal-fabric-detail-content-answer{
+	font-size: 12px;
+}
+
+#modal-fabric-detail-content-select{
+	margin: 20px 0px 20px 0px;
+}
+
+.fabric-detail-close {
+    background: #fff !important;
+    padding: 10px !important;
+    position: absolute;
+    float: right;
+    top: 10px;
+    right: 10px;
+}
+
+#product-design-list-cover{
+	margin: 30px 0px;
+}
+
+.product-design-list-item{
+	margin: 0px 10px 40px 10px;
+
+	-webkit-box-shadow: 0px 2px 14px -1px rgba(163,163,163,1);
+	-moz-box-shadow: 0px 2px 14px -1px rgba(163,163,163,1);
+	box-shadow: 0px 2px 14px -1px rgba(163,163,163,1);
+}
+
+.product-design-name{
+    background: #000;
+    color: #fff;
+    padding: 7px 10px 7px 10px;
+}
+
+.product-design-description{
+	font-size: 12.5px;
+    padding: 15px;
+}
+
+.modal-design-name{
+    font-size: 25px;
+    line-height: 40px;
+}
+
+.modal-design-price {
+    display: inline-block;
+    color: #c1903e;
+    font-size: 20px;
+    margin: 20px 0px;
+}
+
+.modal-design-price span{
+    display: inline-block;
+    text-decoration: line-through;
+    font-size: 14px;
+    padding-left: 10px;
+    color: #191919;
+}
+
+.modal-design-description{
+	font-size: 12px;
+	text-align: justify;
+	margin-bottom: 10px;
+}
+
+.modal-pocket{ 
+	padding: 15px 15px 0px 15px;
+}
+
+.modal-pocket-label{
+    letter-spacing: 0.5px !important;
+    font-weight: 400 !important;
+    text-transform: none !important;
+    margin-left: -10px !important;
+    margin-top: -7px;
+}
+
+
+.modal-pocket-title {
+    margin-top: 8px;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: #fff;
+    background: #000;
+    padding: 0px 10px;
+    font-size: 12px;
+}
+
+.mob-measure-instr{
+	float: right;
+}
+
+#modal-monogram-cover{
+	margin: 20px 0px;
+}
+
+.modal-monogram-body{
+	margin: 5px 0px 20px;
+}
+
+
+.modal-monogram-body input[type="text"] {
+    width: 100%;
+    padding: 0px 10px 0px 10px;
+    font-size: 12px;
+}
+
+.mobile-monogram-learn{
+	text-align: right;
+}
+
+.measurement-head span{
+    color: #c1903e !important;
+    float: right;
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.measurement-head span > .fa{
+    font-size: medium;
+    margin-left: 3px;
+}
+
+.measure-learn-link a{
+    display: none;
+}
+
+#modal-design-image-cover{
+    margin: 0px 0px 30px 0px;
+}
+
+.modal-input-label{
+    display: inline-block;
+}
+
+.modal-input-instruction{
+    display: inline-block;
+    float: right;
+}
+
+.modal-input-instruction span{
+    float: none;
+    font-size: 12px;
+}
+
+.modal-original-head{
+    display: inline-block;
+    background: #000;
+}
+
+.modal-original-head > .modal-title {
+    background: #000;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight:600;
+    font-size: 15px;
+}
+
+.modal-header .close {
+    color: #fff;
+    float: right;
+    top: 0;
+    right: 0;
+    position: absolute;
+    margin: -10px -10px;
+}
+
+.mf-close-button {
+    background: #000;
+    border: 0px;
+    padding: 7px 0px;
+    letter-spacing: 1px;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+
+.sifu-cart-table-cover{
+    border: .1rem solid #ebebeb
+}
+
+.sifu-cart-table-head{
+    background: #000;
+    margin: -1px;
+}
+
+.sifu-cart-table-head h3{
+    font-size: 12px;
+    text-align: center;
+    font-weight: 600;
+    color: #fff;
+    padding: 6px 0px 0px 0px;
+    letter-spacing: 1px;
+}
+
+.ssifu-table-border{
+    border: 1px solid #fff;
+}
+
+.product-content-left{
+    padding: 20px 5px;
+}
+
+.product-content-center img{
+    width: 100%;
+    padding: 10px;
+}
+
+.bd-right-non{
+    border-right: 0px;
+}
+
+.bd-left-non{
+    border-left: 0px;
+}
+
+.product-content-name{
+    font-weight: 600;
+}
+
+.product-content-details-item span{
+    font-weight: 600;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.product-content-details{
+    margin-top: 30px;
+}
+
+.sctb-item{
+    padding: 0px 0px 20px 0px;
+}
+
+.pdc-border{
+    border-bottom: .1rem solid #ebebeb;
+    margin: 20px 10px;
+}
+
+.ssifu-cart-summary-cover{
+    padding: 25px;
+    border: .1rem dashed #d7d7d7;
+    background-color: #f9f9f9;
+    border-radius: .3rem;
+}
+
+.sifu-summary-title {
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0;
+    padding-bottom: 6px;
+    border-bottom: .1rem solid #cccccc;
+    margin-bottom: 2.1rem;
+}
+
+.summary-subtotal span{
+    font-style: italic;
+    font-size: 10px;
+}
+
+.btn-outline-primary-2 {
+    color: #c96;
+    background-color: transparent;
+    background-image: none;
+    border-color: #c96;
+    box-shadow: none;
+    margin-top: 30px;
+}
+
+.btn-outline-dark-2{
+    margin-top: 30px;
+}
+
+.alert-sifu {
+    color: #fff;
+    background-color: #c1903e;
+    border-color: #d1942f;
+    padding: 13px;
+}
+
+.alert-sifu h6 {
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 1px;
+    margin: 0px;
+    font-weight: 600;
+}
+
+.login-message-body {
+    letter-spacing: 1px;
+    margin: 16px 0px 0px 0px;
+}
+
+.login-message-body a {
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.login-message-body a:hover{
+    color: #000;
+}
+
+#modal-fabric-detail-image img{
+    margin-bottom: 30px;
+}
+
+.custom-design-instruction{
+    text-align: center;
+    padding: 50px 0px 20px 0px;
+}
+
+.custom-design-instruction p{
+    letter-spacing: 1px;
+}
+
+.custom-design-instruction p > a{
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+#mobile-load-class a:hover{
+    color: #191919;
+}
+
+
+
+
+
+
+
+.create-shirt__steps-container.sticky {
+    position: fixed;
+    left: 0;
+    right: 0;
+}

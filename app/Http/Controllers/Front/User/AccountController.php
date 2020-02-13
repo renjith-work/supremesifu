@@ -31,6 +31,12 @@ class AccountController extends Controller
             $user->lname = $request->lname;
             $user->email = $request->email;
             $user->save();
+            if (isset($request->roles)) {
+                foreach ($request->roles as $role) {
+                    $role_r = Role::where('id', '=', $role)->firstOrFail();            
+                    $user->assignRole($role_r); //Assigning role to user
+                }
+            } 
 
             Session::flash('success', 'your account details where successfully updated.');
             return redirect()->back();

@@ -1,0 +1,122 @@
+ body{
+        width: 794px;
+        height: 1122px;
+        /*margin: 30mm 45mm 30mm 45mm; */
+        /* change the margins as you want them to be. */
+        /*border: 1px solid #000 !important;*/
+        font-weight: 600;
+        font-size: 13px;
+        letter-spacing: 0.70px;
+}
+
+.no-border-bottom{
+    border-bottom: 1px solid #fff !important;
+}
+
+.no-border-top{
+    border-top: 1px solid #fff !important;
+}
+
+.table {
+    margin-bottom: 0px;
+} 
+
+.p-border{
+    border: 1px solid #000;
+}
+
+.no-margin{
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+
+.table-bordered td, .table-bordered th{
+    border: 1px solid #000 !important;
+}
+
+.table-borderless td, .table-borderless th{
+    border: 1px solid #fff !important;
+}
+
+.table td, .table th {
+    padding: 5px 10px 5px 10px;
+ }
+
+ .seciton-1{
+    text-align: center;
+    text-transform: uppercase;
+ }
+
+ .text-left{
+    text-align: left;
+ }
+
+ .inst-thread{
+    margin-top: 100px;
+ }
+
+ .no-padding{
+    padding: 0px !important;
+ }
+
+ .order-image img{
+    width: 100%;
+ }
+
+.order-image{
+    margin-top: -40px;
+}
+
+.placket-cover{
+    text-align: left;
+    width: 200px;
+    margin-top: -240px;
+}
+
+.placket-cover table{
+    position: relative;
+    background: #fff;
+}
+
+.placket-cover td{
+    border: 1px solid #000 !important;
+}
+
+.cuff-cover{
+    text-align: left;
+    width: 150px;
+    margin-top: -34px;
+}
+
+.cuff-cover table{
+    position: relative;
+    background: #fff;
+}
+
+.cuff-cover td{
+    border: 1px solid #000 !important;
+}
+
+.shirt-bottom{
+    text-align: left;
+    width: 150px;
+    margin-top: -24px;
+}
+
+.shirt-bottom table{
+    position: relative;
+    background: #fff;
+}
+
+.shirt-bottom td{
+    border: 1px solid #000 !important;
+}
+
+.back-image{
+	float: right;
+	margin-top: -60px;
+}
+
+.back-image img{
+	width: 90px;
+}

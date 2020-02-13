@@ -1,0 +1,258 @@
+/*Containers*/
+@media only screen and (min-width : 320px) {
+	.mobile-container{
+		padding: 0px 20px 0px 20px;
+	}
+	
+	.ssifu-sticky-top{
+		padding-bottom: 50px;
+	}
+
+	.shirt-page-cover {
+	    padding: 0px 10px 0px 10px;
+	}
+
+	.product-detail-fabric-image{
+		display: none;
+	}
+
+	.measurement-tutorial-video {
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    /*height: 100%;*/
+	    display: block;
+	     position: relative; 
+	}
+
+	#tutorial-image img{
+		margin-bottom: 30px;
+	}
+
+	.sifu-cart-table-head{
+		display: none;
+	}
+
+	.product-content-left{
+		margin-top: 10px;
+	}
+
+	.product-content-center{
+	    text-align: center;
+	    padding: 0px 0px;
+	}
+
+	.pcd-dktp{
+		display: none;
+	}
+
+	.login-form-container{
+		padding: 40px 20px 40px 20px;	
+	}
+
+	.singin-title{
+		display: none;
+	}
+
+	.customer-auth-title span{
+		display: none;
+	}
+
+	.mobile-or {
+	    text-align: center;
+	    font-weight: 600;
+	    margin: 0px 0px 10px 0px;
+	}
+
+	.login-social-text{
+		text-align: left;
+	}
+
+	#load-class-dropdown{
+		display: block;
+	}
+
+}
+@media only screen and (min-width : 480px) {
+	.mobile-container{
+		padding: 0px 30px 0px 30px;
+	}
+}
+@media only screen and (min-width : 768px) {
+	.mobile-container{
+		padding: 0px 30px 0px 30px;
+	}
+
+	.ssifu-sticky-top{
+		padding-bottom: 20px;
+	}
+
+	.shirt-page-cover {
+	    padding: 0px 50px 0px 50px;
+	}
+
+	.product-detail-fabric-image{
+		display: block;
+	}
+
+	.measurement-tutorial-video {
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	    display: block;
+	    /*position: relative; */
+	}
+
+	#tutorial-image img{
+		margin-bottom: 0px;
+	}
+
+	.sifu-cart-table-head{
+		display: block;
+	}
+
+	.product-content-center{
+	    text-align: center;
+	    padding: 20px 0px;
+	}
+
+	.product-content-details{
+		display: none;
+	}
+
+	.pcd-dktp{
+		display: block;
+	}
+
+	.login-form-container{
+		padding: 60px 60px 60px 60px;
+	}
+
+	.singin-title{
+		display: block;
+	}
+
+	.customer-auth-title span{
+		display: block;
+	}
+
+	.mobile-or {
+	    display: none;
+	}
+
+	.login-social-text{
+		text-align: center;
+	}
+
+	#load-class-dropdown{
+		display: none;
+	}
+
+	.main-menu-area ul li > a{
+		letter-spacing: 1px;
+	}
+}
+@media only screen and (min-width : 992px) {
+	.mobile-container{
+		padding: 0px 40px 0px 40px;
+	}
+}
+@media only screen and (min-width : 1200px) {
+	.mobile-container{
+		padding: 0px 50px 0px 50px;
+	}
+}
+
+/*Slider Section*/
+@media only screen and (min-width : 320px) {
+	.slick-current .hero-content-one h1{
+	    font-family: 'GothamMedium';
+	    font-weight: 400;
+	    line-height: 35px;
+	    font-size: 23px !important;
+	    letter-spacing: 1px;
+	}
+
+	.slick-current .hero-content-one h2{
+	    font-family: 'GothamMedium';
+	    font-weight: 400;
+	    line-height: 28px;
+	    font-size: 18px !important;
+	    letter-spacing: 1px;
+	}
+
+	.slick-current .hero-content-one p{
+		font-family: 'GothamBook';
+	    letter-spacing: 1px;
+	    margin: 25px 0px 30px 0px;
+	}
+}
+@media only screen and (min-width : 992px) {
+	.slick-current .hero-content-one h1{
+	    font-family: 'GothamMedium';
+	    font-weight: 400;
+	    line-height: 10px;
+	    font-size: 30px !important;
+	    letter-spacing: 1px;
+	}
+
+	.slick-current .hero-content-one h2{
+	    font-family: 'GothamMedium';
+	    font-weight: 400;
+	    line-height: 35px;
+	    font-size: 20px !important;
+	    letter-spacing: 1px;
+	}
+
+	.slider-text-info{
+	    position: inherit;
+	    top: 80% !important;
+	}
+
+	.slick-current .hero-content-one p{
+		font-family: 'GothamBook';
+	    letter-spacing: 1px;
+	    margin: 30px 0px 40px 0px;
+	}
+}
+
+
+
+/*Blog Section*/
+@media only screen and (min-width : 320px) {
+	.section-title-regular{
+		display: none;
+	}
+}
+@media only screen and (min-width : 480px) {
+
+}
+@media only screen and (min-width : 768px) {
+
+}
+@media only screen and (min-width : 992px) {
+
+}
+@media only screen and (min-width : 1200px) {
+
+}
+
+/*Responsive template*/
+@media only screen and (min-width : 320px) {
+
+}
+@media only screen and (min-width : 480px) {
+
+}
+@media only screen and (min-width : 768px) {
+
+}
+@media only screen and (min-width : 992px) {
+
+}
+@media only screen and (min-width : 1200px) {
+
+}

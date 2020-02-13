@@ -44,4 +44,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->attributes['password'] = Hash::needsRehash($value) ? Hash::make($value) : $value;
     }
+
+    public function post()
+    {
+     return $this->hasMany('App\Models\Post\Post');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }
