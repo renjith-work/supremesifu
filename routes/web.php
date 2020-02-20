@@ -89,7 +89,7 @@ Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 	Route::resource('fabric/class', 'Admin\Product\Fabric\FabricClassController',  ['as' => 'fabric']);
 	Route::resource('fabric/attribute/value', 'Admin\Product\Fabric\FabricAttributeValueController',  ['as' => 'fabric.attribute']);
-	Route::get('fabric/attribute/list', 'Admin\Product\Fabric\FabricAttributeController@list', )->name('fabric.attribute.list');
+	Route::get('fabric/attribute/list', 'Admin\Product\Fabric\FabricAttributeController@list')->name('fabric.attribute.list');
 	Route::resource('fabric/attribute', 'Admin\Product\Fabric\FabricAttributeController',  ['as' => 'fabric']);
 	Route::resource('fabric', 'Admin\Product\Fabric\FabricController');
 	Route::get('fabric/{id}/delete', 'Admin\Product\Fabric\FabricController@delete')->name('fabric.delete');
