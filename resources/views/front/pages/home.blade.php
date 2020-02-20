@@ -59,21 +59,21 @@
                                 <div class="col-lg-4 col-md-4">
                                     <!-- single-banner start -->
                                     <div class="single-banner mt--30">
-                                        <a href="shirts"><img src="/front/assets/images/banner/b1.jpg" alt=""></a>
+                                        <a href="/custom-shirt/fabric/class"><img src="/front/assets/images/banner/b1.jpg" alt=""></a>
                                     </div>
                                     <!-- single-banner end -->
                                 </div>
                                 <div class="col-lg-4 col-md-4">
                                     <!-- single-banner start -->
                                     <div class="single-banner mt--30">
-                                        <a href="suits"><img src="/front/assets/images/banner/b2.jpg" alt=""></a>
+                                        <a href="/custom-shirt/fabric/class"><img src="/front/assets/images/banner/b2.jpg" alt=""></a>
                                     </div>
                                     <!-- single-banner end -->
                                 </div>
                                 <div class="col-lg-4 col-md-4">
                                     <!-- single-banner start -->
                                     <div class="single-banner mt--30">
-                                        <a href="trousers"><img src="/front/assets/images/banner/b3.jpg" alt=""></a>
+                                        <a href="/custom-shirt/fabric/class"><img src="/front/assets/images/banner/b3.jpg" alt=""></a>
                                     </div>
                                     <!-- single-banner end -->
                                 </div>
@@ -491,7 +491,7 @@
                         <div class="home-info-item-content">
                             <div class="home-info-item-head">Our <b>Story</b></div>
                             <div class="home-info-item-body">Rethinking custom clothing we came up with a revolutionary approach to combine traditional tailoring with modern technology.</div>
-                            <div class="home-info-item-more"><a href="our-story">Read More</a></div>
+                            <div class="home-info-item-more"><a href="/about-us/our-history">Read More</a></div>
                         </div>
                     </div>
                 </div>
@@ -503,7 +503,7 @@
                         <div class="home-info-item-content">
                             <div class="home-info-item-head">Our <b>Fabric</b></div>
                             <div class="home-info-item-body">Our multitude of quality fabrics is destined to make you spellbound through the kaleidoscope of textures and colors. We offer fabrics for all tastes and budgets.</div>
-                            <div class="home-info-item-more"><a href="our-story">Read More</a></div>
+                            <div class="home-info-item-more"><a href="/custom-shirt/fabric/class">Read More</a></div>
                         </div>
                     </div>
                 </div>
@@ -515,7 +515,7 @@
                         <div class="home-info-item-content">
                             <div class="home-info-item-head">Our <b>Shop</b></div>
                             <div class="home-info-item-body">Your cloths are stitched with upmost dedication with best materials by skilled craftsmen.</div>
-                            <div class="home-info-item-more"><a href="our-story">Read More</a></div>
+                            <div class="home-info-item-more"><a href="#">Read More</a></div>
                         </div>
                     </div>
                 </div>
@@ -532,7 +532,7 @@
                             <h2>Start <span> Designing</span></h2>
                             <p style="text-align: justify;">Clothing made to make you Look Great & Feel Good. Here, the finest quality natural fabrics meet skillful artisans backed by cutting edge technology. All products are responsibly made in our in-house facilities following the strictest quality norms, safety standards & happy working conditions.</p>
                             <br>
-                            <p><a class="home-hover-design" href="design-shirt">Start Designing</a></p>
+                            <p><a class="home-hover-design" href="/custom-shirt/fabric/class">Start Designing</a></p>
                         </figcaption>           
                     </figure>
                 </div>
@@ -546,7 +546,7 @@
                                 <figcaption>
                                     <h2>Our <span> Story</span></h2>
                                     <p style="text-align: justify;">Combining six generations of tradition with the modern technologies.</p>
-                                    <p><a style="text-align: right" href="our-story">Read More</a></p>
+                                    <p><a style="text-align: right" href="/about-us/our-history">Read More</a></p>
                                 </figcaption>           
                             </figure>
                         </div>
@@ -558,7 +558,7 @@
                                 <figcaption>
                                     <h2>Our <span> Shop</span></h2>
                                     <p style="text-align: justify;">Your cloths are stitched with upmost dedication with best materials by skilled craftsmen.</p>
-                                    <p><a style="text-align: right" href="our-shop">Read More</a></p>
+                                    <p><a style="text-align: right" href="#">Read More</a></p>
                                 </figcaption>           
                             </figure>
                         </div>
@@ -572,7 +572,7 @@
                                 <figcaption>
                                     <h2>Quality <span> Fabric</span></h2>
                                     <p style="text-align: justify;">Fabrics that inspore to create dazzling cloths.</p>
-                                    <p><a style="text-align: right" href="our-fabrics">Read More</a></p>
+                                    <p><a style="text-align: right" href="/custom-shirt/fabric/class">Read More</a></p>
                                 </figcaption>           
                             </figure>
                         </div>
@@ -584,7 +584,7 @@
                                 <figcaption>
                                     <h2>Affordable <span> Pricing</span></h2>
                                     <p style="text-align: justify;">By eliminating all the costs of a retail business, we bring your the best prices.</p>
-                                    <p><a style="text-align: right" href="our-prices">Read More</a></p>
+                                    <p><a style="text-align: right" href="/about-us">Read More</a></p>
                                 </figcaption>           
                             </figure>
                         </div>

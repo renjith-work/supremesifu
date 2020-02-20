@@ -68,13 +68,10 @@
                                          @guest
                                             <a href="/register">Sign Up</a>&nbsp; | &nbsp;<a href="/login">Login</a>
                                         @endguest
-                                        {{-- @auth
-                                           Welcome  &nbsp;<a href=""> {{ Auth::user()->fname }}</a> &nbsp; | &nbsp; 
-                                            <a href="/user/logout">Logout</a>
-                                        @endauth --}}
                                     </div>
                                 </li>
                                 @auth
+                                {{Cart::getContent()->count()}}
                                 <li class="setting-top list-inline-item">
                                     <div class="btn-group">
                                         <button class="dropdown-toggle">{{ Auth::user()->fname }} {{ Auth::user()->lname }}'s Account <i class="fa fa-angle-down"></i></button>
@@ -149,7 +146,7 @@
                             <div class="shoping-cart">
                                 <div class="btn-group">
                                     <!-- Mini Cart Button start -->
-                                    <button class="dropdown-toggle"><a href="/cart"><i class="fa fa-shopping-cart"></i> <span class="top-semiTitle">Cart </span> {{-- ({{ $cartCount }}) --}}</a></button>
+                                    <button class="dropdown-toggle"><a href="/cart"><i class="fa fa-shopping-cart"></i> <span class="top-semiTitle">Cart </span> ({{Cart::getContent()->count()}})</a></button>
                                     <!-- Mini Cart button end -->
                                     
                                     <!-- Mini Cart wrap start -->

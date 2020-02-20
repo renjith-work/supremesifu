@@ -20,9 +20,18 @@ class LoginController extends Controller
         if(Auth::check()){
             return redirect()->back();
         }else{
-
+            
+            if(!session()->has('url.intended'))
+            {
+                session(['url.intended' => url()->previous()]);
+            }
             return view('front.auth.login');
         }
+    }
+
+    public function logout(){
+        Auth::logout();
+        return redirect('/login');
     }
 
     public function loginUser(Request $request) {

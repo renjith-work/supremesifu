@@ -22,14 +22,13 @@ $(document).ready(function() {
 
         $('#mobile-load-class').html('');
         $.ajax({
-            url: "/api/fabric/class/find",
+            url: "/fabric/class/find",
             type:'POST',
             data: {_token:_token, id:id},
             dataType: 'json',
             success:function(response){
-                console.log(response);
                 $.each(response, function(key,value){
-                    $('#mobile-load-class').append('<div class="col-md-3"> <a href="'+value.id+'" class="load-fabric-modal"> <div class="single-fabric-cover"> <div class="single-fabric-image"><img src="/images/fabric/products/'+value.image+'" alt="'+value.name+'"> </div><div class="single-fabric-content"> <div class="single-fabric-name">'+value.name+'</div><div class="single-fabric-price">MYR '+value.price+'/ Meter</div><div class="single-fabric-details">'+value.attributes+'</div></div></div></a></div>');
+                    $('#mobile-load-class').append('<div class="col-md-3"> <a href="'+value.id+'" class="load-fabric-modal"> <div class="single-fabric-cover"> <div class="single-fabric-image"><img src="/images/product/fabric/'+value.image+'" alt="'+value.name+'"> </div><div class="single-fabric-content"> <div class="single-fabric-name">'+value.name+'</div><div class="single-fabric-price">MYR '+value.price+'/ Meter</div><div class="single-fabric-details">'+value.attributes+'</div></div></div></a></div>');
                 });
             }
         });
@@ -54,7 +53,6 @@ $(document).ready(function() {
         $('.single-fabric-details').each(function(){  
         	if($(this).height() > highestBox) {
                 highestBox = $(this).height();
-                console.log(highestBox); 
             }
             $('.single-fabric-details').height(highestBox); 
         });         
@@ -73,7 +71,7 @@ $(document).ready(function() {
             success:function(response){
             	console.log(response);
             	$('#loadFabricDetails').modal('show');
-            	$('#modal-fabric-detail-image').append('<img src="/images/fabric/products/'+response[0].image+'" alt=""> ');
+            	$('#modal-fabric-detail-image').append('<img src="/images/product/fabric/'+response[0].image+'" alt=""> ');
             	$('#modal-fabric-detail-content').append('<div class="modal-fabric-detail-content-item row"> <div class="col-md-4"> <div class="modal-fabric-detail-content-title"> Name </div></div><div class="col-md-8"> <div class="modal-fabric-detail-content-answer"> '+response[0].name+' </div></div></div>');
                 $.each(response[0].attributes, function(key,value){
                 	$('#modal-fabric-detail-content').append('<div class="modal-fabric-detail-content-item row"> <div class="col-md-4"> <div class="modal-fabric-detail-content-title"> '+value.t1+' </div></div><div class="col-md-8"> <div class="modal-fabric-detail-content-answer"> '+value.t2+' </div></div></div>');
@@ -88,7 +86,7 @@ $(document).ready(function() {
     	$('#load-class-dropdown').css("display", "block");
     	$('#classSelect').html('');
     	$.ajax({
-            url: "/api/fabric/class/list",
+            url: "/fabric/class/list",
             type:'GET',
             dataType: 'json',
             success:function(response){

@@ -40,7 +40,7 @@ $(document).ready(function() {
     function loadPockets(){
         $('#design_pocket').html('');
         $.ajax({
-            url: "/api/product/design/shirt/pocket/list",
+            url: "/design/shirt/pocket/list",
             type:'GET',
             dataType: 'json',
             success:function(response){
@@ -59,7 +59,7 @@ $(document).ready(function() {
     function loadMonograms(){
         $('#modal-monogram-cover').html('');
         $.ajax({
-            url: "/api/product/design/monogram/list",
+            url: "/design/monogram/list",
             type:'GET',
             dataType: 'json',
             success:function(response){

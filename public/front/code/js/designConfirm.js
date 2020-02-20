@@ -112,7 +112,7 @@ $(document).ready(function() {
             dataType: 'json',
             success:function(response){
                     $('#product_detail_title').append(response[0].name+' '+product_design_name);
-                    $('#product_detail_fabric_image').append('<img src="/images/fabric/products/'+response[0].image+'" alt="">')
+                    $('#product_detail_fabric_image').append('<img src="/images/product/fabric/'+response[0].image+'" alt="">')
                     $('#fabric_details_body').append('<div class="row fabric-detail-item"><div class="col-md-5 fabric-detail-head">Name</div><div class="col-md-7 fabric-detail-body">'+response[0].name+'</div></div>');
                     $('#fabric_details_body').append('<div class="row fabric-detail-item"><div class="col-md-5 fabric-detail-head">Class</div><div class="col-md-7 fabric-detail-body">'+response[0].class+'</div></div>');
                     $.each(response[0].attributes, function(key,value){
@@ -157,13 +157,13 @@ $(document).ready(function() {
         $('#modal_instruction').html('');
         $('#md_ld_fabclass').css({display: 'none'});
         $.ajax({
-            url: "/api/fabric/class/list",
+            url: "/front/fabric/class/list",
             type:'GET',
             dataType: 'json',
             success:function(response){
                 $('#modal_instruction').append('<p>To help you find a fabric that best fits you and your budget <b>Supreme Sifu</b> has classified the fabrics in to three sections. Select the section you prefer to view the fabrics of the section -</p>');
                 $.each(response, function(key,value){
-                    $('#class_cover').append('<div class="col-md-3"> <div class="class-cover"> <input type="radio" name="fabric_class" id="class_'+value.name+'" class="input-hidden fabric_class_select" value="'+value.id+'"/> <label for="class_'+value.name+'" class="section-image"> <img src="/images/fabric/class/'+value.image+'" alt="'+value.name+'"> <div class="select-tick"><i class="fa fa-check" aria-hidden="true"></i></div></label> <div class="class-content-section-cover-modal"> <div class="class-content-title-modal">'+value.name+'</div></div></div></div>');
+                    $('#class_cover').append('<div class="col-md-3"> <div class="class-cover"> <input type="radio" name="fabric_class" id="class_'+value.name+'" class="input-hidden fabric_class_select" value="'+value.id+'"/> <label for="class_'+value.name+'" class="section-image"> <img src="/images/product/fabric/'+value.image+'" alt="'+value.name+'"> <div class="select-tick"><i class="fa fa-check" aria-hidden="true"></i></div></label> <div class="class-content-section-cover-modal"> <div class="class-content-title-modal">'+value.name+'</div></div></div></div>');
                 });
             }
         });
@@ -178,14 +178,14 @@ $(document).ready(function() {
         $('#modal_instruction').html('');
         $('#md_ld_fabclass').css({display: 'block'});
         $.ajax({
-            url: "/api/fabric/class/find",
+            url: "/front/fabric/class/find",
             type:'POST',
             data: {_token:_token, id:cat_id},
             dataType: 'json',
             success:function(response){
                 $('#modal_instruction').append('<p>Please select from the below premium selection of fabrics.</p>');
                 $.each(response, function(key,value){
-                    $('#class_cover').append('<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 mt-30"> <div class="single-product-wrap spw-modal"> <div class="product-image pd-image-modal"> <input type="radio" name="fabric_material" id="fabric_'+value.id+'" class="input-hidden front_fabric_list" value="'+value.id+'"/> <label for="fabric_'+value.id+'" class="section-image"> <img src="/images/fabric/products/'+value.image+'" alt="'+value.name+'"> <span class="label-product label-new">'+cat_name+'</span> <div class="select-tick"><i class="fa fa-check" aria-hidden="true"></i></div><div class="product-content-modal"> <h3 class="pdc-h3">'+ value.name +'</h3> <div class="product-price-modal">'+value.price+'/ Meter</div><div class="product-select">SELECT FABRIC</div></div></label> </div></div></div>');
+                    $('#class_cover').append('<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 mt-30"> <div class="single-product-wrap spw-modal"> <div class="product-image pd-image-modal"> <input type="radio" name="fabric_material" id="fabric_'+value.id+'" class="input-hidden front_fabric_list" value="'+value.id+'"/> <label for="fabric_'+value.id+'" class="section-image"> <img src="/images/product/fabric/'+value.image+'" alt="'+value.name+'"> <span class="label-product label-new">'+cat_name+'</span> <div class="select-tick"><i class="fa fa-check" aria-hidden="true"></i></div><div class="product-content-modal"> <h3 class="pdc-h3">'+ value.name +'</h3> <div class="product-price-modal">'+value.price+'/ Meter</div><div class="product-select">SELECT FABRIC</div></div></label> </div></div></div>');
                 });
                 fabrictiHeight();
             }
@@ -235,7 +235,7 @@ $(document).ready(function() {
     function loadMeasurementAttribute(){
         $('#measurement_attribute_cover').html('');
         $.ajax({
-            url: "/api/measurement/attribute/list1",
+            url: "/measurement/attribute/list1",
             type:'GET',
             dataType: 'json',
             success:function(response){
@@ -256,7 +256,7 @@ $(document).ready(function() {
     function loadDirectMeasurementAttribute(){
         $('#measurement_ddattribute_cover').html('');
         $.ajax({
-            url: "/api/measurement/attribute/list2",
+            url: "/measurement/attribute/list2",
             type:'GET',
             dataType: 'json',
             success:function(response){
@@ -286,6 +286,7 @@ $(document).ready(function() {
 
 // Load attributes value table
     function loadAttributeValues(id){
+        console.log(id);
         var _token = $("input[name='_token']").val();
         $.ajax({
             url: "/measurement/attributes/values/load",
@@ -499,7 +500,7 @@ $(document).ready(function() {
     function loadMonograms(){
         $('#monogram_cover').html('');
         $.ajax({
-            url: "/api/product/design/monogram/list",
+            url: "/product/design/monogram/list",
             type:'GET',
             dataType: 'json',
             success:function(response){
@@ -618,6 +619,7 @@ $(document).ready(function() {
             data: {_token:_token, data:data, id:product_id},
             dataType: 'json',
             success:function(response){
+                console.log(response);
                 window.location.replace('/cart');
             }
         });
@@ -645,12 +647,13 @@ $(document).ready(function() {
         getProductAttributeValues(product_id);
         getQuantity();
         getMeasurementProfile();
-        getProductPrice()
+        getProductPrice();
         setTimeout(function(){
             goToCart(inputObject);
         }, 500);        
 
     });
+
 
     $('#addToCart').on('click', function(event) {
         event.preventDefault();
@@ -659,7 +662,7 @@ $(document).ready(function() {
         getProductAttributeValues(product_id);
         getQuantity();
         getMeasurementProfile();
-        getProductPrice()
+        getProductPrice();
         setTimeout(function(){
             updateProduct(inputObject);
         }, 500);        

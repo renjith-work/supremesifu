@@ -76,6 +76,16 @@
                     <!-- blog-details-wrapper start -->
                     <div class="blog-details-wrapper">
                         <div class="blog-details-head"><h1>{{$post->title}}</h1></div>
+                        <div class="blog-details-meta">
+                            <ul>
+                                <li>{{ Carbon\Carbon::parse($post->created_at)->isoFormat('MMM Do, YYYY') }}</li>
+                                <li>0 Comments</li>
+                                <li>in <a href=#>{{$post->category->name}}</a></li>
+                                <li>by <a href="#">{{$post->user->fname}} {{$post->user->lname}}</a></li>
+                            </ul>
+                            {{-- <span class="blog-details-matea-date">{{ Carbon\Carbon::parse($post->created_at)->isoFormat('MMM Do, YYYY') }}</span> <b>/</b>
+                            <span class="blog-details-matea-author">{{$post->user->fname}} {{$post->user->lname}}</span> <b>/</b>     --}}                                                                 
+                        </div>
                         @if($post->video != null)
                         <div class="blog-details-video">
                             <iframe width="100%" height="" src="{{$post->video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -85,10 +95,6 @@
                             <img src="/images/post/{{$post->image}}" alt="">
                         </div>
                         @endif
-                        <div class="blog-details-meta">
-                            <span class="blog-details-matea-date">{{ Carbon\Carbon::parse($post->created_at)->isoFormat('MMM Do, YYYY') }},</span>
-                            <span class="blog-details-matea-author"><b>Author</b> &nbsp; - &nbsp;{{$post->user->fname}} {{$post->user->lname}}</span>
-                        </div>
                         <div class="postinfo-wrapper blog-post-content-cover">
                             <div class="post-info">
                                 @if($post->bodyE)

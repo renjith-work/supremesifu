@@ -47,7 +47,7 @@ $(document).ready(function() {
     function loadMeasurementAttribute(){
         $('#measurement_attribute_cover').html('');
         $.ajax({
-            url: "/api/measurement/attribute/list1",
+            url: "/measurement/attribute/list1",
             type:'GET',
             dataType: 'json',
             success:function(response){
@@ -62,7 +62,7 @@ $(document).ready(function() {
     function loadDirectMeasurementAttribute(){
         $('#measurement_ddattribute_cover').html('');
         $.ajax({
-            url: "/api/measurement/attribute/list2",
+            url: "/measurement/attribute/list2",
             type:'GET',
             dataType: 'json',
             success:function(response){
@@ -81,7 +81,7 @@ $(document).ready(function() {
     function loadAttributeValues(id){
         var _token = $("input[name='_token']").val();
         $.ajax({
-            url: "/api/measurement/attribute/value/find",
+            url: "/measurement/attribute/value/find",
             type:'POST',
             data: {_token:_token, id:id},
             dataType: 'json',
@@ -111,7 +111,7 @@ $(document).ready(function() {
     function loadTutorial(id){
         var _token = $("input[name='_token']").val();
         $.ajax({
-            url: "/api/guides/measurement/find",
+            url: "/guides/measurement/find",
             type:'POST',
             data: {_token:_token, id:id},
             dataType: 'json',
@@ -124,7 +124,7 @@ $(document).ready(function() {
     function loadMattrDetails(id){
         var _token = $("input[name='_token']").val();
         var result = $.parseJSON($.ajax({
-                        url: "/api/measurement/attribute/find",
+                        url: "/measurement/attribute/find",
                         type:'POST',
                         data: {_token:_token, id:id},
                         dataType: 'json', 
