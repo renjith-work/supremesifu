@@ -120,18 +120,19 @@ Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 
 
 // Front End Routes
-Route::get('/', 'Front\HomeController@index')->name('home');
+Route::get('/', 'Front\Page\HomePageController@index')->name('home');
 
 // Page Routes
-Route::get('/delivery-returns', 'Front\HomeController@deliveryReturns');
-Route::get('/contact-us', 'Front\HomeController@contact');
-Route::get('/about-us', 'Front\HomeController@about');
-Route::get('/about-us/how-it-works', 'Front\HomeController@howitworks');
-Route::get('/about-us/our-history', 'Front\HomeController@ourHistory');
-Route::get('/about-us/perfect-fit-guarantee', 'Front\HomeController@perfectFit');
-Route::get('/about-us/terms-and-conditions', 'Front\HomeController@termsConditions');
-Route::get('/about-us/privacy-policy', 'Front\HomeController@privacy');
-Route::get('/about-us/frequently-asked-questions-faq', 'Front\HomeController@faq');
+Route::get('/delivery-returns', 'Front\Page\PageController@deliveryReturns');
+Route::get('/contact-us', 'Front\Page\PageController@contact');
+Route::get('/about-us', 'Front\Page\PageController@about');
+Route::get('/about-us/how-it-works', 'Front\Page\PageController@howitworks');
+Route::get('/about-us/our-history', 'Front\Page\PageController@ourHistory');
+Route::get('/about-us/perfect-fit-guarantee', 'Front\Page\PageController@perfectFit');
+Route::get('/about-us/terms-and-conditions', 'Front\Page\PageController@termsConditions');
+Route::get('/about-us/privacy-policy', 'Front\Page\PageController@privacy');
+Route::get('/about-us/frequently-asked-questions-faq', 'Front\Page\PageController@faq');
+Route::get('/collection/shirts', 'Front\Product\ProductDesignController@index');
 
 // Blog Routes
 Route::group(['prefix'  =>   'blog', 'as' => 'blog.'], function() {
@@ -165,6 +166,10 @@ Route::group(['prefix'  =>   'product/front'], function() {
 Route::group(['prefix'  =>   'product'], function() {
 	Route::post('/price/calculate', 'Front\Product\Price\PriceController@calculate');
 	Route::post('/load/images', 'Front\Product\ProductController@loadImages');
+});
+
+Route::group(['prefix'  =>   'product/design'], function() {
+	Route::post('/load/images', 'Front\Product\ProductDesignController@loadImages');
 });
 
 Route::get('/product/design/monogram/list', 'Front\Product\Monogram\MonogramController@list');
@@ -221,3 +226,6 @@ Route::group(['prefix' => 'orders'], function () {
 
 Route::post('/design/shirt/buy-now', 'Ecommerce\ProductController@updateProduct');
 Route::post('/design/shirt/add-to-cart', 'Ecommerce\ProductController@cartAdd');
+
+// Product Details Page
+Route::get('/product/shirt/{id}/details', 'Front\Product\ProductDesignController@detail');

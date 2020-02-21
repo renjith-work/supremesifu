@@ -210,67 +210,23 @@
             </div>
             <div class="product-wrapper">
                 <div class="row">
+                    @foreach($products as $product)
                     <div class="col-md-3 col-6">
                         <div class="single-product-wrap ss-p-wrap">
                             <div class="product-image">
-                                <a href="#"><img src="/front/assets/images/product/9.jpg" alt=""></a>
+                                <a href="/product/shirt/{{$product->id}}/details"><img src="/images/product/design/{{$product->folder}}/{{$product->p_image}}" alt=""></a>
                                 <span class="label-product label-new">new</span>
                             </div>
                             <div class="product-content">
-                                <h3><a href="product-details.html">100% Non-iron cotton Poplin double twisted</a></h3>
+                                <h3><a href="/product/shirt/{{$product->id}}/details">{{$product->name}}</a></h3>
                                 <div class="home-price-box">
-                                    <span class="new-price">$53.27</span>
-                                    <span class="old-price">$58.49</span>
+                                    <span class="new-price">{{$product->price}}</span>
+                                    <span class="old-price">{{$product->og_price}}</span>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="single-product-wrap ss-p-wrap">
-                            <div class="product-image">
-                                <a href="#"><img src="/front/assets/images/product/9.jpg" alt=""></a>
-                                <span class="label-product label-new">new</span>
-                            </div>
-                            <div class="product-content">
-                                <h3><a href="product-details.html">100% Non-iron cotton Poplin double twisted</a></h3>
-                                <div class="home-price-box">
-                                    <span class="new-price">$53.27</span>
-                                    <span class="old-price">$58.49</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="single-product-wrap ss-p-wrap">
-                            <div class="product-image">
-                                <a href="#"><img src="/front/assets/images/product/9.jpg" alt=""></a>
-                                <span class="label-product label-new">new</span>
-                            </div>
-                            <div class="product-content">
-                                <h3><a href="product-details.html">100% Non-iron cotton Poplin double twisted</a></h3>
-                                <div class="home-price-box">
-                                    <span class="new-price">$53.27</span>
-                                    <span class="old-price">$58.49</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="single-product-wrap ss-p-wrap">
-                            <div class="product-image">
-                                <a href="#"><img src="/front/assets/images/product/9.jpg" alt=""></a>
-                                <span class="label-product label-new">new</span>
-                            </div>
-                            <div class="product-content">
-                                <h3><a href="product-details.html">100% Non-iron cotton Poplin double twisted</a></h3>
-                                <div class="home-price-box">
-                                    <span class="new-price">$53.27</span>
-                                    <span class="old-price">$58.49</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                                        
+                    </div>    
+                    @endforeach                                    
                 </div>
             </div>
         </div>
@@ -289,112 +245,23 @@
             <!-- product-wrapper start -->
             <div class="product-wrapper pt--30">
                 <div class="row product-slider">
+                    @foreach($products as $product)
                     <div class="col-md-3 col-6">
                         <div class="single-product-wrap">
                             <div class="product-image">
-                                <a href="#"><img src="/front/assets/images/product/9.jpg" alt=""></a>
+                                <a href="/product/shirt/{{$product->id}}/details"><img src="/images/product/design/{{$product->folder}}/{{$product->p_image}}" alt=""></a>
                                 <span class="label-product label-new">new</span>
                             </div>
                             <div class="product-content">
-                                <h3><a href="product-details.html">100% Non-iron cotton Poplin double twisted</a></h3>
+                                <h3><a href="/product/shirt/{{$product->id}}/details">{{$product->name}}</a></h3>
                                 <div class="home-price-box">
-                                    <span class="new-price">$53.27</span>
-                                    <span class="old-price">$58.49</span>
+                                    <span class="new-price">{{$product->price}}</span>
+                                    <span class="old-price">{{$product->og_price}}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 col-6">
-                        <div class="single-product-wrap">
-                            <div class="product-image">
-                                <a href="#"><img src="/front/assets/images/product/9.jpg" alt=""></a>
-                                <span class="label-product label-new">new</span>
-                            </div>
-                            <div class="product-content">
-                                <h3><a href="product-details.html">100% Non-iron cotton Poplin double twisted</a></h3>
-                                <div class="home-price-box">
-                                    <span class="new-price">$53.27</span>
-                                    <span class="old-price">$58.49</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="single-product-wrap">
-                            <div class="product-image">
-                                <a href="#"><img src="/front/assets/images/product/9.jpg" alt=""></a>
-                                <span class="label-product label-new">new</span>
-                            </div>
-                            <div class="product-content">
-                                <h3><a href="product-details.html">100% Non-iron cotton Poplin double twisted</a></h3>
-                                <div class="home-price-box">
-                                    <span class="new-price">$53.27</span>
-                                    <span class="old-price">$58.49</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="single-product-wrap">
-                            <div class="product-image">
-                                <a href="#"><img src="/front/assets/images/product/9.jpg" alt=""></a>
-                                <span class="label-product label-new">new</span>
-                            </div>
-                            <div class="product-content">
-                                <h3><a href="product-details.html">100% Non-iron cotton Poplin double twisted</a></h3>
-                                <div class="home-price-box">
-                                    <span class="new-price">$53.27</span>
-                                    <span class="old-price">$58.49</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="single-product-wrap">
-                            <div class="product-image">
-                                <a href="#"><img src="/front/assets/images/product/9.jpg" alt=""></a>
-                                <span class="label-product label-new">new</span>
-                            </div>
-                            <div class="product-content">
-                                <h3><a href="product-details.html">100% Non-iron cotton Poplin double twisted</a></h3>
-                                <div class="home-price-box">
-                                    <span class="new-price">$53.27</span>
-                                    <span class="old-price">$58.49</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="single-product-wrap">
-                            <div class="product-image">
-                                <a href="#"><img src="/front/assets/images/product/9.jpg" alt=""></a>
-                                <span class="label-product label-new">new</span>
-                            </div>
-                            <div class="product-content">
-                                <h3><a href="product-details.html">100% Non-iron cotton Poplin double twisted</a></h3>
-                                <div class="home-price-box">
-                                    <span class="new-price">$53.27</span>
-                                    <span class="old-price">$58.49</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="single-product-wrap">
-                            <div class="product-image">
-                                <a href="#"><img src="/front/assets/images/product/9.jpg" alt=""></a>
-                                <span class="label-product label-new">new</span>
-                            </div>
-                            <div class="product-content">
-                                <h3><a href="product-details.html">100% Non-iron cotton Poplin double twisted</a></h3>
-                                <div class="home-price-box">
-                                    <span class="new-price">$53.27</span>
-                                    <span class="old-price">$58.49</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
+                    @endforeach                    
                 </div>
             </div>
             <!-- product-wrapper end -->
