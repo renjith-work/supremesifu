@@ -42,7 +42,13 @@
                                 <div class="blog-contend">
                                     <h3><a href="/guides/{{$post->slug}}">{{$post->title}}</a></h3>
                                     <div class="blog-date-categori"><span>Category</span> - {{$post->category->name}}</div>
-                                    <p>{!!  substr(strip_tags($post->body), 0, 100) !!}... </p>
+                                    <p>
+                                         @if($post->bodyE)
+                                            {!!  substr(strip_tags($post->bodyE), 0, 100) !!}...</td>
+                                        @elseif($post->bodyH)
+                                            {!!  substr(strip_tags($post->bodyH), 0, 100) !!}...</td>
+                                        @endif
+                                    </p>
                                     <div class="mt-30 blog-more-area"> <a href="/guides/{{$post->slug}}" class="blog-btn btn guide-list-button">Read more</a> </div>
                                 </div>
                             </div>
