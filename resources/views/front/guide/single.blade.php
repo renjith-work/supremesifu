@@ -31,30 +31,16 @@
                                 @foreach($posts as $item)
                                 <div class="sidebar-posts-inner row">
                                     <div class="sidebar-post-inner-image col-4">
-                                        <a href="/blog/posts/{{$item->slug}}"><img src="/images/post/{{$item->image}}" alt=""></a>
+                                        <a href="/guides/{{$item->slug}}"><img src="/images/post/{{$item->image}}" alt=""></a>
                                     </div>
                                     <div class="sidebar-post-inner-content col-8">
-                                        <h3><a href="/blog/posts/{{$item->slug}}">{{$item->title}}</a></h3>
+                                        <h3><a href="/guides/{{$item->slug}}">{{$item->title}}</a></h3>
                                     </div>
                                 </div>
                                 @endforeach
                             </div>
                         </div>
 
-                        <!-- shop-sidebar start -->
-                        <div class="blog-sidebar mb--30">
-                            <div class="blog-sidebar-header">CATEGORIES</div>
-                            <div class="blog-sidebar-category-body">
-                                <ul>  
-                                    @foreach($categories as $category)
-                                        @if ($category->id != 1)
-                                            <li><a href="/blog/categories/{{$category->slug}}">{{$category->name}}</a></li>
-                                        @endif
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- shop-sidebar end -->
                         @if($post->tags)
                         <!-- shop-sidebar start -->
                         <div class="blog-sidebar mb--30">

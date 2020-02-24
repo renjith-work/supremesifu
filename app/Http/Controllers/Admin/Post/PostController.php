@@ -100,6 +100,8 @@ class PostController extends Controller
             $post->bodyH = $request->bodyH; 
             $post->metatag = $request->metatag; 
             $post->metadescp = $request->metadescp; 
+            $post->video = $request->video; 
+
 
             if ($request-> hasFile('image')) //Check if the file exists
             {
@@ -222,6 +224,7 @@ class PostController extends Controller
             $post->bodyH = $request->bodyH; 
             $post->metatag = $request->metatag; 
             $post->metadescp = $request->metadescp; 
+            $post->video = $request->video; 
 
             if ($request-> hasFile('image')) //Check if the file exists
             {
@@ -266,7 +269,8 @@ class PostController extends Controller
                 $post->tags()->sync(array());
             }
             Session::flash('success', 'The data was successfully updated.');
-            return redirect()->route('admin.post.index');
+            // return redirect()->route('admin.post.index');
+            return redirect()->back();
         }else{
             return redirect()->back()->withInput()->withErrors($validator);
         }

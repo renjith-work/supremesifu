@@ -84,6 +84,12 @@ Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 	Route::get('post/image/delete/{id}/{image}', 'Admin\Post\PostController@imageDel');
 });
 
+// Guide Post Routes
+Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
+	// Guide Category Routes
+	Route::resource('guide', 'Admin\Guide\GuideController');
+});
+
 // Product Routes
 // Fabric Routes
 Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
@@ -137,6 +143,10 @@ Route::get('/collection/shirts', 'Front\Product\ProductDesignController@index');
 // Blog Routes
 Route::group(['prefix'  =>   'blog', 'as' => 'blog.'], function() {
 	Route::get('/posts/{slug}', ['as'=>'front.post.single', 'uses'=>'Front\Post\PostController@single'])->where('slug', '[\w\d\-\_]+');
+});
+Route::group(['prefix'  =>   'guides', 'as' => 'guides'], function() {
+	Route::get('/', 'Front\Guide\GuideController@index');
+	Route::get('/{slug}', ['as'=>'.single', 'uses'=>'Front\Guide\GuideController@single'])->where('slug', '[\w\d\-\_]+');
 });
 
 // Custom Shirt Design
