@@ -12,6 +12,7 @@
                     <li class="header">FABRIC MANAGEMENT</li>
                     <li class=""><a href="/admin/fabric"> <i class="fa fa-circle-o""></i> <span>Fabric management</span> <span class="pull-right-container"></span> </a></li>
                     <li class="header">POST MANAGEMENT</li>
+                    @can('List Guide')<li class=""><a href="/admin/guide"> <i class="fa fa-circle-o""></i> <span>Guide management</span> <span class="pull-right-container"></span> </a></li>@endcan
                     @can('List Post')<li class=""><a href="/admin/post"> <i class="fa fa-circle-o""></i> <span>Post management</span> <span class="pull-right-container"></span> </a></li>@endcan
                     @can('List Post Category')<li class=""><a href="/admin/post/category"> <i class="fa fa-circle-o""></i> <span>Category management</span> <span class="pull-right-container"></span> </a></li>@endcan
                     @can('List Post Tag')<li class=""><a href="/admin/post/tag"> <i class="fa fa-circle-o""></i> <span>Tag management</span> <span class="pull-right-container"></span> </a></li>@endcan
