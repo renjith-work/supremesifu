@@ -117,14 +117,14 @@
                                     <li><a href="">Trousers</a></li> --}}
                                     <li>
                                         <a href="/guides">Design Guides</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="/guides/design-a-shirt">Design A Shirt</a></li>
+                                        {{-- <ul class="sub-menu">
+                                            <li><a href="/guides">Design A Shirt</a></li>
                                             <li><a href="/guides/customize-a-shirt">Customize A Shirt</a></li>
                                             <li><a href="/guides/measure-your-body">Measure Yourself</a></li>
                                             <li><a href="/guides/direct-measurement">Direct Measurement</a></li>
                                             <li><a href="/guides/standard-size-guide">Standard Size Guide</a></li>
                                             <li><a href="/guides/take-care-of-dress-shirt">Shirt Care</a></li>
-                                        </ul>
+                                        </ul> --}}
                                     </li>
                                     {{-- <li><a href="/promotions">Promotions</a></li> --}}
                                 </ul>
