@@ -20,6 +20,12 @@ class GuideController extends Controller
         return view('admin.guide.index')->with('posts', $posts);
     }
 
+    public function load(Request $request){
+        $id = $request->id;
+        $data = Post::where('id', $id)->first();
+        return response()->json($data);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

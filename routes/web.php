@@ -88,6 +88,7 @@ Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 	// Guide Category Routes
 	Route::resource('guide', 'Admin\Guide\GuideController');
+	Route::post('/guide/load', 'Admin\Guide\GuideController@load');
 });
 
 // Product Routes

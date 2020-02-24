@@ -400,16 +400,16 @@ $(document).ready(function() {
         var _token = $("input[name='_token']").val();
         console.log(id);
         $.ajax({
-            url: "/guide/load",
+            url: "/admin/guide/load",
             type:'POST',
             data: {_token:_token, id:id},
             dataType: 'json',
             success:function(response){
                 $('#loadTutorial').modal('show');
                 $('#modalTitle').append(response.title);
-                $('#tutorial-image').append('<img src="/images/guide/'+response.image+'" alt="">');
+                $('#tutorial-image').append('<img src="/images/post/'+response.image+'" alt="">');
                 $('#tutorial-video').append('<iframe class="measurement-tutorial-video" src="'+response.video+'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
-                $('#tutorial-body').append(response.body);
+                $('#tutorial-body').append(response.bodyH);
             }
         });
     }

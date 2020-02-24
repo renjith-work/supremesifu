@@ -71,7 +71,6 @@
                                     </div>
                                 </li>
                                 @auth
-                                {{Cart::getContent()->count()}}
                                 <li class="setting-top list-inline-item">
                                     <div class="btn-group">
                                         <button class="dropdown-toggle">{{ Auth::user()->fname }} {{ Auth::user()->lname }}'s Account <i class="fa fa-angle-down"></i></button>
