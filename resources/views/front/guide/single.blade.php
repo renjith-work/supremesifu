@@ -6,8 +6,7 @@
             <div class="col-lg-12">
                 <ul class="breadcrumb-list">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/blog/posts">Supreme Sifu Blogs</a></li>
-                    <li class="breadcrumb-item"><a href="/blogs/categories/{{$post->category->slug}}">{{$post->category->name}}</a></li>
+                    <li class="breadcrumb-item"><a href="/guides">Supreme Sifu Guides</a></li>
                     <li class="breadcrumb-item active">{{$post->title}}</li>
                 </ul>
             </div>
