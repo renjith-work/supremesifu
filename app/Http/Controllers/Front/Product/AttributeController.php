@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Front\Product;
 
 use App\Models\Product\ProductAttributeValue;
 use App\Models\Product\ProductAttribute;
-use App\Models\Product\Product;
 use App\Models\Product\ProductAttributeValueSave;
+use App\Models\Product\Product;
+use App\Models\Product\ProductDesign;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -43,6 +44,14 @@ class AttributeController extends Controller
     public function loadAttributes(Request $request){
         $id = $request->id;
         $product = Product::find($id);
+        $category_id = $product->product_category_id;
+        $attributes = ProductAttribute::where('product_category_id', $category_id)->get();
+        return response()->json($attributes);
+    }
+
+    public function loadPDesignAttributes(Request $request){
+        $id = $request->id;
+        $product = ProductDesign::find($id);
         $category_id = $product->product_category_id;
         $attributes = ProductAttribute::where('product_category_id', $category_id)->get();
         return response()->json($attributes);

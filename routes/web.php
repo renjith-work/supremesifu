@@ -181,6 +181,7 @@ Route::group(['prefix'  =>   'product'], function() {
 
 Route::group(['prefix'  =>   'product/design'], function() {
 	Route::post('/load/images', 'Front\Product\ProductDesignController@loadImages');
+	Route::post('/front/attribute/list', 'Front\Product\AttributeController@loadPDesignAttributes');
 });
 
 Route::get('/product/design/monogram/list', 'Front\Product\Monogram\MonogramController@list');
@@ -189,6 +190,11 @@ Route::group(['prefix'  =>   'monogram'], function() {
 	Route::post('/product/value', 'Front\Product\Monogram\MonogramController@loadValues');
 	Route::post('/product/category', 'Front\Product\Monogram\MonogramController@loadProductMonogram');
 });
+
+Route::group(['prefix'  =>   'product/design/monogram'], function() {
+	Route::post('/category', 'Front\Product\Monogram\MonogramController@loadProductDesignMonogram');
+});
+	Route::post('/product/design/measurement/category', 'Front\Measurement\AttributeValueController@loadPDesignAttributes');
 
 Route::group(['prefix'  =>   'measurement'], function() {
 	Route::post('/profile/values', 'Front\Measurement\AttributeValueController@loadValues');
@@ -237,6 +243,7 @@ Route::group(['prefix' => 'orders'], function () {
 
 Route::post('/design/shirt/buy-now', 'Ecommerce\ProductController@updateProduct');
 Route::post('/design/shirt/add-to-cart', 'Ecommerce\ProductController@cartAdd');
+Route::post('/design/shirt/new/add-to-cart', 'Ecommerce\ProductController@cartAddNewShirt');
 
 // Product Details Page
 Route::get('/product/shirt/{id}/details', 'Front\Product\ProductDesignController@detail');

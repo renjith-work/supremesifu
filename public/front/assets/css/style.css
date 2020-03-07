@@ -101,6 +101,11 @@ a:hover {
   color: #c1903e;
 }
 
+a:focus {
+  text-decoration: none;
+  color: #c1903e;
+}
+
 button, input[type="submit"] {
   cursor: pointer;
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front\Product\Monogram;
 use App\Models\Product\Monogram;
 use App\Models\Product\ProductMonogram;
 use App\Models\Product\Product;
+use App\Models\Product\ProductDesign;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -35,6 +36,14 @@ class MonogramController extends Controller
     public function loadProductMonogram(Request $request){
         $id = $request->id;
         $product = Product::find($id);
+        $category_id = $product->product_category_id;
+        $monogram = Monogram::where('product_category_id', $category_id)->get();
+        return response()->json($monogram);
+    }
+
+    public function loadProductDesignMonogram(Request $request){
+        $id = $request->id;
+        $product = ProductDesign::find($id);
         $category_id = $product->product_category_id;
         $monogram = Monogram::where('product_category_id', $category_id)->get();
         return response()->json($monogram);

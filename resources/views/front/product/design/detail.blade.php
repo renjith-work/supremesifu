@@ -106,6 +106,13 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="measurement-error-instruction" class="hide_content">
+                                    The measurement fields cannot be left empty. Please select a measurement proifle or enter custom measurements.
+                                </div>
+                            </div>
+                        </div>
                         <div class="row shirt-content-place-order-cover pt--20">   
                             <div class="col-md-6">
                                 <a id="confirmOrder" href="#" class="dress-content-place-order">BUY NOW</a>

@@ -111,7 +111,6 @@ $(document).ready(function() {
             data: {_token:_token, id:id},
             dataType: 'json',
             success:function(response){
-                    console.log(response[0].name);
                     $('#product_detail_title').append(response[0].name+' '+product_name);
                     $('#product_detail_fabric_image').append('<img src="/images/product/fabric/'+response[0].image+'" alt="">')
                     $('#fabric_details_body').append('<div class="row fabric-detail-item"><div class="col-md-5 fabric-detail-head">Name</div><div class="col-md-7 fabric-detail-body">'+response[0].name+'</div></div>');
@@ -140,6 +139,7 @@ $(document).ready(function() {
                 $('#product_price').append('MYR '+response.price);
                 $('#product_og_price').append('MYR '+response.og_price);
                 product_price = response.price;
+                
             }
         });
     }
@@ -230,7 +230,50 @@ $(document).ready(function() {
 
 // Measurement Management
 
-// Load the measurement attributes on to the page as input boxes.
+    $('#measurement-save-cover').css("display", "none");
+    
+    // saveMeasurementAlert();
+    // function saveMeasurementAlert(){
+    //     if(mp_name == null){
+    //         $('#measurement-save-cover').css("display", "block");
+    //     }
+    // }
+
+
+    loadAllMeasurementProfiles(measurement_id);
+    function loadAllMeasurementProfiles(id){
+        $.ajax({
+            url: "/measurement/profiles/list",
+            type:'GET',
+            dataType: 'json',
+            success:function(response){
+                    $('#measureProfile').append('<option selected="true" disabled="disabled">Standard Measurement Profiles</option>');
+                    $.each(response[0], function(key1,value1){
+                        if(value1.id == id){
+                            $('#measureProfile').append('<option value="'+value1.id+'" selected>'+value1.name+'</option>');
+                        }else{
+                            $('#measureProfile').append('<option value="'+value1.id+'">'+value1.name+'</option>');
+                        }
+                    });
+                    if(jQuery.isEmptyObject(response[1]))
+                    {
+                        // console.log("No Saved Measurements");
+                    }else
+                    {
+                        
+                        $('#measureProfile').append('<option disabled="disabled">Saved Measurement Profiles</option>');
+                        $.each(response[1], function(key2,value2){
+                            if(value2.id == id){
+                                $('#measureProfile').append('<option value="'+value2.id+'" selected>'+value2.name+'</option>');
+                            }else{
+                                $('#measureProfile').append('<option value="'+value2.id+'">'+value2.name+'</option>');
+                            }
+                        });
+                    }
+                }
+        }); 
+    }
+
 // Load the normal measurement attributes
     loadMeasurementAttribute();
     function loadMeasurementAttribute(){
@@ -287,7 +330,6 @@ $(document).ready(function() {
 
 // Load attributes value table
     function loadAttributeValues(id){
-        console.log(id);
         var _token = $("input[name='_token']").val();
         $.ajax({
             url: "/measurement/attributes/values/load",
@@ -302,88 +344,7 @@ $(document).ready(function() {
         });
     }
 
-    $('#measurement-save-cover').css("display", "none");
-    
-    // saveMeasurementAlert();
-    // function saveMeasurementAlert(){
-    //     if(mp_name == null){
-    //         $('#measurement-save-cover').css("display", "block");
-    //     }
-    // }
 
-
-// Load Measurement profile function.
-    function loadMeasurementProfile(id){
-        $('#measureProfile').html('');
-        loadAllMeasurementProfiles(id);
-    }
-
-// Loading common measurement profiles
-    function loadCommonMeasurement(id){
-        $.ajax({
-            url: "/measurement/profiles/common",
-            type:'GET',
-            dataType: 'json',
-            success:function(response){
-                    $('#measureProfile').append('<option selected="true" disabled="disabled">Standard Measurement Profiles</option>');
-                $.each(response, function(key,value){
-                    if(value.id == id){
-                        $('#measureProfile').append('<option value="'+value.id+'" selected>'+value.name+'</option>');
-                    }else{
-                        $('#measureProfile').append('<option value="'+value.id+'">'+value.name+'</option>');
-                    }
-                });
-            }
-        });
-    }
-
-// Load user measurement profiles
-    function loadUserMeasurement(id){
-       $.ajax({
-            url: "/measurement/profiles/user",
-            type:'GET',
-            dataType: 'json',
-            success:function(response){
-                if( response.length != 0 ) {
-                    $('#measureProfile').append('<option selected="true" disabled="disabled">Saved Measurement Profiles</option>');
-                    $.each(response, function(key,value){
-                        if(value.id == id){
-                            $('#measureProfile').append('<option value="'+value.id+'" selected>'+value.name+'</option>');
-                        }else{
-                            $('#measureProfile').append('<option value="'+value.id+'">'+value.name+'</option>');
-                        }
-                    });
-                }
-            }
-        }); 
-    }
-
-    loadAllMeasurementProfiles(measurement_id);
-    function loadAllMeasurementProfiles(id){
-        $.ajax({
-            url: "/measurement/profiles/list",
-            type:'GET',
-            dataType: 'json',
-            success:function(response){
-                    $('#measureProfile').append('<option selected="true" disabled="disabled">Standard Measurement Profiles</option>');
-                    $.each(response[0], function(key1,value1){
-                        if(value1.id == id){
-                            $('#measureProfile').append('<option value="'+value1.id+'" selected>'+value1.name+'</option>');
-                        }else{
-                            $('#measureProfile').append('<option value="'+value1.id+'">'+value1.name+'</option>');
-                        }
-                    });
-                    $('#measureProfile').append('<option disabled="disabled">Saved Measurement Profiles</option>');
-                    $.each(response[1], function(key2,value2){
-                        if(value2.id == id){
-                            $('#measureProfile').append('<option value="'+value2.id+'" selected>'+value2.name+'</option>');
-                        }else{
-                            $('#measureProfile').append('<option value="'+value2.id+'">'+value2.name+'</option>');
-                        }
-                    });
-                }
-        }); 
-    }
 
 // Load Save Measurement Link
     $(document).on('click', '.mt-link', function(event){
@@ -477,11 +438,6 @@ $(document).ready(function() {
 
 // Monogram Management
 
-// Load the monograms with respect to the product selected once the page is loaded.
-    $(window).load(function(){
-        loadMonogramValues(product_id);
-    }); 
-
 // Load Monogram input fields function
     loadMonograms();
     function loadMonograms(){
@@ -503,27 +459,6 @@ $(document).ready(function() {
         });
     }
 
-// Load the correct monogram values on to the function. 
-    function loadMonogramValues(id){
-        var _token = $("input[name='_token']").val();
-        $.ajax({
-            url: "/monogram/product/value",
-            type:'POST',
-            data: {_token:_token, id:id},
-            dataType: 'json',
-            success:function(response){
-                $.each(response, function(key,value){
-                    $("#"+value.code).val(value.value);
-                });
-            }
-        });
-    }
-
-
-
-
-
-    
 
 // Submitting the values.
 
@@ -531,7 +466,7 @@ $(document).ready(function() {
 
     function getMonogramValues(id){
         $.ajax({
-            url: "/monogram/product/category",
+            url: "/product/design/monogram/category",
             type:'POST',
             data: {_token:_token, id:id},
             dataType: 'json',
@@ -548,7 +483,7 @@ $(document).ready(function() {
 
     function getMeasurementValues(id){
         $.ajax({
-            url: "/measurement/product/category",
+            url: "/product/design/measurement/category",
             type:'POST',
             data: {_token:_token, id:id},
             dataType: 'json',
@@ -571,13 +506,14 @@ $(document).ready(function() {
 
     function getProductPrice(){
         var name = 'price';
-        var value = product_price;
+        var value = $('#product_price').val();
+        console.log(value);
         inputObject[name] = value;
     }
 
     function getProductAttributeValues(id){
         $.ajax({
-            url: "/product/front/attribute/list",
+            url: "/product/design/front/attribute/list",
             type:'POST',
             data: {_token:_token, id:id},
             dataType: 'json',
@@ -600,6 +536,18 @@ $(document).ready(function() {
         inputObject[name] = value;
     }
 
+    function getProductDesignId(){
+        name = 'design_id';
+        value = product_id;
+        inputObject[name] = value;
+    }
+
+    function getFabricId(){
+        name = 'fabric_id';
+        value = fabric_id;
+        inputObject[name] = value;
+    }
+
     function goToCart(data){
         $.ajax({
             url: "/design/shirt/buy-now",
@@ -613,15 +561,29 @@ $(document).ready(function() {
         });
     }
 
-    function updateProduct(data){
+    function updateProduct(data){        
         $('#addCartName').html('');
         $.ajax({
             url: "/design/shirt/add-to-cart",
             type:'POST',
-            data: {_token:_token, data:data, id:product_id},
+            data: {_token:_token, data:data},
             dataType: 'json',
             success:function(response){
                 console.log(response);
+                $('#addCartName').text(response);
+                $('#addToCartModal').modal('show');
+            }
+        });
+    }
+
+    function createProduct(data){
+        $('#addCartName').html('');
+        $.ajax({
+            url: "/design/shirt/new/add-to-cart",
+            type:'POST',
+            data: {_token:_token, data:data},
+            dataType: 'json',
+            success:function(response){
                 $('#addCartName').text(response);
                 $('#addToCartModal').modal('show');
             }
@@ -635,7 +597,6 @@ $(document).ready(function() {
         getProductAttributeValues(product_id);
         getQuantity();
         getMeasurementProfile();
-        getProductPrice();
         setTimeout(function(){
             goToCart(inputObject);
         }, 500);        
@@ -645,18 +606,38 @@ $(document).ready(function() {
 
     $('#addToCart').on('click', function(event) {
         event.preventDefault();
-        getMonogramValues(product_id);
-        getMeasurementValues(product_id);
-        getProductAttributeValues(product_id);
-        getQuantity();
-        getMeasurementProfile();
-        getProductPrice();
-        setTimeout(function(){
-            updateProduct(inputObject);
-        }, 500);        
-
+        var mval = validateMeasurementInput();
+        if(mval == 1)
+        {
+            getMonogramValues(product_id);
+            getMeasurementValues(product_id);
+            getProductAttributeValues(product_id);
+            getQuantity();
+            getMeasurementProfile();
+            getProductPrice();
+            getProductPrice();
+            getProductDesignId();
+            getFabricId();
+            setTimeout(function(){
+                // console.log(inputObject);   
+                createProduct(inputObject);
+            }, 500);        
+        }
     });
 
-    console.log(product_price);
+    function validateMeasurementInput(){
+        var value = $('.measurement-input').filter(function () {
+            return this.value != '';
+        });
+        if (value.length<=0) {
+            event.preventDefault();
+            console.log("Please enter measurements or select a standard measurement.");
+            $('#measurement-error-instruction').removeClass("hide_content");
+            return 0;
+        }else{
+            return 1;
+        }
+    }
+
  });
 

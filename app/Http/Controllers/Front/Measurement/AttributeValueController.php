@@ -7,6 +7,7 @@ use App\Models\Measurement\MeasurementAttributeValue;
 use App\Models\Measurement\UserMeasurementProfile;
 use App\Models\Measurement\UserMeasurementProfileValue;
 use App\Models\Product\Product;
+use App\Models\Product\ProductDesign;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -105,6 +106,14 @@ class AttributeValueController extends Controller
     public function loadAttributes(Request $request){
         $id = $request->id;
         $product = Product::find($id);
+        $category_id = $product->product_category_id;
+        $attributes = MeasurementAttribute::where('product_category_id', $category_id)->get();
+        return response()->json($attributes);
+    }
+
+    public function loadPDesignAttributes(Request $request){
+        $id = $request->id;
+        $product = ProductDesign::find($id);
         $category_id = $product->product_category_id;
         $attributes = MeasurementAttribute::where('product_category_id', $category_id)->get();
         return response()->json($attributes);

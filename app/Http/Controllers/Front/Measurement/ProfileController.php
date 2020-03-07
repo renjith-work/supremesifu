@@ -64,6 +64,8 @@ class ProfileController extends Controller
             );
         }
 
+        $data2 = array();
+
         if(Auth::check()){
             $user_id = Auth::user()->id;
             $userData =  UserMeasurementProfile::where('user_id', $user_id)->get();

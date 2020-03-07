@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Ecommerce;
 
 use App\Models\Product\Product;
+use App\Models\Product\Fabric\Fabric;
 use App\Models\Product\Monogram;
 use App\Models\Product\ProductMonogram;
 use App\Models\Product\ProductAttribute;
@@ -243,5 +244,77 @@ class ProductController extends Controller
 
     public function resetCart(){
         
+    }
+
+    public function cartAddNewShirt(Request $request)
+    {       
+            if(Auth::check()){
+                $user_id = Auth::user()->id;
+            }else{
+                $user_id = null;
+            }
+            $session_id = $session_id = Session::getId();
+            $input = $request->data;
+
+            $monogram_array = [];
+            $monograms = Monogram::where('product_category_id', 3)->get();
+            foreach($monograms as $monogram){
+                if (array_key_exists($monogram->code, $input)) {
+                    if (isset($input[$monogram->code])) {
+                        $monogram_array[] = array(
+                                            'monogram_id' => $monogram->id,
+                                            'value' => $input[$monogram->code],
+                        );
+                    } 
+                }
+            }
+
+
+            $fabric = Fabric::find($input['fabric_id']);
+            $design = ProductDesign::find($input['design_id']);
+
+            $product = new Product;
+            $product->user_id = $user_id;
+            $product->session_id = $session_id;
+            $product->product_design_id = $design->id;
+            $product->product_category_id = 3;
+            $product->fabric_id = $fabric->id;
+            $product->name = $fabric->name.' '.$design->name;
+            $product->price = $design->price;
+            $product->og_price = $design->og_price;
+            $product->description = $design->description;
+            $product->summary = $design->summary;
+            $product->p_image = $design->p_image;
+            $product->s_image = $design->s_image;
+            $product->album = $design->album;
+            $product->folder = $design->folder;
+            $product->save();
+
+            $product->monogram()->sync($monogram_array, false);
+            
+            $attribute_array = [];
+            $attributes = ProductAttribute::where('product_category_id', 3)->get();
+            foreach($attributes as $attribute){
+                if (array_key_exists($attribute->code, $input)) {
+                    if (isset($input[$attribute->code])) {
+                        $attribute_array[] = array(
+                                            'product_id' => $product->id,
+                                            'product_attribute_id' => $attribute->id,
+                                            'product_attribute_value_id' => $input[$attribute->code],
+                        );
+                    } 
+                }
+            }
+
+            ProductAttributeValueSave::insert($attribute_array);
+
+            $options = array(
+                        'folder' => $product->folder,
+                        'image' => $product->p_image,
+            );
+
+            Cart::add($product->id, $product->name, $product->price, $input['quantity'], $options);
+            // Cart::add($product->id, $product->name, $request->input('price'), $request->input('qty'));
+            return response()->json($product->name);
     }
 }
