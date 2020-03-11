@@ -12,15 +12,17 @@
                     <div class="modal-body-content-main">
                         <div class="modal-fabric-detail-cover row">
                             <div class="col-md-6">
-                                <div id="modal-design-image-cover">
-                                    
+                                {{-- <div id="modal-design-image-cover"> --}}
+                                <div id="product-details-left">
+                                    <div class="product-details-images slider-lg-image-1" id="product_detail_images"></div>
+                                    <div class="product-details-thumbs slider-thumbs-1" id="product_detail_thumbs"></div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div id="modal-design-detail-content">
-                                    <div class="modal-design-name">Red Stripe Pure Cotton Long Collar Dress Shirt</div>
-                                    <div class="modal-design-price"> MYR 60.00 <span>MYR 102.50</span></div>
-                                    <div class="modal-design-description"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.</div>
+                                    <div class="modal-design-name"></div>
+                                    <div class="modal-design-price"> <span></span></div>
+                                    <div class="modal-design-description"></div>
                                 </div>
                                 <form action="{{route('custom-shirt.create')}}" method="POST" enctype="multipart/form-data">
                                 {{ csrf_field() }}

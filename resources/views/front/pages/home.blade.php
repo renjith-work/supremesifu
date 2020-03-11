@@ -247,13 +247,13 @@
                 <div class="row product-slider">
                     @foreach($products as $product)
                     <div class="col-md-3 col-6">
-                        <div class="single-product-wrap">
+                        <div class="single-product-wrap home-spwrap">
                             <div class="product-image">
-                                <a href="/product/shirt/{{$product->id}}/details"><img src="/images/product/design/{{$product->folder}}/{{$product->p_image}}" alt=""></a>
+                                <a href="/product/shirt/{{$product->slug}}"><img src="/images/product/product/{{$product->p_image}}" alt=""></a>
                                 <span class="label-product label-new">new</span>
                             </div>
-                            <div class="product-content">
-                                <h3><a href="/product/shirt/{{$product->id}}/details">{{$product->name}}</a></h3>
+                            <div class="product-content home-sp-pc">
+                                <h3 class="home-sp-h3"><a href="/product/shirt/{{$product->slug}}">{{$product->name}}</a></h3>
                                 <div class="home-price-box">
                                     <span class="new-price">{{$product->price}}</span>
                                     <span class="old-price">{{$product->og_price}}</span>
@@ -602,7 +602,7 @@
     <!-- Our Brand Area End -->
 @endsection
 @section('footer')
-<script src="/front/code/js/home.js"></script>
+<script src="/front/code/js/home.js?version=<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 <script type="text/javascript">
     $('.variable-width').slick({
       dots: true,

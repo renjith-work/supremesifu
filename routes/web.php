@@ -113,6 +113,15 @@ Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 	// Product Attributes Routes
 	Route::resource('product/attribute', 'Admin\Product\AttributeController',  ['as' => 'product']);
 	Route::get('product/attribute/{id}/delete', 'Admin\Product\AttributeController@delete')->name('product.attribute.delete');
+	// Product Routes
+	Route::resource('product', 'Admin\Product\ProductController');
+	Route::get('product/{id}/delete', 'Admin\Product\ProductController@delete')->name('product.delete');
+	// Route::get('post/image/delete/{id}/{image}', 'Admin\Post\PostController@imageDel');
+});
+
+Route::group(['prefix'  =>   'admin/product', 'as' => 'admin.product.'], function() {
+	Route::resource('shirt', 'Admin\Product\Item\ShirtController');
+	Route::get('shirt/{id}/delete', 'Admin\Product\Item\ShirtController@delete')->name('shirt.delete');
 });
 
 // Fabric Api Routes
@@ -139,7 +148,7 @@ Route::get('/about-us/perfect-fit-guarantee', 'Front\Page\PageController@perfect
 Route::get('/about-us/terms-and-conditions', 'Front\Page\PageController@termsConditions');
 Route::get('/about-us/privacy-policy', 'Front\Page\PageController@privacy');
 Route::get('/about-us/frequently-asked-questions-faq', 'Front\Page\PageController@faq');
-Route::get('/collection/shirts', 'Front\Product\ProductDesignController@index');
+Route::get('/collection/shirts', 'Front\Product\ProductController@index');
 
 // Blog Routes
 Route::group(['prefix'  =>   'blog', 'as' => 'blog.'], function() {
@@ -246,4 +255,5 @@ Route::post('/design/shirt/add-to-cart', 'Ecommerce\ProductController@cartAdd');
 Route::post('/design/shirt/new/add-to-cart', 'Ecommerce\ProductController@cartAddNewShirt');
 
 // Product Details Page
-Route::get('/product/shirt/{id}/details', 'Front\Product\ProductDesignController@detail');
+// Route::get('/product/shirt/{id}/details', 'Front\Product\ProductController@detail');
+Route::get('/product/shirt/{slug}', 'Front\Product\ProductController@detail');

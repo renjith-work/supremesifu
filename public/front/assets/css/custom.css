@@ -3335,3 +3335,18 @@ box-shadow: 0px 0px 5px 0px rgba(112,112,112,1);
     line-height: 16px;
     letter-spacing: 1px;
 }
+
+.home-spwrap{
+	border: 1px solid #dcdcdc !important
+}
+
+.home-sp-pc{
+	background: #000 !important;
+	color: #fff;
+	padding: 15px 10px 7px 10px !important;
+}
+
+.home-sp-pc h3 a{
+	color: #fff;
+	letter-spacing: 1px;
+}

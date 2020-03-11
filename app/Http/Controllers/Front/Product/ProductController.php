@@ -22,7 +22,21 @@ use Cart;
 
 class ProductController extends Controller
 {
-   public function createProduct(Request $request)
+    public function index()
+    {
+        $products = Product::orderBy('id', 'asc')->get();    
+        // return response()->json($products);
+        return view('front.product.shirt.index')->with('products', $products);
+    }
+
+    public function detail($slug)
+    {
+        $product = Product::where('slug', '=', $slug)->first();
+        // $product = Product::find($id);
+        return view('front.product.shirt.detail')->with('product', $product);
+    }
+
+    public function createProduct(Request $request)
     {   
         // $input = $request->all();
         // return response()->json($input);
@@ -96,11 +110,12 @@ class ProductController extends Controller
         $image1[] = $product->p_image;
         $image1[] = $product->s_image;
         $image2 = json_decode($product->album, true);
-        $images = array_merge($image1, $image2);
-        $data[] = array(
-                    'folder' => $product->folder,
-                    'images' => $images 
-        );
+        // $images = array_merge($image1, $image2);
+        // $data[] = array(
+        //             'folder' => $product->folder,
+        //             'images' => $images 
+        // );
+        $data = json_decode($product->album, true);
         return response()->json($data);
     }
 }

@@ -33,14 +33,14 @@ $(document).ready(function() {
         $('#product_detail_thumbs').html('');
         var _token = $("input[name='_token']").val();
         $.ajax({
-            url: "/product/design/load/images",
+            url: "/product/load/images",
             type:'POST',
             data: {_token:_token, id:id},
             dataType: 'json',
             success:function(response){
-                $.each(response[0].images, function(key,value){
-                    $('#product_detail_images').append('<div class="lg-image"><a href="/images/product/design/'+response[0].folder+'/'+value+'" class="img-poppu"><img src="/images/product/design/'+response[0].folder+'/'+value+'" alt="product image"></a></div>');
-                    $('#product_detail_thumbs').append('<div class="sm-image"><img src="/images/product/design/'+response[0].folder+'/'+value+'" alt="product image thumb"></div>');
+                $.each(response, function(key,value){
+                    $('#product_detail_images').append('<div class="lg-image"><a href="/images/product/product/'+value+'" class="img-poppu"><img src="/images/product/product/'+value+'" alt="product image"></a></div>');
+                    $('#product_detail_thumbs').append('<div class="sm-image"><img src="/images/product/product/'+value+'" alt="product image thumb"></div>');
                 });
                 destroyCarousel();
                 loadSlick();
@@ -111,7 +111,7 @@ $(document).ready(function() {
             data: {_token:_token, id:id},
             dataType: 'json',
             success:function(response){
-                    $('#product_detail_title').append(response[0].name+' '+product_name);
+                    $('#product_detail_title').append(product_name);
                     $('#product_detail_fabric_image').append('<img src="/images/product/fabric/'+response[0].image+'" alt="">')
                     $('#fabric_details_body').append('<div class="row fabric-detail-item"><div class="col-md-5 fabric-detail-head">Name</div><div class="col-md-7 fabric-detail-body">'+response[0].name+'</div></div>');
                     $('#fabric_details_body').append('<div class="row fabric-detail-item"><div class="col-md-5 fabric-detail-head">Class</div><div class="col-md-7 fabric-detail-body">'+response[0].class+'</div></div>');

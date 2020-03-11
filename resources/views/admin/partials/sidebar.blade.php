@@ -11,6 +11,8 @@
                     <li class=""><a href="/dashboard"> <i class="fa fa-dashboard"></i> <span>Dashboard</span> <span class="pull-right-container"></span> </a></li>
                     <li class="header">FABRIC MANAGEMENT</li>
                     <li class=""><a href="/admin/fabric"> <i class="fa fa-circle-o""></i> <span>Fabric management</span> <span class="pull-right-container"></span> </a></li>
+                    <li class="header">PRODUCT MANAGEMENT</li>
+                    <li class=""><a href="/admin/product"> <i class="fa fa-circle-o""></i> <span>Product</span> <span class="pull-right-container"></span> </a></li>
                     <li class="header">POST MANAGEMENT</li>
                     @can('List Guide')<li class=""><a href="/admin/guide"> <i class="fa fa-circle-o""></i> <span>Guide management</span> <span class="pull-right-container"></span> </a></li>@endcan
                     @can('List Post')<li class=""><a href="/admin/post"> <i class="fa fa-circle-o""></i> <span>Post management</span> <span class="pull-right-container"></span> </a></li>@endcan
