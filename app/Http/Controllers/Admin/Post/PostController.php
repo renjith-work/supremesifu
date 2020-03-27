@@ -8,9 +8,12 @@ use App\Models\Post\PostTag;
 use App\Models\Post\PostStatus;
 use App\Models\Post\PostDesign;
 use App\User;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 use Illuminate\Support\Str;
+
 use Auth;
 use Validator;
 use Session;
@@ -307,5 +310,24 @@ class PostController extends Controller
         $post->save();
         // return redirect()->back()->with;
         return redirect(url()->previous() . "#uploaded_images");
+    }
+
+    public function delete($id)
+    {
+        $post = Post::find($id);
+        if($post->image)
+        {
+            Storage::delete('post/'. $post->image);
+        }
+        $images = json_decode($post->album);
+        foreach($images as $image ){
+            Storage::delete('post/'.$image);
+        }
+
+        $post->tags()->detach();
+        $post->delete();
+
+        Session::flash('success', 'The data was successfully deleted.');
+        return redirect()->back();
     }
 }

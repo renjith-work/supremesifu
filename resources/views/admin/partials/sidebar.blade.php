@@ -13,6 +13,20 @@
                     <li class=""><a href="/admin/fabric"> <i class="fa fa-circle-o""></i> <span>Fabric management</span> <span class="pull-right-container"></span> </a></li>
                     <li class="header">PRODUCT MANAGEMENT</li>
                     <li class=""><a href="/admin/product"> <i class="fa fa-circle-o""></i> <span>Product</span> <span class="pull-right-container"></span> </a></li>
+                    <li class="treeview {{ Active::checkRoute('admin.product.design.*') }} ">
+                        <a href="#"> <i class="fa fa-cogs"></i> <span>Product Design</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+                        <ul class="treeview-menu">
+                            <li class="{{ Active::checkRoute(['admin.product.design.shirt.*' ]) }}"><a href="/admin/product/design/shirt"> <i class="fa fa-circle-o"></i> <span>Shirt</span> <span class="pull-right-container"></span> </a></li>
+                        </ul>
+                    </li>
+                    <li class="{{ Active::checkRoute(['admin.product.category.*' ]) }}"><a href="/admin/product/category"> <i class="fa fa-circle-o""></i> <span>Product Category</span> <span class="pull-right-container"></span> </a></li>
+                    <li class="treeview {{ Active::checkRoute('admin.product.attribute.*') }} ">
+                        <a href="#"> <i class="fa fa-cogs"></i> <span>Product Attributes</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+                        <ul class="treeview-menu">
+                            <li class="{{ Active::checkRoute(['admin.product.attribute.index', 'admin.product.attribute.create', 'admin.product.attribute.edit' ]) }}"><a href="/admin/product/attribute"> <i class="fa fa-circle-o"></i> <span>Attributes</span> <span class="pull-right-container"></span> </a></li>
+                            <li class="{{ Active::checkRoute(['admin.product.attribute.value*' ]) }}"><a href="/admin/product/attribute/value"> <i class="fa fa-circle-o"></i> <span>Attribute Values</span> <span class="pull-right-container"></span> </a></li>
+                        </ul>
+                    </li>
                     <li class="header">POST MANAGEMENT</li>
                     @can('List Guide')<li class=""><a href="/admin/guide"> <i class="fa fa-circle-o""></i> <span>Guide management</span> <span class="pull-right-container"></span> </a></li>@endcan
                     @can('List Post')<li class=""><a href="/admin/post"> <i class="fa fa-circle-o""></i> <span>Post management</span> <span class="pull-right-container"></span> </a></li>@endcan

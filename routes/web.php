@@ -81,6 +81,7 @@ Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 	Route::get('post/status/{id}/delete', 'Admin\Post\StatusController@delete')->name('post.status.delete');
 	// Post Routes
 	Route::resource('post', 'Admin\Post\PostController');
+	Route::get('post/{id}/delete', 'Admin\Post\PostController@delete');
 	Route::get('post/image/delete/{id}/{image}', 'Admin\Post\PostController@imageDel');
 });
 
@@ -92,7 +93,13 @@ Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 });
 
 // Product Routes
-// Fabric Routes
+
+// Fabric Admin API End Points
+	Route::post('/admin/api/fabric/find', 'Admin\Api\Product\Fabric\FabricController@findFabric');
+	Route::get('/admin/api/fabric/class/load', 'Admin\Api\Product\Fabric\FabricClassController@load');
+	
+
+// Product Fabric Routes
 Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 	Route::resource('fabric/class', 'Admin\Product\Fabric\FabricClassController',  ['as' => 'fabric']);
 	Route::resource('fabric/attribute/value', 'Admin\Product\Fabric\FabricAttributeValueController',  ['as' => 'fabric.attribute']);
@@ -102,27 +109,47 @@ Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 	Route::get('fabric/{id}/delete', 'Admin\Product\Fabric\FabricController@delete')->name('fabric.delete');
 });
 
+
+// Product Attributes API Routes
+Route::post('/admin/api/product/attribute/load', 'Admin\Api\Product\Attribute\AttributeController@load');
+
+// Product Attribute Routes
+Route::group(['prefix'  =>   'admin/product', 'as' => 'admin.product.'], function() {
+	// Product Attributes Value Routes
+	Route::resource('attribute/value', 'Admin\Product\Attribute\AttributeValueController', ['as' => 'attribute']);
+	Route::get('attribute/value/{id}/delete', 'Admin\Product\Attribute\AttributeValueController@delete')->name('attribute.value.delete');
+	Route::post('attribute/load', 'Admin\Product\Attribute\AttributeValueController@load')->name('attribute.load');
+
+	// Product Attributes Routes
+	Route::resource('attribute', 'Admin\Product\Attribute\AttributeController');
+	Route::get('attribute/{id}/delete', 'Admin\Product\Attribute\AttributeController@delete')->name('attribute.delete');
+});
+
+// Product Routes
+Route::group(['prefix'  =>   'admin/product', 'as' => 'admin.product.'], function() {
+	Route::resource('shirt', 'Admin\Product\Item\ShirtController');
+	Route::get('shirt/{id}/delete', 'Admin\Product\Item\ShirtController@delete')->name('shirt.delete');
+});
+
+// Product Design Routes 
+// Shirt Routes
+Route::group(['prefix'  =>   'admin/product/design', 'as' => 'admin.product.design.'], function() {
+	Route::resource('shirt', 'Admin\Product\Design\ShirtController');
+	Route::get('shirt/{id}/delete', 'Admin\Product\Design\ShirtController@delete')->name('shirt.delete');
+});
+
 // Product Routes
 Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 	// Product Category Routes
 	Route::resource('product/category', 'Admin\Product\ProductCategoryController',  ['as' => 'product']);
 	Route::get('product/category/{id}/delete', 'Admin\Product\ProductCategoryController@delete')->name('product.category.delete');
-	// Product Attributes Value Routes
-	Route::resource('product/attribute/value', 'Admin\Product\AttributeValueController',  ['as' => 'product']);
-	Route::get('product/attribute/value/{id}/delete', 'Admin\Product\AttributeValueController@delete')->name('product.attribute.value.delete');
-	// Product Attributes Routes
-	Route::resource('product/attribute', 'Admin\Product\AttributeController',  ['as' => 'product']);
-	Route::get('product/attribute/{id}/delete', 'Admin\Product\AttributeController@delete')->name('product.attribute.delete');
 	// Product Routes
 	Route::resource('product', 'Admin\Product\ProductController');
 	Route::get('product/{id}/delete', 'Admin\Product\ProductController@delete')->name('product.delete');
 	// Route::get('post/image/delete/{id}/{image}', 'Admin\Post\PostController@imageDel');
 });
 
-Route::group(['prefix'  =>   'admin/product', 'as' => 'admin.product.'], function() {
-	Route::resource('shirt', 'Admin\Product\Item\ShirtController');
-	Route::get('shirt/{id}/delete', 'Admin\Product\Item\ShirtController@delete')->name('shirt.delete');
-});
+
 
 // Fabric Api Routes
 
@@ -257,3 +284,4 @@ Route::post('/design/shirt/new/add-to-cart', 'Ecommerce\ProductController@cartAd
 // Product Details Page
 // Route::get('/product/shirt/{id}/details', 'Front\Product\ProductController@detail');
 Route::get('/product/shirt/{slug}', 'Front\Product\ProductController@detail');
+Route::get('product/design/jso/{id}', 'Front\Product\ProductDesignController@jso');

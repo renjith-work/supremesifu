@@ -60,10 +60,10 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:5|max:255|unique:products,name',
             'category' => 'required',
-            'product_design' => 'required',
             'description' => 'required',
             'summary' => 'required',
             'price' => 'required',
@@ -71,6 +71,8 @@ class ProductController extends Controller
             'p_image' =>   'required|image|mimes:jpeg,png,jpg,gif,svg|max:2000',
             's_image' =>   'required|image|mimes:jpeg,png,jpg,gif,svg|max:2000',
             'album*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2000',
+            'metatag' => 'required',
+            'metadescp' => 'required',
         ],
         [
             'p_image.max' => 'Max image upload size is 2 MB.',
@@ -81,17 +83,21 @@ class ProductController extends Controller
         ]);
 
         if ($validator->passes()) {
+
+
         	$product = new Product;
         	$product->name = $request->name;
         	$product->user_id = 1;
         	$product->slug = Str::slug($request->name, '-'); 
         	$product->product_category_id = $request->category ;
-        	$product->product_design_id = $request->product_design ;
-        	$product->fabric_id = $request->fabric;
+            $product->fabric_id = $request->fabric;
         	$product->description = $request->description ;
         	$product->summary = $request->summary ;
-        	$product->price = $request->price ;
+            $product->price = $request->price ;
         	$product->og_price = $request->og_price ;
+        	$product->video = $request->video;
+            $product->metatag = $request->metatag;
+            $product->metadescp = $request->metadescp;
 
         	if ($request-> hasFile('p_image')) //Check if the file exists
             {
@@ -129,6 +135,23 @@ class ProductController extends Controller
             }
 
             $product->save();
+
+            $input = $request->all();
+            $productAttribute_array = array();
+            $attributes = ProductAttribute::where('product_category_id', $input['category'])->get();
+            foreach($attributes as $attribute)
+            {
+                if (array_key_exists($attribute->code, $input)){
+                    $productAttribute_array[] =array(
+                                                
+                                                'product_id' => $product->id, 
+                                                'product_attribute_id' => $attribute->id, 
+                                                'product_attribute_value_id' => $input[$attribute->code], 
+                                            );
+                }
+            }
+            return response()->json($productAttribute_array);
+
             Session::flash('success', 'The data was successfully inserted.');
             return redirect()->back();
         }else{

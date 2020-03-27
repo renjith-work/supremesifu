@@ -82,4 +82,9 @@ class DesignController extends Controller
     {
         //
     }
+
+
+    public function shirt(){
+        
+    }
 }

@@ -85,4 +85,10 @@ class FabricClassController extends Controller
     {
         //
     }
+
+    public function load()
+    {
+        $fabricclasses = FabricClass::all();
+        return response()->json($fabricclasses);
+    }
 }

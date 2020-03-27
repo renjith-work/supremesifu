@@ -42,17 +42,13 @@
                                         {!!  substr(strip_tags($post->bodyH), 0, 100) !!}...</td>
                                     @endif
                                 <td>{{$post->status->name }}</td>
-                                <td style="padding-left: 10px; padding-right: 10px;">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <a href="/admin/post/{{$post->id}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                        </div> 
-                                        <div class="col-md-4">
-                                            <a href="/admin/post/{{$post->id}}/edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <a href="/admin/post/{{$post->id}}/delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                        </div>
+                                <td style="width: 150px;">
+                                    <div class="action-ul-cover">
+                                        <ul>
+                                            <li><a href="/admin/post/{{$post->id}}" class="crud-ab-cover ab-view"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
+                                            <li><a href="/admin/post/{{$post->id}}/edit" class="crud-ab-cover ab-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+                                            <li><a href="/admin/post/{{$post->id}}/delete" class="crud-ab-cover ab-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                        </ul>
                                     </div>
                                 </td>
                             </tr>

@@ -58,7 +58,9 @@
                                         <select id="category" class="form-control custom-select mt-15 @error('category') is-invalid @enderror" name="category">
                                             <option disabled selected>Select a category</option>
                                             @foreach($categories as $category)
-                                                <option value="{{ $category->id }}"> {{ $category->name }} </option>
+                                                 @if($category->id != 1)
+                                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                                @endif
                                             @endforeach
                                         </select>
                                         @error('category') <p class="error-p">{{$errors->first('category')}}</p> @enderror

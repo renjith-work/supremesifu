@@ -48,4 +48,8 @@ class ProductDesign extends Model
     public function attributes(){
         return $this->hasMany('App\Models\Product\ProductAttributeValue');
     }
+
+    public function attributeValues(){
+        return $this->hasMany('App\Models\Product\ProductDesignAttributeValue');
+    }
 }

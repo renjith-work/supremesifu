@@ -43,17 +43,13 @@
                                 <td>{{$product->summary}}</td>
                                 <td>{{$product->status_id }}</td>
                                 <td>MYR {{$product->price }}</td>
-                                <td style="padding-left: 10px; padding-right: 10px;">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <a href="/admin/product/{{$product->id}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                        </div> 
-                                        <div class="col-md-4">
-                                            <a href="/admin/product/{{$product->id}}/edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <a href="/admin/product/{{$product->id}}/delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                        </div>
+                                <td style="width: 150px;">
+                                    <div class="action-ul-cover">
+                                        <ul>
+                                            <li><a href="/admin/product/{{$product->id}}" class="crud-ab-cover ab-view"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
+                                            <li><a href="/admin/product/{{$product->id}}/edit" class="crud-ab-cover ab-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+                                            <li><a href="/admin/product/{{$product->id}}/delete" class="crud-ab-cover ab-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                        </ul>
                                     </div>
                                 </td>
                             </tr>
