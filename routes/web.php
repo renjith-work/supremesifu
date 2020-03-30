@@ -111,6 +111,7 @@ Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 
 
 // Product Attributes API Routes
+Route::post('/admin/api/product/attribute/loadEdit', 'Admin\Api\Product\Attribute\AttributeController@loadEdit');
 Route::post('/admin/api/product/attribute/load', 'Admin\Api\Product\Attribute\AttributeController@load');
 
 // Product Attribute Routes
@@ -146,7 +147,7 @@ Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 	// Product Routes
 	Route::resource('product', 'Admin\Product\ProductController');
 	Route::get('product/{id}/delete', 'Admin\Product\ProductController@delete')->name('product.delete');
-	// Route::get('post/image/delete/{id}/{image}', 'Admin\Post\PostController@imageDel');
+	Route::get('product/image/delete/{id}/{image}', 'Admin\Product\ProductController@imageDel');
 });
 
 
