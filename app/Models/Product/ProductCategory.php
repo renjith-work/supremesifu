@@ -20,4 +20,9 @@ class ProductCategory extends Model
 	{
 		return $this->hasMany('App\Models\Product\ProductAttribute');
 	}
+
+	public function products()
+	{
+		return $this->hasMany('App\Models\Product\Product');
+	}
 }

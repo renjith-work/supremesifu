@@ -113,6 +113,7 @@ class RoleController extends Controller {
             foreach ($p_all as $p) {
                 $role->revokePermissionTo($p); //Remove all permissions associated with role
             }
+            
             foreach ($request->permissions as $permission) {
                 $p = Permission::where('id', '=', $permission)->firstOrFail(); //Get corresponding form //permission in db
                 $role->givePermissionTo($p);  //Assign permission to role

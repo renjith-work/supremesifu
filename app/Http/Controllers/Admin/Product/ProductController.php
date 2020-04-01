@@ -168,8 +168,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        // $product = Product::find($id);
-        // return view('admin.product.view')->with('product', $product);
+        $product = Product::find($id);
+        return view('admin.product.view')->with('product', $product);
     }
 
     /**
