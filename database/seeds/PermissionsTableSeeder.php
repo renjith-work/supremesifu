@@ -116,6 +116,128 @@ class PermissionsTableSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
             ],
+            [
+            'name' => 'List Product',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ],
+            [
+            'name' => 'Create Product',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ],
+            [
+            'name' => 'Edit Product',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ],
+            [
+            'name' => 'Delete Product',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ],
+            [
+            'name' => 'List Product Category',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ],
+            [
+            'name' => 'Create Product Category',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ],
+            [
+            'name' => 'Edit Product Category',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ],
+            [
+            'name' => 'Delete Product Category',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ],
+            [
+            'name' => 'List Product Attribute',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ],
+            [
+            'name' => 'Create Product Attribute',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ],
+            [
+            'name' => 'Edit Product Attribute',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ],
+            [
+            'name' => 'Delete Product Attribute',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ],
+            [
+            'name' => 'List Product Attribute Value',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ],
+            [
+            'name' => 'Create Product Attribute Value',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ],
+            [
+            'name' => 'Edit Product Attribute Value',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ],
+            [
+            'name' => 'Delete Product Attribute Value',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ],
+
+            [
+            'name' => 'List Brand',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ],
+            [
+            'name' => 'Create Brand',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ],
+            [
+            'name' => 'Edit Brand',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ],
+            [
+            'name' => 'Delete Brand',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ]
+            
         ]);
     }
     }

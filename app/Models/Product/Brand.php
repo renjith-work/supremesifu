@@ -10,4 +10,9 @@ class Brand extends Model
 	{
 		return $this->hasMany('App\Models\Product\Fabric');
 	}
+
+	public function products()
+	{
+		return $this->hasMany('App\Models\Product\Product');
+	}
 }

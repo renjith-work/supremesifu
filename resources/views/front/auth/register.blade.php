@@ -60,5 +60,11 @@
 	</div>
 @endsection
 @section('footer')
-
+<script>
+ 	document.addEventListener('keydown', function(event) {
+        if (event.keyCode == 13) {// enter
+        	document.getElementsByTagName("form")[0].submit();
+        }
+    });
+ </script>
 @endsection

@@ -44,6 +44,17 @@
                                         @error('name') <p class="error-p">{{$errors->first('name')}}</p> @enderror
                                     </div>
                                     <div class="form-group">
+                                        <label for="brand">Brand</label>
+                                        <div class="form-instruction">You may leave this blank if the product doesn't have any brand.</div>
+                                        <select id="brand" class="form-control custom-select mt-15 @error('brand') is-invalid @enderror" name="brand">
+                                            <option disabled selected>Select a brand</option>
+                                            @foreach($brands as $brand)
+                                                <option value="{{ $brand->id }}"> {{ $brand->name }} </option>                                            
+                                            @endforeach
+                                        </select>
+                                        @error('brand') <p class="error-p">{{$errors->first('brand')}}</p> @enderror
+                                    </div>
+                                    <div class="form-group">
                                         <label for="category">Product Category</label>
                                         <select id="category" class="form-control custom-select mt-15 @error('category') is-invalid @enderror" name="category">
                                             <option disabled selected>Select a category</option>

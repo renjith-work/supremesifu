@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Product;
 use App\Models\Product\Product;
 use App\Models\Product\ProductCategory;
 use App\Models\Product\Fabric\Fabric;
+use App\Models\Product\Brand;
 use App\Models\Product\Monogram;
 use App\Models\Product\ProductMonogram;
 use App\Models\Product\ProductAttribute;
@@ -28,6 +29,9 @@ use File;
 
 class ProductController extends Controller
 {
+    public function __construct() {
+        $this->middleware(['auth', 'product']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -48,7 +52,8 @@ class ProductController extends Controller
     {
     	$categories = ProductCategory::orderBy('id', 'asc')->get();
     	$fabrics = Fabric::orderBy('id', 'asc')->get();
-        return view('admin.product.create')->with('categories', $categories)->with('fabrics', $fabrics);
+        $brands = Brand::orderBy('id', 'asc')->get();
+        return view('admin.product.create')->with('categories', $categories)->with('fabrics', $fabrics)->with('brands', $brands);
     }
 
     /**
@@ -98,6 +103,7 @@ class ProductController extends Controller
             $product->metadescp = $request->metadescp;
             $product->featured = $request->featured;
             $product->menu = $request->menu;
+            $product->brand = $request->brand;
 
         	if ($request-> hasFile('p_image')) //Check if the file exists
             {
@@ -183,7 +189,8 @@ class ProductController extends Controller
         $product = Product::find($id);
         $categories = ProductCategory::orderBy('id', 'asc')->get();
         $fabrics = Fabric::orderBy('id', 'asc')->get();
-        return view('admin.product.edit')->with('categories', $categories)->with('fabrics', $fabrics)->with('product', $product);
+        $brands = Brand::orderBy('id', 'asc')->get();
+        return view('admin.product.edit')->with('categories', $categories)->with('fabrics', $fabrics)->with('product', $product)->with('brands', $brands);
     }
 
     /**
@@ -233,6 +240,7 @@ class ProductController extends Controller
             $product->metadescp = $request->metadescp;
             $product->featured = $request->featured;
             $product->menu = $request->menu;
+            $product->brand = $request->brand;
 
             if ($request-> hasFile('p_image')) //Check if the file exists
             {

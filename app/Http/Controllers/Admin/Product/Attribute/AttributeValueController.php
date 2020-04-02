@@ -20,6 +20,9 @@ use File;
 
 class AttributeValueController extends Controller
 {
+    public function __construct() {
+        $this->middleware(['auth', 'productAttributeValue']);
+    }
     /**
      * Display a listing of the resource.
      *

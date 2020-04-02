@@ -48,4 +48,9 @@ class Product extends Model
     public function attributes(){
         return $this->hasMany('App\Models\Product\ProductAttributeValue');
     }
+
+    public function brand()
+    {
+        return $this->belongsTo('App\Models\Product\Brand', 'brand_id');
+    }
 }

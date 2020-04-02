@@ -65,6 +65,12 @@ class Kernel extends HttpKernel
         'postCategory' => \App\Http\Middleware\PostCategoryMiddleware::class,
         'postTag' => \App\Http\Middleware\PostTagMiddleware::class,
         'postStatus' => \App\Http\Middleware\PostStatusMiddleware::class,
+        'product' => \App\Http\Middleware\ProductMiddleware::class,
+        'productAttribute' => \App\Http\Middleware\ProductAttributeMiddleware::class,
+        'productAttributeValue' => \App\Http\Middleware\ProductAttributeValueMiddleware::class,
+        'productCategory' => \App\Http\Middleware\ProductCategoryMiddleware::class,
+        'brand' => \App\Http\Middleware\BrandMiddleware::class,
+        'dashboard' => \App\Http\Middleware\DashboardMiddleware::class,
     ];
 
     /**

@@ -19,6 +19,24 @@
 Auth::routes();
 Auth::routes(['verify' => true]);
 
+// Initial Routes
+Route::get('/test', 'HomeController@test')->middleware('verified');
+Route::get('/email', 'HomeController@mail')->name('sendEmail');
+
+Route::group(['prefix'  =>   'admin/dashboard', 'as' => 'admin.dashboard.'], function() {
+	Route::get('', 'Admin\Dashboard\DashboardController@index');
+	Route::get('/super-admin', 'Admin\Dashboard\DashboardController@superAdmin')->name('super-admin');
+	Route::get('/admin', 'Admin\Dashboard\DashboardController@admin')->name('admin');
+	Route::get('/product-manager', 'Admin\Dashboard\DashboardController@productManager')->name('product-manager');
+	Route::get('/order-manager', 'Admin\Dashboard\DashboardController@orderManager')->name('order-manager');
+	Route::get('/logistics-manager', 'Admin\Dashboard\DashboardController@logisticsManager')->name('logistics-manager');
+	Route::get('/accounts-manager', 'Admin\Dashboard\DashboardController@accountsManager')->name('accounts-manager');
+	Route::get('/business-manager', 'Admin\Dashboard\DashboardController@businessManager')->name('business-manager');
+	Route::get('/media-manager', 'Admin\Dashboard\DashboardController@mediaManager')->name('media-manager');
+	Route::get('/editor', 'Admin\Dashboard\DashboardController@editor')->name('editor');
+	Route::get('/author', 'Admin\Dashboard\DashboardController@author')->name('author');
+});
+
 Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 	// User Routes
 	Route::resource('auth/users', 'Admin\Auth\UserController',  ['as' => 'auth']);
@@ -61,11 +79,6 @@ Route::get('login/facebook/callback', 'Front\Auth\LoginController@handleFacebook
 
 // Email Verification
 Route::get('/email-verified', 'Front\Auth\EmailController@verified')->name('verification.redirect');
-
-// Initial Routes
-Route::get('/test', 'HomeController@test')->middleware('verified');
-Route::get('/email', 'HomeController@mail')->name('sendEmail');
-Route::get('/dashboard', 'Admin\Dashboard\DashboardController@index')->name('dashboard');
 
 
 // Blog Post Routes
