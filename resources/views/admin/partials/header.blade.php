@@ -40,6 +40,7 @@
                             <ul class="dropdown-menu admin-top-link">
                                 <li><a href="#"><i class="fa fa-user text-aqua"></i>Profile</a></li>
                                 <li><a href="/user/logout"><i class="fa fa-sign-out text-danger"></i>Sign Out</a></li>
+                                <li><a href="/user/logout"><i class="fa fa-sign-out text-danger"></i>Test</a></li>
                             </ul>
                         </li>
                     </ul>
