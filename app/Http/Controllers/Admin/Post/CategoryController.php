@@ -84,8 +84,7 @@ class CategoryController extends Controller
                 Image::make($image)->resize(835, 470)->save($location); //Use intervention to create an image model and store the file with the resize.
                 $category->image= $filename; //store the filename in to the database.
             }
-
-            return response()->json($category);
+            
             $category->save();
             Session::flash('success', 'The data was successfully inserted.');
             return redirect()->route('admin.post.category.create');

@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             ProductDesignTableSeeder::class,    
             // Fabric Seeder
             BrandsTableSeeder::class,
+            FabricBrandsTableSeeder::class,
             FabricCLassesTableSeeder::class,
             FabricStatusTableSeeder::class,
             FabricAttributesTableSeeder::class,
@@ -48,6 +49,7 @@ class DatabaseSeeder extends Seeder
             UserMeasurementProfileValueTableSeeder::class,
             // Measurement
             MonogramTableSeeder::class,
+            StatusTableSeeder::class,
 
         ]);
     }

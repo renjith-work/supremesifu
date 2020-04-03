@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Models\Product;
+namespace App\Models\Product\Fabric;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Brand extends Model
+class FabricBrand extends Model
 {
-	public function products()
+    public function fabric()
 	{
-		return $this->hasMany('App\Models\Product\Product');
+		return $this->hasMany('App\Models\Product\Fabric');
 	}
 
 	public function status()

@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 
-class BrandsTableSeeder extends Seeder
+class FabricBrandsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,7 +12,7 @@ class BrandsTableSeeder extends Seeder
      */
     public function run()
     {
-    	DB::table('brands')->insert([
+        DB::table('fabric_brands')->insert([
             [
             	'name' => 'Albini',
             	'slug' => 'albini',

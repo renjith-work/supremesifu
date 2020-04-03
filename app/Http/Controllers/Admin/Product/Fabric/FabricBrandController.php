@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Product\Brand;
+namespace App\Http\Controllers\Admin\Product\Fabric;
 
-use App\Models\Product\Brand;
+use App\Models\Product\Fabric\FabricBrand;
 use App\Models\Status;
 
 use Illuminate\Http\Request;
@@ -17,11 +17,10 @@ Use Storage;
 Use Purifier;
 use File;
 
-
-class BrandController extends Controller
+class FabricBrandController extends Controller
 {
     public function __construct() {
-        $this->middleware(['auth', 'brand']);
+        $this->middleware(['auth', 'FabricBrand']);
     }
     /**
      * Display a listing of the resource.
@@ -30,8 +29,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brands = Brand::orderBy('id', 'asc')->paginate(15);
-        return view('admin.product.brand.index')->with('brands', $brands);
+        $brands = FabricBrand::orderBy('id', 'asc')->paginate(15);
+        return view('admin.product.fabric.brand.index')->with('brands', $brands);
     }
 
     /**
@@ -42,7 +41,7 @@ class BrandController extends Controller
     public function create()
     {   
         $statuses = Status::all();
-        return view('admin.product.brand.create')->with('statuses', $statuses);
+        return view('admin.product.fabric.brand.create')->with('statuses', $statuses);
     }
 
     /**
@@ -52,15 +51,15 @@ class BrandController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
-         $validator = Validator::make($request->all(), [
-            'name' => 'required|min:2|max:255|unique:brands,name',
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|min:2|max:255|unique:fabric_brands,name',
             'description' => 'required',
             'image' =>   'required|image|mimes:jpeg,png,jpg,gif,svg|max:2000',
         ]);
 
         if ($validator->passes()) {
-            $brand = new Brand;
+            $brand = new FabricBrand;
             $brand->name = $request->name;
             $brand->slug = Str::slug($request->name, '-'); 
             $brand->description = strip_tags(htmlspecialchars_decode($request->description));
@@ -70,7 +69,7 @@ class BrandController extends Controller
             {
                 $image = $request->file('image'); //Grab and store the file on to $image
                 $filename = Str::slug(pathinfo($request->image->getClientOriginalName(), PATHINFO_FILENAME), '-').'-'.time(). '.'. $image->getClientOriginalExtension(); //Create a new filename
-                $location = public_path('images/product/brands/'. $filename);
+                $location = public_path('images/product/fabric/brands/'. $filename);
                 Image::make($image)->resize(400, 400)->save($location); //Use intervention to create an image model and store the file with the resize.
                 $brand->image= $filename; //store the filename in to the database.
             }
@@ -103,9 +102,9 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
-        $brand = Brand::find($id);
+        $brand = FabricBrand::find($id);
         $statuses = Status::all();
-        return view('admin.product.brand.edit')->with('statuses', $statuses)->with('brand', $brand);
+        return view('admin.product.fabric.brand.edit')->with('statuses', $statuses)->with('brand', $brand);
     }
 
     /**
@@ -116,15 +115,15 @@ class BrandController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   
-         $validator = Validator::make($request->all(), [
-            'name' => "required|min:2|max:255|unique:brands,name,$id",
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => "required|min:2|max:255|unique:fabric_brands,name,$id",
             'description' => 'required',
             'image' =>   'image|mimes:jpeg,png,jpg,gif,svg|max:2000',
         ]);
 
         if ($validator->passes()) {
-            $brand = Brand::find($id);
+            $brand = FabricBrand::find($id);
             $brand->name = $request->name;
             $brand->slug = Str::slug($request->name, '-'); 
             $brand->description = strip_tags(htmlspecialchars_decode($request->description));
@@ -134,12 +133,12 @@ class BrandController extends Controller
             {
                 $image = $request->file('image'); //Grab and store the file on to $image
                 $filename = Str::slug(pathinfo($request->image->getClientOriginalName(), PATHINFO_FILENAME), '-').'-'.time(). '.'. $image->getClientOriginalExtension(); //Create a new filename
-                $location = public_path('images/product/brands/'. $filename);
+                $location = public_path('images/product/fabric/brands/'. $filename);
                 Image::make($image)->resize(400, 400)->save($location); //Use intervention to create an image model and store the file with the resize.
                 
                 $oldFilename = $brand->image;
                 $brand->image= $filename; //store the filename in to the database.
-                Storage::delete('product/brands' .'/'. $oldFilename);
+                Storage::delete('product/fabric/brands' .'/'. $oldFilename);
             }
 
             $brand->save();
@@ -164,8 +163,8 @@ class BrandController extends Controller
 
     public function delete($id)
     {
-        $brand = Brand::find($id);
-        Storage::delete('product/brands/'. $brand->image);
+        $brand = FabricBrand::find($id);
+        Storage::delete('product/fabric/brands/'. $brand->image);
         $brand->delete(); 
         Session::flash('success', 'The entry was successfully deleted.');
         return redirect()->back(); 

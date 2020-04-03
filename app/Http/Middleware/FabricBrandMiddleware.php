@@ -3,9 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
 
-class BrandMiddleware
+class FabricBrandMiddleware
 {
     /**
      * Handle an incoming request.
@@ -21,20 +20,9 @@ class BrandMiddleware
             return $next($request);
         }
 
-        if ($request->is('admin/brand'))//If user is listing a post category
+        if ($request->is('admin/product/fabric/brand'))//If user is listing a post category
          {
-            if (!Auth::user()->hasPermissionTo('List Brand'))
-         {
-                abort('401');
-            } 
-         else {
-                return $next($request);
-            }
-        }
-
-        if ($request->is('admin/brand/create'))//If user is creating a post category
-         {
-            if (!Auth::user()->hasPermissionTo('Create Brand'))
+            if (!Auth::user()->hasPermissionTo('List Fabric Brand'))
          {
                 abort('401');
             } 
@@ -43,18 +31,29 @@ class BrandMiddleware
             }
         }
 
-        if ($request->is('admin/brand/*/edit')) //If user is editing a post category
+        if ($request->is('admin/product/fabric/brand/create'))//If user is creating a post category
          {
-            if (!Auth::user()->hasPermissionTo('Edit Brand')) {
+            if (!Auth::user()->hasPermissionTo('Create Fabric Brand'))
+         {
+                abort('401');
+            } 
+         else {
+                return $next($request);
+            }
+        }
+
+        if ($request->is('admin/product/fabric/brand/*/edit')) //If user is editing a post category
+         {
+            if (!Auth::user()->hasPermissionTo('Edit Fabric Brand')) {
                 abort('401');
             } else {
                 return $next($request);
             }
         }
 
-        if ($request->is('admin/brand/*/delete')) //If user is deleting a post category
+        if ($request->is('admin/product/fabric/brand/*/delete')) //If user is deleting a post category
          {
-            if (!Auth::user()->hasPermissionTo('Delete Brand')) {
+            if (!Auth::user()->hasPermissionTo('Delete Fabric Brand')) {
                 abort('401');
             } 
          else 
@@ -65,5 +64,4 @@ class BrandMiddleware
 
         return $next($request);
     }
-
 }

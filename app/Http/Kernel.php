@@ -70,6 +70,7 @@ class Kernel extends HttpKernel
         'productAttributeValue' => \App\Http\Middleware\ProductAttributeValueMiddleware::class,
         'productCategory' => \App\Http\Middleware\ProductCategoryMiddleware::class,
         'brand' => \App\Http\Middleware\BrandMiddleware::class,
+        'fabricBrand' => \App\Http\Middleware\FabricBrandMiddleware::class,
         'dashboard' => \App\Http\Middleware\DashboardMiddleware::class,
     ];
 

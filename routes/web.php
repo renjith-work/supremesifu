@@ -37,6 +37,8 @@ Route::group(['prefix'  =>   'admin/dashboard', 'as' => 'admin.dashboard.'], fun
 	Route::get('/author', 'Admin\Dashboard\DashboardController@author')->name('author');
 });
 
+
+
 Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 	// User Routes
 	Route::resource('auth/users', 'Admin\Auth\UserController',  ['as' => 'auth']);
@@ -170,7 +172,14 @@ Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 
 // Brand Routes
 Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
-	Route::resource('brand', 'Admin\Product\Brand\BrandController');
+	Route::resource('/brand', 'Admin\Product\Brand\BrandController');
+	Route::get('/brand/{id}/delete', 'Admin\Product\Brand\BrandController@delete')->name('brand.delete');
+});
+
+// Fabric Brands
+Route::group(['prefix'  =>   'admin/product/fabric', 'as' => 'admin.product.fabric.'], function() {
+	Route::resource('brand', 'Admin\Product\Fabric\FabricBrandController');
+	Route::get('brand/{id}/delete', 'Admin\Product\Fabric\FabricBrandController@delete')->name('brand.delete');
 });
 
 

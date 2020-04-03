@@ -26,7 +26,7 @@
 							<div class="px-auth-box-head-title">Login</div>
 						</div>
 							<div class="px-auth-box-body">
-							<form method="POST" action="{{route('front.auth.user.login')}}">
+							<form method="POST" action="{{route('front.auth.user.login')}}" id="login">
 		                	{{ csrf_field() }}
 								<div class="form-group">
 									<label for="email">Email address</label>
@@ -91,10 +91,6 @@
 @endsection
 @section('footer')
 <script>
- 	document.addEventListener('keydown', function(event) {
-        if (event.keyCode == 13) {// enter
-        	document.getElementsByTagName("form")[0].submit();
-        }
-    });
+ 	
  </script>
 @endsection

@@ -13,7 +13,7 @@ class Fabric extends Model
 
     public function brand()
 	{
-	 return $this->belongsTo('App\Models\Product\Brand', 'brand_id');
+	 return $this->belongsTo('App\Models\Product\Fabric\FabricBrand', 'brand_id');
 	}
 
 	public function class()
