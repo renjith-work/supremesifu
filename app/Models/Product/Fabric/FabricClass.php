@@ -10,4 +10,9 @@ class FabricClass extends Model
 	{
 		return $this->hasMany('App\Models\Product\Fabric');
 	}
+
+	public function status()
+	{
+		return $this->belongsTo('App\Models\Status', 'status_id');
+	}
 }

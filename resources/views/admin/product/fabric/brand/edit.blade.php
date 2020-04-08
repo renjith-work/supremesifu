@@ -8,7 +8,7 @@
     <section class="content-header">
         <ol class="breadcrumb">
             <li><a href="/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="/admin/brand">Brand Management</a></li>
+            <li><a href="/admin/product/fabric/brand">Fabric Brand Management</a></li>
             <li class="active">Edit brand</li>
         </ol>
     </section>

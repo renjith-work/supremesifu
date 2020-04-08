@@ -23,7 +23,7 @@ class FabricCLassesTableSeeder extends Seeder
             	'profit' => '25.00',
             	'grade' => '2',
             	'image' => 'silver.jpg',
-            	'status_id' => '0',
+            	'status_id' => '1',
 	            'created_at' => Carbon::now(),
 	            'updated_at' => Carbon::now(),
 	        ],[
@@ -36,7 +36,7 @@ class FabricCLassesTableSeeder extends Seeder
             	'profit' => '25.00',
             	'grade' => '3',
             	'image' => 'gold.jpg',
-            	'status_id' => '0',
+            	'status_id' => '1',
 	            'created_at' => Carbon::now(),
 	            'updated_at' => Carbon::now(),
 	        ],[
@@ -49,7 +49,7 @@ class FabricCLassesTableSeeder extends Seeder
             	'profit' => '25.00',
             	'grade' => '2',
             	'image' => 'platinum.jpg',
-            	'status_id' => '0',
+            	'status_id' => '1',
 	            'created_at' => Carbon::now(),
 	            'updated_at' => Carbon::now(),
 	        ],[
@@ -62,7 +62,7 @@ class FabricCLassesTableSeeder extends Seeder
             	'profit' => '25.00',
             	'grade' => '2',
             	'image' => 'diamond.jpg',
-            	'status_id' => '0',
+            	'status_id' => '1',
 	            'created_at' => Carbon::now(),
 	            'updated_at' => Carbon::now(),
 	        ],

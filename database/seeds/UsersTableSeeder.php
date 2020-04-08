@@ -17,16 +17,29 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'fname' => 'Renjith',
-            'lname' => 'R S',
-            'email' => 'info@rsrenjith.com',
-            'email_verified_at' => Carbon::now(),
-            'state' => '1',
-            'password' => bcrypt('passmenow'),
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
+            
+            [
+                'fname' => 'Renjith',
+                'lname' => 'R S',
+                'email' => 'info@rsrenjith.com',
+                'email_verified_at' => Carbon::now(),
+                'state' => '1',
+                'password' => bcrypt('passmenow'),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'fname' => 'Renjith',
+                'lname' => 'Rajan',
+                'email' => 'renjith@rsrenjith.com',
+                'email_verified_at' => Carbon::now(),
+                'state' => '1',
+                'password' => bcrypt('password'),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
         ]);
 
-        factory(App\User::class, 10)->create();
+        // factory(App\User::class, 10)->create();
     }
 }

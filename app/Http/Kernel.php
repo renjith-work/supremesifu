@@ -61,6 +61,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'isAdmin' => \App\Http\Middleware\AdminMiddleware::class,
+        'dashboard' => \App\Http\Middleware\DashboardMiddleware::class,
         'post' => \App\Http\Middleware\PostMiddleware::class,
         'postCategory' => \App\Http\Middleware\PostCategoryMiddleware::class,
         'postTag' => \App\Http\Middleware\PostTagMiddleware::class,
@@ -71,7 +72,7 @@ class Kernel extends HttpKernel
         'productCategory' => \App\Http\Middleware\ProductCategoryMiddleware::class,
         'brand' => \App\Http\Middleware\BrandMiddleware::class,
         'fabricBrand' => \App\Http\Middleware\FabricBrandMiddleware::class,
-        'dashboard' => \App\Http\Middleware\DashboardMiddleware::class,
+        'fabricClass' => \App\Http\Middleware\FabricClassMiddleware::class,
     ];
 
     /**

@@ -116,12 +116,24 @@ Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 
 // Product Fabric Routes
 Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
-	Route::resource('fabric/class', 'Admin\Product\Fabric\FabricClassController',  ['as' => 'fabric']);
+	
+	
 	Route::resource('fabric/attribute/value', 'Admin\Product\Fabric\FabricAttributeValueController',  ['as' => 'fabric.attribute']);
 	Route::get('fabric/attribute/list', 'Admin\Product\Fabric\FabricAttributeController@list')->name('fabric.attribute.list');
+	
 	Route::resource('fabric/attribute', 'Admin\Product\Fabric\FabricAttributeController',  ['as' => 'fabric']);
+	
 	Route::resource('fabric', 'Admin\Product\Fabric\FabricController');
 	Route::get('fabric/{id}/delete', 'Admin\Product\Fabric\FabricController@delete')->name('fabric.delete');
+});
+
+// Fabric Brands
+Route::group(['prefix'  =>   'admin/product/fabric', 'as' => 'admin.product.fabric.'], function() {
+	Route::resource('brand', 'Admin\Product\Fabric\FabricBrandController');
+	Route::get('brand/{id}/delete', 'Admin\Product\Fabric\FabricBrandController@delete')->name('brand.delete');
+
+	Route::resource('class', 'Admin\Product\Fabric\FabricClassController');
+	Route::get('class/{id}/delete', 'Admin\Product\Fabric\FabricClassController@delete')->name('class.delete');
 });
 
 
@@ -175,13 +187,6 @@ Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 	Route::resource('/brand', 'Admin\Product\Brand\BrandController');
 	Route::get('/brand/{id}/delete', 'Admin\Product\Brand\BrandController@delete')->name('brand.delete');
 });
-
-// Fabric Brands
-Route::group(['prefix'  =>   'admin/product/fabric', 'as' => 'admin.product.fabric.'], function() {
-	Route::resource('brand', 'Admin\Product\Fabric\FabricBrandController');
-	Route::get('brand/{id}/delete', 'Admin\Product\Fabric\FabricBrandController@delete')->name('brand.delete');
-});
-
 
 
 

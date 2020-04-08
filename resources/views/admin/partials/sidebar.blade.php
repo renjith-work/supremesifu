@@ -27,7 +27,7 @@
                     </li>
                     @endhasrole
                     <li class="header">PRODUCT MANAGEMENT</li>
-                    @can('List Product')<li class="{{ Active::checkRoute(['admin.product.*' ]) }}"><a href="/admin/product"> <i class="fa fa-circle-o""></i> <span>Product</span> <span class="pull-right-container"></span> </a></li>@endcan
+                    @can('List Product')<li class="{{ Active::checkRoute(['admin.product.index', 'admin.product.create', 'admin.product.edit', 'admin.product.show' ]) }}"><a href="/admin/product"> <i class="fa fa-circle-o""></i> <span>Product</span> <span class="pull-right-container"></span> </a></li>@endcan
                     @can('List Brand')<li class="{{ Active::checkRoute(['admin.brand.*' ]) }}"><a href="/admin/brand"> <i class="fa fa-circle-o""></i> <span>Product Brands</span> <span class="pull-right-container"></span> </a></li>@endcan
                     <li class="treeview {{ Active::checkRoute('admin.product.design.*') }} ">
                         <a href="#"> <i class="fa fa-cogs"></i> <span>Product Design</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
@@ -45,7 +45,8 @@
                     </li>@endcan
                     <li class="header">FABRIC MANAGEMENT</li>
                     <li class=""><a href="/admin/fabric"> <i class="fa fa-circle-o""></i> <span>Fabric Management</span> <span class="pull-right-container"></span> </a></li>
-                    @can('List Product Attribute')<li class="{{ Active::checkRoute(['admin.product.fabric.brand.*']) }}"><a href="/admin/product/fabric/brand"> <i class="fa fa-circle-o""></i> <span>Fabric Brand</span> <span class="pull-right-container"></span> </a></li>@endcan
+                    @can('List Fabric Class')<li class="{{ Active::checkRoute(['admin.product.fabric.class.*']) }}"><a href="/admin/product/fabric/class"> <i class="fa fa-circle-o""></i> <span>Fabric Class</span> <span class="pull-right-container"></span> </a></li>@endcan
+                    @can('List Fabric Brand')<li class="{{ Active::checkRoute(['admin.product.fabric.brand.*']) }}"><a href="/admin/product/fabric/brand"> <i class="fa fa-circle-o""></i> <span>Fabric Brand</span> <span class="pull-right-container"></span> </a></li>@endcan
                     <li class="header">POST MANAGEMENT</li>
                     @can('List Guide')<li class=""><a href="/admin/guide"> <i class="fa fa-circle-o""></i> <span>Guide management</span> <span class="pull-right-container"></span> </a></li>@endcan
                     @can('List Post')<li class=""><a href="/admin/post"> <i class="fa fa-circle-o""></i> <span>Post management</span> <span class="pull-right-container"></span> </a></li>@endcan

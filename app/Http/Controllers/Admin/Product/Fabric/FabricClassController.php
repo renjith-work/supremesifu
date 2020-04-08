@@ -3,12 +3,24 @@
 namespace App\Http\Controllers\Admin\Product\Fabric;
 
 use App\Models\Product\Fabric\FabricClass;
+use App\Models\Status;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Auth;
+use Validator;
+use Session;
+Use Image;
+Use Storage;
+Use Purifier;
+use File;
+
 class FabricClassController extends Controller
 {
+    public function __construct() {
+        $this->middleware(['auth', 'fabricClass']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +28,9 @@ class FabricClassController extends Controller
      */
     public function index()
     {
-        $fabricclasses = FabricClass::all();
-        return response()->json($fabricclasses);
+        $classes = FabricClass::orderBy('id', 'asc')->paginate(15);
+        return response()->json($classes);
+        return view('admin.product.fabric.class.index')->with('classes', $classes);
     }
 
     /**
@@ -27,7 +40,8 @@ class FabricClassController extends Controller
      */
     public function create()
     {
-        //
+        $statuses = Status::all();
+        return view('admin.product.fabric.class.create')->with('statuses', $statuses);
     }
 
     /**
@@ -84,6 +98,11 @@ class FabricClassController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function delete($id)
+    {
+
     }
 
     public function load()

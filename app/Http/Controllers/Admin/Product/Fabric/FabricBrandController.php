@@ -20,7 +20,7 @@ use File;
 class FabricBrandController extends Controller
 {
     public function __construct() {
-        $this->middleware(['auth', 'FabricBrand']);
+        $this->middleware(['auth', 'fabricBrand']);
     }
     /**
      * Display a listing of the resource.
