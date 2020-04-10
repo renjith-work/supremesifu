@@ -10,7 +10,7 @@ use App\Models\Product\Brand;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Models\Product\ProductCategory;
 use Illuminate\Support\Str;
 
 use Auth;
@@ -45,7 +45,8 @@ class FabricController extends Controller
         $brands = Brand::orderBy('id', 'asc')->get();
         $attributes = FabricAttribute::orderBy('id', 'asc')->get();
         $values = FabricAttributeValue::orderBy('id', 'asc')->get();
-        return view('admin.product.fabric.create')->with('brands', $brands)->with('classes', $classes)->with('attributes', $attributes)->with('values', $values);
+        $categories = ProductCategory::where('parent_id', 2)->get();
+        return view('admin.product.fabric.create')->with('brands', $brands)->with('classes', $classes)->with('attributes', $attributes)->with('values', $values)->with('categories', $categories);
     }
 
     /**
@@ -56,7 +57,6 @@ class FabricController extends Controller
      */
     public function store(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:fabrics,name',
             'description' => 'required',
@@ -96,6 +96,8 @@ class FabricController extends Controller
                 }
             }
             $fabric->fabricAttributeValues()->sync($syncTable);
+            $fabric->productCategories()->sync($request->categories, false);
+
             Session::flash('success', 'The data was successfully stored.');
             return redirect()->back();
         }else{
@@ -127,7 +129,15 @@ class FabricController extends Controller
         $attributes = FabricAttribute::orderBy('id', 'asc')->get();
         $values = FabricAttributeValue::orderBy('id', 'asc')->get();
         $fabric = Fabric::find($id);
-        return view('admin.product.fabric.edit')->with('fabric', $fabric)->with('brands', $brands)->with('classes', $classes)->with('attributes', $attributes)->with('values', $values);
+        $categories = ProductCategory::where('parent_id', 2)->get();
+        
+        $sel_categories = array();
+        foreach($fabric->productCategories as $category)
+        {
+            $sel_categories[] = $category->id;
+        }
+
+        return view('admin.product.fabric.edit')->with('fabric', $fabric)->with('brands', $brands)->with('classes', $classes)->with('attributes', $attributes)->with('values', $values)->with('categories', $categories)->with('sel_categories', $sel_categories);
     }
 
     /**
@@ -182,13 +192,17 @@ class FabricController extends Controller
             }
             $fabric->fabricAttributeValues()->sync($syncTable);
 
+            if(isset($request->categories)){
+                $fabric->productCategories()->sync($request->categories);
+            }else{
+                $fabric->productCategories()->sync(array());
+            }
+
             Session::flash('success', 'The data was successfully stored.');
             return redirect()->back();
         }else{
             return redirect()->back()->withInput()->withErrors($validator);
         }
-
-
     }
 
     /**

@@ -18,11 +18,10 @@ class CreateFabricClassesTable extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->text('description');
-            $table->string('price');
-            $table->decimal('workmanship',9,2);
-            $table->decimal('packaging',9,2);
-            $table->decimal('profit',9,2);
             $table->bigInteger('grade');
+            $table->string('price');
+            $table->text('metatag');
+            $table->text('metadescp');
             $table->string('image');
             $table->bigInteger('status_id')->default(0)->nullable();
             $table->timestamps();

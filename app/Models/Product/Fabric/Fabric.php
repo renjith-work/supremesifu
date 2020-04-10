@@ -30,4 +30,9 @@ class Fabric extends Model
 	{
 	 return $this->hasMany('App\Models\Product');
 	}
+
+	public function productCategories()
+	{
+		return $this->belongsToMany('App\Models\Product\ProductCategory', 'fabric_product_categories', 'fabric_id', 'product_category_id');
+	}
 }

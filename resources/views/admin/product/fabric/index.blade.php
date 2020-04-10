@@ -28,6 +28,7 @@
                                 <th>Price /M</th>
                                 <th>Class</th>
                                 <th>Brand</th>
+                                <th>Categories</th>
                                 <th>Status</th>
                                 <th style="width: 150px">Action</th>
                             </tr>
@@ -41,6 +42,13 @@
                                 <td>{{$fabric->price }}</td>
                                 <td>{{$fabric->class->name }}</td>
                                 <td>{{$fabric->brand->name }}</td>
+                                <td>
+                                    @if($fabric->productCategories)
+                                        @foreach ($fabric->productCategories as $category)
+                                        <span class="label label-success show-tag-label">{{$category->name}}</span> 
+                                        @endforeach
+                                    @endif
+                                </td>
                                 <td>{{$fabric->status->name }}</td>
                                 <td style="padding-left: 10px; padding-right: 10px;">
                                     <div class="row">

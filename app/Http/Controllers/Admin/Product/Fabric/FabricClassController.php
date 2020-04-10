@@ -8,6 +8,8 @@ use App\Models\Status;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Str;
+
 use Auth;
 use Validator;
 use Session;
@@ -29,7 +31,7 @@ class FabricClassController extends Controller
     public function index()
     {
         $classes = FabricClass::orderBy('id', 'asc')->paginate(15);
-        return response()->json($classes);
+        // return response()->json($classes);
         return view('admin.product.fabric.class.index')->with('classes', $classes);
     }
 
@@ -52,7 +54,52 @@ class FabricClassController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributeNames = array(
+            'metatag' => 'meta tag',
+            'metadescp' => 'meta description'
+        );
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|min:2|max:255|unique:fabric_classes,name',
+            'description' => 'required',
+            'status' => 'required',
+            'price' => 'required',
+            'metatag' => 'required',
+            'metadescp' => 'required',
+            'image' =>   'required|image|mimes:jpeg,png,jpg,gif,svg|max:2000',
+        ],
+        [
+            'image.max' => 'Max image upload size is 2 MB.'
+        ]);
+
+        if ($validator->passes()) {
+            $class = new FabricClass;
+            $class->name = $request->name;
+            $class->slug = Str::slug($request->name, '-');
+            $class->description = $request->description;
+            $class->status_id = $request->status;
+            $class->price = $request->price;
+            $class->metatag = $request->metatag;
+            $class->metadescp = $request->metadescp;
+            $class->price = $request->price;
+            $class->grade = $request->grade;
+
+            if ($request-> hasFile('image')) //Check if the file exists
+            {
+                $image = $request->file('image'); //Grab and store the file on to $image
+                $filename = Str::slug(pathinfo($request->image->getClientOriginalName(), PATHINFO_FILENAME), '-').'-'.time(). '.'. $image->getClientOriginalExtension(); //Create a new filename
+                $location = public_path('images/product/fabric/class/'. $filename);
+                Image::make($image)->resize(835, 470)->save($location); //Use intervention to create an image model and store the file with the resize.
+                $class->image= $filename; //store the filename in to the database.
+            }
+            
+            $class->save();
+            Session::flash('success', 'The data was successfully inserted.');
+            return redirect()->back();
+
+        }else{
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
     }
 
     /**
@@ -74,7 +121,9 @@ class FabricClassController extends Controller
      */
     public function edit($id)
     {
-        //
+        $statuses = Status::all();
+        $class = FabricClass::find($id);
+        return view('admin.product.fabric.class.edit')->with('statuses', $statuses)->with('class', $class);
     }
 
     /**
@@ -86,7 +135,55 @@ class FabricClassController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $attributeNames = array(
+            'metatag' => 'meta tag',
+            'metadescp' => 'meta description'
+        );
+
+        $validator = Validator::make($request->all(), [
+            'name' => "required|min:2|max:255|unique:fabric_classes,name, $id",
+            'description' => 'required',
+            'status' => 'required',
+            'price' => 'required',
+            'metatag' => 'required',
+            'metadescp' => 'required',
+            'image' =>   'image|mimes:jpeg,png,jpg,gif,svg|max:2000',
+        ],
+        [
+            'image.max' => 'Max image upload size is 2 MB.'
+        ]);
+
+        if ($validator->passes()) {
+            $class = FabricClass::find($id);
+            $class->name = $request->name;
+            $class->slug = Str::slug($request->name, '-');
+            $class->description = $request->description;
+            $class->status_id = $request->status;
+            $class->price = $request->price;
+            $class->metatag = $request->metatag;
+            $class->metadescp = $request->metadescp;
+            $class->price = $request->price;
+            $class->grade = $request->grade;
+
+            if ($request-> hasFile('image')) //Check if the file exists
+            {
+                $image = $request->file('image'); //Grab and store the file on to $image
+                $filename = Str::slug(pathinfo($request->image->getClientOriginalName(), PATHINFO_FILENAME), '-').'-'.time(). '.'. $image->getClientOriginalExtension(); //Create a new filename
+                $location = public_path('images/product/fabric/class/'. $filename);
+                Image::make($image)->resize(835, 470)->save($location); //Use intervention to create an image model and store the file with the resize.
+
+                $oldFilename = $class->image;
+                $class->image= $filename; //store the filename in to the database.
+                Storage::delete('product/fabric/class/'. $oldFilename);
+            }
+            
+            $class->save();
+            Session::flash('success', 'The data was successfully updated.');
+            return redirect()->back();
+
+        }else{
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
     }
 
     /**
@@ -102,7 +199,12 @@ class FabricClassController extends Controller
 
     public function delete($id)
     {
-
+        $class = FabricClass::find($id);
+        Storage::delete('product/fabric/class/'. $class->image);
+        $class->delete();
+        
+        Session::flash('success', 'The data was successfully deleted.');
+        return redirect()->back();
     }
 
     public function load()

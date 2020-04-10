@@ -72,6 +72,26 @@
                                 </select>
                                 @error('brand') <p class="error-p">{{$errors->first('brand')}}</p> @enderror
                             </div>
+                            @if($categories)
+                            <div class="form-group">
+                                <label>Categories</label>
+                                <div class="form-instruction">Select the categories for which this fabric can be used.</div>
+                                <div class="form-group-sub">
+                                    <div class="row">
+                                        @foreach ($categories as $category)
+                                            <div class="col-md-3">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" name="categories[]" value="{{ $category->id }}" @if(in_array($category->id, $sel_categories)) checked @endif>
+                                                    <label>{{ ucfirst($category->name) }}</label>
+                                                    <br>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    @error('categories') <p class="error-p">{{$errors->first('categories')}}</p> @enderror
+                                </div>
+                            </div>
+                            @endif
                             <div id="attribute_cover"></div><br>
                             <div class="form-group">
                                 <label>Fabric Image</label>

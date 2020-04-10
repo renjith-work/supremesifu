@@ -24,10 +24,7 @@
                                 <th>Image</th>
                                 <th>Name</th>
                                 <th>Description</th>
-                                <th>Price Range</th>
-                                <th>Workmanship</th>
-                                <th>Packaging</th>
-                                <th>Profit</th>
+                                <th>Price Range</th>                                
                                 <th>Grade</th>
                                 <th>Status</th>
                                 <th style="width: 150px">Action</th>
@@ -40,9 +37,6 @@
                                 <td>{{$class->name }}</td>
                                 <td>{!!  substr(strip_tags($class->description), 0, 40) !!}...</td>
                                 <td>{{$class->price }}</td>
-                                <td>{{$class->workmanship }}</td>
-                                <td>{{$class->packaging }}</td>
-                                <td>{{$class->profit }}</td>
                                 <td>{{$class->grade }}</td>
                                 <td>{{$class->status->name }}</td>
                                 <td style="width: 150px;">
