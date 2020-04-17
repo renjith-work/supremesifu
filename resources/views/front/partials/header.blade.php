@@ -45,7 +45,7 @@
     <div class="header-area">
         <!-- header-top start -->
         <div class="header-top bg-black">
-            <div class="container">
+            <div class="mobile-container">
                 <div class="row">
                     <div class="col-lg-8 order-2 order-lg-1">
                         <div class="top-left-wrap">
@@ -79,6 +79,16 @@
                                                 <li><a href="/user/dashboard"><i class="acc-icon fa fa-user-circle-o"></i> Manage My Account</a></li>
                                                 <li><a href="/user/order"><i class="acc-icon fa fa-shopping-cart"></i> My Orders</a></li>
                                                 <li><a href="/user/logout"><i class="acc-icon fa fa-sign-out"></i> Logout</a></li>
+                                                @hasrole('Super Admin')<li><a href="/admin/dashboard/super-admin"><i class="acc-icon fa fa-cog"></i> Admin Dashboard</a></li>@endhasrole
+                                                @hasrole('Administrator')<li><a href="/admin/dashboard/admin"><i class="acc-icon fa fa-cog"></i> Admin Dashboard</a></li>@endhasrole
+                                                @hasrole('Product Manager')<li><a href="/admin/dashboard/product-manager"><i class="acc-icon fa fa-cog"></i> Admin Dashboard</a></li>@endhasrole
+                                                @hasrole('Order Manager')<li><a href="/admin/dashboard/order-manager"><i class="acc-icon fa fa-cog"></i> Admin Dashboard</a></li>@endhasrole
+                                                @hasrole('Logistics Manager')<li><a href="/admin/dashboard/logistics-manager"><i class="acc-icon fa fa-cog"></i> Admin Dashboard</a></li>@endhasrole
+                                                @hasrole('Accounts Manager')<li><a href="/admin/dashboard/accounts-manager"><i class="acc-icon fa fa-cog"></i> Admin Dashboard</a></li>@endhasrole
+                                                @hasrole('Business Manager')<li><a href="/admin/dashboard/business-manager"><i class="acc-icon fa fa-cog"></i> Admin Dashboard</a></li>@endhasrole
+                                                @hasrole('Media Manager')<li><a href="/admin/dashboard/media-manager"><i class="acc-icon fa fa-cog"></i> Admin Dashboard</a></li>@endhasrole
+                                                @hasrole('Editor')<li><a href="/admin/dashboard/editor"><i class="acc-icon fa fa-cog"></i> Admin Dashboard</a></li>@endhasrole
+                                                @hasrole('Author')<li><a href="/admin/dashboard/author"><i class="acc-icon fa fa-cog"></i> Admin Dashboard</a></li>@endhasrole
                                             </ul>
                                         </div>
                                     </div>

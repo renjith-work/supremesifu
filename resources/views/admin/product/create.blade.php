@@ -42,18 +42,7 @@
                                         <label for="name">Product Name</label>
                                         <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" maxlength="255" value="{{ old('name') }}">
                                         @error('name') <p class="error-p">{{$errors->first('name')}}</p> @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="brand">Brand</label>
-                                        <div class="form-instruction">You may leave this blank if the product doesn't have any brand.</div>
-                                        <select id="brand" class="form-control custom-select mt-15 @error('brand') is-invalid @enderror" name="brand">
-                                            <option disabled selected>Select a brand</option>
-                                            @foreach($brands as $brand)
-                                                <option value="{{ $brand->id }}"> {{ $brand->name }} </option>                                            
-                                            @endforeach
-                                        </select>
-                                        @error('brand') <p class="error-p">{{$errors->first('brand')}}</p> @enderror
-                                    </div>
+                                    </div>                                    
                                     <div class="form-group">
                                         <label for="category">Product Category</label>
                                         <select id="category" class="form-control custom-select mt-15 @error('category') is-invalid @enderror" name="category">
@@ -65,21 +54,18 @@
                                             @endforeach
                                         </select>
                                         @error('category') <p class="error-p">{{$errors->first('category')}}</p> @enderror
-                                    </div>
+                                    </div>     
                                     <div class="form-group">
-                                        <label for="fabric_class">Fabric Class</label>
-                                        <select id="fabric_class" class="form-control custom-select mt-15 @error('fabric_class') is-invalid @enderror" name="fabric_class">
-                                            <option disabled selected>Select a fabric class</option>
+                                        <label for="brand">Brand</label>
+                                        <div class="form-instruction">You may leave this blank if the product doesn't have any brand.</div>
+                                        <select id="brand" class="form-control custom-select mt-15 @error('brand') is-invalid @enderror" name="brand">
+                                            <option disabled selected>Select a brand</option>
+                                            @foreach($brands as $brand)
+                                                <option value="{{ $brand->id }}"> {{ $brand->name }} </option>                                            
+                                            @endforeach
                                         </select>
-                                        @error('fabric_class') <p class="error-p">{{$errors->first('fabric_class')}}</p> @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="fabric">Fabric</label>
-                                        <select id="fabric" class="form-control custom-select mt-15 @error('fabric') is-invalid @enderror" name="fabric">
-                                            <option disabled selected>Select a fabric</option>
-                                        </select>
-                                        @error('fabric') <p class="error-p">{{$errors->first('fabric')}}</p> @enderror
-                                    </div>
+                                        @error('brand') <p class="error-p">{{$errors->first('brand')}}</p> @enderror
+                                    </div>                               
                                     <div class="form-group">
                                         <label for="description">Product Description</label>
                                         <div class="form-instruction">Use the editor to write the description of the product.</div>
@@ -124,6 +110,20 @@
                                     <h3 class="box-title">PRODUCT ATTRIBUTES</h3>
                                 </div>
                                 <div class="gb-body">
+                                    <div class="form-group">
+                                        <label for="fabric_class">Fabric Class</label>
+                                        <select id="fabric_class" class="form-control custom-select mt-15 @error('fabric_class') is-invalid @enderror" name="fabric_class">
+                                            <option disabled selected>Select a fabric class</option>
+                                        </select>
+                                        @error('fabric_class') <p class="error-p">{{$errors->first('fabric_class')}}</p> @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fabric">Fabric</label>
+                                        <select id="fabric" class="form-control custom-select mt-15 @error('fabric') is-invalid @enderror" name="fabric">
+                                            <option disabled selected>Select a fabric</option>
+                                        </select>
+                                        @error('fabric') <p class="error-p">{{$errors->first('fabric')}}</p> @enderror
+                                    </div>
                                     <div class="section-sub-title">Product Attributes</div>
                                     <div id="prd-attr-cover">
                                         <div class="admin-blank-section">

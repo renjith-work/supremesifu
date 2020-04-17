@@ -125,6 +125,7 @@ $(document).ready(function(){
     $(document).on('change', '#category', function(){
         // loadPdVals();   
         var category = $("#category").val();
+        loadFabricSection(category); //Load the fabric section if the product category has a fabric associated with it.
         loadProductAttributes(category);
 
         setTimeout(function(){
@@ -132,6 +133,19 @@ $(document).ready(function(){
         }, 1000);              
     });
 
+    function loadFabricSection(pd_cat_id)
+    {   
+        console.log(_token);
+        $.ajax({
+            url: "/admin/api/fabric/product-category",
+            type:'POST',
+            data: {_token:_token, id:pd_cat_id},
+            dataType: 'json',
+            success:function(response){
+               console.log(response);
+            }
+        });
+    }
 
     function loadPdVals()
     {   

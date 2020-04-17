@@ -6,7 +6,7 @@ use App\Models\Product\Fabric\Fabric;
 use App\Models\Product\Fabric\FabricClass;
 use App\Models\Product\Fabric\FabricAttribute;
 use App\Models\Product\Fabric\FabricAttributeValue;
-use App\Models\Product\Brand;
+use App\Models\Product\Fabric\FabricBrand;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -41,10 +41,10 @@ class FabricController extends Controller
      */
     public function create()
     {
-        $classes = FabricClass::orderBy('id', 'asc')->get();
-        $brands = Brand::orderBy('id', 'asc')->get();
-        $attributes = FabricAttribute::orderBy('id', 'asc')->get();
-        $values = FabricAttributeValue::orderBy('id', 'asc')->get();
+        $classes = FabricClass::all();
+        $brands = FabricBrand::all();
+        $attributes = FabricAttribute::all();
+        $values = FabricAttributeValue::all();
         $categories = ProductCategory::where('parent_id', 2)->get();
         return view('admin.product.fabric.create')->with('brands', $brands)->with('classes', $classes)->with('attributes', $attributes)->with('values', $values)->with('categories', $categories);
     }
@@ -124,10 +124,10 @@ class FabricController extends Controller
      */
     public function edit($id)
     {
-        $classes = FabricClass::orderBy('id', 'asc')->get();
-        $brands = Brand::orderBy('id', 'asc')->get();
-        $attributes = FabricAttribute::orderBy('id', 'asc')->get();
-        $values = FabricAttributeValue::orderBy('id', 'asc')->get();
+        $classes = FabricClass::all();
+        $brands = FabricBrand::all();
+        $attributes = FabricAttribute::all();
+        $values = FabricAttributeValue::all();
         $fabric = Fabric::find($id);
         $categories = ProductCategory::where('parent_id', 2)->get();
         
@@ -221,6 +221,8 @@ class FabricController extends Controller
         $fabric = Fabric::find($id);
         $fabric->fabricAttributeValues()->detach();
         Storage::delete('product/fabric/'.$fabric->image);
+
+        $fabric->productCategories()->detach();
         $fabric->delete();
 
         Session::flash('success', 'The data was successfully deleted.');

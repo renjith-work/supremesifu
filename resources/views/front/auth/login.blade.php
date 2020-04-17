@@ -35,7 +35,7 @@
 								</div>
 								<div class="form-group">
 									<label for="password">Password</label>
-									<input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Please enter your minimum 6-character password..">
+									<input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" placeholder="Please enter your minimum 6-character password..">
 									@error('password') <p class="error-p">{{ $errors->first('password') }}</p> @enderror
 								</div>
 								<div class="px-atuh-box-check-cover">
@@ -90,7 +90,5 @@
 	</div>
 @endsection
 @section('footer')
-<script>
- 	
- </script>
+<script src="/front/frame/auth/login.js"></script>
 @endsection

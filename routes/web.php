@@ -110,6 +110,7 @@ Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 // Product Routes
 
 // Fabric Admin API End Points
+	Route::post('/admin/api/fabric/product-category', 'Admin\Api\Product\Fabric\FabricController@pdCategory');
 	Route::post('/admin/api/fabric/find', 'Admin\Api\Product\Fabric\FabricController@findFabric');
 	Route::get('/admin/api/fabric/class/load', 'Admin\Api\Product\Fabric\FabricClassController@load');
 	

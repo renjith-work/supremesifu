@@ -51,9 +51,8 @@ class ProductController extends Controller
     public function create()
     {
     	$categories = ProductCategory::orderBy('id', 'asc')->get();
-    	$fabrics = Fabric::orderBy('id', 'asc')->get();
         $brands = Brand::orderBy('id', 'asc')->get();
-        return view('admin.product.create')->with('categories', $categories)->with('fabrics', $fabrics)->with('brands', $brands);
+        return view('admin.product.create')->with('categories', $categories)->with('brands', $brands);
     }
 
     /**
