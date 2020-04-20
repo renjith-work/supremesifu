@@ -189,6 +189,30 @@ class PermissionsTableSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ],
             [
+                'name' => 'List Catalogue',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'Create Catalogue',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'Edit Catalogue',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'Delete Catalogue',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
             'name' => 'List Product Attribute',
             'guard_name' => 'web',
             'created_at' => Carbon::now(),

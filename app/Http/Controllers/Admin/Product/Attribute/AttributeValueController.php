@@ -31,7 +31,7 @@ class AttributeValueController extends Controller
     public function index()
     {
         $values = ProductAttributeValue::orderBy('id', 'asc')->paginate(15);
-        return view('admin.product.attribute.value.index')->with('values', $values);
+        return view('admin.product.catalogue.attribute.value.index')->with('values', $values);
     }
 
     /**
@@ -42,7 +42,7 @@ class AttributeValueController extends Controller
     public function create()
     {
         $categories = ProductCategory::all();
-        return view('admin.product.attribute.value.create')->with('categories', $categories);
+        return view('admin.product.catalogue.attribute.value.create')->with('categories', $categories);
     }
 
     /**
@@ -128,7 +128,7 @@ class AttributeValueController extends Controller
     {
         $categories = ProductCategory::all();
         $value = ProductAttributeValue::find($id);
-        return view('admin.product.attribute.value.edit')->with('categories', $categories)->with('value', $value);
+        return view('admin.product.catalogue.attribute.value.edit')->with('categories', $categories)->with('value', $value);
     }
 
     /**

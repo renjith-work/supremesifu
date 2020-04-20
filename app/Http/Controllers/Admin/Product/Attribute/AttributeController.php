@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Product\Attribute;
 
 use App\Models\Product\ProductAttribute;
-use App\Models\Product\ProductCategory;
+use App\Models\Product\Catalogue;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -29,7 +29,7 @@ class AttributeController extends Controller
     public function index()
     {
         $attributes = ProductAttribute::orderBy('id', 'asc')->paginate(15);
-        return view('admin.product.attribute.index')->with('attributes', $attributes);
+        return view('admin.product.catalogue.attribute.index')->with('attributes', $attributes);
     }
 
     /**
@@ -39,8 +39,8 @@ class AttributeController extends Controller
      */
     public function create()
     {
-        $categories = ProductCategory::all();
-        return view('admin.product.attribute.create')->with('categories', $categories);
+        $catalogues = Catalogue::all();
+        return view('admin.product.catalogue.attribute.create')->with('catalogues', $catalogues);
     }
 
     /**
@@ -55,13 +55,13 @@ class AttributeController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:5|max:255',
             'code' => 'required|min:5|max:255|unique:product_attributes,code',
-            'category' => 'required',
+            'catalogue' => 'required',
             'frontend_type' => 'required',
             'is_filterable' => 'required',
             'is_required' => 'required',
         ],
         [
-            'category.required' => 'Please select a product category.',
+            'catalogue.required' => 'Please select a product category.',
             'frontend_type.required' => 'Please select a front end display type.',
             'is_filterable.required' => 'Please select if you want to filter through the attributes.',
             'is_required.required' => 'Please select if you want to attribute compulsory.',
@@ -71,7 +71,7 @@ class AttributeController extends Controller
             $attribute = new ProductAttribute;
             $attribute->name = $request->name;
             $attribute->code = $request->code;
-            $attribute->product_category_id = $request->category;
+            $attribute->catalogue_id = $request->catalogue;
             $attribute->frontend_type = $request->frontend_type;
             $attribute->is_filterable = $request->is_filterable;
             $attribute->is_required = $request->is_required;
@@ -103,8 +103,8 @@ class AttributeController extends Controller
     public function edit($id)
     {
         $attribute = ProductAttribute::find($id);
-        $categories = ProductCategory::all();
-        return view('admin.product.attribute.edit')->with('categories', $categories)->with('attribute', $attribute);
+        $catalogues = Catalogue::all();
+        return view('admin.product.catalogue.attribute.edit')->with('catalogues', $catalogues)->with('attribute', $attribute);
     }
 
     /**
@@ -119,13 +119,13 @@ class AttributeController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:5|max:255',
             'code' => "required|min:5|max:255|unique:product_attributes,code, $id",
-            'category' => 'required',
+            'catalogue' => 'required',
             'frontend_type' => 'required',
             'is_filterable' => 'required',
             'is_required' => 'required',
         ],
         [
-            'category.required' => 'Please select a product category.',
+            'catalogue.required' => 'Please select a product category.',
             'frontend_type.required' => 'Please select a front end display type.',
             'is_filterable.required' => 'Please select if you want to filter through the attributes.',
             'is_required.required' => 'Please select if you want to attribute compulsory.',
@@ -135,7 +135,7 @@ class AttributeController extends Controller
             $attribute = ProductAttribute::find($id);
             $attribute->name = $request->name;
             $attribute->code = $request->code;
-            $attribute->product_category_id = $request->category;
+            $attribute->catalogue_id = $request->catalogue;
             $attribute->frontend_type = $request->frontend_type;
             $attribute->is_filterable = $request->is_filterable;
             $attribute->is_required = $request->is_required;

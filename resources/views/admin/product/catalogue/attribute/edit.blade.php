@@ -17,8 +17,8 @@
     <section class="content">
         <div class="admin-footer-error">@include('admin.partials.flashErrorMessage')</div>
         <div class="global-settings-cover">
-            <form action="{{route('admin.product.attribute.store')}}" method="POST" enctype="multipart/form-data" data-parsley-validate >
-                {{ csrf_field() }}
+            <form action="{{ route('admin.product.attribute.update', $attribute->id) }}" method="POST" enctype="multipart/form-data">
+                {{ csrf_field() }} {{ method_field('PUT') }}
                 <div class="row user">
                     <div class="col-md-3">
                         <div class="tile p-0 gb-settings-body" style="background: #fff;">
@@ -37,34 +37,34 @@
                                 <div class="gb-body">
                                     <div class="form-group">
                                         <label for="name">Attribute Name</label>
-                                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" maxlength="255" value="{{ old('name') }}">
+                                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" maxlength="255" value="{{ old('name', $attribute->name) }}">
                                         @error('name') <p class="error-p">{{$errors->first('name')}}</p> @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="code">Attribute Code</label>
                                         <div class="form-instruction">The attribute code should be unique.</div>
-                                        <input type="text" name="code" class="form-control @error('code') is-invalid @enderror" id="code" maxlength="255" value="{{ old('code') }}">
+                                        <input type="text" name="code" class="form-control @error('code') is-invalid @enderror" id="code" maxlength="255" value="{{ old('name', $attribute->code) }}">
                                         @error('code') <p class="error-p">{{$errors->first('code')}}</p> @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="category">Product Category</label>
-                                        <select id="category" class="form-control custom-select mt-15 @error('category') is-invalid @enderror" name="category">
-                                            <option disabled selected>Select a product category</option>
-                                            @foreach($categories as $category)
-                                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                        <label for="catalogue">Product Category</label>
+                                        <select id="catalogue" class="form-control custom-select mt-15 @error('catalogue') is-invalid @enderror" name="catalogue">
+                                            <option disabled>Select a product catalogue</option>
+                                            @foreach($catalogues as $catalogue)
+                                                <option value="{{$catalogue->id}}" @if($attribute->catalogue_id == $catalogue->id) selected @endif>{{$catalogue->name}}</option>
                                             @endforeach
                                         </select>
-                                        @error('category') <p class="error-p">{{$errors->first('category')}}</p> @enderror
+                                        @error('catalogue') <p class="error-p">{{$errors->first('catalogue')}}</p> @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="frontend_type">Display Type</label>
                                         <div class="form-instruction">How do you want this attribute to be displayed (select will be set as default)</div>
                                         <select id="frontend_type" class="form-control custom-select mt-15 @error('frontend_type') is-invalid @enderror" name="frontend_type">
-                                            <option disabled selected>Select a display type</option>
-                                            <option value="select">Select</option>
-                                            <option value="radio">Radio</option>
-                                            <option value="text">Text</option>
-                                            <option value="text_area">Text Area</option>
+                                            <option disabled>Select a display type</option>
+                                            <option value="select" @if($attribute->frontend_type == 'select') selected @endif>Select</option>
+                                            <option value="radio" @if($attribute->frontend_type == 'radio') selected @endif>Radio</option>
+                                            <option value="text" @if($attribute->frontend_type == 'text') selected @endif>Text</option>
+                                            <option value="text_area" @if($attribute->frontend_type == 'text_area') selected @endif>Text Area</option>
                                         </select>
                                         @error('frontend_type') <p class="error-p">{{$errors->first('frontend_type')}}</p> @enderror
                                     </div>
@@ -72,8 +72,8 @@
                                         <label for="is_filterable">Filterable</label>
                                         <div class="form-instruction">Do you want the attribute to be filterable.</div>
                                         <select id="is_filterable" class="form-control custom-select mt-15 @error('is_filterable') is-invalid @enderror" name="is_filterable">
-                                            <option value="1">Yes</option>
-                                            <option value="0">No</option>
+                                            <option value="1" @if($attribute->is_filterable == 1) selected @endif>Yes</option>
+                                            <option value="0" @if($attribute->is_filterable == 0) selected @endif>No</option>
                                         </select>
                                         @error('is_filterable') <p class="error-p">{{$errors->first('is_filterable')}}</p> @enderror
                                     </div>
@@ -81,8 +81,8 @@
                                         <label for="is_required">Required</label>
                                         <div class="form-instruction">Do you want the attribute to be required compulsorily.</div>
                                         <select id="is_required" class="form-control custom-select mt-15 @error('is_required') is-invalid @enderror" name="is_required">
-                                            <option value="1">Yes</option>
-                                            <option value="0">No</option>
+                                            <option value="1" @if($attribute->is_required == 1) selected @endif>Yes</option>
+                                            <option value="0" @if($attribute->is_required == 0) selected @endif>No</option>
                                         </select>
                                         @error('is_required') <p class="error-p">{{$errors->first('is_required')}}</p> @enderror
                                     </div>

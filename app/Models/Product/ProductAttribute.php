@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductAttribute extends Model
 {
-    public function productCategory()
+    public function catalogue()
 	{
-	 return $this->belongsTo('App\Models\Product\ProductCategory', 'product_category_id');
+	 return $this->belongsTo('App\Models\Product\Catalogue', 'catalogue_id');
 	}
 
 	public function productAttributeValues()

@@ -23,7 +23,7 @@
                                 <th style="width: 30px">#</th>
                                 <th>Name</th>
                                 <th>Code</th>
-                                <th>Product Category</th>
+                                <th>Catalogue</th>
                                 <th>Filterable</th>
                                 <th>Required</th>
                                 <th style="width: 150px">Action</th>
@@ -34,7 +34,7 @@
                                 <td>{{$attribute->id }}</td>
                                 <td>{{$attribute->name }}</td>
                                 <td>{{$attribute->code }}</td>
-                                <td>{{$attribute->productCategory->name }}</td>
+                                <td>{{$attribute->catalogue->name }}</td>
                                 <td>
                                     @if($attribute->is_filterable == 0)
                                         No
