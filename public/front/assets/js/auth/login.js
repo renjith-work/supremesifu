@@ -4,17 +4,14 @@ $(document).ready(function() {
         	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }});
 
-    // $('.input').keypress(function (e) {
-    //   if (e.which == 13) {
-    //     $('form#login').submit();
-    //     return false;    //<---- Add this line
-    //   }
-    // });
-    document.addEventListener('keydown', function(event) {
-        if (event.keyCode == 13) {// enter
+    $('#password').keypress(function (event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
             $('form#login').submit();
-            return false;    //<---- Add this line
+            event.stopPropagation();
+            // return false;    //<---- Add this line	
         }
+        // event.stopPropagation();
     });
 
     $('#modal-login-btn').click(function(event) {

@@ -165,6 +165,30 @@ class PermissionsTableSeeder extends Seeder
             'updated_at' => Carbon::now(),
             ],
             [
+                'name' => 'List Custom Product Category',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'Create Custom Product Category',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'Edit Custom Product Category',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'Delete Custom Product Category',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
             'name' => 'List Product Attribute',
             'guard_name' => 'web',
             'created_at' => Carbon::now(),

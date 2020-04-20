@@ -89,6 +89,3 @@
 		</div>
 	</div>
 @endsection
-@section('footer')
-<script src="/front/frame/auth/login.js"></script>
-@endsection

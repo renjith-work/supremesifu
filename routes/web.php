@@ -178,6 +178,11 @@ Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 	Route::get('product/image/delete/{id}/{image}', 'Admin\Product\ProductController@imageDel');
 });
 
+// Custom Product Category Routes
+Route::group(['prefix'  =>   'admin/product/custom', 'as' => 'admin.product.custom.'], function () {
+	Route::resource('category', 'Admin\Product\CustomProductCategoryController');
+	Route::get('category/{id}/delete', 'Admin\Product\CustomProductCategoryController@delete')->name('category.delete');
+});
 
 
 // Fabric Api Routes
