@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Product\Attribute;
 
 use App\Models\Product\ProductAttributeValue;
 use App\Models\Product\ProductAttribute;
-use App\Models\Product\ProductCategory;
+use App\Models\Product\Catalogue;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -41,8 +41,8 @@ class AttributeValueController extends Controller
      */
     public function create()
     {
-        $categories = ProductCategory::all();
-        return view('admin.product.catalogue.attribute.value.create')->with('categories', $categories);
+        $catalogues = Catalogue::all();
+        return view('admin.product.catalogue.attribute.value.create')->with('catalogues', $catalogues);
     }
 
     /**
@@ -126,9 +126,9 @@ class AttributeValueController extends Controller
      */
     public function edit($id)
     {
-        $categories = ProductCategory::all();
+        $catalogues = Catalogue::all();
         $value = ProductAttributeValue::find($id);
-        return view('admin.product.catalogue.attribute.value.edit')->with('categories', $categories)->with('value', $value);
+        return view('admin.product.catalogue.attribute.value.edit')->with('catalogues', $catalogues)->with('value', $value);
     }
 
     /**
@@ -214,13 +214,6 @@ class AttributeValueController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function load(Request $request)
-    {
-        $id = $request->id;
-        $data = ProductAttribute::where('product_category_id', $id)->get();
-        return response()->json($data);
     }
 
     public function delete($id)

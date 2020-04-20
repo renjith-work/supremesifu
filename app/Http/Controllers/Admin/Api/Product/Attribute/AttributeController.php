@@ -11,6 +11,13 @@ use App\Http\Controllers\Controller;
 
 class AttributeController extends Controller
 {
+    public function loadAttr(Request $request)
+    {
+        $id = $request->id;
+        $data = ProductAttribute::where('catalogue_id', $id)->get();
+        return response()->json($data);
+    }
+
     public function load(Request $request)
     {	
     	$attributes = ProductAttribute::where('product_category_id', $request->id)->get();

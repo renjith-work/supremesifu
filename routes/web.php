@@ -141,13 +141,14 @@ Route::group(['prefix'  =>   'admin/product/fabric', 'as' => 'admin.product.fabr
 // Product Attributes API Routes
 Route::post('/admin/api/product/attribute/loadEdit', 'Admin\Api\Product\Attribute\AttributeController@loadEdit');
 Route::post('/admin/api/product/attribute/load', 'Admin\Api\Product\Attribute\AttributeController@load');
+Route::post('/admin/product/attribute/load', 'Admin\Api\Product\Attribute\AttributeController@loadAttr')->name('admin.product.attribute.load');
 
 // Product Attribute Routes
 Route::group(['prefix'  =>   'admin/product', 'as' => 'admin.product.'], function() {
 	// Product Attributes Value Routes
 	Route::resource('attribute/value', 'Admin\Product\Attribute\AttributeValueController', ['as' => 'attribute']);
 	Route::get('attribute/value/{id}/delete', 'Admin\Product\Attribute\AttributeValueController@delete')->name('attribute.value.delete');
-	Route::post('attribute/load', 'Admin\Product\Attribute\AttributeValueController@load')->name('attribute.load');
+	
 
 	// Product Attributes Routes
 	Route::resource('attribute', 'Admin\Product\Attribute\AttributeController');

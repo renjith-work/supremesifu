@@ -37,18 +37,12 @@
                                 <div class="gb-body">
                                     <div class="form-group">
                                         <br>
-                                        <label for="category">Product Category</label>
-                                        <div class="form-instruction">Please select a product category to get all the attributes of the category</div>
-                                        <select id="category" class="form-control custom-select mt-15 @error('category') is-invalid @enderror" name="category">
-                                            <option disabled selected>Select a product category</option>
-                                            @foreach($categories as $category)
-                                                @if($category->id != 1)
-                                                    @if($category->id == $value->productAttribute->product_category_id)
-                                                        <option value="{{$category->id}}" selected>{{$category->name}}</option>
-                                                    @else
-                                                        <option value="{{$category->id}}">{{$category->name}}</option>
-                                                    @endif
-                                                @endif
+                                        <label for="catalogue">Product Catalogue</label>
+                                        <div class="form-instruction">Please select a product catalogue to get all the attributes of the catalogue</div>
+                                        <select id="catalogue" class="form-control custom-select mt-15 @error('catalogue') is-invalid @enderror" name="catalogue">
+                                            <option disabled selected>Select a product catalogue</option>
+                                            @foreach($catalogues as $catalogue)
+                                                <option value="{{$catalogue->id}}" @if($catalogue->id == $value->productAttribute->catalogue_id) selected @endif>{{$catalogue->name}}</option>
                                             @endforeach
                                         </select>
                                         @error('category') <p class="error-p">{{$errors->first('category')}}</p> @enderror
@@ -57,7 +51,6 @@
                                         <label for="attribute">Attribute</label>
                                         <select id="attribute" class="form-control custom-select mt-15 @error('attribute') is-invalid @enderror" name="attribute">
                                             <option disabled selected>Select product attribute</option>
-                                            <option disabled>Select a product category</option>
                                         </select>
                                         @error('attribute') <p class="error-p">{{$errors->first('attribute')}}</p> @enderror
                                     </div>
@@ -142,7 +135,7 @@
 @endsection
 @section('footer')
     <script type="text/javascript">
-        var category_id  = {!!json_encode($value->productAttribute->product_category_id)!!};
+        var catalogue_id  = {!!json_encode($value->productAttribute->catalogue_id)!!};
         var attribute_id  = {!!json_encode($value->product_attribute_id)!!};
     </script>
     <script src="/cmadmin/bower_components/select2/dist/js/select2.full.min.js"></script>

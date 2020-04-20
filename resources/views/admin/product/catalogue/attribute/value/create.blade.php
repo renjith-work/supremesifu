@@ -37,17 +37,15 @@
                                 </div>
                                 <div class="gb-body">
                                     <div class="form-group">
-                                        <label for="category">Product Category</label>
-                                        <div class="form-instruction">Please select a product category to get all the attributes of the category</div>
-                                        <select id="category" class="form-control custom-select mt-15 @error('category') is-invalid @enderror" name="category">
-                                            <option disabled selected>Select a product category</option>
-                                            @foreach($categories as $category)
-                                                @if($category->id != 1)
-                                                    <option value="{{$category->id}}">{{$category->name}}</option>
-                                                @endif
+                                        <label for="catalogue">Product Catalogue</label>
+                                        <div class="form-instruction">Please select a product catalogue to get all the attributes of the catalogue</div>
+                                        <select id="catalogue" class="form-control custom-select mt-15 @error('catalogue') is-invalid @enderror" name="catalogue">
+                                            <option disabled selected>Select a catalogue</option>
+                                            @foreach($catalogues as $catalogue)
+                                                <option value="{{$catalogue->id}}">{{$catalogue->name}}</option>
                                             @endforeach
                                         </select>
-                                        @error('category') <p class="error-p">{{$errors->first('category')}}</p> @enderror
+                                        @error('catalogue') <p class="error-p">{{$errors->first('catalogue')}}</p> @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="attribute">Attribute</label>

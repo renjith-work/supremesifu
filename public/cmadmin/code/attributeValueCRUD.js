@@ -19,17 +19,17 @@ $(document).ready(function() {
         image_advtab: true,
     });
 
-    $(document).on('change', '#category', function(){
-        var category = $("#category").val();
-        loadAttributes(category);
+    $(document).on('change', '#catalogue', function(){
+        var catalogue = $("#catalogue").val();
+        loadAttributes(catalogue);
     });
 
     
     loadAttrIfCat();
     function loadAttrIfCat(){
-        if (typeof category_id != 'undefined' && category_id)
+        if (typeof catalogue_id != 'undefined' && catalogue_id)
         {
-            loadAttributesSelect(category_id);        
+            loadAttributesSelect(catalogue_id);        
         }
     }
 
