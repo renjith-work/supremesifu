@@ -152,6 +152,10 @@ Route::group(['prefix'  =>   'admin/product', 'as' => 'admin.product.'], functio
 	// Product Attributes Routes
 	Route::resource('attribute', 'Admin\Product\Attribute\AttributeController');
 	Route::get('attribute/{id}/delete', 'Admin\Product\Attribute\AttributeController@delete')->name('attribute.delete');
+
+	// Product Attributes Routes
+	Route::resource('catalogue', 'Admin\Product\Attribute\CatalogueController');
+	Route::get('catalogue/{id}/delete', 'Admin\Product\Attribute\CatalogueController@delete')->name('catalogue.delete');
 });
 
 // Product Routes

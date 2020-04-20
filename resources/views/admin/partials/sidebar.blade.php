@@ -37,9 +37,10 @@
                     </li>
                     @can('List Product Category')<li class="{{ Active::checkRoute(['admin.product.category.*' ]) }}"><a href="/admin/product/category"> <i class="fa fa-circle-o"></i> <span>Product Category</span> <span class="pull-right-container"></span> </a></li>@endcan
                     @can('List Custom Product Category')<li class="{{ Active::checkRoute(['admin.product.custom.category.*' ]) }}"><a href="/admin/product/custom/category"> <i class="fa fa-circle-o"></i> <span>Custom Product Category</span> <span class="pull-right-container"></span> </a></li>@endcan
-                    @can('List Product Attribute')<li class="treeview {{ Active::checkRoute('admin.product.attribute.*') }} ">
+                    @can('List Product Attribute')<li class="treeview {{ Active::checkRoute(['admin.product.attribute.*','admin.product.catalogue.*']) }} ">
                         <a href="#"> <i class="fa fa-cogs"></i> <span>Product Attributes</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
+                            <li class="{{ Active::checkRoute(['admin.product.catalogue.index', 'admin.product.catalogue.create', 'admin.product.catalogue.edit' ]) }}"><a href="/admin/product/catalogue"> <i class="fa fa-circle-o"></i> <span>Catalogue</span> <span class="pull-right-container"></span> </a></li>
                             <li class="{{ Active::checkRoute(['admin.product.attribute.index', 'admin.product.attribute.create', 'admin.product.attribute.edit' ]) }}"><a href="/admin/product/attribute"> <i class="fa fa-circle-o"></i> <span>Attributes</span> <span class="pull-right-container"></span> </a></li>
                             <li class="{{ Active::checkRoute(['admin.product.attribute.value*' ]) }}"><a href="/admin/product/attribute/value"> <i class="fa fa-circle-o"></i> <span>Attribute Values</span> <span class="pull-right-container"></span> </a></li>
                         </ul>
