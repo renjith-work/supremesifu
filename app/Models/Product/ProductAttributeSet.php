@@ -4,7 +4,7 @@ namespace App\Models\Product;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Catalogue extends Model
+class ProductAttributeSet extends Model
 {
     public function attributes()
     {

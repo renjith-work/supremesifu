@@ -10,14 +10,14 @@
     <section class="content-header">
         <ol class="breadcrumb">
             <li><a href="/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="/admin/product/catalogue/">Product Catalogue Management</a></li>
-            <li class="active">Create Product Catalogue</li>
+            <li><a href="/admin/product/attribute/set">Product Attribute Set Management</a></li>
+            <li class="active">Create Product Attribute Set</li>
         </ol>
     </section>
     <section class="content">
         <div class="admin-footer-error">@include('admin.partials.flashErrorMessage')</div>
         <div class="global-settings-cover">
-            <form action="{{route('admin.product.catalogue.store')}}" method="POST" enctype="multipart/form-data" data-parsley-validate >
+            <form action="{{route('admin.product.attribute.set.store')}}" method="POST" enctype="multipart/form-data" data-parsley-validate >
                 {{ csrf_field() }}
                 <div class="row user">
                     <div class="col-md-3">
@@ -32,16 +32,16 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="mainPane">
                                 <div class="box-header">
-                                    <h3 class="box-title">Create Product Catalogue</h3>
+                                    <h3 class="box-title">Create Product Attribute Set</h3>
                                 </div>
                                 <div class="gb-body">
                                     <div class="form-group">
-                                        <label for="name">Catalogue Name</label>
+                                        <label for="name">Attribute Set Name</label>
                                         <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" maxlength="255" value="{{ old('name') }}">
                                         @error('name') <p class="error-p">{{$errors->first('name')}}</p> @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="description">Catalogue Description</label>
+                                        <label for="description">Attribute Set Description</label>
                                         <textarea name="description" id="description" class="form-control wysiwyg @error('description') is-invalid @enderror" rows="5">{{ old('description') }}</textarea>
                                         @error('description') <p class="error-p">{{$errors->first('description')}}</p> @enderror
                                     </div>

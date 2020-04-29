@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCataloguesTable extends Migration
+class CreateProductAttributeSetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCataloguesTable extends Migration
      */
     public function up()
     {
-        Schema::create('catalogues', function (Blueprint $table) {
+        Schema::create('product_attribute_sets', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->unique();
             $table->text('description')->nullable();
@@ -28,6 +28,6 @@ class CreateCataloguesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('catalogues');
+        Schema::dropIfExists('product_attribute_sets');
     }
 }

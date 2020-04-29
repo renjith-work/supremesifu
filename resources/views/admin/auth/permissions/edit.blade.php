@@ -32,7 +32,7 @@
                             @error('name') <p class="error-p">{{$errors->first('name')}}</p> @enderror
                         </div>
                         <div class="box-footer">
-                            <input id="submit" type="Submit" value="Create Role" class="btn btn-success btn-lg pull-right submit-button btn-submit">
+                            <input id="submit" type="Submit" value="Save" class="btn btn-success btn-lg pull-right submit-button btn-submit">
                         </div>
                     </form>
                 </div>

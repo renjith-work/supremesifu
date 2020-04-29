@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class CatalogueMiddleware
+class ProductAttributeSetMiddleware
 {
     /**
      * Handle an incoming request.
@@ -21,36 +21,36 @@ class CatalogueMiddleware
             return $next($request);
         }
 
-        if ($request->is('admin/product/catalogue')) //If user is listing a post category
+        if ($request->is('admin/product/attribute/set')) //If user is listing a post category
         {
-            if (!Auth::user()->hasPermissionTo('List Catalogue')) {
+            if (!Auth::user()->hasPermissionTo('List Product Attribute Set')) {
                 abort('401');
             } else {
                 return $next($request);
             }
         }
 
-        if ($request->is('admin/product/catalogue/create')) //If user is creating a post category
+        if ($request->is('admin/product/attribute/set/create')) //If user is creating a post category
         {
-            if (!Auth::user()->hasPermissionTo('Create Catalogue')) {
+            if (!Auth::user()->hasPermissionTo('Create Product Attribute Set')) {
                 abort('401');
             } else {
                 return $next($request);
             }
         }
 
-        if ($request->is('admin/product/catalogue/*/edit')) //If user is editing a post category
+        if ($request->is('admin/product/attribute/set/*/edit')) //If user is editing a post category
         {
-            if (!Auth::user()->hasPermissionTo('Edit Catalogue')) {
+            if (!Auth::user()->hasPermissionTo('Edit Product Attribute Set')) {
                 abort('401');
             } else {
                 return $next($request);
             }
         }
 
-        if ($request->is('admin/product/catalogue/*/delete')) //If user is deleting a post category
+        if ($request->is('admin/product/attribute/set/*/delete')) //If user is deleting a post category
         {
-            if (!Auth::user()->hasPermissionTo('Delete Catalogue')) {
+            if (!Auth::user()->hasPermissionTo('Delete Product Attribute Set')) {
                 abort('401');
             } else {
                 return $next($request);

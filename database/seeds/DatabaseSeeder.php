@@ -25,9 +25,9 @@ class DatabaseSeeder extends Seeder
             // Roles and Permissions Seeder
             PermissionsTableSeeder::class,
             RolesTableSeeder::class,
-            
+
             // Product Seeder
-            CatalogueTableSeeder::class,    
+            ProductAttributeSetTableSeeder::class,    
             ProductCategoryTableSeeder::class,
             ProductAttributeTableSeeder::class,
             ProductAttributeValueTableSeeder::class,

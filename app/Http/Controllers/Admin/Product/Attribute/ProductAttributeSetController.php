@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Product\Attribute;
 
-use App\Models\Product\Catalogue;
+use App\Models\Product\ProductAttributeSet;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,11 +15,11 @@ use Storage;
 use Purifier;
 use File;
 
-class CatalogueController extends Controller
+class ProductAttributeSetController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'catalogue']);
+        $this->middleware(['auth', 'productAttributeSet']);
     }
     /**
      * Display a listing of the resource.
@@ -28,8 +28,8 @@ class CatalogueController extends Controller
      */
     public function index()
     {
-        $catalogues = Catalogue::orderBy('id', 'asc')->paginate(15);
-        return view('admin.product.catalogue.index')->with('catalogues', $catalogues);
+        $attribute_sets = ProductAttributeSet::orderBy('id', 'asc')->paginate(15);
+        return view('admin.product.attributes.set.index')->with('attribute_sets', $attribute_sets);
     }
 
     /**
@@ -39,7 +39,7 @@ class CatalogueController extends Controller
      */
     public function create()
     {
-        return view('admin.product.catalogue.create');
+        return view('admin.product.attributes.set.create');
     }
 
     /**
@@ -53,16 +53,16 @@ class CatalogueController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'name' => 'required|min:2|max:255|unique:catalogues,name',
+                'name' => 'required|min:2|max:255|unique:product_attribute_sets,name',
                 'description' => 'required',
             ]
         );
 
         if ($validator->passes()) {
-            $catalogue = new Catalogue;
-            $catalogue->name = $request->name;
-            $catalogue->description = Purifier::clean($request->description);
-            $catalogue->save();
+            $attribute_set = new ProductAttributeSet();
+            $attribute_set->name = $request->name;
+            $attribute_set->description = Purifier::clean($request->description);
+            $attribute_set->save();
             Session::flash('success', 'The data was successfully inserted.');
             return redirect()->back();
         } else {
@@ -89,8 +89,8 @@ class CatalogueController extends Controller
      */
     public function edit($id)
     {
-        $catalogue = Catalogue::find($id);
-        return view('admin.product.catalogue.edit')->with('catalogue', $catalogue);
+        $attribute_set = ProductAttributeSet::find($id);
+        return view('admin.product.attributes.set.edit')->with('attribute_set', $attribute_set);
     }
 
     /**
@@ -105,16 +105,16 @@ class CatalogueController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'name' => "required|min:2|max:255|unique:catalogues,name, $id",
+                'name' => "required|min:2|max:255|unique:product_attribute_sets,name, $id",
                 'description' => 'required',
             ]
         );
 
         if ($validator->passes()) {
-            $catalogue = Catalogue::find($id);
-            $catalogue->name = $request->name;
-            $catalogue->description = Purifier::clean($request->description);
-            $catalogue->save();
+            $attribute_set = ProductAttributeSet::find($id);
+            $attribute_set->name = $request->name;
+            $attribute_set->description = Purifier::clean($request->description);
+            $attribute_set->save();
             Session::flash('success', 'The data was successfully inserted.');
             return redirect()->back();
         } else {
@@ -130,13 +130,13 @@ class CatalogueController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // 
     }
 
     public function delete($id)
     {
-        $catalogue = Catalogue::find($id);
-        $catalogue->delete();
+        $attribute_set = ProductAttributeSet::find($id);
+        $attribute_set->delete();
         Session::flash('success', 'The data was successfully deleted.');
         return redirect()->back();
     }
