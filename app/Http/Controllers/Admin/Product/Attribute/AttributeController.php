@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Product\Attribute;
 
 use App\Models\Product\ProductAttribute;
-use App\Models\Product\Catalogue;
+use App\Models\Product\ProductAttributeSet;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -29,7 +29,7 @@ class AttributeController extends Controller
     public function index()
     {
         $attributes = ProductAttribute::orderBy('id', 'asc')->paginate(15);
-        return view('admin.product.catalogue.attribute.index')->with('attributes', $attributes);
+        return view('admin.product.attributes.attribute.index')->with('attributes', $attributes);
     }
 
     /**
@@ -39,8 +39,8 @@ class AttributeController extends Controller
      */
     public function create()
     {
-        $catalogues = Catalogue::all();
-        return view('admin.product.catalogue.attribute.create')->with('catalogues', $catalogues);
+        $attributeSets = ProductAttributeSet::all();
+        return view('admin.product.attributes.attribute.create')->with('attributeSets', $attributeSets);
     }
 
     /**
@@ -53,28 +53,31 @@ class AttributeController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|min:5|max:255',
-            'code' => 'required|min:5|max:255|unique:product_attributes,code',
-            'catalogue' => 'required',
+            'name' => 'required|min:3|max:255',
+            'code' => 'required|min:3|max:255|unique:product_attributes,code',
+            'attributeSet' => 'required',
             'frontend_type' => 'required',
             'is_filterable' => 'required',
             'is_required' => 'required',
+            'is_configurable' => 'required',
         ],
         [
-            'catalogue.required' => 'Please select a product category.',
+            'attributeSet.required' => 'Please select a product attribute set.',
             'frontend_type.required' => 'Please select a front end display type.',
             'is_filterable.required' => 'Please select if you want to filter through the attributes.',
             'is_required.required' => 'Please select if you want to attribute compulsory.',
+            'is_configurable.required' => 'Please select if you want the attribute to be configurable from the front end.',
         ]);
 
         if ($validator->passes()) {
             $attribute = new ProductAttribute;
             $attribute->name = $request->name;
             $attribute->code = $request->code;
-            $attribute->catalogue_id = $request->catalogue;
+            $attribute->product_attribute_set_id = $request->attributeSet;
             $attribute->frontend_type = $request->frontend_type;
             $attribute->is_filterable = $request->is_filterable;
             $attribute->is_required = $request->is_required;
+            $attribute->is_configurable = $request->is_configurable;
             $attribute->save();
             Session::flash('success', 'The data was successfully inserted.');
             return redirect()->back();
@@ -103,8 +106,8 @@ class AttributeController extends Controller
     public function edit($id)
     {
         $attribute = ProductAttribute::find($id);
-        $catalogues = Catalogue::all();
-        return view('admin.product.catalogue.attribute.edit')->with('catalogues', $catalogues)->with('attribute', $attribute);
+        $attributeSets = ProductAttributeSet::all();
+        return view('admin.product.attributes.attribute.edit')->with('attributeSets', $attributeSets)->with('attribute', $attribute);
     }
 
     /**
@@ -116,29 +119,32 @@ class AttributeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|min:5|max:255',
-            'code' => "required|min:5|max:255|unique:product_attributes,code, $id",
-            'catalogue' => 'required',
+         $validator = Validator::make($request->all(), [
+            'name' => 'required|min:3|max:255',
+            'code' => "required|min:3|max:255|unique:product_attributes,code, $id",
+            'attributeSet' => 'required',
             'frontend_type' => 'required',
             'is_filterable' => 'required',
             'is_required' => 'required',
+            'is_configurable' => 'required',
         ],
         [
-            'catalogue.required' => 'Please select a product category.',
+            'attributeSet.required' => 'Please select a product attribute set.',
             'frontend_type.required' => 'Please select a front end display type.',
             'is_filterable.required' => 'Please select if you want to filter through the attributes.',
             'is_required.required' => 'Please select if you want to attribute compulsory.',
+            'is_configurable.required' => 'Please select if you want the attribute to be configurable from the front end.',
         ]);
 
         if ($validator->passes()) {
             $attribute = ProductAttribute::find($id);
             $attribute->name = $request->name;
             $attribute->code = $request->code;
-            $attribute->catalogue_id = $request->catalogue;
+            $attribute->product_attribute_set_id = $request->attributeSet;
             $attribute->frontend_type = $request->frontend_type;
             $attribute->is_filterable = $request->is_filterable;
             $attribute->is_required = $request->is_required;
+            $attribute->is_configurable = $request->is_configurable;
             $attribute->save();
             Session::flash('success', 'The data was successfully updated.');
             return redirect()->back();

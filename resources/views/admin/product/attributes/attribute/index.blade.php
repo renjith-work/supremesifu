@@ -23,7 +23,8 @@
                                 <th style="width: 30px">#</th>
                                 <th>Name</th>
                                 <th>Code</th>
-                                <th>Catalogue</th>
+                                <th>Attribute Set</th>
+                                <th style="width: 300px">Values</th>
                                 <th>Filterable</th>
                                 <th>Required</th>
                                 <th style="width: 150px">Action</th>
@@ -34,7 +35,12 @@
                                 <td>{{$attribute->id }}</td>
                                 <td>{{$attribute->name }}</td>
                                 <td>{{$attribute->code }}</td>
-                                <td>{{$attribute->catalogue->name }}</td>
+                                <td>{{$attribute->attributeSet->name}}</td>
+                                <td>
+                                    @foreach($attribute->productAttributeValues as $value)
+                                        <span class="label label-success label-pixtent-success">{{$value->value}}</span>
+                                    @endforeach
+                                </td>
                                 <td>
                                     @if($attribute->is_filterable == 0)
                                         No
@@ -52,7 +58,6 @@
                                 <td style="width: 150px;">
                                     <div class="action-ul-cover">
                                         <ul>
-                                            <li><a href="/admin/product/attribute/{{$attribute->id}}" class="crud-ab-cover ab-view"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
                                             <li><a href="/admin/product/attribute/{{$attribute->id}}/edit" class="crud-ab-cover ab-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
                                             <li><a href="/admin/product/attribute/{{$attribute->id}}/delete" class="crud-ab-cover ab-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
                                         </ul>

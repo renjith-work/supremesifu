@@ -19,9 +19,9 @@ $(document).ready(function() {
         image_advtab: true,
     });
 
-    $(document).on('change', '#catalogue', function(){
-        var catalogue = $("#catalogue").val();
-        loadAttributes(catalogue);
+    $(document).on('change', '#attributeSet', function(){
+        var set = $("#attributeSet").val();
+        loadAttributes(set);
     });
 
     
@@ -36,6 +36,7 @@ $(document).ready(function() {
     // oad all attributes while creating.
 
     function loadAttributes(id){
+        console.log(id);
         $('#attribute').html('');
         $.ajax({
             url: "/admin/product/attribute/load",

@@ -37,15 +37,15 @@
                                 </div>
                                 <div class="gb-body">
                                     <div class="form-group">
-                                        <label for="catalogue">Product Catalogue</label>
-                                        <div class="form-instruction">Please select a product catalogue to get all the attributes of the catalogue</div>
-                                        <select id="catalogue" class="form-control custom-select mt-15 @error('catalogue') is-invalid @enderror" name="catalogue">
-                                            <option disabled selected>Select a catalogue</option>
-                                            @foreach($catalogues as $catalogue)
-                                                <option value="{{$catalogue->id}}">{{$catalogue->name}}</option>
+                                        <label for="attributeSet">Product Attribute Set</label>
+                                        <div class="form-instruction">Please select a product attribute set to get all the attributes of the product.</div>
+                                        <select id="attributeSet" class="form-control custom-select mt-15 @error('attributeSet') is-invalid @enderror" name="attributeSet">
+                                            <option disabled selected>Select a attribute set</option>
+                                            @foreach($attributeSets as $set)
+                                                <option value="{{$set->id}}">{{$set->name}}</option>
                                             @endforeach
                                         </select>
-                                        @error('catalogue') <p class="error-p">{{$errors->first('catalogue')}}</p> @enderror
+                                        @error('attributeSet') <p class="error-p">{{$errors->first('attributeSet')}}</p> @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="attribute">Attribute</label>

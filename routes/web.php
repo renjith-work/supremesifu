@@ -145,6 +145,9 @@ Route::post('/admin/product/attribute/load', 'Admin\Api\Product\Attribute\Attrib
 
 // Product Attribute Routes
 Route::group(['prefix'  =>   'admin/product', 'as' => 'admin.product.'], function() {
+	// Product Attributes Value Image Settings
+	Route::resource('attribute/value/image/settings', 'Admin\Product\Attribute\ProductAttributeImageController', ['as' => 'attribute.value.image']);
+	Route::get('attribute/value/image/settings/{id}/delete', 'Admin\Product\Attribute\ProductAttributeImageController@delete')->name('attribute.value.image.settings.delete');
 	// Product Attributes Value Routes
 	Route::resource('attribute/value', 'Admin\Product\Attribute\AttributeValueController', ['as' => 'attribute']);
 	Route::get('attribute/value/{id}/delete', 'Admin\Product\Attribute\AttributeValueController@delete')->name('attribute.value.delete');

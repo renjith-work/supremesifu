@@ -72,6 +72,7 @@ class Kernel extends HttpKernel
         'productCategory' => \App\Http\Middleware\ProductCategoryMiddleware::class,
         'customProductCategory' => \App\Http\Middleware\CustomProductCategoryMiddleware::class,
         'productAttributeSet' => \App\Http\Middleware\ProductAttributeSetMiddleware::class,
+        'productAttributeImageSettings' => \App\Http\Middleware\ProductAttributeImageSettingsMiddleware::class,
         'brand' => \App\Http\Middleware\BrandMiddleware::class,
         'fabricBrand' => \App\Http\Middleware\FabricBrandMiddleware::class,
         'fabricClass' => \App\Http\Middleware\FabricClassMiddleware::class,

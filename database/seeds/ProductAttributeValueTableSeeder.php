@@ -149,7 +149,7 @@ class ProductAttributeValueTableSeeder extends Seeder
         	],
         	[
         		'product_attribute_id'          =>  '4',
-        		'value'          =>  'One Angled pocket',
+        		'value'          =>  'One Pocket',
 	            'description'   =>  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ',
 	            'd_image'          =>  'pocket.png',
 	            'd_drawing'          =>  'pocket.png',
@@ -158,7 +158,7 @@ class ProductAttributeValueTableSeeder extends Seeder
         	],
         	[
         		'product_attribute_id'          =>  '4',
-        		'value'          =>  '1 Rounded Pocket With Button',
+        		'value'          =>  'Two Pocket',
 	            'description'   =>  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ',
 	            'd_image'          =>  'pocket.png',
 	            'd_drawing'          =>  'pocket.png',

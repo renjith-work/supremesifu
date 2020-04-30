@@ -14,7 +14,7 @@ class AttributeController extends Controller
     public function loadAttr(Request $request)
     {
         $id = $request->id;
-        $data = ProductAttribute::where('catalogue_id', $id)->get();
+        $data = ProductAttribute::where('product_attribute_set_id', $id)->get();
         return response()->json($data);
     }
 

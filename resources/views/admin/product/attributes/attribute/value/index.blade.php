@@ -49,7 +49,6 @@
                                 <td style="width: 150px;">
                                     <div class="action-ul-cover">
                                         <ul>
-                                            <li><a href="/admin/product/attribute/value/{{$value->id}}" class="crud-ab-cover ab-view"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
                                             <li><a href="/admin/product/attribute/value/{{$value->id}}/edit" class="crud-ab-cover ab-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
                                             <li><a href="/admin/product/attribute/value/{{$value->id}}/delete" class="crud-ab-cover ab-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
                                         </ul>

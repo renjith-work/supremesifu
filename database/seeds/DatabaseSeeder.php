@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             ProductCategoryTableSeeder::class,
             ProductAttributeTableSeeder::class,
             ProductAttributeValueTableSeeder::class,
+            ProductAttributeImageTableSeeder::class,
             ProductDesignTableSeeder::class,
             CustomProductCategoryTableSeeder::class,    
             // Fabric Seeder

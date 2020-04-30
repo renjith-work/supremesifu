@@ -21,6 +21,7 @@ class CreateProductAttributesTable extends Migration
             $table->bigInteger('product_attribute_set_id')->nullable();
             $table->boolean('is_filterable')->default(0);
             $table->boolean('is_required')->default(0);
+            $table->boolean('is_configurable')->default(0);
             $table->timestamps();
         });
     }

@@ -47,14 +47,14 @@
                                         @error('code') <p class="error-p">{{$errors->first('code')}}</p> @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="catalogue">Product Category</label>
-                                        <select id="catalogue" class="form-control custom-select mt-15 @error('catalogue') is-invalid @enderror" name="catalogue">
-                                            <option disabled>Select a product catalogue</option>
-                                            @foreach($catalogues as $catalogue)
-                                                <option value="{{$catalogue->id}}" @if($attribute->catalogue_id == $catalogue->id) selected @endif>{{$catalogue->name}}</option>
+                                        <label for="attributeSet">Attribute Set</label>
+                                        <select id="attributeSet" class="form-control custom-select mt-15 @error('attributeSet') is-invalid @enderror" name="attributeSet">
+                                            <option disabled>Select a product attribute set</option>
+                                            @foreach($attributeSets as $set)
+                                                <option value="{{$set->id}}" @if($attribute->product_attribute_set_id == $set->id) selected @endif>{{$set->name}}</option>
                                             @endforeach
                                         </select>
-                                        @error('catalogue') <p class="error-p">{{$errors->first('catalogue')}}</p> @enderror
+                                        @error('attributeSet') <p class="error-p">{{$errors->first('attributeSet')}}</p> @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="frontend_type">Display Type</label>
@@ -85,6 +85,15 @@
                                             <option value="0" @if($attribute->is_required == 0) selected @endif>No</option>
                                         </select>
                                         @error('is_required') <p class="error-p">{{$errors->first('is_required')}}</p> @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="is_configurable">Configurable</label>
+                                        <div class="form-instruction">Do you want the attribute to be configurable from the front end.</div>
+                                        <select id="is_configurable" class="form-control custom-select mt-15 @error('is_configurable') is-invalid @enderror" name="is_configurable">
+                                            <option value="1" @if($attribute->is_configurable == 1) selected @endif>Yes</option>
+                                            <option value="0" @if($attribute->is_configurable == 0) selected @endif>No</option>
+                                        </select>
+                                        @error('is_configurable') <p class="error-p">{{$errors->first('is_configurable')}}</p> @enderror
                                     </div>
                                 </div>
                                 <div class="tile-footer">

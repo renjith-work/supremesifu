@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Product\Attribute;
 
 use App\Models\Product\ProductAttributeValue;
 use App\Models\Product\ProductAttribute;
-use App\Models\Product\Catalogue;
+use App\Models\Product\ProductAttributeSet;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -31,7 +31,7 @@ class AttributeValueController extends Controller
     public function index()
     {
         $values = ProductAttributeValue::orderBy('id', 'asc')->paginate(15);
-        return view('admin.product.catalogue.attribute.value.index')->with('values', $values);
+        return view('admin.product.attributes.attribute.value.index')->with('values', $values);
     }
 
     /**
@@ -41,8 +41,8 @@ class AttributeValueController extends Controller
      */
     public function create()
     {
-        $catalogues = Catalogue::all();
-        return view('admin.product.catalogue.attribute.value.create')->with('catalogues', $catalogues);
+        $attributeSets = ProductAttributeSet::all();
+        return view('admin.product.attributes.attribute.value.create')->with('attributeSets', $attributeSets);
     }
 
     /**
@@ -91,6 +91,7 @@ class AttributeValueController extends Controller
                 Image::make($image)->resize(200, 200)->save($location); //Use intervention to create an image model and store the file with the resize.
                 $value->d_drawing= $filename; //store the filename in to the database.
             }
+            if ($request->hasFile('c_image'))
             {
                 $image = $request->file('c_image'); //Grab and store the file on to $image
                 $filename = 'c_image-'.Str::slug(pathinfo($request->c_image->getClientOriginalName(), PATHINFO_FILENAME), '-').'-'.time(). '.'. $image->getClientOriginalExtension(); //Create a new filename
@@ -126,9 +127,9 @@ class AttributeValueController extends Controller
      */
     public function edit($id)
     {
-        $catalogues = Catalogue::all();
+        $attributeSets = ProductAttributeSet::all();
         $value = ProductAttributeValue::find($id);
-        return view('admin.product.catalogue.attribute.value.edit')->with('catalogues', $catalogues)->with('value', $value);
+        return view('admin.product.attributes.attribute.value.edit')->with('attributeSets', $attributeSets)->with('value', $value);
     }
 
     /**

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class FabricProductCategory extends Migration
+class CreateProductAttributeImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class FabricProductCategory extends Migration
      */
     public function up()
     {
-        Schema::create('fabric_product_categories', function (Blueprint $table) {
+        Schema::create('product_attribute_images', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('fabric_id')->unsigned();
-            $table->foreign('fabric_id')->references('id')->on('fabrics');
-            
-            $table->bigInteger('product_category_id')->unsigned();
-            $table->foreign('product_category_id')->references('id')->on('product_categories');
+            $table->string('name');
+            $table->string('code')->unique();
+            $table->bigInteger('height');
+            $table->bigInteger('width');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class FabricProductCategory extends Migration
      */
     public function down()
     {
-
+        Schema::dropIfExists('product_attribute_images');
     }
 }

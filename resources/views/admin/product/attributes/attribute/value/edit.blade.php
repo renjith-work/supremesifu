@@ -41,9 +41,9 @@
                                         <div class="form-instruction">Please select a product catalogue to get all the attributes of the catalogue</div>
                                         <select id="catalogue" class="form-control custom-select mt-15 @error('catalogue') is-invalid @enderror" name="catalogue">
                                             <option disabled selected>Select a product catalogue</option>
-                                            @foreach($catalogues as $catalogue)
+                                            {{-- @foreach($catalogues as $catalogue)
                                                 <option value="{{$catalogue->id}}" @if($catalogue->id == $value->productAttribute->catalogue_id) selected @endif>{{$catalogue->name}}</option>
-                                            @endforeach
+                                            @endforeach --}}
                                         </select>
                                         @error('category') <p class="error-p">{{$errors->first('category')}}</p> @enderror
                                     </div>

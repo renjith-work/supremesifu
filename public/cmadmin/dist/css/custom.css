@@ -989,3 +989,9 @@ vertical-align: middle;
 	bordeR: 1px solid #b7b7b7;
 	text-align: center;
 }
+
+.label-pixtent-success{
+	font-size: 10px;
+	font-weight: 600;
+	letter-spacing: 0.5px;
+}
