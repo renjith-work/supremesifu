@@ -8,14 +8,14 @@
     <section class="content-header">
         <ol class="breadcrumb">
             <li><a href="/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="/admin/brand">Brand Management</a></li>
+            <li><a href="/admin/product/brand">Brand Management</a></li>
             <li class="active">Create brand</li>
         </ol>
     </section>
     <section class="content">
         <div class="admin-footer-error">@include('admin.partials.flashErrorMessage')</div>
         <div class="global-settings-cover">
-            <form action="{{route('admin.brand.store')}}" method="POST" enctype="multipart/form-data" data-parsley-validate >
+            <form action="{{route('admin.product.brand.store')}}" method="POST" enctype="multipart/form-data" data-parsley-validate >
                 {{ csrf_field() }}
                 <div class="row user">
                     <div class="col-md-3">

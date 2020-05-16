@@ -15,7 +15,7 @@
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">Brand Management</h3>
-                        <a href="/admin/brand/create" class="btn btn-warning pull-right">Create Brand</a>
+                        <a href="/admin/product/brand/create" class="btn btn-warning pull-right">Create Brand</a>
                     </div>
                     <div class="box-body list-items">
                         <table class="table table-bordered ss-data-table">
@@ -39,8 +39,8 @@
                                     <div class="action-ul-cover">
                                         <ul>
                                             {{-- <li><a href="/admin/brand/{{$brand->id}}" class="crud-ab-cover ab-view"><i class="fa fa-eye" aria-hidden="true"></i></a></li> --}}
-                                            <li><a href="/admin/brand/{{$brand->id}}/edit" class="crud-ab-cover ab-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
-                                            <li><a href="/admin/brand/{{$brand->id}}/delete" class="crud-ab-cover ab-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                            <li><a href="/admin/product/brand/{{$brand->id}}/edit" class="crud-ab-cover ab-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+                                            <li><a href="/admin/product/brand/{{$brand->id}}/delete" class="crud-ab-cover ab-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
                                         </ul>
                                     </div>
                                 </td>

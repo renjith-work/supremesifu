@@ -51,7 +51,6 @@
                                         <label for="attribute">Attribute</label>
                                         <select id="attribute" class="form-control custom-select mt-15 @error('attribute') is-invalid @enderror" name="attribute">
                                             <option disabled selected>Select product attribute</option>
-                                            <option disabled>Select a product category</option>
                                         </select>
                                         @error('attribute') <p class="error-p">{{$errors->first('attribute')}}</p> @enderror
                                     </div>

@@ -159,6 +159,12 @@ Route::group(['prefix'  =>   'admin/product', 'as' => 'admin.product.'], functio
 	// Product Attributes Routes
 	Route::resource('attribute', 'Admin\Product\Attribute\AttributeController');
 	Route::get('attribute/{id}/delete', 'Admin\Product\Attribute\AttributeController@delete')->name('attribute.delete');
+
+	Route::resource('/brand', 'Admin\Product\Brand\BrandController');
+	Route::get('/brand/{id}/delete', 'Admin\Product\Brand\BrandController@delete')->name('brand.delete');
+
+	Route::resource('/mfd-country', 'Admin\Product\Brand\MfdCountryController');
+	Route::get('/mfd-country/{id}/delete', 'Admin\Product\Brand\MfdCountryController@delete')->name('mfd-country.delete');
 });
 
 // Product Routes
@@ -193,14 +199,6 @@ Route::group(['prefix'  =>   'admin/product/custom', 'as' => 'admin.product.cust
 
 
 // Fabric Api Routes
-
-
-// Brand Routes
-Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
-	Route::resource('/brand', 'Admin\Product\Brand\BrandController');
-	Route::get('/brand/{id}/delete', 'Admin\Product\Brand\BrandController@delete')->name('brand.delete');
-});
-
 
 
 // Front End Routes

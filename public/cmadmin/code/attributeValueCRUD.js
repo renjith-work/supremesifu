@@ -27,9 +27,9 @@ $(document).ready(function() {
     
     loadAttrIfCat();
     function loadAttrIfCat(){
-        if (typeof catalogue_id != 'undefined' && catalogue_id)
+        if (typeof attribute_set_id != 'undefined' && attribute_set_id)
         {
-            loadAttributesSelect(catalogue_id);        
+            loadAttributesSelect(attribute_set_id);        
         }
     }
 

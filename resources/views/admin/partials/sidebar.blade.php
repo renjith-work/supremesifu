@@ -28,11 +28,12 @@
                     @endhasrole
                     <li class="header">CATALOGUE</li>
                     @can('List Product')<li class="{{ Active::checkRoute(['admin.product.index', 'admin.product.create', 'admin.product.edit', 'admin.product.show' ]) }}"><a href="/admin/product"> <i class="fa fa-circle-o"></i> <span>Product</span> <span class="pull-right-container"></span> </a></li>@endcan
-                    <li class="treeview {{ Active::checkRoute(['admin.brand.*', 'admin.product.category.*', 'admin.product.custom.category.*', 'admin.product.attribute.*', 'admin.product.attribute.value*']) }} ">
+                    <li class="treeview {{ Active::checkRoute(['admin.product.brand.*', 'admin.product.category.*', 'admin.product.custom.category.*', 'admin.product.attribute.*', 'admin.product.attribute.value*', 'admin.product.mfd-country.*']) }} ">
                         <a href="#"> <i class="fa fa-cogs"></i> <span>Product Settings</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
                             @can('List Product Category')<li class="{{ Active::checkRoute(['admin.product.category.*' ]) }}"><a href="/admin/product/category"> <i class="fa fa-circle-o"></i> <span>Product Category</span> <span class="pull-right-container"></span> </a></li>@endcan
-                            @can('List Brand')<li class="{{ Active::checkRoute(['admin.brand.*' ]) }}"><a href="/admin/brand"> <i class="fa fa-circle-o"></i> <span>Product Brands</span> <span class="pull-right-container"></span> </a></li>@endcan
+                            @can('List Brand')<li class="{{ Active::checkRoute(['admin.product.brand.*' ]) }}"><a href="/admin/product/brand"> <i class="fa fa-circle-o"></i> <span>Product Brands</span> <span class="pull-right-container"></span> </a></li>@endcan
+                            @can('List Manufacturing Country')<li class="{{ Active::checkRoute(['admin.product.mfd-country.*' ]) }}"><a href="/admin/product/mfd-country"> <i class="fa fa-circle-o"></i> <span>Mfd Countries</span> <span class="pull-right-container"></span> </a></li>@endcan
                             @can('List Custom Product Category')<li class="{{ Active::checkRoute(['admin.product.custom.category.*' ]) }}"><a href="/admin/product/custom/category"> <i class="fa fa-circle-o"></i> <span>Custom Product Category</span> <span class="pull-right-container"></span> </a></li>@endcan
                             @can('List Product Attribute')
                             <li class="treeview {{ Active::checkRoute(['admin.product.attribute.*']) }} ">
@@ -41,7 +42,6 @@
                                     <li class="{{ Active::checkRoute(['admin.product.attribute.set.*' ]) }}"><a href="/admin/product/attribute/set"> <i class="fa fa-circle-o"></i> <span>Attribute Set</span> <span class="pull-right-container"></span> </a></li>
                                     <li class="{{ Active::checkRoute(['admin.product.attribute.index', 'admin.product.attribute.create', 'admin.product.attribute.edit' ]) }}"><a href="/admin/product/attribute"> <i class="fa fa-circle-o"></i> <span>Attributes</span> <span class="pull-right-container"></span> </a></li>
                                     <li class="{{ Active::checkRoute(['admin.product.attribute.value.index', 'admin.product.attribute.value.create', 'admin.product.attribute.value.edit' ]) }}"><a href="/admin/product/attribute/value"> <i class="fa fa-circle-o"></i> <span>Attribute Values</span> <span class="pull-right-container"></span> </a></li>
-                                    <li class="{{ Active::checkRoute(['admin.product.attribute.value.image.settings.*']) }}"><a href="/admin/product/attribute/value/image/settings"> <i class="fa fa-circle-o"></i> <span>Attribute Image Settings</span> <span class="pull-right-container"></span> </a></li>
                                 </ul>
                             </li>
                             @endcan

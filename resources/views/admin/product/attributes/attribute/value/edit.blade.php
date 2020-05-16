@@ -36,16 +36,15 @@
                                 </div>
                                 <div class="gb-body">
                                     <div class="form-group">
-                                        <br>
-                                        <label for="catalogue">Product Catalogue</label>
-                                        <div class="form-instruction">Please select a product catalogue to get all the attributes of the catalogue</div>
-                                        <select id="catalogue" class="form-control custom-select mt-15 @error('catalogue') is-invalid @enderror" name="catalogue">
-                                            <option disabled selected>Select a product catalogue</option>
-                                            {{-- @foreach($catalogues as $catalogue)
-                                                <option value="{{$catalogue->id}}" @if($catalogue->id == $value->productAttribute->catalogue_id) selected @endif>{{$catalogue->name}}</option>
-                                            @endforeach --}}
+                                        <label for="attributeSet">Product Attribute Set</label>
+                                        <div class="form-instruction">Please select a product attribute set to get all the attributes of the product.</div>
+                                        <select id="attributeSet" class="form-control custom-select mt-15 @error('attributeSet') is-invalid @enderror" name="attributeSet">
+                                            <option disabled selected>Select a attribute set</option>
+                                            @foreach($attributeSets as $set)
+                                                <option value="{{$set->id}}" @if($set->id == $value->productAttribute->product_attribute_set_id) selected @endif>{{$set->name}}</option>
+                                            @endforeach
                                         </select>
-                                        @error('category') <p class="error-p">{{$errors->first('category')}}</p> @enderror
+                                        @error('attributeSet') <p class="error-p">{{$errors->first('attributeSet')}}</p> @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="attribute">Attribute</label>
@@ -135,7 +134,7 @@
 @endsection
 @section('footer')
     <script type="text/javascript">
-        var catalogue_id  = {!!json_encode($value->productAttribute->catalogue_id)!!};
+        var attribute_set_id  = {!!json_encode($value->productAttribute->product_attribute_set_id)!!};
         var attribute_id  = {!!json_encode($value->product_attribute_id)!!};
     </script>
     <script src="/cmadmin/bower_components/select2/dist/js/select2.full.min.js"></script>

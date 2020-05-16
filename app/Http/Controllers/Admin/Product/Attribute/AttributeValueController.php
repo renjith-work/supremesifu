@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Product\Attribute;
 use App\Models\Product\ProductAttributeValue;
 use App\Models\Product\ProductAttribute;
 use App\Models\Product\ProductAttributeSet;
+use App\Models\Product\Attribute\ProductAttributeImage;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
