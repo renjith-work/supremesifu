@@ -380,6 +380,30 @@ class PermissionsTableSeeder extends Seeder
                 'guard_name' => 'web',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'List Tax Class',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'Create Tax Class',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'Edit Tax Class',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'Delete Tax Class',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ]
             
         ]);

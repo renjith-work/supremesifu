@@ -51,6 +51,13 @@
                     <li class=""><a href="/admin/fabric"> <i class="fa fa-circle-o"></i> <span>Fabric</span> <span class="pull-right-container"></span> </a></li>
                     @can('List Fabric Class')<li class="{{ Active::checkRoute(['admin.product.fabric.class.*']) }}"><a href="/admin/product/fabric/class"> <i class="fa fa-circle-o"></i> <span>Fabric Class</span> <span class="pull-right-container"></span> </a></li>@endcan
                     @can('List Fabric Brand')<li class="{{ Active::checkRoute(['admin.product.fabric.brand.*']) }}"><a href="/admin/product/fabric/brand"> <i class="fa fa-circle-o"></i> <span>Fabric Brand</span> <span class="pull-right-container"></span> </a></li>@endcan
+                    <li class="header">STORE SETTINGS</li>
+                    <li class="treeview {{ Active::checkRoute(['admin.product.tax.class.*']) }} ">
+                        <a href="#"> <i class="fa fa-cogs"></i> <span>Tax Settings</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+                        <ul class="treeview-menu">
+                            @can('List Tax Class')<li class="{{ Active::checkRoute(['admin.product.tax.class.*' ]) }}"><a href="/admin/product/tax/class"> <i class="fa fa-circle-o"></i> <span>Tax Class</span> <span class="pull-right-container"></span> </a></li>@endcan
+                        </ul>
+                    </li>
                     <li class="header">POST MANAGEMENT</li>
                     @can('List Guide')<li class=""><a href="/admin/guide"> <i class="fa fa-circle-o"></i> <span>Guide management</span> <span class="pull-right-container"></span> </a></li>@endcan
                     @can('List Post')<li class=""><a href="/admin/post"> <i class="fa fa-circle-o"></i> <span>Post management</span> <span class="pull-right-container"></span> </a></li>@endcan

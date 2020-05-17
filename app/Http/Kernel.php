@@ -77,6 +77,7 @@ class Kernel extends HttpKernel
         'brand' => \App\Http\Middleware\BrandMiddleware::class,
         'fabricBrand' => \App\Http\Middleware\FabricBrandMiddleware::class,
         'fabricClass' => \App\Http\Middleware\FabricClassMiddleware::class,
+        'taxClass' => \App\Http\Middleware\TaxClassMiddleware::class,
     ];
 
     /**

@@ -167,6 +167,11 @@ Route::group(['prefix'  =>   'admin/product', 'as' => 'admin.product.'], functio
 	Route::get('/mfd-country/{id}/delete', 'Admin\Product\Brand\MfdCountryController@delete')->name('mfd-country.delete');
 });
 
+Route::group(['prefix'  =>   'admin/product/tax', 'as' => 'admin.product.tax.'], function () {
+	Route::resource('/class', 'Admin\Product\Tax\TaxClassController');
+	Route::get('/class/{id}/delete', 'Admin\Product\Tax\TaxClassController@delete')->name('class.delete');
+});
+
 // Product Routes
 Route::group(['prefix'  =>   'admin/product', 'as' => 'admin.product.'], function() {
 	Route::resource('shirt', 'Admin\Product\Item\ShirtController');
