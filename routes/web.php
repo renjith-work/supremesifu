@@ -170,6 +170,9 @@ Route::group(['prefix'  =>   'admin/product', 'as' => 'admin.product.'], functio
 Route::group(['prefix'  =>   'admin/product/tax', 'as' => 'admin.product.tax.'], function () {
 	Route::resource('/class', 'Admin\Product\Tax\TaxClassController');
 	Route::get('/class/{id}/delete', 'Admin\Product\Tax\TaxClassController@delete')->name('class.delete');
+
+	Route::resource('/country', 'Admin\Product\Tax\TaxCountryController');
+	Route::get('/country/{id}/delete', 'Admin\Product\Tax\TaxCountryController@delete')->name('country.delete');
 });
 
 // Product Routes

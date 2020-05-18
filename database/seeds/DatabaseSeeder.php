@@ -34,7 +34,11 @@ class DatabaseSeeder extends Seeder
             ProductAttributeImageTableSeeder::class,
             ProductDesignTableSeeder::class,
             CustomProductCategoryTableSeeder::class,    
-            MfdCountriesTableSeeder::class,    
+            MfdCountriesTableSeeder::class,
+
+            // Tax Management
+            TaxCountryTableSeeder::class,    
+
             // Fabric Seeder
             BrandsTableSeeder::class,
             FabricBrandsTableSeeder::class,
@@ -42,6 +46,7 @@ class DatabaseSeeder extends Seeder
             FabricStatusTableSeeder::class,
             FabricAttributesTableSeeder::class,
             FabricAttributeValuesTableSeeder::class,
+            
             // Measurement Seeder
             MeasurementAttributeTableSeeder::class,
             MeasurementAttributeValueTableSeeder::class,
