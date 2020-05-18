@@ -1,6 +1,8 @@
 @extends('admin.layout')
 @section('header')
     <link rel="stylesheet" type="text/css" href="/cmadmin/parsley/parsley.css">
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=olg2smjmsqjy5ogdk1zogy9sj5qginfm4e5ozpvxrm5ecfek"></script>
+    <link rel="stylesheet" href="/cmadmin/bower_components/select2/dist/css/select2.min.css">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 @endsection
 @section('content')
@@ -8,14 +10,14 @@
     <section class="content-header">
         <ol class="breadcrumb">
             <li><a href="/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="/admin/product/tax/country">Manufacturing Country Management</a></li>
-            <li class="active">Edit Country</li>
+            <li><a href="/admin/product/tax/zone">Tax Zone Management</a></li>
+            <li class="active">Edit Tax Zone</li>
         </ol>
     </section>
     <section class="content">
         <div class="admin-footer-error">@include('admin.partials.flashErrorMessage')</div>
         <div class="global-settings-cover">
-            <form action="{{ route('admin.product.tax.country.update', $country->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.product.tax.zone.update', $zone->id) }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }} {{ method_field('PUT') }}
                 <div class="row user">
                     <div class="col-md-3">
@@ -30,34 +32,33 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="mainPane">
                                 <div class="box-header">
-                                    <h3 class="box-title">Add Country</h3>
+                                    <h3 class="box-title">Edit Tax Zone</h3>
                                 </div>
                                 <div class="gb-body">
                                     <div class="form-group">
-                                        <label for="name">Country Name</label>
-                                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" maxlength="255" value="{{ old('name', $country->name) }}">
+                                        <label for="name">Tax Zone Name</label>
+                                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" maxlength="255" value="{{ old('name', $zone->name) }}">
                                         @error('name') <p class="error-p">{{$errors->first('name')}}</p> @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="iso_code2">Country Alpha Code 2 (iso_code2)</label>
-                                        <input type="text" name="iso_code2" class="form-control @error('iso_code2') is-invalid @enderror" id="iso_code2" maxlength="255" value="{{ old('iso_code2', $country->iso_code2) }}">
-                                        @error('iso_code2') <p class="error-p">{{$errors->first('iso_code2')}}</p> @enderror
+                                        <label for="code">Tax Zone Code</label>
+                                        <input type="text" name="code" class="form-control @error('code') is-invalid @enderror" id="code" maxlength="255" value="{{ old('code', $zone->code) }}">
+                                        @error('code') <p class="error-p">{{$errors->first('code')}}</p> @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="iso_code3">Country Alpha Code 3 (iso_code3)</label>
-                                        <input type="text" name="iso_code3" class="form-control @error('iso_code3') is-invalid @enderror" id="iso_code3" maxlength="255" value="{{ old('iso_code3', $country->iso_code3) }}">
-                                        @error('iso_code3') <p class="error-p">{{$errors->first('iso_code3')}}</p> @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="numeric">Country Numeric Code</label>
-                                        <input type="text" name="numeric" class="form-control @error('numeric') is-invalid @enderror" id="numeric" maxlength="255" value="{{ old('numeric', $country->numeric) }}">
-                                        @error('numeric') <p class="error-p">{{$errors->first('numeric')}}</p> @enderror
+                                        <label for="country">Countries</label>
+                                        <select id="country" class="form-control custom-select mt-15 @error('country') is-invalid @enderror" name="country">
+                                            @foreach($countries as $country)
+                                                <option value="{{$country->id}}" @if($country->id == $zone->tax_country_id) selected @endif>{{$country->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('country') <p class="error-p">{{$errors->first('country')}}</p> @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="status">Status</label>
                                         <select id="status" class="form-control custom-select mt-15 @error('status') is-invalid @enderror" name="status">
-                                            <option value="1"  @if($country->status == 1) selected @endif>Yes</option>
-                                            <option value="0" @if($country->status == 0) selected @endif>No</option>
+                                            <option value="1"  @if($zone->status == 1) selected @endif>Yes</option>
+                                            <option value="0" @if($zone->status == 0) selected @endif>No</option>
                                         </select>
                                         @error('status') <p class="error-p">{{$errors->first('status')}}</p> @enderror
                                     </div>
@@ -65,7 +66,7 @@
                                 <div class="tile-footer">
                                     <div class="row d-print-none mt-2">
                                         <div class="col-md-12 text-right">
-                                            <input class="btn btn-success" type="submit" value="Submit">
+                                            <button class="btn btn-success" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -80,22 +81,8 @@
 </div>
 @endsection
 @section('footer')
+    <script src="/cmadmin/bower_components/select2/dist/js/select2.full.min.js"></script>
     <script src="/cmadmin/parsley/parsley.js"></script>
-    @section('footer')
-    <script src="/cmadmin/parsley/parsley.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            
-            $.ajaxSetup({
-            headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }});
-
-            $('#image').change(function(){
-                $('#image_preview').html("");
-                $('#image_preview').append("<div class='col-md-4 upload-multi-img'><img src='"+URL.createObjectURL(event.target.files[0])+"'></div>");
-            });
-
-        });
-    </script>
+    <script src="/cmadmin/code/crud.js"></script>
+    <script src="/cmadmin/code/js/productCategoryCRUD.js"></script>
 @endsection

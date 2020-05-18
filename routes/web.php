@@ -167,12 +167,16 @@ Route::group(['prefix'  =>   'admin/product', 'as' => 'admin.product.'], functio
 	Route::get('/mfd-country/{id}/delete', 'Admin\Product\Brand\MfdCountryController@delete')->name('mfd-country.delete');
 });
 
+// Admin Tax Routes
 Route::group(['prefix'  =>   'admin/product/tax', 'as' => 'admin.product.tax.'], function () {
 	Route::resource('/class', 'Admin\Product\Tax\TaxClassController');
 	Route::get('/class/{id}/delete', 'Admin\Product\Tax\TaxClassController@delete')->name('class.delete');
 
 	Route::resource('/country', 'Admin\Product\Tax\TaxCountryController');
 	Route::get('/country/{id}/delete', 'Admin\Product\Tax\TaxCountryController@delete')->name('country.delete');
+
+	Route::resource('/zone', 'Admin\Product\Tax\TaxZoneController');
+	Route::get('/zone/{id}/delete', 'Admin\Product\Tax\TaxZoneController@delete')->name('zone.delete');
 });
 
 // Product Routes
