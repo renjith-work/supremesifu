@@ -185,6 +185,12 @@ Route::group(['prefix'  =>   'admin/product/tax', 'as' => 'admin.product.tax.'],
 	Route::get('/rate/{id}/delete', 'Admin\Product\Tax\TaxRateController@delete')->name('rate.delete');
 });
 
+// Admin Inventory Routes
+Route::group(['prefix'  =>   'admin/product/inventory', 'as' => 'admin.product.inventory.'], function () {
+	
+	Route::resource('/unit', 'Admin\Product\Inventory\InventoryUnitController');
+	Route::get('/unit/{id}/delete', 'Admin\Product\Inventory\InventoryUnitController@delete')->name('unit.delete');
+});	
 
 // Product Routes
 Route::group(['prefix'  =>   'admin/product', 'as' => 'admin.product.'], function() {

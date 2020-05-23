@@ -61,6 +61,12 @@
                             @can('List Tax Rate')<li class="{{ Active::checkRoute(['admin.product.tax.rate.*' ]) }}"><a href="/admin/product/tax/rate"> <i class="fa fa-circle-o"></i> <span>Tax Rate</span> <span class="pull-right-container"></span> </a></li>@endcan
                         </ul>
                     </li>
+                    <li class="treeview {{ Active::checkRoute(['admin.product.inventory.unit.*']) }} ">
+                        <a href="#"> <i class="fa fa-cogs"></i> <span>Inventory Settings</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+                        <ul class="treeview-menu">
+                            @can('List Inventory Unit')<li class="{{ Active::checkRoute(['admin.product.inventory.unit.*' ]) }}"><a href="/admin/product/inventory/unit"> <i class="fa fa-circle-o"></i> <span>Inventory Unit</span> <span class="pull-right-container"></span> </a></li>@endcan
+                        </ul>
+                    </li>
                     <li class="header">POST MANAGEMENT</li>
                     @can('List Guide')<li class=""><a href="/admin/guide"> <i class="fa fa-circle-o"></i> <span>Guide management</span> <span class="pull-right-container"></span> </a></li>@endcan
                     @can('List Post')<li class=""><a href="/admin/post"> <i class="fa fa-circle-o"></i> <span>Post management</span> <span class="pull-right-container"></span> </a></li>@endcan

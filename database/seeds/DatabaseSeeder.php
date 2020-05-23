@@ -37,7 +37,11 @@ class DatabaseSeeder extends Seeder
             MfdCountriesTableSeeder::class,
 
             // Tax Management
-            TaxCountryTableSeeder::class,    
+            TaxCountryTableSeeder::class,
+
+            // Inventory Units
+            InventoryUnitTypeTableSeeder::class,
+            InventoryUnitTableSeeder::class,
 
             // Fabric Seeder
             BrandsTableSeeder::class,
