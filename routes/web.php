@@ -109,11 +109,11 @@ Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 
 // Product Routes
 
+
 // Fabric Admin API End Points
 	Route::post('/admin/api/fabric/product-category', 'Admin\Api\Product\Fabric\FabricController@pdCategory');
 	Route::post('/admin/api/fabric/find', 'Admin\Api\Product\Fabric\FabricController@findFabric');
 	Route::get('/admin/api/fabric/class/load', 'Admin\Api\Product\Fabric\FabricClassController@load');
-	
 
 // Product Fabric Routes
 Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
@@ -167,17 +167,24 @@ Route::group(['prefix'  =>   'admin/product', 'as' => 'admin.product.'], functio
 	Route::get('/mfd-country/{id}/delete', 'Admin\Product\Brand\MfdCountryController@delete')->name('mfd-country.delete');
 });
 
+// Admin Tax Api Endpoints
+Route::post('/admin/api/product/tax/zone', 'Admin\Api\Product\Tax\TaxZoneController@getZones')->name('admin.api.product.tax.zone.load');
+
 // Admin Tax Routes
 Route::group(['prefix'  =>   'admin/product/tax', 'as' => 'admin.product.tax.'], function () {
 	Route::resource('/class', 'Admin\Product\Tax\TaxClassController');
 	Route::get('/class/{id}/delete', 'Admin\Product\Tax\TaxClassController@delete')->name('class.delete');
-
+	
 	Route::resource('/country', 'Admin\Product\Tax\TaxCountryController');
 	Route::get('/country/{id}/delete', 'Admin\Product\Tax\TaxCountryController@delete')->name('country.delete');
-
+	
 	Route::resource('/zone', 'Admin\Product\Tax\TaxZoneController');
 	Route::get('/zone/{id}/delete', 'Admin\Product\Tax\TaxZoneController@delete')->name('zone.delete');
+	
+	Route::resource('/rate', 'Admin\Product\Tax\TaxRateController');
+	Route::get('/rate/{id}/delete', 'Admin\Product\Tax\TaxRateController@delete')->name('rate.delete');
 });
+
 
 // Product Routes
 Route::group(['prefix'  =>   'admin/product', 'as' => 'admin.product.'], function() {
@@ -336,3 +343,4 @@ Route::post('/design/shirt/new/add-to-cart', 'Ecommerce\ProductController@cartAd
 // Route::get('/product/shirt/{id}/details', 'Front\Product\ProductController@detail');
 Route::get('/product/shirt/{slug}', 'Front\Product\ProductController@detail');
 Route::get('product/design/jso/{id}', 'Front\Product\ProductDesignController@jso');
+

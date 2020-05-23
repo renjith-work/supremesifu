@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Product\Tax;
 
 use App\Models\Product\Tax\TaxClass;
+use App\Models\Product\Tax\TaxRate;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -137,8 +138,12 @@ class TaxClassController extends Controller
     public function delete($id)
     {
         $class = TaxClass::find($id);
+        $rates = TaxRate::where('tax_class_id', $class->id)->get();
+        foreach ($rates as $rate) {
+            TaxRate::where('id', $rate->id)->delete();
+        }
         $class->delete();
-        Session::flash('success', 'The data was successfully deleted.');
+        Session::flash('success', 'This entry and the related enteries were successfully deleted.');
         return redirect()->back();
     }
 }

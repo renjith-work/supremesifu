@@ -2,23 +2,26 @@
 
 namespace App\Http\Controllers\Admin\Product\Tax;
 
-use App\Models\Product\Tax\TaxZone;
-use App\Models\Product\Tax\TaxCountry;
 use App\Models\Product\Tax\TaxRate;
+use App\Models\Product\Tax\TaxClass;
+use App\Models\Product\Tax\TaxCountry;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
+use Illuminate\Support\Str;
 
 use Auth;
 use Validator;
 use Session;
 use Purifier;
 
-class TaxZoneController extends Controller
+
+class TaxRateController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'taxZone']);
+        $this->middleware(['auth', 'taxRate']);
     }
     /**
      * Display a listing of the resource.
@@ -27,8 +30,8 @@ class TaxZoneController extends Controller
      */
     public function index()
     {
-        $zones = TaxZone::orderBy('id', 'asc')->paginate(15);
-        return view('admin.product.tax.zone.index')->with('zones', $zones);
+        $rates = TaxRate::orderBy('id', 'asc')->paginate(15);
+        return view('admin.product.tax.rate.index')->with('rates', $rates);
     }
 
     /**
@@ -38,8 +41,9 @@ class TaxZoneController extends Controller
      */
     public function create()
     {
+        $classes = TaxClass::all();
         $countries = TaxCountry::all();
-        return view('admin.product.tax.zone.create')->with('countries', $countries);
+        return view('admin.product.tax.rate.create')->with('classes', $classes)->with('countries', $countries);
     }
 
     /**
@@ -51,18 +55,20 @@ class TaxZoneController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|min:1|max:255',
-            'code' => 'required|min:2|max:255|unique:tax_zones,code'
+            'class' => 'required',
+            'country' => 'required',
+            'zone' => 'required',
+            'description' => 'required'
         ]);
 
         if ($validator->passes()) {
-            $zone = new TaxZone;
-            $zone->name = $request->name;
-            $zone->code = $request->code;
-            $zone->tax_country_id = $request->country;
-            $zone->status = $request->status;
+            $rate = new TaxRate;
+            $rate->tax_class_id = $request->class;
+            $rate->tax_zone_id = $request->zone;
+            $rate->rate = $request->rate;
+            $rate->description = $request->description;
 
-            $zone->save();
+            $rate->save();
             Session::flash('success', 'The data was successfully inserted.');
             return redirect()->back();
         } else {
@@ -89,9 +95,11 @@ class TaxZoneController extends Controller
      */
     public function edit($id)
     {
+        $classes = TaxClass::all();
         $countries = TaxCountry::all();
-        $zone = TaxZone::find($id);
-        return view('admin.product.tax.zone.edit')->with('countries', $countries)->with('zone', $zone);
+        $rate = TaxRate::find($id);
+        return view('admin.product.tax.rate.edit')->with('classes', $classes)->with('countries', $countries)->with('rate', $rate);
+
     }
 
     /**
@@ -104,18 +112,20 @@ class TaxZoneController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|min:1|max:255',
-            'code' => "required|min:2|max:255|unique:tax_zones,code,$id"
+            'class' => 'required',
+            'country' => 'required',
+            'zone' => 'required',
+            'description' => 'required'
         ]);
 
         if ($validator->passes()) {
-            $zone = TaxZone::find($id);
-            $zone->name = $request->name;
-            $zone->code = $request->code;
-            $zone->tax_country_id = $request->country;
-            $zone->status = $request->status;
+            $rate = TaxRate::find($id);
+            $rate->tax_class_id = $request->class;
+            $rate->tax_zone_id = $request->zone;
+            $rate->rate = $request->rate;
+            $rate->description = $request->description;
 
-            $zone->save();
+            $rate->save();
             Session::flash('success', 'The data was successfully updated.');
             return redirect()->back();
         } else {
@@ -136,13 +146,9 @@ class TaxZoneController extends Controller
 
     public function delete($id)
     {
-        $zone = TaxZone::find($id);
-        $rates = TaxRate::where('tax_zone_id', $zone->id)->get();
-        foreach ($rates as $rate) {
-            TaxRate::where('id', $rate->id)->delete();
-        }
-        $zone->delete();
-        Session::flash('success', 'This entry and the related enteries were successfully deleted.');
+        $rate = TaxRate::find($id);
+        $rate->delete();
+        Session::flash('success', 'The entry was successfully deleted.');
         return redirect()->back();
     }
 }

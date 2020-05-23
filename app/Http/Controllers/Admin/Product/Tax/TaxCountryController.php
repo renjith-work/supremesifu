@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Product\Tax;
 
 use App\Models\Product\Tax\TaxCountry;
+use App\Models\Product\Tax\TaxZone;
+use App\Models\Product\Tax\TaxRate;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -139,8 +141,19 @@ class TaxCountryController extends Controller
     public function delete($id)
     {
         $country = TaxCountry::find($id);
+        $zones = TaxZone::where('tax_country_id', $country->id)->get();
+        
+        foreach ($zones as $zone) {
+            $rates = TaxRate::where('tax_zone_id', $zone->id)->get();
+            foreach($rates as $rate){
+                TaxRate::where('id', $rate->id)->delete();
+            }
+            TaxZone::where('id', $zone->id)->delete();
+        }
+
         $country->delete();
-        Session::flash('success', 'The entry was successfully deleted.');
+
+        Session::flash('success', 'This entry and the related enteries were successfully deleted.');
         return redirect()->back();
     }
 }

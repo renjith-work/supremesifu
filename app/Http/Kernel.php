@@ -80,6 +80,7 @@ class Kernel extends HttpKernel
         'taxClass' => \App\Http\Middleware\TaxClassMiddleware::class,
         'taxCountry' => \App\Http\Middleware\TaxCountryMiddleware::class,
         'taxZone' => \App\Http\Middleware\TaxZoneMiddleware::class,
+        'taxRate' => \App\Http\Middleware\TaxRateMiddleware::class,
     ];
 
     /**

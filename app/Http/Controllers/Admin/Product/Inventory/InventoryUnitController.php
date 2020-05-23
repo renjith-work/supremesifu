@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Product\Inventory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class UnitController extends Controller
+class InventoryUnitController extends Controller
 {
     /**
      * Display a listing of the resource.
