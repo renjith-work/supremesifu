@@ -167,6 +167,11 @@ Route::group(['prefix'  =>   'admin/product', 'as' => 'admin.product.'], functio
 	Route::get('/mfd-country/{id}/delete', 'Admin\Product\Brand\MfdCountryController@delete')->name('mfd-country.delete');
 });
 
+// Product Media Routes
+Route::group(['prefix'  =>   'admin/product/media/', 'as' => 'admin.product.media.'], function () {
+	// Route::resource('/class', 'Admin\Product\Tax\TaxClassController');
+	// Route::get('/class/{id}/delete', 'Admin\Product\Tax\TaxClassController@delete')->name('class.delete');
+});
 // Admin Tax Api Endpoints
 Route::post('/admin/api/product/tax/zone', 'Admin\Api\Product\Tax\TaxZoneController@getZones')->name('admin.api.product.tax.zone.load');
 

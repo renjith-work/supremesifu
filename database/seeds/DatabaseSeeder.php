@@ -43,6 +43,9 @@ class DatabaseSeeder extends Seeder
             InventoryUnitTypeTableSeeder::class,
             InventoryUnitTableSeeder::class,
 
+            // Product Media Seeder
+            ProductImagePositionTableSeeder::class,
+
             // Fabric Seeder
             BrandsTableSeeder::class,
             FabricBrandsTableSeeder::class,
