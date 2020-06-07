@@ -6,11 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-	public function productCategory()
-	{
-		return $this->belongsTo('App\Models\Product\ProductCategory', 'product_category_id');
-	}
-
     public function monogram()
     {
         return $this->belongsToMany('App\Models\Product\ProductMonogram', 'product_monograms', 'product_id', 'monogram_id');
@@ -46,11 +41,36 @@ class Product extends Model
     }
 
     public function attributes(){
-        return $this->hasMany('App\Models\Product\ProductAttributeValue');
+        return $this->hasMany('App\Models\Product\ProductAttributeValueSave', 'product_id');
     }
 
     public function brand()
     {
         return $this->belongsTo('App\Models\Product\Brand', 'brand_id');
+    }
+
+    public function images()
+    {
+        return $this->hasMany('App\Models\Product\Image\ProductImagePosition', 'product_id');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany('App\Models\Product\ProductCategory', 'product_product_category', 'product_id', 'product_category_id');
+    }
+
+    public function price()
+    {
+        return $this->hasOne('App\Models\Product\ProductPrice', 'product_id');
+    }
+
+    public function inventory()
+    {
+        return $this->hasOne('App\Models\Product\Inventory\Inventory', 'product_id');
+    }
+
+    public function weight()
+    {
+        return $this->hasOne('App\Models\Product\Weight\ProductWeight', 'product_id');
     }
 }

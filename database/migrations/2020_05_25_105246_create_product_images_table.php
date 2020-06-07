@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductWeightsTable extends Migration
+class CreateProductImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateProductWeightsTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_weights', function (Blueprint $table) {
+        Schema::create('product_images', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('product_id')->nullable();
-            $table->bigInteger('inventory_unit_id')->nullable();
-            $table->decimal('weight', 12, 2);
+            $table->bigInteger('product_id')->unsigned()->nullable();
+            $table->bigInteger('position_id')->unsigned()->nullable();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateProductWeightsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_weights');
+        Schema::dropIfExists('product_images');
     }
 }

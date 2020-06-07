@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInventoriesTable extends Migration
+class CreateProductPricesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateInventoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('inventories', function (Blueprint $table) {
+        Schema::create('product_prices', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('product_id');
-            $table->boolean('managable')->nullable()->default(1);
-            $table->bigInteger('quantity')->nullable();
-            $table->bigInteger('threshold')->nullable();
-            $table->bigInteger('notification_quantity')->nullable();
-            $table->boolean('status')->nullable()->default(1);
+            $table->decimal('price', 9, 2);
+            $table->decimal('splPrice', 9, 2)->nullable();
+            $table->decimal('mfdPrice', 9, 2)->nullable();
+            $table->date('startDate')->nullable();
+            $table->date('endDate')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateInventoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inventories');
+        Schema::dropIfExists('product_prices');
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Product\Tax;
 
 use App\Models\Product\Tax\TaxRate;
 use App\Models\Product\Tax\TaxClass;
-use App\Models\Product\Tax\TaxCountry;
+use App\Models\Settings\Country;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -42,7 +42,7 @@ class TaxRateController extends Controller
     public function create()
     {
         $classes = TaxClass::all();
-        $countries = TaxCountry::all();
+        $countries = Country::where('status', 1)->get();
         return view('admin.product.tax.rate.create')->with('classes', $classes)->with('countries', $countries);
     }
 
@@ -96,7 +96,7 @@ class TaxRateController extends Controller
     public function edit($id)
     {
         $classes = TaxClass::all();
-        $countries = TaxCountry::all();
+        $countries = Country::where('status', 1)->get();
         $rate = TaxRate::find($id);
         return view('admin.product.tax.rate.edit')->with('classes', $classes)->with('countries', $countries)->with('rate', $rate);
 

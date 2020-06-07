@@ -13,7 +13,7 @@ class TaxRate extends Model
 
     public function zone()
     {
-        return $this->belongsTo('App\Models\Product\Tax\TaxZone', 'tax_zone_id');
+        return $this->belongsTo('App\Models\Settings\Zone', 'tax_zone_id');
     }
 
 }

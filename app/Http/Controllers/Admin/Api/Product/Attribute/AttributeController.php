@@ -20,7 +20,7 @@ class AttributeController extends Controller
 
     public function load(Request $request)
     {	
-    	$attributes = ProductAttribute::where('product_category_id', $request->id)->get();
+    	$attributes = ProductAttribute::where('product_attribute_set_id', $request->id)->get();
     	$data = array();
     	$data2 = array();
     	foreach($attributes as $attribute)
@@ -50,8 +50,8 @@ class AttributeController extends Controller
     public function loadEdit(Request $request)
     {   
         $product_id = $request->product_id;
-        $category_id = $request->category_id;
-        $attributes = ProductAttribute::where('product_category_id', $category_id)->get();
+        $attributeSet_id = $request->attributeSet_id;
+        $attributes = ProductAttribute::where('product_attribute_set_id', $attributeSet_id)->get();
 
         $pavs = ProductAttributeValueSave::where('product_id', $product_id)->get();
         // return response()->json($pavs);

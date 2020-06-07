@@ -22,7 +22,7 @@ class FabricTableSeeder extends Seeder
             	'image'			=> 'class.jpg',
             	'fabric_class_id'	=> 1,
             	'brand_id'	=> 1,
-            	'status_id'	=> 1,
+            	'status'	=> 1,
 	        ],[
             	'name'      	=> 'Silver Class -2',
             	'slug'      	=> 'silver-class-2',
@@ -31,7 +31,7 @@ class FabricTableSeeder extends Seeder
             	'image'			=> 'class.jpg',
             	'fabric_class_id'	=> 1,
             	'brand_id'	=> 1,
-            	'status_id'	=> 1,
+            	'status'	=> 1,
 	        ],[
             	'name'      	=> 'Silver Class -3',
             	'slug'      	=> 'silver-class-3',
@@ -40,7 +40,7 @@ class FabricTableSeeder extends Seeder
             	'image'			=> 'class.jpg',
             	'fabric_class_id'	=> 1,
             	'brand_id'	=> 1,
-            	'status_id'	=> 1,
+            	'status'	=> 1,
 	        ]
         ]);
     }

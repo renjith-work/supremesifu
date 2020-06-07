@@ -49,7 +49,7 @@
                                         <select id="country" class="form-control custom-select mt-15 @error('country') is-invalid @enderror" name="country">
                                                 <option disabled selected>Select Country</option>
                                             @foreach($countries as $country)
-                                                <option value="{{$country->id}}" @if($country->id == $rate->zone->tax_country_id) selected @endif>{{$country->name}}</option>
+                                                <option value="{{$country->id}}" @if($country->id == $rate->zone->country_id) selected @endif>{{$country->name}}</option>
                                             @endforeach
                                         </select>
                                         @error('country') <p class="error-p">{{$errors->first('country')}}</p> @enderror
@@ -94,7 +94,7 @@
     <script src="/cmadmin/bower_components/select2/dist/js/select2.full.min.js"></script>
     <script src="/cmadmin/parsley/parsley.js"></script>
     <script type="text/javascript">
-        var country_id  = {!! json_encode($rate->zone->tax_country_id) !!};
+        var country_id  = {!! json_encode($rate->zone->country_id) !!};
         var zone_id  = {!! json_encode($rate->tax_zone_id) !!};
     </script>
     <script src="/cmadmin/code/crud.js"></script>

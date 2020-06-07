@@ -11,7 +11,7 @@ class ProductAttributeValueSave extends Model
     }
 
     public function productAttribute(){
-    	return $this->belongsToMany('App\Models\Product\ProductAttribute',  'product_attribute_id');
+    	return $this->belongsTo('App\Models\Product\ProductAttribute', 'product_attribute_id');
     }
 
     public function value(){

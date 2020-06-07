@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTaxCountriesTable extends Migration
+class CreateCountriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTaxCountriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('tax_countries', function (Blueprint $table) {
+        Schema::create('countries', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('iso_code2')->unique();
@@ -31,6 +31,6 @@ class CreateTaxCountriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tax_countries');
+        Schema::dropIfExists('countries');
     }
 }

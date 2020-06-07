@@ -28,6 +28,7 @@
                     @endhasrole
                     <li class="header">CATALOGUE</li>
                     @can('List Product')<li class="{{ Active::checkRoute(['admin.product.index', 'admin.product.create', 'admin.product.edit', 'admin.product.show' ]) }}"><a href="/admin/product"> <i class="fa fa-circle-o"></i> <span>Product</span> <span class="pull-right-container"></span> </a></li>@endcan
+                    <li class=""><a href="/admin/product/new/create"> <i class="fa fa-circle-o"></i> <span>New Product</span> <span class="pull-right-container"></span> </a></li>
                     <li class="treeview {{ Active::checkRoute(['admin.product.brand.*', 'admin.product.category.*', 'admin.product.custom.category.*', 'admin.product.attribute.*', 'admin.product.attribute.value*', 'admin.product.mfd-country.*']) }} ">
                         <a href="#"> <i class="fa fa-cogs"></i> <span>Product Settings</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
@@ -56,8 +57,6 @@
                         <a href="#"> <i class="fa fa-cogs"></i> <span>Tax Settings</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                         <ul class="treeview-menu">
                             @can('List Tax Class')<li class="{{ Active::checkRoute(['admin.product.tax.class.*' ]) }}"><a href="/admin/product/tax/class"> <i class="fa fa-circle-o"></i> <span>Tax Class</span> <span class="pull-right-container"></span> </a></li>@endcan
-                            @can('List Tax Country')<li class="{{ Active::checkRoute(['admin.product.tax.country.*' ]) }}"><a href="/admin/product/tax/country"> <i class="fa fa-circle-o"></i> <span>Tax Country</span> <span class="pull-right-container"></span> </a></li>@endcan
-                            @can('List Tax Zone')<li class="{{ Active::checkRoute(['admin.product.tax.zone.*' ]) }}"><a href="/admin/product/tax/zone"> <i class="fa fa-circle-o"></i> <span>Tax Zone</span> <span class="pull-right-container"></span> </a></li>@endcan
                             @can('List Tax Rate')<li class="{{ Active::checkRoute(['admin.product.tax.rate.*' ]) }}"><a href="/admin/product/tax/rate"> <i class="fa fa-circle-o"></i> <span>Tax Rate</span> <span class="pull-right-container"></span> </a></li>@endcan
                         </ul>
                     </li>

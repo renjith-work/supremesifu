@@ -995,3 +995,17 @@ vertical-align: middle;
 	font-weight: 600;
 	letter-spacing: 0.5px;
 }
+
+.pchs-box{
+	margin: 20px 0px 0px 0px;
+}
+
+.pchs-chck-cover > label{
+    position: absolute;
+    margin-top: 1px;
+    margin-left: 11px;
+}
+
+.dynamic-added-video{
+	margin-top: 20px;
+}

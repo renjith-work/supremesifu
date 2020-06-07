@@ -49,7 +49,13 @@
                                         @endforeach
                                     @endif
                                 </td>
-                                <td>{{$fabric->status->name }}</td>
+                                <td>
+                                    @if($fabric->status == 1)
+                                        <span class="label label-success label-pixtent-success">Active</span>
+                                    @elseif($fabric->status == 1)
+                                        <span class="label label-danger label-pixtent-success">In-Active</span>
+                                    @endif
+                                </td>
                                 <td style="padding-left: 10px; padding-right: 10px;">
                                     <div class="row">
                                         <div class="col-md-4 col-md-offset-2">

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductWeightsTable extends Migration
+class CreateZonesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateProductWeightsTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_weights', function (Blueprint $table) {
+        Schema::create('zones', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('product_id')->nullable();
-            $table->bigInteger('inventory_unit_id')->nullable();
-            $table->decimal('weight', 12, 2);
+            $table->string('name');
+            $table->string('code')->unique();
+            $table->bigInteger('country_id');
+            $table->boolean('status')->nullable()->default(0);
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateProductWeightsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_weights');
+        Schema::dropIfExists('zones');
     }
 }

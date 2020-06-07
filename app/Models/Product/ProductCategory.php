@@ -18,7 +18,7 @@ class ProductCategory extends Model
 
 	public function products()
 	{
-		return $this->hasMany('App\Models\Product\Product');
+		return $this->belongsToMany('App\Models\Product\Product','product_product_category', 'product_category_id', 'product_id');
 	}
 
 	public function fabrics()

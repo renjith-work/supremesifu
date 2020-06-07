@@ -33,7 +33,7 @@ $(document).ready(function () {
     function taxZoneLoad(id) {
         $('#zone').html('');
         $.ajax({
-            url: "/admin/api/product/tax/zone",
+            url: "/admin/api/settings/country/zones",
             type: 'POST',
             data: { _token: _token, id: id },
             dataType: 'json',
@@ -60,7 +60,7 @@ $(document).ready(function () {
         console.log(id);
         $('#zone').html('');
         $.ajax({
-            url: "/admin/api/product/tax/zone",
+            url: "/admin/api/settings/country/zones",
             type: 'POST',
             data: { _token: _token, id: id},
             dataType: 'json',

@@ -22,7 +22,7 @@ class CreateFabricsTable extends Migration
             $table->string('image');
             $table->bigInteger('fabric_class_id')->nullable();
             $table->bigInteger('brand_id')->nullable();
-            $table->bigInteger('status_id')->default(0)->nullable();
+            $table->boolean('status')->nullable()->default(1);
             $table->timestamps();
         });
     }

@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         	UsersTableSeeder::class,
             // Settings
             SettingsTableSeeder::class,
+            CountryTableSeeder::class,
         	// Post Seeder
             PostCategoryTableSeeder::class,
             PostDesignTableSeeder::class,
@@ -22,10 +23,11 @@ class DatabaseSeeder extends Seeder
             PostTableSeeder::class,
             PostTagTableSeeder::class,
             // postRTagTableSeeder::class,
+
             // Roles and Permissions Seeder
             PermissionsTableSeeder::class,
             RolesTableSeeder::class,
-
+            RolesHasPermissionsTableSeeder::class,
             // Product Seeder
             ProductAttributeSetTableSeeder::class,    
             ProductCategoryTableSeeder::class,
@@ -34,10 +36,6 @@ class DatabaseSeeder extends Seeder
             ProductAttributeImageTableSeeder::class,
             ProductDesignTableSeeder::class,
             CustomProductCategoryTableSeeder::class,    
-            MfdCountriesTableSeeder::class,
-
-            // Tax Management
-            TaxCountryTableSeeder::class,
 
             // Inventory Units
             InventoryUnitTypeTableSeeder::class,
@@ -48,6 +46,7 @@ class DatabaseSeeder extends Seeder
 
             // Fabric Seeder
             BrandsTableSeeder::class,
+            FabricTableSeeder::class,
             FabricBrandsTableSeeder::class,
             FabricCLassesTableSeeder::class,
             FabricStatusTableSeeder::class,

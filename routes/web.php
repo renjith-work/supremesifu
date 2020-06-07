@@ -22,6 +22,9 @@ Auth::routes(['verify' => true]);
 // Initial Routes
 Route::get('/test', 'HomeController@test')->middleware('verified');
 Route::get('/email', 'HomeController@mail')->name('sendEmail');
+// Route::get('/debug-sentry', function () {
+// 	throw new Exception('My first Sentry error!');
+// });
 
 Route::group(['prefix'  =>   'admin/dashboard', 'as' => 'admin.dashboard.'], function() {
 	Route::get('', 'Admin\Dashboard\DashboardController@index');
@@ -109,6 +112,9 @@ Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 
 // Product Routes
 
+// Settings End Points
+Route::post('/admin/api/settings/country/zones', 'Admin\Api\Settings\Country\ZoneController@getZones');
+
 
 // Fabric Admin API End Points
 	Route::post('/admin/api/fabric/product-category', 'Admin\Api\Product\Fabric\FabricController@pdCategory');
@@ -141,6 +147,7 @@ Route::group(['prefix'  =>   'admin/product/fabric', 'as' => 'admin.product.fabr
 // Product Attributes API Routes
 Route::post('/admin/api/product/attribute/loadEdit', 'Admin\Api\Product\Attribute\AttributeController@loadEdit');
 Route::post('/admin/api/product/attribute/load', 'Admin\Api\Product\Attribute\AttributeController@load');
+Route::get('/admin/api/product/attribute/load/test', 'Admin\Api\Product\Attribute\AttributeController@test');
 Route::post('/admin/product/attribute/load', 'Admin\Api\Product\Attribute\AttributeController@loadAttr')->name('admin.product.attribute.load');
 
 // Product Attribute Routes
@@ -172,19 +179,11 @@ Route::group(['prefix'  =>   'admin/product/media/', 'as' => 'admin.product.medi
 	// Route::resource('/class', 'Admin\Product\Tax\TaxClassController');
 	// Route::get('/class/{id}/delete', 'Admin\Product\Tax\TaxClassController@delete')->name('class.delete');
 });
-// Admin Tax Api Endpoints
-Route::post('/admin/api/product/tax/zone', 'Admin\Api\Product\Tax\TaxZoneController@getZones')->name('admin.api.product.tax.zone.load');
 
 // Admin Tax Routes
 Route::group(['prefix'  =>   'admin/product/tax', 'as' => 'admin.product.tax.'], function () {
 	Route::resource('/class', 'Admin\Product\Tax\TaxClassController');
 	Route::get('/class/{id}/delete', 'Admin\Product\Tax\TaxClassController@delete')->name('class.delete');
-	
-	Route::resource('/country', 'Admin\Product\Tax\TaxCountryController');
-	Route::get('/country/{id}/delete', 'Admin\Product\Tax\TaxCountryController@delete')->name('country.delete');
-	
-	Route::resource('/zone', 'Admin\Product\Tax\TaxZoneController');
-	Route::get('/zone/{id}/delete', 'Admin\Product\Tax\TaxZoneController@delete')->name('zone.delete');
 	
 	Route::resource('/rate', 'Admin\Product\Tax\TaxRateController');
 	Route::get('/rate/{id}/delete', 'Admin\Product\Tax\TaxRateController@delete')->name('rate.delete');
@@ -215,10 +214,15 @@ Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 	// Product Category Routes
 	Route::resource('product/category', 'Admin\Product\ProductCategoryController',  ['as' => 'product']);
 	Route::get('product/category/{id}/delete', 'Admin\Product\ProductCategoryController@delete')->name('product.category.delete');
+
+	// New Product Routes
+	Route::resource('product/new', 'Admin\Product\Product\ProductController',  ['as' => 'product']);
+
 	// Product Routes
 	Route::resource('product', 'Admin\Product\ProductController');
 	Route::get('product/{id}/delete', 'Admin\Product\ProductController@delete')->name('product.delete');
 	Route::get('product/image/delete/{id}/{image}', 'Admin\Product\ProductController@imageDel');
+
 });
 
 // Custom Product Category Routes

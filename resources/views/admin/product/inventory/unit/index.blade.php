@@ -34,7 +34,7 @@
                                 <td>{{$unit->id }}</td>
                                 <td>{{$unit->name }}</td>
                                 <td>{{$unit->abbrevation }}</td>
-                                <td>{{$unit->type->name }}</td>
+                                {{-- <td>{{$unit->type->name }}</td> --}}
                                 <td>{{$unit->description }}</td>
                                 <td>@if($unit->status == 0)
                                     <span class="label label-danger label-pixtent-success">Inactive</span>

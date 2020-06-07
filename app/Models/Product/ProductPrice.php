@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models\Product\Weight;
+namespace App\Models\Product;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductWeight extends Model
+class ProductPrice extends Model
 {
     public function product()
     {
