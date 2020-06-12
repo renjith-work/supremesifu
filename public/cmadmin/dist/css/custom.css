@@ -1007,5 +1007,44 @@ vertical-align: middle;
 }
 
 .dynamic-added-video{
-	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.first-video{
+	margin-bottom: 20px;
+}
+
+.upload-multi-img{
+	margin-bottom: 35px;
+}
+
+.uds-cover{
+	padding: 0px;
+	margin: 20px 0px 0px 0px;
+	/* background-color: #f7f7f9; */
+}
+
+.uds-item{
+	border: 1px solid #d6d8db;
+	padding: 5px 0px 5px 10px;
+	margin: 10px 20px;
+}
+
+.cm-pdf-icon{
+	font-size: 30px;
+	padding: 3px 20px 0px 0px;
+	color: red;
+	margin-top: -10px;
+}
+
+.uds-item a{
+	margin-top: 8px;
+	position: absolute;
+	font-size: 15px;
+}
+
+.uds-item-button a{
+	margin-top: 0px;
+	float: right;
+	position: inherit;
 }

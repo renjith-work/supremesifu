@@ -45,7 +45,7 @@ class FabricController extends Controller
         $brands = FabricBrand::all();
         $attributes = FabricAttribute::all();
         $values = FabricAttributeValue::all();
-        $categories = ProductCategory::where('parent_id', 2)->get();
+        $categories = ProductCategory::all();
         return view('admin.product.fabric.create')->with('brands', $brands)->with('classes', $classes)->with('attributes', $attributes)->with('values', $values)->with('categories', $categories);
     }
 
@@ -75,7 +75,7 @@ class FabricController extends Controller
             $fabric->price = $request->price;
             $fabric->fabric_class_id = $request->class;
             $fabric->brand_id = $request->brand;
-            $fabric->status_id = 1;
+            $fabric->status = $request->status;
             if ($request-> hasFile('image')) //Check if the file exists
             {
                 $image = $request->file('image'); //Grab and store the file on to $image
@@ -129,7 +129,7 @@ class FabricController extends Controller
         $attributes = FabricAttribute::all();
         $values = FabricAttributeValue::all();
         $fabric = Fabric::find($id);
-        $categories = ProductCategory::where('parent_id', 2)->get();
+        $categories = ProductCategory::all();
         
         $sel_categories = array();
         foreach($fabric->productCategories as $category)
@@ -167,7 +167,7 @@ class FabricController extends Controller
             $fabric->price = $request->price;
             $fabric->fabric_class_id = $request->class;
             $fabric->brand_id = $request->brand;
-            $fabric->status_id = 1;
+            $fabric->status = $request->status;
             if ($request-> hasFile('image')) //Check if the file exists
             {
                 $image = $request->file('image'); //Grab and store the file on to $image

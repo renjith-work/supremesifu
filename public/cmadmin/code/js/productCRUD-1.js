@@ -24,21 +24,60 @@ $(document).ready(function () {
     
     $(document).on('change', '#fabric_class', function () {
         var fabricClass = $("#fabric_class").val();
-        loadFabric(fabricClass);
+        var prdCats = $("#category").val();
+        if (typeof prdCats != 'undefined' && prdCats)
+        {
+            console.log(prdCats);
+            loadFabric(fabricClass, prdCats);
+        }else{
+            console.log('no categories selected');
+            $('#fabric-select-error').append('<p class="error-p">This category does not habe any categories associated with it.')
+        }
     });
 
     // Loading Fabric during create.
-    function loadFabric(id) {
+    function loadFabric(id, cats) {
         $('#fabric').html('');
         $.ajax({
             url: "/admin/api/fabric/find",
             type: 'POST',
-            data: { _token: _token, id: id },
+            data: { _token: _token, id: id, cats: cats},
             dataType: 'json',
             success: function (response) {
                 $('#fabric').append('<option disabled selected>Select a fabric</option>');
                 $.each(response, function (key, value) {
                     $('#fabric').append('<option value="' + value.id + '">' + value.name + '</option>');
+                });
+            }
+        });
+    }
+
+    // Fabric Edit Section
+    loadFabricEdit();
+    function loadFabricEdit() {
+        if (typeof fabric_id != 'undefined' && fabric_id) {
+            var fabricClassEdit = $("#fabric_class").val();
+            var prdCatsEdit = $("#category").val();
+            loadFabricEditValue(fabricClassEdit, prdCatsEdit, fabric_id)
+        }
+    }
+
+    function loadFabricEditValue(id, cats, fabric_id)
+    {
+        $('#fabric').html('');
+        $.ajax({
+            url: "/admin/api/fabric/find",
+            type: 'POST',
+            data: { _token: _token, id: id, cats: cats },
+            dataType: 'json',
+            success: function (response) {
+                $('#fabric').append('<option disabled selected>Select a fabric</option>');
+                $.each(response, function (key, value) {
+                    if(value.id == fabric_id){
+                        $('#fabric').append('<option value="' + value.id + '" selected>' + value.name + '</option>');
+                    }else{
+                        $('#fabric').append('<option value="' + value.id + '">' + value.name + '</option>');
+                    }
                 });
             }
         });
@@ -58,19 +97,6 @@ $(document).ready(function () {
             loadProductAttributeValues(attributeSet);
         }, 1000);
     });
-
-    // function loadFabricSection(pd_cat_id) {
-    //     console.log(_token);
-    //     $.ajax({
-    //         url: "/admin/api/fabric/product-category",
-    //         type: 'POST',
-    //         data: { _token: _token, id: pd_cat_id },
-    //         dataType: 'json',
-    //         success: function (response) {
-    //             console.log(response);
-    //         }
-    //     });
-    // }
 
     function loadPdVals() {
         var attributeSet_id = $("#attributeSet").val();
@@ -98,7 +124,7 @@ $(document).ready(function () {
             data: { _token: _token, id: id },
             dataType: 'json',
             success: function (response) {
-                console.log(response);
+                // console.log(response);
                 $.each(response, function (key, value) {
                     $('#prd-attr-cover').append('<div class="form-group"><label for="' + value.code + '">' + value.name + '</label><select id="' + value.code + '" class="form-control custom-select mt-15" name="' + value.code + '"></select></div>');
                 });
@@ -163,26 +189,15 @@ $(document).ready(function () {
     });
 
     // Add More Button
-    var i = 1;
-
-    $('#add').click(function () {
-        i++;
-        $('#dynamic_field').append('<tr id="row' + i + '" class="dynamic-added"><td><input type="text" name="name[]" placeholder="Enter your Name" class="form-control name_list" /></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
-    }); 
-
-    $(document).on('click', '.btn_remove', function () {
-        var button_id = $(this).attr("id");
-        $('#row' + button_id + '').remove();
-    });  
 
     var j = 1;
     $('#add_video').click(function () {
         j++;
-        $('#dynamic-video-cover').append('<div class="row dynamic-added-video" id="video-row-' + j + '"><div class="col-md-10"><textarea name="video[]" class="form-control" rows="1"></textarea></div><div class="col-md-2"><button type="button" name="remove_video" id="remove_video-' + j +'" class="btn btn-danger btn_remove">X</button></div></div>');
+        $('#dynamic-video-cover').append('<div class="row dynamic-added-video" id="video-row-' + j + '"><div class="col-md-10"><textarea name="video[]" class="form-control" rows="1"></textarea></div><div class="col-md-2"><button type="button" name="remove_video" id="'+ j +'" class="btn btn-danger remove_video">X</button></div></div>');
     }); 
     $(document).on('click', '.remove_video', function () {
-        var button_id = $(this).attr("id");
-        $('#video-row-' + button_id + '').remove();
+        var rmv_button_id = $(this).attr("id");
+        $('#video-row-' + rmv_button_id + '').remove();
     });  
 
     // Scrolling To Top

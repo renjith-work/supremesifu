@@ -51,7 +51,17 @@ class Product extends Model
 
     public function images()
     {
-        return $this->hasMany('App\Models\Product\Image\ProductImagePosition', 'product_id');
+        return $this->hasMany('App\Models\Product\Image\ProductImage', 'product_id');
+    }
+
+    public function videos()
+    {
+        return $this->hasMany('App\Models\Product\File\ProductVideo', 'product_id');
+    }
+
+    public function documents()
+    {
+        return $this->hasMany('App\Models\Product\File\ProductDocument', 'product_id');
     }
 
     public function categories()

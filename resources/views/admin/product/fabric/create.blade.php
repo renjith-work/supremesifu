@@ -3,6 +3,7 @@
      <link rel="stylesheet" href="/cmadmin/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
     {!! Html::style('cmadmin/parsley/parsley.css') !!}
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=olg2smjmsqjy5ogdk1zogy9sj5qginfm4e5ozpvxrm5ecfek"></script>
+    <link rel="stylesheet" href="/cmadmin/bower_components/select2/dist/css/select2.min.css">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 @endsection
 @section('content')
@@ -60,23 +61,16 @@
                             </div>
                             @if($categories)
                             <div class="form-group">
-                                <label>Categories</label>
-                                <div class="form-instruction">Select the categories for which this fabric can be used.</div>
-                                <div class="form-group-sub">
-                                    <div class="row">
-                                        @foreach ($categories as $category)
-                                            <div class="col-md-3">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" name="categories[]" value="{{ $category->id }}">
-                                                    <label>{{ ucfirst($category->name) }}</label>
-                                                    <br>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                    @error('categories') <p class="error-p">{{$errors->first('categories')}}</p> @enderror
-                                </div>
-                            </div>
+                                <label for="categories">Product Category</label>
+                                <select id="categories" multiple class="form-control custom-select mt-15 @error('categories') is-invalid @enderror select2" name="categories[]">
+                                    @foreach($categories as $category)
+                                        @if($category->id != 1)
+                                            <option value="{{ $category->id }}"> {{ $category->name }} </option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                @error('categories') <p class="error-p">{{$errors->first('categories')}}</p> @enderror
+                            </div> 
                             @endif
                             <div id="attribute_cover"></div>
                             <br>
@@ -87,6 +81,14 @@
                                 @error('image') <p class="error-p">{{$errors->first('image')}}</p> @enderror
                                 <div id="image_preview" class="row"></div>
                             </div>
+                            <div class="form-group">
+                                <label for="status">Fabric Status</label>
+                                <select id="status" class="form-control custom-select mt-15 @error('status') is-invalid @enderror" name="status">
+                                    <option value="1">Active</option>
+                                    <option value="0">In-Active</option>
+                                </select>
+                                @error('status') <p class="error-p">{{$errors->first('status')}}</p> @enderror
+                            </div> 
                             <div class="box-footer">
                                 <input id="submitTag" type="Submit" value="Submit" class="btn btn-success btn-lg pull-right submit-button btn-submit">
                             </div>
@@ -99,6 +101,7 @@
 </div>
 @endsection
 @section('footer')
+    <script src="/cmadmin/bower_components/select2/dist/js/select2.full.min.js"></script>
     <script src="/cmadmin/parsley/parsley.js"></script>
     <script type="text/javascript">
     $(document).ready(function(e){
@@ -114,6 +117,11 @@
             plugins: 'print preview searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
             toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
             image_advtab: true,
+        });
+        
+        // Initialize Select2 features
+        $(function () {
+            $('.select2').select2()
         });
 
         $('#image').change(function(){
@@ -135,7 +143,6 @@
                         $('#attribute_cover').append('<label for="attribute">'+value.name+'</label>');
                         $('#attribute_cover').append('<select name="'+value.name+'" id="'+value.name+'" class="form-control"></select>');
                         $('#attribute_cover').append('</div>');
-                        console.log(value.values);
                         $.each(value.values, function(key1,value1){
                             $('#'+ value.name).append('<option value="'+value1.id+'">'+value1.value+'</option>');
                         });

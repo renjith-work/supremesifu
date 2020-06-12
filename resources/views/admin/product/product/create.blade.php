@@ -17,7 +17,7 @@
     <section class="content">
         <div class="admin-footer-error">@include('admin.partials.flashErrorMessage')</div>
         <div class="global-settings-cover">
-            <form action="{{route('admin.product.new.store')}}" id="product_create" method="POST" enctype="multipart/form-data" data-parsley-validate >
+            <form action="{{route('admin.product.store')}}" id="product_create" method="POST" enctype="multipart/form-data" data-parsley-validate >
                 {{ csrf_field() }}
                 <div class="row user">
                     <div class="col-md-3">
@@ -193,6 +193,7 @@
                                                 <option value="{{ $class->id }}"> {{ $class->name }} </option>                                            
                                             @endforeach
                                         </select>
+                                        <div id="fabric-select-error"></div>
                                         @error('fabric_class') <p class="error-p">{{$errors->first('fabric_class')}}</p> @enderror
                                     </div>
                                     <div class="form-group">
@@ -349,32 +350,17 @@
                                 </div>
                                 <div class="gb-body">
                                     <div class="form-group">
-                                        <div class="table-responsive">  
-                                            <table class="table table-bordered" id="dynamic_field">  
-                                                <tr>  
-                                                    <td><input type="text" name="name[]" placeholder="Enter your Name" class="form-control name_list" /></td>  
-                                                    <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>  
-                                                </tr>  
-                                            </table>  
-                                            <input type="button" name="submit" id="submit" class="btn btn-info" value="Submit" />  
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
                                         <label for="video">Product Videos</label>
                                         <div id="dynamic-video-cover">
                                             <div class="row">
                                                 <div class="col-md-10">
-                                                    <textarea name="video" id="video" class="form-control @error('video') is-invalid @enderror" rows="1">{{ old('video') }}</textarea>
+                                                    <textarea name="video[]" id="video" class="form-control @error('video') is-invalid @enderror" rows="1"></textarea>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <button type="button" name="add_video" id="add_video" class="btn btn-success">Add More</button>
                                                 </div>
                                             </div>
                                         </div>
-                                        
-                                        {{-- <div class="form-instruction">You may leave this blank if the product has no video.</div>
-                                        <textarea name="video" id="video" class="form-control @error('video') is-invalid @enderror" rows="1">{{ old('video') }}</textarea>
-                                        @error('video') <p class="error-p">{{$errors->first('video')}}</p> @enderror --}}
                                     </div>
                                     <div class="section-sub-title">File Uploads</div>
                                     <div class="form-group">

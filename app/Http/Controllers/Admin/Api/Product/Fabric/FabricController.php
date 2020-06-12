@@ -14,7 +14,30 @@ class FabricController extends Controller
 {
     public function findFabric(Request $request)
     {
-    	$data = Fabric::where('fabric_class_id', $request->id)->get();
+        $cat_ids = $request->cats;
+
+        $fabrics_array = array();
+        foreach ($cat_ids as $cat_id) {
+            $category = ProductCategory::find($cat_id);
+            foreach ($category->fabrics as $fab) {
+                $fabrics_array[] = array(
+                    'id' => $fab->id,
+                    'name' => $fab->name,
+                    'class' => $fab->fabric_class_id,
+                );
+            }
+        }
+
+        $fabrics_array = array_map("unserialize", array_unique(array_map("serialize", $fabrics_array)));
+        $data = array();
+        foreach ($fabrics_array as $fabric) {
+            if ($fabric['class'] == $request->id)
+            $data[] = array(
+                'id' => $fabric['id'],
+                'name' => $fabric['name']
+            );
+        }
+
         return response()->json($data);
     }
 

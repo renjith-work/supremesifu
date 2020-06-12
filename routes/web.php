@@ -216,12 +216,11 @@ Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 	Route::get('product/category/{id}/delete', 'Admin\Product\ProductCategoryController@delete')->name('product.category.delete');
 
 	// New Product Routes
-	Route::resource('product/new', 'Admin\Product\Product\ProductController',  ['as' => 'product']);
-
-	// Product Routes
-	Route::resource('product', 'Admin\Product\ProductController');
-	Route::get('product/{id}/delete', 'Admin\Product\ProductController@delete')->name('product.delete');
-	Route::get('product/image/delete/{id}/{image}', 'Admin\Product\ProductController@imageDel');
+	Route::resource('product', 'Admin\Product\Product\ProductController');
+	Route::get('product/{id}/delete', 'Admin\Product\Product\ProductController@delete');
+	Route::get('product/image/delete/{id}', 'Admin\Product\Product\ProductController@imageDel');
+	Route::get('product/video/delete/{id}', 'Admin\Product\Product\ProductController@videoDel');
+	Route::get('product/document/delete/{id}', 'Admin\Product\Product\ProductController@documentDel');
 
 });
 
