@@ -134,13 +134,17 @@ Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 	Route::get('fabric/{id}/delete', 'Admin\Product\Fabric\FabricController@delete')->name('fabric.delete');
 });
 
-// Fabric Brands
+// Fabric
 Route::group(['prefix'  =>   'admin/product/fabric', 'as' => 'admin.product.fabric.'], function() {
 	Route::resource('brand', 'Admin\Product\Fabric\FabricBrandController');
 	Route::get('brand/{id}/delete', 'Admin\Product\Fabric\FabricBrandController@delete')->name('brand.delete');
 
 	Route::resource('class', 'Admin\Product\Fabric\FabricClassController');
 	Route::get('class/{id}/delete', 'Admin\Product\Fabric\FabricClassController@delete')->name('class.delete');
+
+	Route::resource('', 'Admin\Product\Fabric\FabricController');
+	Route::get('{id}/delete', 'Admin\Product\Fabric\FabricController@delete')->name('fabric.delete');
+	
 });
 
 
@@ -169,9 +173,6 @@ Route::group(['prefix'  =>   'admin/product', 'as' => 'admin.product.'], functio
 
 	Route::resource('/brand', 'Admin\Product\Brand\BrandController');
 	Route::get('/brand/{id}/delete', 'Admin\Product\Brand\BrandController@delete')->name('brand.delete');
-
-	Route::resource('/mfd-country', 'Admin\Product\Brand\MfdCountryController');
-	Route::get('/mfd-country/{id}/delete', 'Admin\Product\Brand\MfdCountryController@delete')->name('mfd-country.delete');
 });
 
 // Product Media Routes

@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             CountryTableSeeder::class,
         	// Post Seeder
             PostCategoryTableSeeder::class,
-            PostDesignTableSeeder::class,
+            // PostDesignTableSeeder::class,
             PostStatusTableSeeder::class,
             PostTableSeeder::class,
             PostTagTableSeeder::class,

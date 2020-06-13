@@ -334,6 +334,30 @@ class PermissionsTableSeeder extends Seeder
             'updated_at' => Carbon::now(),
             ],
             [
+                'name' => 'List Fabric',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'Create Fabric',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'Edit Fabric',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'Delete Fabric',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
                 'name' => 'List Product Attribute Image Settings',
                 'guard_name' => 'web',
                 'created_at' => Carbon::now(),

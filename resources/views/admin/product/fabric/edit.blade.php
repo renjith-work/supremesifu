@@ -11,7 +11,7 @@
     <section class="content-header">
         <ol class="breadcrumb">
             <li><a href="/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="/admin/fabric/">Fabric Management</a></li>
+            <li><a href="/admin/product/fabric/">Fabric Management</a></li>
             <li class="active">Create Fabric</li>
         </ol>
     </section>
@@ -24,7 +24,7 @@
                         <h3 class="form-box-title">Create Fabric</h3> 
                     </div>
                     <div class="form-box-body">
-                        <form action="{{ route('admin.fabric.update', $fabric->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.product.fabric.update', $fabric->id) }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }} {{ method_field('PUT') }}
                             <div class="form-group">
                                 <label for="name">Fabric Name</label>

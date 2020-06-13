@@ -34,7 +34,7 @@
                         <ul class="treeview-menu">
                             @can('List Product Category')<li class="{{ Active::checkRoute(['admin.product.category.*' ]) }}"><a href="/admin/product/category"> <i class="fa fa-circle-o"></i> <span>Product Category</span> <span class="pull-right-container"></span> </a></li>@endcan
                             @can('List Brand')<li class="{{ Active::checkRoute(['admin.product.brand.*' ]) }}"><a href="/admin/product/brand"> <i class="fa fa-circle-o"></i> <span>Product Brands</span> <span class="pull-right-container"></span> </a></li>@endcan
-                            @can('List Manufacturing Country')<li class="{{ Active::checkRoute(['admin.product.mfd-country.*' ]) }}"><a href="/admin/product/mfd-country"> <i class="fa fa-circle-o"></i> <span>Mfd Countries</span> <span class="pull-right-container"></span> </a></li>@endcan
+                            @can('List Manufacturing Country')<li class="{{ Active::checkRoute(['admin.product.mfd-country.*' ]) }}"><a href="/admin/product/mfd-country"> <i class="fa fa-circle-o"></i> <span>Mfd Countries</span> <span class="pull-right-container"></span> </a></li>@endcan --}}
                             @can('List Custom Product Category')<li class="{{ Active::checkRoute(['admin.product.custom.category.*' ]) }}"><a href="/admin/product/custom/category"> <i class="fa fa-circle-o"></i> <span>Custom Product Category</span> <span class="pull-right-container"></span> </a></li>@endcan
                             @can('List Product Attribute')
                             <li class="treeview {{ Active::checkRoute(['admin.product.attribute.*']) }} ">
@@ -49,9 +49,17 @@
                         </ul>
                     </li>
                     <li class="header">FABRIC MANAGEMENT</li>
-                    <li class=""><a href="/admin/fabric"> <i class="fa fa-circle-o"></i> <span>Fabric</span> <span class="pull-right-container"></span> </a></li>
-                    @can('List Fabric Class')<li class="{{ Active::checkRoute(['admin.product.fabric.class.*']) }}"><a href="/admin/product/fabric/class"> <i class="fa fa-circle-o"></i> <span>Fabric Class</span> <span class="pull-right-container"></span> </a></li>@endcan
-                    @can('List Fabric Brand')<li class="{{ Active::checkRoute(['admin.product.fabric.brand.*']) }}"><a href="/admin/product/fabric/brand"> <i class="fa fa-circle-o"></i> <span>Fabric Brand</span> <span class="pull-right-container"></span> </a></li>@endcan
+                    {{-- @can('List Fabric')<li class=""><a href="/admin/fabric"> <i class="fa fa-circle-o"></i> <span>Fabric</span> <span class="pull-right-container"></span> </a></li>@endcan --}}
+                    @can('List Fabric')<li class="{{ Active::checkRoute(['admin.product.fabric.index', 'admin.product.fabric.create', 'admin.product.fabric.edit' ]) }}"><a href="/admin/product/fabric"> <i class="fa fa-circle-o"></i> <span>Fabric</span> <span class="pull-right-container"></span> </a></li>@endcan
+                    <li class="treeview {{ Active::checkRoute(['admin.product.fabric.class.*', 'admin.product.fabric.brand.*' ]) }}">
+                        <a href="#"> <i class="fa fa-cogs"></i> <span>Fabric Settings</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+                        <ul class="treeview-menu">
+                             @can('List Fabric Class')<li class="{{ Active::checkRoute(['admin.product.fabric.class.*']) }}"><a href="/admin/product/fabric/class"> <i class="fa fa-circle-o"></i> <span>Fabric Class</span> <span class="pull-right-container"></span> </a></li>@endcan
+                             @can('List Fabric Brand')<li class="{{ Active::checkRoute(['admin.product.fabric.brand.*']) }}"><a href="/admin/product/fabric/brand"> <i class="fa fa-circle-o"></i> <span>Fabric Brand</span> <span class="pull-right-container"></span> </a></li>@endcan
+                        </ul>
+                    </li>
+                    {{-- @can('List Fabric Class')<li class="{{ Active::checkRoute(['admin.product.fabric.class.*']) }}"><a href="/admin/product/fabric/class"> <i class="fa fa-circle-o"></i> <span>Fabric Class</span> <span class="pull-right-container"></span> </a></li>@endcan
+                    @can('List Fabric Brand')<li class="{{ Active::checkRoute(['admin.product.fabric.brand.*']) }}"><a href="/admin/product/fabric/brand"> <i class="fa fa-circle-o"></i> <span>Fabric Brand</span> <span class="pull-right-container"></span> </a></li>@endcan --}}
                     <li class="header">STORE SETTINGS</li>
                     <li class="treeview {{ Active::checkRoute(['admin.product.tax.class.*', 'admin.product.tax.country.*', 'admin.product.tax.zone.*', 'admin.product.tax.rate.*']) }} ">
                         <a href="#"> <i class="fa fa-cogs"></i> <span>Tax Settings</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>

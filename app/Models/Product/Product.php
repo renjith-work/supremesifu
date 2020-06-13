@@ -69,6 +69,11 @@ class Product extends Model
         return $this->belongsToMany('App\Models\Product\ProductCategory', 'product_product_category', 'product_id', 'product_category_id');
     }
 
+    public function taxClass()
+    {
+        return $this->belongsTo('App\Models\Product\Tax\TaxClass', 'tax_class_id');
+    }
+
     public function price()
     {
         return $this->hasOne('App\Models\Product\ProductPrice', 'product_id');

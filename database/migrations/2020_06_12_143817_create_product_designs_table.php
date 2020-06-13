@@ -15,19 +15,19 @@ class CreateProductDesignsTable extends Migration
     {
         Schema::create('product_designs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('product_category_id')->nullable();
+            $table->string('name')->unique()->nullable();
+            $table->string('slug')->unique()->nullable();
+            $table->bigInteger('product_attribute_set_id')->nullable();
             $table->bigInteger('fabric_id')->nullable();
-            $table->string('name');
-            $table->string('slug')->unique();
-            $table->decimal('price',9,2)->nullable();
-            $table->decimal('og_price',9,2)->nullable();
-            $table->text('description');
-            $table->text('summary');
-            $table->string('p_image');
-            $table->string('s_image');
-            $table->text('album');
-            $table->string('folder');
-            $table->bigInteger('status_id')->default(1)->nullable();
+            $table->text('description')->nullable();
+            $table->text('summary')->nullable();
+            $table->bigInteger('tax_class_id')->nullable();
+            $table->string('pageTitle');
+            $table->text('metatag');
+            $table->text('metadescp');
+            $table->boolean('featured')->default(0);
+            $table->boolean('menu')->default(0);
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }
