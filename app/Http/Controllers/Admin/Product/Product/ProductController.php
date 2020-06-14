@@ -17,6 +17,7 @@ use App\Models\Product\ProductAttribute;
 use App\Models\Product\ProductAttributeValueSave;
 use App\Models\Product\File\ProductVideo;
 use App\Models\Product\Image\ProductImage;
+use App\Models\Product\File\ProductDocument;
 use App\Models\Product\Fabric\Fabric;
 use App\Models\Product\Monogram;
 use App\Models\Product\ProductMonogram;
@@ -27,7 +28,7 @@ use App\Models\UMProfileValue;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Product\File\ProductDocument;
+
 use Illuminate\Support\Str;
 use Auth;
 use Validator;
@@ -79,7 +80,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-
 
         $validator = Validator::make( $request->all(),
             [
@@ -157,6 +157,8 @@ class ProductController extends Controller
             $this->videoSave($request, $product->id);
             $this->imageSave($request, $product->id);
             $this->documentSave($request, $product->id);
+
+            Session::flash('success', 'The data was successfully inserted.');
             return redirect()->back();
 
         } else {
@@ -548,7 +550,7 @@ class ProductController extends Controller
             foreach ($request->only('album') as $files) {
                 foreach ($files as $file) {
                     if (is_file($file)) {    // not sure this is needed
-                        $filename = Str::slug($request->name, '-') . '-' . $count . '-' . time() . '.' . $file->getClientOriginalExtension();
+                        $filename = Str::slug($request->name, '-') . '-album' . '-' . $count . '-' . time() . '.' . $file->getClientOriginalExtension();
                         $location = public_path('images/product/product/' . $filename);
                         Image::make($file)->resize(800, 800)->save($location); // path to file
                         ProductImage::create([
@@ -615,7 +617,7 @@ class ProductController extends Controller
             foreach ($request->only('album') as $files) {
                 foreach ($files as $file) {
                     if (is_file($file)) {    // not sure this is needed
-                        $filename = Str::slug($request->name, '-') . '-' . $count . '-' . time() . '.' . $file->getClientOriginalExtension();
+                        $filename = Str::slug($request->name, '-').'-album'  . '-' . $count . '-' . time() . '.' . $file->getClientOriginalExtension();
                         $location = public_path('images/product/product/' . $filename);
                         Image::make($file)->resize(800, 800)->save($location); // path to file
                         ProductImage::create([

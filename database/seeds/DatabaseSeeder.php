@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
             ProductAttributeTableSeeder::class,
             ProductAttributeValueTableSeeder::class,
             ProductAttributeImageTableSeeder::class,
-            ProductDesignTableSeeder::class,
+            // ProductDesignTableSeeder::class,
             CustomProductCategoryTableSeeder::class,    
 
             // Inventory Units

@@ -150,6 +150,7 @@ Route::group(['prefix'  =>   'admin/product/fabric', 'as' => 'admin.product.fabr
 
 // Product Attributes API Routes
 Route::post('/admin/api/product/attribute/loadEdit', 'Admin\Api\Product\Attribute\AttributeController@loadEdit');
+Route::post('/admin/api/product/attribute/loadDesignEdit', 'Admin\Api\Product\Attribute\AttributeController@loadDesignEdit');
 Route::post('/admin/api/product/attribute/load', 'Admin\Api\Product\Attribute\AttributeController@load');
 Route::get('/admin/api/product/attribute/load/test', 'Admin\Api\Product\Attribute\AttributeController@test');
 Route::post('/admin/product/attribute/load', 'Admin\Api\Product\Attribute\AttributeController@loadAttr')->name('admin.product.attribute.load');
@@ -197,18 +198,6 @@ Route::group(['prefix'  =>   'admin/product/inventory', 'as' => 'admin.product.i
 	Route::get('/unit/{id}/delete', 'Admin\Product\Inventory\InventoryUnitController@delete')->name('unit.delete');
 });	
 
-// Product Routes
-Route::group(['prefix'  =>   'admin/product', 'as' => 'admin.product.'], function() {
-	Route::resource('shirt', 'Admin\Product\Item\ShirtController');
-	Route::get('shirt/{id}/delete', 'Admin\Product\Item\ShirtController@delete')->name('shirt.delete');
-});
-
-// Product Design Routes 
-// Shirt Routes
-Route::group(['prefix'  =>   'admin/product/design', 'as' => 'admin.product.design.'], function() {
-	Route::resource('shirt', 'Admin\Product\Design\ShirtController');
-	Route::get('shirt/{id}/delete', 'Admin\Product\Design\ShirtController@delete')->name('shirt.delete');
-});
 
 // Product Routes
 Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
@@ -229,6 +218,16 @@ Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
 Route::group(['prefix'  =>   'admin/product/custom', 'as' => 'admin.product.custom.'], function () {
 	Route::resource('category', 'Admin\Product\CustomProductCategoryController');
 	Route::get('category/{id}/delete', 'Admin\Product\CustomProductCategoryController@delete')->name('category.delete');
+});
+
+// Product Design Routes 
+
+// Shirt Routes
+Route::group(['prefix'  =>   'admin/product/design', 'as' => 'admin.product.design.'], function () {
+	Route::resource('shirt', 'Admin\Product\Design\ShirtController');
+	Route::get('shirt/{id}/delete', 'Admin\Product\Design\ShirtController@delete')->name('shirt.delete');
+	Route::get('shirt/image/delete/{id}', 'Admin\Product\Design\ShirtController@imageDel')->name('shirt.image.delete');;
+	Route::get('shirt/video/delete/{id}', 'Admin\Product\Design\ShirtController@videoDel')->name('shirt.video.delete');;
 });
 
 
