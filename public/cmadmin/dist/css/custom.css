@@ -1048,3 +1048,32 @@ vertical-align: middle;
 	float: right;
 	position: inherit;
 }
+
+.fabric-price-item {
+    border: 1px #b9b5b5;
+    border-style: dashed;
+    padding: 20px;
+}
+
+.fabric-price-item{
+	margin: 40px 0px 20px 0px;
+}
+
+.fabric-add-more-cover{
+	padding: 20px 0px 40px 0px;
+}
+.btn-fabric-add{
+	float: right;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.remove-fabric-price{
+	margin-top: -20px;
+    float: right;
+    margin-right: -20px;
+}
+

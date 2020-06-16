@@ -121,32 +121,26 @@ Route::post('/admin/api/settings/country/zones', 'Admin\Api\Settings\Country\Zon
 	Route::post('/admin/api/fabric/find', 'Admin\Api\Product\Fabric\FabricController@findFabric');
 	Route::get('/admin/api/fabric/class/load', 'Admin\Api\Product\Fabric\FabricClassController@load');
 
-// Product Fabric Routes
-Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
-	
-	
-	Route::resource('fabric/attribute/value', 'Admin\Product\Fabric\FabricAttributeValueController',  ['as' => 'fabric.attribute']);
-	Route::get('fabric/attribute/list', 'Admin\Product\Fabric\FabricAttributeController@list')->name('fabric.attribute.list');
-	
-	Route::resource('fabric/attribute', 'Admin\Product\Fabric\FabricAttributeController',  ['as' => 'fabric']);
-	
-	Route::resource('fabric', 'Admin\Product\Fabric\FabricController');
-	Route::get('fabric/{id}/delete', 'Admin\Product\Fabric\FabricController@delete')->name('fabric.delete');
-});
-
+Route::get('admin/product/fabricz/{id}/edit', 'Admin\Product\Fabric\FabricController@edit');
 // Fabric
 Route::group(['prefix'  =>   'admin/product/fabric', 'as' => 'admin.product.fabric.'], function() {
 	Route::resource('brand', 'Admin\Product\Fabric\FabricBrandController');
 	Route::get('brand/{id}/delete', 'Admin\Product\Fabric\FabricBrandController@delete')->name('brand.delete');
 
 	Route::resource('class', 'Admin\Product\Fabric\FabricClassController');
-	Route::get('class/{id}/delete', 'Admin\Product\Fabric\FabricClassController@delete')->name('class.delete');
-
-	Route::resource('', 'Admin\Product\Fabric\FabricController');
-	Route::get('{id}/delete', 'Admin\Product\Fabric\FabricController@delete')->name('fabric.delete');
-	
+	Route::get('class/{id}/delete', 'Admin\Product\Fabric\FabricClassController@delete')->name('class.delete');	
 });
 
+Route::resource('admin/product/fabric', 'Admin\Product\Fabric\FabricController', ['as' => 'admin.product']);
+Route::get('admin/product/fabric/{id}/delete', 'Admin\Product\Fabric\FabricController@delete')->name('admin.product.fabric.delete');
+
+// Product Fabric Routes
+Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
+	Route::resource('fabric/attribute/value', 'Admin\Product\Fabric\FabricAttributeValueController',  ['as' => 'fabric.attribute']);
+	Route::get('fabric/attribute/list', 'Admin\Product\Fabric\FabricAttributeController@list')->name('fabric.attribute.list');
+
+	Route::resource('fabric/attribute', 'Admin\Product\Fabric\FabricAttributeController',  ['as' => 'fabric']);
+});
 
 // Product Attributes API Routes
 Route::post('/admin/api/product/attribute/loadEdit', 'Admin\Api\Product\Attribute\AttributeController@loadEdit');

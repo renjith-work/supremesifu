@@ -89,6 +89,56 @@
                                 </select>
                                 @error('status') <p class="error-p">{{$errors->first('status')}}</p> @enderror
                             </div> 
+                            <div class="section-sub-title">Fabric Product Price</div>
+                            <div class="fabric-price-cover">
+                                <div class="fabric-price-item">
+                                    <div class="fabric-price-item-head">
+                                        <div class="fabric-price-item-close">
+                                            <button type="button" name="remove-fabric-price" class="btn btn-danger remove-fabric-price">X</button>
+                                        </div>
+                                    </div>
+                                    <div class="fabric-price-item-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Product Type</label>
+                                                <select class="form-control custom-select mt-15" name="product_set">
+                                                    <option value="1">Active</option>
+                                                    <option value="0">In-Active</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Product Price</label>
+                                                    <input type="number" step="any" name="price" class="form-control" id="price" maxlength="255">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Promotional Price</label>
+                                                    <input type="number" step="any" name="price" class="form-control" id="price" maxlength="255">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="startDate">Promo Price - Begin Date</label>
+                                                    <input type="date" name="startDate" class="form-control" id="startDate" maxlength="255">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="endDate">Promo Price - End Date</label>
+                                                    <input type="date" name="endDate" class="form-control" id="endDate" maxlength="255">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="fabric-add-more-cover">
+                                <button type="button" name="add_price" id="add_price" class="btn btn-success btn-fabric-add">Add More Price</button>
+                            </div>
                             <div class="box-footer">
                                 <input id="submitTag" type="Submit" value="Submit" class="btn btn-success btn-lg pull-right submit-button btn-submit">
                             </div>
@@ -103,55 +153,5 @@
 @section('footer')
     <script src="/cmadmin/bower_components/select2/dist/js/select2.full.min.js"></script>
     <script src="/cmadmin/parsley/parsley.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function(e){
-
-        $.ajaxSetup({
-            headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }});
-
-        tinymce.init({
-            selector: '.tiny_body',
-            theme: 'modern',
-            plugins: 'print preview searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
-            toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
-            image_advtab: true,
-        });
-        
-        // Initialize Select2 features
-        $(function () {
-            $('.select2').select2()
-        });
-
-        $('#image').change(function(){
-            $('#image_preview').html("");
-            $('#image_preview').append("<div class='col-md-4 upload-multi-img'><img src='"+URL.createObjectURL(event.target.files[0])+"'></div>");
-        }); 
-
-        loadFabricAttributes();
-        function loadFabricAttributes(){
-            $('#attribute_cover').html('');
-            $.ajax({
-                url: "/admin/fabric/attribute/list",
-                type:'GET',
-                dataType: 'json',
-                success:function(response){
-                    // console.log(response);
-                    $.each(response, function(key,value){
-                        $('#attribute_cover').append('<div class="form-group">');
-                        $('#attribute_cover').append('<label for="attribute">'+value.name+'</label>');
-                        $('#attribute_cover').append('<select name="'+value.name+'" id="'+value.name+'" class="form-control"></select>');
-                        $('#attribute_cover').append('</div>');
-                        $.each(value.values, function(key1,value1){
-                            $('#'+ value.name).append('<option value="'+value1.id+'">'+value1.value+'</option>');
-                        });
-
-                    });
-                }
-            });
-        }
-        
-    });
-</script>
+    <script src="/cmadmin/code/js/fabric/fabricCRUD.js"></script>
 @endsection

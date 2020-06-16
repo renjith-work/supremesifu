@@ -15,7 +15,7 @@ class HomePageController extends Controller
     {
         $posts = Post::where('featured', 1)->orderBy('id', 'desc')->take(3)->get();
         // $products = ProductDesign::where('user_id', 1)->orderBy('id', 'desc')->get();
-        $products = Product::orderBy('id', 'desc')->get();
+        $products = Product::where('featured', 1)->orderBy('id', 'desc')->get();
         return view('front.pages.home')->with('posts', $posts)->with('products', $products);
     }
 }

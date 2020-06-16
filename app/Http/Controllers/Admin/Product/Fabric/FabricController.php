@@ -127,14 +127,14 @@ class FabricController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {        
         $classes = FabricClass::all();
         $brands = FabricBrand::all();
         $attributes = FabricAttribute::all();
         $values = FabricAttributeValue::all();
         $fabric = Fabric::find($id);
         $categories = ProductCategory::all();
-        
+
         $sel_categories = array();
         foreach($fabric->productCategories as $category)
         {

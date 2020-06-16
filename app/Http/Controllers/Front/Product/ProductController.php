@@ -32,7 +32,6 @@ class ProductController extends Controller
     public function detail($slug)
     {
         $product = Product::where('slug', '=', $slug)->first();
-        // $product = Product::find($id);
         return view('front.product.shirt.detail')->with('product', $product);
     }
 
@@ -107,15 +106,16 @@ class ProductController extends Controller
     public function loadImages(Request $request){
         $id = $request->id;
         $product = Product::find($id);
-        $image1[] = $product->p_image;
-        $image1[] = $product->s_image;
-        $image2 = json_decode($product->album, true);
-        // $images = array_merge($image1, $image2);
-        // $data[] = array(
-        //             'folder' => $product->folder,
-        //             'images' => $images 
-        // );
-        $data = json_decode($product->album, true);
-        return response()->json($data);
+
+        $images = $product->images;
+        $image_array = array();
+        foreach($images as $image){
+            $image_array[] = array(
+                            'name' => $image->name,
+                            'position' => $image->position_id,
+            );
+        }
+
+        return response()->json($image_array);
     }
 }

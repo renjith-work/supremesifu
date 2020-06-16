@@ -214,13 +214,17 @@
                     <div class="col-md-3 col-6">
                         <div class="single-product-wrap ss-p-wrap">
                             <div class="product-image">
-                                <a href="/product/shirt/{{$product->id}}/details"><img src="/images/product/design/{{$product->folder}}/{{$product->p_image}}" alt=""></a>
+                                <a href="/product/shirt/{{$product->id}}/details">
+                                    @foreach($product->images as $image) @if($image->position_id == 1)
+                                    <img src="/images/product/product/{{$image->name}}" alt="{{$image->name}}">
+                                    @endif @endforeach
+                                </a>
                                 <span class="label-product label-new">new</span>
                             </div>
                             <div class="product-content">
                                 <h3><a href="/product/shirt/{{$product->id}}/details">{{$product->name}}</a></h3>
                                 <div class="home-price-box">
-                                    <span class="new-price">{{$product->price}}</span>
+                                    <span class="new-price">{{$product->price->price}}</span>
                                     <span class="old-price">{{$product->og_price}}</span>
                                 </div>
                             </div>
@@ -249,14 +253,18 @@
                     <div class="col-md-3 col-6">
                         <div class="single-product-wrap home-spwrap">
                             <div class="product-image">
-                                <a href="/product/shirt/{{$product->slug}}"><img src="/images/product/product/{{$product->p_image}}" alt=""></a>
+                                <a href="/product/shirt/{{$product->slug}}">
+                                    @foreach($product->images as $image) @if($image->position_id == 1)
+                                    <img src="/images/product/product/{{$image->name}}" alt="{{$image->name}}">
+                                    @endif @endforeach
+                                </a>
                                 <span class="label-product label-new">new</span>
                             </div>
                             <div class="product-content home-sp-pc">
                                 <h3 class="home-sp-h3"><a href="/product/shirt/{{$product->slug}}">{{$product->name}}</a></h3>
                                 <div class="home-price-box">
-                                    <span class="new-price">{{$product->price}}</span>
-                                    <span class="old-price">{{$product->og_price}}</span>
+                                    <span class="new-price">{{$product->price->price}}</span>
+                                    {{-- <span class="old-price">{{$product->og_price}}</span> --}}
                                 </div>
                             </div>
                         </div>

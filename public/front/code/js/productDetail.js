@@ -38,9 +38,10 @@ $(document).ready(function() {
             data: {_token:_token, id:id},
             dataType: 'json',
             success:function(response){
+                console.log(response);
                 $.each(response, function(key,value){
-                    $('#product_detail_images').append('<div class="lg-image"><a href="/images/product/product/'+value+'" class="img-poppu"><img src="/images/product/product/'+value+'" alt="product image"></a></div>');
-                    $('#product_detail_thumbs').append('<div class="sm-image"><img src="/images/product/product/'+value+'" alt="product image thumb"></div>');
+                    $('#product_detail_images').append('<div class="lg-image"><a href="/images/product/product/' + value.name + '" class="img-poppu"><img src="/images/product/product/' + value.name + '" alt="' + value.name +'"></a></div>');
+                    $('#product_detail_thumbs').append('<div class="sm-image"><img src="/images/product/product/'+value.name+'" alt="product image thumb"></div>');
                 });
                 destroyCarousel();
                 loadSlick();

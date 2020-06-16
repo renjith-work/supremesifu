@@ -10,4 +10,9 @@ class ProductAttributeSet extends Model
     {
         return $this->hasMany('App\Models\Product\ProductAttribute');
     }
+
+    public function fabricPrices()
+    {
+        return $this->hasMany('App\Models\Product\Fabric\FabricPrice', 'product_attribute_set_id');
+    }
 }
