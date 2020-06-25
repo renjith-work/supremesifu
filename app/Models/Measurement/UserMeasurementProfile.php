@@ -17,4 +17,9 @@ class UserMeasurementProfile extends Model
 	public function mppavalues(){
 		return $this->hasMany('App\Models\Measurement\MeasureProfileProductAttributeValue',  'mp_id');
 	}
+
+	public function values()
+	{
+		return $this->hasMany('App\Models\Measurement\UserMeasurementProfileValue',  'u_mp_id');
+	}
 }

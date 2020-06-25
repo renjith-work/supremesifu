@@ -21,7 +21,7 @@ class ProfileController extends Controller
 
     public function commonList(){
 
-    	$customData = UserMeasurementProfile::where('user_id', 1)->get();;
+    	$customData = UserMeasurementProfile::where('user_id', 1)->get();
     	$data = array();
     	foreach ($customData as $profile) {
     		$data[] = array(

@@ -15,7 +15,7 @@ class CreateMonogramsTable extends Migration
     {
         Schema::create('monograms', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('product_category_id')->nullable();
+            $table->bigInteger('product_attribute_set_id')->nullable();
             $table->string('name');
             $table->string('code')->unique();
             $table->bigInteger('letter');

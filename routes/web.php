@@ -131,8 +131,15 @@ Route::group(['prefix'  =>   'admin/product/fabric', 'as' => 'admin.product.fabr
 	Route::get('class/{id}/delete', 'Admin\Product\Fabric\FabricClassController@delete')->name('class.delete');	
 });
 
+// Fabric Routes Section
+
+Route::resource('admin/product/fabric/price', 'Admin\Product\Fabric\FabricPriceController', ['as' => 'admin.product.fabric']);
+Route::get('admin/product/fabric/{id}/price/create', 'Admin\Product\Fabric\FabricPriceController@createPrice');
+Route::get('admin/product/fabric/price/{id}/delete', 'Admin\Product\Fabric\FabricPriceController@delete');
+
 Route::resource('admin/product/fabric', 'Admin\Product\Fabric\FabricController', ['as' => 'admin.product']);
 Route::get('admin/product/fabric/{id}/delete', 'Admin\Product\Fabric\FabricController@delete')->name('admin.product.fabric.delete');
+
 
 // Product Fabric Routes
 Route::group(['prefix'  =>   'admin', 'as' => 'admin.'], function() {
@@ -351,4 +358,19 @@ Route::post('/design/shirt/new/add-to-cart', 'Ecommerce\ProductController@cartAd
 // Route::get('/product/shirt/{id}/details', 'Front\Product\ProductController@detail');
 Route::get('/product/shirt/{slug}', 'Front\Product\ProductController@detail');
 Route::get('product/design/jso/{id}', 'Front\Product\ProductDesignController@jso');
+
+// Product Details API End Points
+Route::post('/front/api/product/detail', 'Front\Api\Product\ProductController@detail');
+Route::post('/front/api/product/fabric', 'Front\Api\Product\Fabric\FabricController@detail');
+Route::post('/front/api/product/shirt/pocket', 'Front\Api\Product\Attribute\AttributeController@loadShirtPocket');
+Route::post('/front/api/measurement/profile/attributes', 'Front\Api\Measurement\MeasurementProfileController@loadAttributeValues');
+Route::post('/front/api/monogram/list', 'Front\Api\Monogram\MonogramController@loadMonograms');
+Route::post('/front/api/measurement/product/attributes', 'Front\Api\Measurement\MeasurementAttributeController@loadAttributes');
+
+// Test Endpoints - To be deleted.
+Route::get('/front/api/product/fabrics', 'Front\Api\Product\Fabric\FabricController@details');
+Route::get('/front/api/product/details', 'Front\Api\Product\ProductController@details');
+Route::get('/front/api/product/shirt/pockets', 'Front\Api\Product\Attribute\AttributeController@loadShirtPockets');
+Route::get('/front/api/measurement/profile/getattributes', 'Front\Api\Measurement\MeasurementProfileController@attributeValues');
+Route::get('/front/api/monogram/lists', 'Front\Api\Monogram\MonogramController@loadMonogramz');
 

@@ -7,12 +7,13 @@ use App\Models\Product\Fabric\FabricClass;
 use App\Models\Product\Fabric\FabricAttribute;
 use App\Models\Product\Fabric\FabricAttributeValue;
 use App\Models\Product\Fabric\FabricBrand;
+use App\Models\Product\Fabric\FabricPrice;
+use App\Models\Product\ProductCategory;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Product\ProductCategory;
-use Illuminate\Support\Str;
 
+use Illuminate\Support\Str;
 use Auth;
 use Validator;
 use Session;
@@ -134,6 +135,7 @@ class FabricController extends Controller
         $values = FabricAttributeValue::all();
         $fabric = Fabric::find($id);
         $categories = ProductCategory::all();
+        $fabric_prices = FabricPrice::where('fabric_id', $id)->get();
 
         $sel_categories = array();
         foreach($fabric->productCategories as $category)
@@ -141,7 +143,7 @@ class FabricController extends Controller
             $sel_categories[] = $category->id;
         }
 
-        return view('admin.product.fabric.edit')->with('fabric', $fabric)->with('brands', $brands)->with('classes', $classes)->with('attributes', $attributes)->with('values', $values)->with('categories', $categories)->with('sel_categories', $sel_categories);
+        return view('admin.product.fabric.edit')->with('fabric', $fabric)->with('brands', $brands)->with('classes', $classes)->with('attributes', $attributes)->with('values', $values)->with('categories', $categories)->with('sel_categories', $sel_categories)->with('fabric_prices', $fabric_prices);
     }
 
     /**

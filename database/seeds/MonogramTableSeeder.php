@@ -14,7 +14,7 @@ class MonogramTableSeeder extends Seeder
     {
         DB::table('monograms')->insert([
             [
-            	'product_category_id' => 3,
+            	'product_attribute_set_id' => 1,
             	'name' => 'Chest Pocket Monogram',
                 'code' => 'chest_pocket_monogram',
             	'letter' =>  6,
@@ -23,7 +23,7 @@ class MonogramTableSeeder extends Seeder
 	            'updated_at' => Carbon::now(),
 	        ],
 	        [
-            	'product_category_id' => 3,
+            	'product_attribute_set_id' => 1,
             	'name' => 'Waist Monogram',
                 'code' => 'waist_monogram',
             	'letter' =>  8,

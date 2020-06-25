@@ -9,16 +9,18 @@ use App\Models\Product\ProductMonogram;
 use App\Models\Product\ProductAttribute;
 use App\Models\Product\ProductAttributeValueSave;
 use App\Models\Product\ProductDesign;
+use App\Models\Measurement\UserMeasurementProfile;
 use App\Models\MeasurementAttribute;
-use App\Models\UserMeasurementProfile;
 use App\Models\UMProfileValue;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use stdClass;
 use Session;
 use Auth;
 use Cart;
+use Carbon\Carbon;
 
 class ProductController extends Controller
 {
@@ -32,7 +34,88 @@ class ProductController extends Controller
     public function detail($slug)
     {
         $product = Product::where('slug', '=', $slug)->first();
-        return view('front.product.shirt.detail')->with('product', $product);
+        
+        $shirtPockets = $this->shirtPocket($product);
+        $productPrice = $this->shirtPrice($product);
+        $defaultMeasurementProfile = $this->defaultMeasurementProfile($product);
+        $userMeasurementProfile = $this->userMeasurementProfile($product);
+
+        return view('front.product.shirt.detail')->with('product', $product)->with('productPrice', $productPrice)->with('shirtPockets', $shirtPockets)->with('userMeasurementProfile', $userMeasurementProfile)->with('defaultMeasurementProfile', $defaultMeasurementProfile);
+    }
+
+    private function defaultMeasurementProfile($product)
+    {
+        $measurementProfiles = $product->attributeSet->measurementProfiles;
+        $measurementProfile_array = array();
+        foreach($measurementProfiles as $profile)
+        {
+            $dmProfile = new stdClass();
+            $dmProfile->id = $profile->id;
+            $dmProfile->name = $profile->name;
+            $measurementProfile_array[] = $dmProfile;
+        }
+        return $measurementProfiles;
+    }
+
+    private function userMeasurementProfile($product)
+    {
+        $measurementProfiles = $product->attributeSet->measurementProfiles;
+        $user_id = Auth::user()->id;
+        $measurementProfile_array = array();
+        foreach ($measurementProfiles as $profile) {
+            if($profile->user_id == $user_id)
+            {
+                $dmProfile = new stdClass();
+                $dmProfile->id = $profile->id;
+                $dmProfile->name = $profile->name;
+                $measurementProfile_array[] = $dmProfile;
+            }
+        }
+        return $measurementProfiles;
+    }
+
+    private function shirtPrice($product)
+    {
+        $startDate = Carbon::create($product->price->startDate);
+        $endDate = Carbon::create($product->price->endDate);
+        $product_price = new stdClass();
+        if (Carbon::now()->between($startDate, $endDate)) {
+            $product_price->price = $product->price->splPrice;
+            $product_price->old_price = $product->price->price;
+        } else {
+            $product_price->price = $product->price->price;
+        }
+        return $product_price;
+    }
+
+    private function shirtPocket($product)
+    {
+        foreach ($product->attributes as $attr) {
+            if ($attr->product_attribute_id == 4) {
+                $selected_pocket_value = $attr->product_attribute_value_id;
+            }
+        }
+        $shirtPockets_array = array();
+        foreach ($product->attributeSet->attributes as $attribute) {
+            if ($attribute->id == 4) {
+                foreach ($attribute->productAttributeValues as $value) {
+                    if ($value->id == $selected_pocket_value) {
+                        $shirtPocket = new stdClass();
+                        $shirtPocket->id = $value->id;
+                        $shirtPocket->value = $value->value;
+                        $shirtPocket->select = 1;
+                        $shirtPockets_array[] = $shirtPocket;
+                    } else {
+                        $shirtPocket = new stdClass();
+                        $shirtPocket->id = $value->id;
+                        $shirtPocket->value = $value->value;
+                        $shirtPocket->select = 0;
+                        $shirtPockets_array[] = $shirtPocket;
+                    }
+                }
+            }
+        }
+        return $shirtPockets_array;
     }
 
     public function createProduct(Request $request)

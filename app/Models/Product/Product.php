@@ -21,9 +21,9 @@ class Product extends Model
         return $this->belongsTo('App\Models\Measurement\UserMeasurementProfile', 'u_mp_id');
     }
 
-    public function design()
+    public function attributeSet()
     {
-        return $this->belongsTo('App\Models\Product\ProductDesign', 'product_design_id');
+        return $this->belongsTo('App\Models\Product\ProductAttributeSet', 'product_attribute_set_id');
     }
 
     public function fabric()
@@ -88,4 +88,5 @@ class Product extends Model
     {
         return $this->hasOne('App\Models\Product\Weight\ProductWeight', 'product_id');
     }
+
 }

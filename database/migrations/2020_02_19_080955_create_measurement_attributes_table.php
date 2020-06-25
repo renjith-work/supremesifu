@@ -19,7 +19,7 @@ class CreateMeasurementAttributesTable extends Migration
             $table->string('name');
             $table->enum('frontend_type', ['select', 'radio', 'text', 'text_area']);
             $table->bigInteger('measurement_category_id')->nullable();
-            $table->bigInteger('product_category_id')->nullable();
+            $table->bigInteger('product_attribute_set_id')->nullable();
             $table->bigInteger('tutorial_id')->nullable();
             $table->boolean('is_filterable')->default(0);
             $table->boolean('is_required')->default(0);

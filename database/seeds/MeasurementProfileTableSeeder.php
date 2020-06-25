@@ -14,31 +14,31 @@ class MeasurementProfileTableSeeder extends Seeder
     {
         DB::table('measurement_profiles')->insert([
             [   
-                'product_category_id' => 3,
+                'product_attribute_set_id' => 1,
                 'name'       =>  'S - Small (Size 32)',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [   
-                'product_category_id' => 3,
+                'product_attribute_set_id' => 1,
                 'name'       =>  'M - Medium (Size 34)',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [   
-                'product_category_id' => 3,
+                'product_attribute_set_id' => 1,
                 'name'       =>  'L - Large (Size 36)',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [   
-                'product_category_id' => 3,
+                'product_attribute_set_id' => 1,
                 'name'       =>  'XL - Extra Large (Size 38)',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [   
-                'product_category_id' => 3,
+                'product_attribute_set_id' => 1,
                 'name'       =>  'XXL - Extra Extra Large (Size 40)',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),

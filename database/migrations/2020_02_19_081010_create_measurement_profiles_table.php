@@ -15,7 +15,7 @@ class CreateMeasurementProfilesTable extends Migration
     {
         Schema::create('measurement_profiles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('product_category_id')->nullable();
+            $table->bigInteger('product_attribute_set_id')->nullable();
             $table->string('name');
             $table->timestamps();
         });

@@ -89,56 +89,6 @@
                                 </select>
                                 @error('status') <p class="error-p">{{$errors->first('status')}}</p> @enderror
                             </div> 
-                            <div class="section-sub-title">Fabric Product Price</div>
-                            <div class="fabric-price-cover">
-                                <div class="fabric-price-item">
-                                    <div class="fabric-price-item-head">
-                                        <div class="fabric-price-item-close">
-                                            <button type="button" name="remove-fabric-price" class="btn btn-danger remove-fabric-price">X</button>
-                                        </div>
-                                    </div>
-                                    <div class="fabric-price-item-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Product Type</label>
-                                                <select class="form-control custom-select mt-15" name="product_set">
-                                                    <option value="1">Active</option>
-                                                    <option value="0">In-Active</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Product Price</label>
-                                                    <input type="number" step="any" name="price" class="form-control" id="price" maxlength="255">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Promotional Price</label>
-                                                    <input type="number" step="any" name="price" class="form-control" id="price" maxlength="255">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="startDate">Promo Price - Begin Date</label>
-                                                    <input type="date" name="startDate" class="form-control" id="startDate" maxlength="255">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="endDate">Promo Price - End Date</label>
-                                                    <input type="date" name="endDate" class="form-control" id="endDate" maxlength="255">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="fabric-add-more-cover">
-                                <button type="button" name="add_price" id="add_price" class="btn btn-success btn-fabric-add">Add More Price</button>
-                            </div>
                             <div class="box-footer">
                                 <input id="submitTag" type="Submit" value="Submit" class="btn btn-success btn-lg pull-right submit-button btn-submit">
                             </div>

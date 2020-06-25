@@ -18,5 +18,10 @@ class MeasurementAttribute extends Model
 
 	public function userMeasurementProfileValue(){
     	return $this->hasMany('App\Models\Measurement\UserMeasurementProfileValue',  'm_at_id');
-    }
+	}
+
+	public function productAttributeSet()
+	{
+		return $this->belongsTo('App\Models\Product\roductAttributeSet', 'product_attribute_set_id');
+	}
 }

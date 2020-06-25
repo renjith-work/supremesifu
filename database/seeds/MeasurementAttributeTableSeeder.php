@@ -17,7 +17,7 @@ class MeasurementAttributeTableSeeder extends Seeder
         		'name'          =>  'Neck Size',
         		'frontend_type'          =>  'select',
                 'measurement_category_id'          =>  1,
-                'product_category_id'          =>  3,
+                'product_attribute_set_id' => 1,
         		'tutorial_id'          =>  1,
         	],
         	[
@@ -25,7 +25,7 @@ class MeasurementAttributeTableSeeder extends Seeder
         		'name'          =>  'Shoulder Size',
         		'frontend_type'          =>  'select',
         		'measurement_category_id'          =>  1,
-                'product_category_id'          =>  3,
+                'product_attribute_set_id' => 1,
         		'tutorial_id'          =>  1,
         	],
         	[
@@ -33,7 +33,7 @@ class MeasurementAttributeTableSeeder extends Seeder
         		'name'          =>  'Front Length',
         		'frontend_type'          =>  'select',
         		'measurement_category_id'          =>  1,
-                'product_category_id'          =>  3,
+                'product_attribute_set_id' => 1,
         		'tutorial_id'          =>  1,
         	],
         	[
@@ -41,7 +41,7 @@ class MeasurementAttributeTableSeeder extends Seeder
         		'name'          =>  'Back Length',
         		'frontend_type'          =>  'select',
         		'measurement_category_id'          =>  1,
-                'product_category_id'          =>  3,
+                'product_attribute_set_id' => 1,
         		'tutorial_id'          =>  1,
         	],
         	[
@@ -49,7 +49,7 @@ class MeasurementAttributeTableSeeder extends Seeder
         		'name'          =>  'Sleeve Length',
         		'frontend_type'          =>  'select',
         		'measurement_category_id'          =>  1,
-                'product_category_id'          =>  3,
+                'product_attribute_set_id' => 1,
         		'tutorial_id'          =>  1,
         	],
         	[
@@ -57,7 +57,7 @@ class MeasurementAttributeTableSeeder extends Seeder
         		'name'          =>  'Chest Size',
         		'frontend_type'          =>  'select',
         		'measurement_category_id'          =>  1,
-                'product_category_id'          =>  3,
+                'product_attribute_set_id' => 1,
         		'tutorial_id'          =>  1,
         	],
         	[
@@ -65,7 +65,7 @@ class MeasurementAttributeTableSeeder extends Seeder
         		'name'          =>  'Waist Size',
         		'frontend_type'          =>  'select',
         		'measurement_category_id'          =>  1,
-                'product_category_id'          =>  3,
+                'product_attribute_set_id' => 1,
         		'tutorial_id'          =>  1,
         	],
         	[
@@ -73,7 +73,7 @@ class MeasurementAttributeTableSeeder extends Seeder
         		'name'          =>  'Hip Size',
         		'frontend_type'          =>  'select',
         		'measurement_category_id'          =>  1,
-                'product_category_id'          =>  3,
+                'product_attribute_set_id' => 1,
         		'tutorial_id'          =>  1,
         	],
         	[
@@ -81,7 +81,7 @@ class MeasurementAttributeTableSeeder extends Seeder
         		'name'          =>  'Elbow Size',
         		'frontend_type'          =>  'select',
         		'measurement_category_id'          =>  1,
-                'product_category_id'          =>  3,
+                'product_attribute_set_id' => 1,
         		'tutorial_id'          =>  1,
         	],
         	[
@@ -89,7 +89,7 @@ class MeasurementAttributeTableSeeder extends Seeder
         		'name'          =>  'Armhole Size',
         		'frontend_type'          =>  'select',
         		'measurement_category_id'          =>  1,
-                'product_category_id'          =>  3,
+                'product_attribute_set_id' => 1,
         		'tutorial_id'          =>  1,
         	],
         	[
@@ -97,7 +97,7 @@ class MeasurementAttributeTableSeeder extends Seeder
         		'name'          =>  'Cuff Size',
         		'frontend_type'          =>  'select',
         		'measurement_category_id'          =>  1,
-                'product_category_id'          =>  3,
+                'product_attribute_set_id' => 1,
         		'tutorial_id'          =>  1,
         	],
             [
@@ -105,7 +105,7 @@ class MeasurementAttributeTableSeeder extends Seeder
                 'name'          =>  'Chest Size',
                 'frontend_type'          =>  'select',
                 'measurement_category_id'          =>  2,
-                'product_category_id'          =>  3,
+                'product_attribute_set_id' => 1,
                 'tutorial_id'          =>  1,
             ],
             [
@@ -113,7 +113,7 @@ class MeasurementAttributeTableSeeder extends Seeder
                 'name'          =>  'Waist Size',
                 'frontend_type'          =>  'select',
                 'measurement_category_id'          =>  2,
-                'product_category_id'          =>  3,
+                'product_attribute_set_id' => 1,
                 'tutorial_id'          =>  1,
             ],
             [
@@ -121,7 +121,7 @@ class MeasurementAttributeTableSeeder extends Seeder
                 'name'          =>  'Hip Size',
                 'frontend_type'          =>  'select',
                 'measurement_category_id'          =>  2,
-                'product_category_id'          =>  3,
+                'product_attribute_set_id' => 1,
                 'tutorial_id'          =>  1,
             ],
 

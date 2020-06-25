@@ -15,4 +15,19 @@ class ProductAttributeSet extends Model
     {
         return $this->hasMany('App\Models\Product\Fabric\FabricPrice', 'product_attribute_set_id');
     }
+
+    public function monograms()
+    {
+        return $this->hasMany('App\Models\Product\Monogram', 'product_attribute_set_id');
+    }
+
+    public function measurementProfiles()
+    {
+        return $this->hasMany('App\Models\Measurement\MeasurementProfile', 'product_attribute_set_id');
+    }
+
+    public function measurementAttributes()
+    {
+        return $this->hasMany('App\Models\Measurement\MeasurementAttribute', 'product_attribute_set_id');
+    }
 }

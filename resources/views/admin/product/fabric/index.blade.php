@@ -26,6 +26,7 @@
                                 <th>Slug</th>
                                 <th>Description</th>
                                 <th>Price /M</th>
+                                <th>Product Price</th>
                                 <th>Class</th>
                                 <th>Brand</th>
                                 <th>Categories</th>
@@ -40,6 +41,13 @@
                                 <td>{{$fabric->slug }}</td>
                                 <td>{!! $fabric->description !!}</td>
                                 <td>{{$fabric->price }}</td>
+                                <td>
+                                    @foreach($fabric->prices as $price)
+                                        <b><u>{{$price->product->name}}</u></b> <br>
+                                        <b>Price - </b>{{$price->price}} <br> 
+                                        <b>Promo Price - </b>{{$price->splPrice}}
+                                    @endforeach
+                                </td>
                                 <td>{{$fabric->class->name }}</td>
                                 <td>{{$fabric->brand->name }}</td>
                                 <td>

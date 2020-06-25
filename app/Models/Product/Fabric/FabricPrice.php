@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class FabricPrice extends Model
 {
-    public function attribute()
+    public function product()
     {
-        return $this->belongsTo('App\Models\Product\Fabric\FabricPrice', 'product_attribute_set_id');
+        return $this->belongsTo('App\Models\Product\ProductAttributeSet', 'product_attribute_set_id');
     }
 
     public function fabric()

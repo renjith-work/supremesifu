@@ -10,4 +10,9 @@ class Monogram extends Model
     {
         return $this->belongsToMany('App\Models\Product\ProductMonogram', 'product_monograms', 'monogram_id', 'product_id');
     }
+
+    public function attributeSet()
+    {
+        return $this->belongsTo('App\Models\Product\ProductAttributeSet', 'product_attribute_set_id');
+    }
 }

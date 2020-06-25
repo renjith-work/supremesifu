@@ -8,13 +8,84 @@ $(document).ready(function() {
 
     $('.measure-learn-link').css('display','block');
 
-    $(window).load(function(){
-        loadProductImages(product_id);
-    }); 
+    
+
+
+    loadProductDetails(product_id);
+    function loadProductDetails(id)
+    {
+        $.ajax({
+            url: "/front/api/product/detail",
+            type: 'POST',
+            data: { _token: _token, id: id },
+            dataType: 'json',
+            success: function (response) {
+                loadProductName(response[0].name);
+                loadProductPrice(response[0].price, response[0].old_price);
+                loadProductFabricDetails(response[0].fabric);
+                loadProductImagez(response[0].image);
+                loadProductPocket(response[0].pockets);
+
+                // Feeding Global Variable
+                currentProduct_id = response[0].id;
+                currentProduct_fabric_id = response[0].fabric[0].id;
+                currentProduct_price = response[0].price;
+            }
+        });
+    }
+    
+
+    function loadProductName(productName)
+    {   
+        $('#product_detail_title').html('');
+        $('#product_detail_title').append(productName);
+    }
+
+    function loadProductPrice(productPromoPrice, productPrice) 
+    {
+        $('#product_price').html('');
+        $('#product_og_price').html('');
+        $('#product_price').append('MYR ' + productPromoPrice);
+        $('#product_og_price').append('MYR ' + productPrice);
+    }
+
+    function loadProductFabricDetails(productFabric)
+    {   
+        
+        $('#fabric_details_body').html('');
+        $('#product-detail-fabric-image').html('');
+        $('#product_detail_fabric_image').html('');
+        $('#fabric_details_body').append('<div class="row fabric-detail-item"><div class="col-md-5 fabric-detail-head">Name</div><div class="col-md-7 fabric-detail-body">' + productFabric[0].name + '</div></div>'); 
+        $('#fabric_details_body').append('<div class="row fabric-detail-item"><div class="col-md-5 fabric-detail-head">Class</div><div class="col-md-7 fabric-detail-body">' + productFabric[0].class + '</div></div>');
+        loadFabricDetailsAttributes(productFabric[0].attributes);
+        loadFabricImage(productFabric[0].image);
+    }
+
+    function loadFabricDetailsAttributes(fabricAttributes)
+    {   
+        $.each(fabricAttributes, function (key, value) {
+            $('#fabric_details_body').append('<div class="row fabric-detail-item"><div class="col-md-5 fabric-detail-head">' + value.attribute_name + '</div><div class="col-md-7 fabric-detail-body">' + value.attribute_value + '</div></div>');
+        });
+    }   
+
+    function loadFabricImage(productFabricImage)
+    {
+        $('#product-detail-fabric-image').html('');
+        $('#product_detail_fabric_image').append('<img src="/images/product/fabric/' + productFabricImage + '" alt="">')
+    }
+
+    function loadProductPocket(pockets){
+        $.each(pockets, function (key, value) {
+            if (value.select == 1) {
+                $('#design_pocket').append(' <div class="col-md-4"><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="shirt-pocket" id="pocket_' + value.id + '" value="' + value.id + '" checked="checked"><label class="form-check-label">' + value.value + '</label></div></div>');
+            } else {
+                $('#design_pocket').append(' <div class="col-md-4"><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="shirt-pocket" id="pocket_' + value.id + '" value="' + value.id + '"><label class="form-check-label">' + value.value + '</label></div></div>');
+            }
+        });
+    }
+
 
 // Product Images
-
-//Check what this function is form and input details here 
 
     function destroyCarousel() {
         if ($('.product-details-images').hasClass('slick-initialized')) {
@@ -28,27 +99,25 @@ $(document).ready(function() {
 
 //Load the product images on page load.
     
-    function loadProductImages(id){
-        $('#product_detail_images').html('');
-        $('#product_detail_thumbs').html('');
-        var _token = $("input[name='_token']").val();
-        $.ajax({
-            url: "/product/load/images",
-            type:'POST',
-            data: {_token:_token, id:id},
-            dataType: 'json',
-            success:function(response){
-                console.log(response);
-                $.each(response, function(key,value){
-                    $('#product_detail_images').append('<div class="lg-image"><a href="/images/product/product/' + value.name + '" class="img-poppu"><img src="/images/product/product/' + value.name + '" alt="' + value.name +'"></a></div>');
-                    $('#product_detail_thumbs').append('<div class="sm-image"><img src="/images/product/product/'+value.name+'" alt="product image thumb"></div>');
-                });
-                destroyCarousel();
-                loadSlick();
-            }
-        });
-        
+    function loadProductImagez(productImages)
+    {
+        $('#product_detail_images').append('<div class="lg-image"><a href="/images/product/product/' + productImages[0].primary_image + '" class="img-poppu"><img src="/images/product/product/' + productImages[0].primary_image + '" alt="' + productImages[0].primary_image + '"></a></div>');
+        $('#product_detail_thumbs').append('<div class="sm-image"><img src="/images/product/product/' + productImages[0].primary_image + '" alt="product image thumb"></div>');
+        $('#product_detail_images').append('<div class="lg-image"><a href="/images/product/product/' + productImages[0].secondary_image + '" class="img-poppu"><img src="/images/product/product/' + productImages[0].secondary_image + '" alt="' + productImages[0].secondary_image + '"></a></div>');
+        $('#product_detail_thumbs').append('<div class="sm-image"><img src="/images/product/product/' + productImages[0].secondary_image + '" alt="product image thumb"></div>');
+        loadProductImagezAlbum(productImages[0].album);
+        destroyCarousel();
+        loadSlick();
     }
+
+    function loadProductImagezAlbum(imagezAlbum)
+    {
+        $.each(imagezAlbum, function (key, value) {
+            $('#product_detail_images').append('<div class="lg-image"><a href="/images/product/product/' + value + '" class="img-poppu"><img src="/images/product/product/' + value + '" alt="' + value + '"></a></div>');
+            $('#product_detail_thumbs').append('<div class="sm-image"><img src="/images/product/product/' + value + '" alt="product image thumb"></div>');
+        });
+    }
+
 
 // Loading the slick load since images are being dynamically loaded. 
     function loadSlick(){
@@ -97,53 +166,54 @@ $(document).ready(function() {
     }
 
 // Fabric Management
+    
 
 // Load Fabric Details on to the page.
-    loadFabricDetails(fabric_id);
-    function loadFabricDetails(id){
-        $('#fabric_details_body').html('');
-        $('#product-detail-fabric-image').html('');
-        $('#product_detail_title').html('');
-        $('#product_detail_fabric_image').html('');
-        var _token = $("input[name='_token']").val();
-        $.ajax({
-            url: "/fabric/details",
-            type:'POST',
-            data: {_token:_token, id:id},
-            dataType: 'json',
-            success:function(response){
-                    $('#product_detail_title').append(product_name);
-                    $('#product_detail_fabric_image').append('<img src="/images/product/fabric/'+response[0].image+'" alt="">')
-                    $('#fabric_details_body').append('<div class="row fabric-detail-item"><div class="col-md-5 fabric-detail-head">Name</div><div class="col-md-7 fabric-detail-body">'+response[0].name+'</div></div>');
-                    $('#fabric_details_body').append('<div class="row fabric-detail-item"><div class="col-md-5 fabric-detail-head">Class</div><div class="col-md-7 fabric-detail-body">'+response[0].class+'</div></div>');
-                    $.each(response[0].attributes, function(key,value){
-                        $('#fabric_details_body').append('<div class="row fabric-detail-item"><div class="col-md-5 fabric-detail-head">'+value.t1+'</div><div class="col-md-7 fabric-detail-body">'+value.t2+'</div></div>');
-                    });
-                    calculatePrice(response[0].id, product_id);
-                    fabric_id = response[0].id;
-            }
-        });
-    }
+    // loadFabricDetails(fabric_id);
+    // function loadFabricDetails(id){
+    //     $('#fabric_details_body').html('');
+    //     $('#product-detail-fabric-image').html('');
+    //     // $('#product_detail_title').html('');
+    //     $('#product_detail_fabric_image').html('');
+    //     var _token = $("input[name='_token']").val();
+    //     $.ajax({
+    //         url: "/fabric/details",
+    //         type:'POST',
+    //         data: {_token:_token, id:id},
+    //         dataType: 'json',
+    //         success:function(response){
+    //                 // $('#product_detail_title').append(product_name);
+    //                 $('#product_detail_fabric_image').append('<img src="/images/product/fabric/'+response[0].image+'" alt="">')
+    //                 $('#fabric_details_body').append('<div class="row fabric-detail-item"><div class="col-md-5 fabric-detail-head">Name</div><div class="col-md-7 fabric-detail-body">'+response[0].name+'</div></div>');
+    //                 $('#fabric_details_body').append('<div class="row fabric-detail-item"><div class="col-md-5 fabric-detail-head">Class</div><div class="col-md-7 fabric-detail-body">'+response[0].class+'</div></div>');
+    //                 $.each(response[0].attributes, function(key,value){
+    //                     $('#fabric_details_body').append('<div class="row fabric-detail-item"><div class="col-md-5 fabric-detail-head">'+value.t1+'</div><div class="col-md-7 fabric-detail-body">'+value.t2+'</div></div>');
+    //                 });
+    //                 calculatePrice(response[0].id, product_id);
+    //                 fabric_id = response[0].id;
+    //         }
+    //     });
+    // }
 
 // Calculate the price of the fabric with respect to the product. 
    
-    function calculatePrice(fab_id, product_id){
-        $('#product_price').html('');
-        $('#product_og_price').html('');
-        var _token = $("input[name='_token']").val();
-        $.ajax({
-            url: "/product/price/calculate",
-            type:'POST',
-            data: {_token:_token, fab_id:fab_id, product_id:product_id},
-            dataType: 'json',
-            success:function(response){
-                $('#product_price').append('MYR '+response.price);
-                $('#product_og_price').append('MYR '+response.og_price);
-                product_price = response.price;
+    // function calculatePrice(fab_id, product_id){
+    //     $('#product_price').html('');
+    //     $('#product_og_price').html('');
+    //     var _token = $("input[name='_token']").val();
+    //     $.ajax({
+    //         url: "/product/price/calculate",
+    //         type:'POST',
+    //         data: {_token:_token, fab_id:fab_id, product_id:product_id},
+    //         dataType: 'json',
+    //         success:function(response){
+    //             $('#product_price').append('MYR '+response.price);
+    //             $('#product_og_price').append('MYR '+response.og_price);
+    //             product_price = response.price;
                 
-            }
-        });
-    }
+    //         }
+    //     });
+    // }
 
 // Load the change fabric modal from the button click
     $('#loadFabricButton').click(function(event) {
@@ -155,6 +225,7 @@ $(document).ready(function() {
 // Loading the class on to the fabric change modal
 
     function loadClass(){
+        console.log('Load Fabric CLasses');
         $('#class_cover').html('');
         $('#modal_instruction').html('');
         $('#md_ld_fabclass').css({display: 'none'});
@@ -173,6 +244,7 @@ $(document).ready(function() {
 
 // Load the fabric from the fabric class selected.
     $(document).on('change', 'input[type=radio][name=fabric_class]', function(){
+        console.log('Load Fabrics');
         var cat_id = $("input[name='fabric_class']:checked").val();
         var cat_name = $("input[name='fabric_class']:checked").parent("div").find(".class-content-title").text();
         var _token = $("input[name='_token']").val();
@@ -198,9 +270,26 @@ $(document).ready(function() {
 
     $(document).on('change', 'input[type=radio][name=fabric_material]', function(){
         var fabric_id = $("input[name='fabric_material']:checked").val();
-        loadFabricDetails(fabric_id);
+        loadNewFabricDetails(fabric_id, product_attr_set_id);
         $('#loadFabric').modal('hide');
     });
+
+    function loadNewFabricDetails(id, attr)
+    {
+        $.ajax({
+            url: "/front/api/product/fabric",
+            type: 'POST',
+            data: { _token: _token, id: id, attr: attr},
+            dataType: 'json',
+            success: function (response) {
+                loadProductFabricDetails(response);
+                loadProductPrice(response[0].price[0].price, response[0].price[0].old_price);
+                // Feeding Global Variables
+                currentProduct_fabric_id = response[0].id;
+                currentProduct_price = response[0].price[0].price;
+            }
+        });
+    }
 
 // Set the height of the fabric details bloack with respect to the longest block. 
 
@@ -227,6 +316,27 @@ $(document).ready(function() {
         event.preventDefault();
         $('#loadFabric').modal('hide');
     });
+
+// Load Monogram input fields function
+    loadMonograms();
+    function loadMonograms() {
+        $('#monogram_cover').html('');
+        $.ajax({
+            url: "/product/design/monogram/list",
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                $.each(response, function (key, value) {
+                    console.log();
+                    var tutorialCode = '';
+                    if (value.tutorial_id != null) {
+                        var tutorialCode = '<div class="modal-input-instruction"><a href="' + value.tutorial_id + '" class="mt-link"><span>instruction</span> <i class="fa fa-info-circle"></i></a></div>';
+                    }
+                    $('#monogram_cover').append('<div class="col-md-6"><div class="monogram-item"><div class="measurement-head"><div class="modal-input-label">' + value.name + ' </div> ' + tutorialCode + '</div><div class="monogram-body mt--5"><input type="text" id="' + value.code + '" name="' + value.code + '" class="monogram-input" placeholder="Maximum Of ' + value.letter + ' Letters"></div></div></div>');
+                });
+            }
+        });
+    }
 
 
 // Measurement Management
@@ -413,53 +523,6 @@ $(document).ready(function() {
         });
     }
 
-// Product Attributes Load
-
-// Load Pockets - (Product Attribute)
-    loadPockets(product_id);
-    function loadPockets(id){
-        $('#design_pocket').html('');
-        var _token = $("input[name='_token']").val();
-        $.ajax({
-            url: "/product/front/attribute/pocket/load",
-            type:'POST',
-            data: {_token:_token, id:id},
-            dataType: 'json',
-            success:function(response){
-                $.each(response, function(key,value){
-                    if (value.select == 1) {
-                        $('#design_pocket').append(' <div class="col-md-4"><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="shirt-pocket" id="pocket_'+value.id+'" value="'+value.id+'" checked="checked"><label class="form-check-label">'+value.name+'</label></div></div>');
-                    }else{
-                        $('#design_pocket').append(' <div class="col-md-4"><div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="shirt-pocket" id="pocket_'+value.id+'" value="'+value.id+'"><label class="form-check-label">'+value.name+'</label></div></div>');   
-                    }
-                });
-            }
-        });
-    }
-
-// Monogram Management
-
-// Load Monogram input fields function
-    loadMonograms();
-    function loadMonograms(){
-        $('#monogram_cover').html('');
-        $.ajax({
-            url: "/product/design/monogram/list",
-            type:'GET',
-            dataType: 'json',
-            success:function(response){
-                $.each(response, function(key,value){
-                    console.log();
-                    var tutorialCode ='';
-                    if(value.tutorial_id != null){
-                        var tutorialCode = '<div class="modal-input-instruction"><a href="'+value.tutorial_id+'" class="mt-link"><span>instruction</span> <i class="fa fa-info-circle"></i></a></div>';
-                    }
-                    $('#monogram_cover').append('<div class="col-md-6"><div class="monogram-item"><div class="measurement-head"><div class="modal-input-label">'+value.name+' </div> '+tutorialCode+'</div><div class="monogram-body mt--5"><input type="text" id="'+value.code+'" name="'+value.code+'" class="monogram-input" placeholder="Maximum Of '+value.letter+' Letters"></div></div></div>');
-                });
-            }
-        });
-    }
-
 
 // Submitting the values.
 
@@ -507,29 +570,30 @@ $(document).ready(function() {
 
     function getProductPrice(){
         var name = 'price';
-        var value = $('#product_price').val();
+        // var value = $('#product_price').val();
+        var value = currentProduct_price;
         console.log(value);
         inputObject[name] = value;
     }
 
-    function getProductAttributeValues(id){
-        $.ajax({
-            url: "/product/design/front/attribute/list",
-            type:'POST',
-            data: {_token:_token, id:id},
-            dataType: 'json',
-            success:function(response){
-                $.each(response, function(key,value){
-                    if($('input[name='+value.code+']:checked').val() != null){
-                        name = value.code;
-                        value = $('input[name='+value.code+']:checked').val();
-                        inputObject[name] = value;
-                    }
-                });
-            }
-        });
-        return inputObject;
-    }
+    // function getProductAttributeValues(id){
+    //     $.ajax({
+    //         url: "/product/design/front/attribute/list",
+    //         type:'POST',
+    //         data: {_token:_token, id:id},
+    //         dataType: 'json',
+    //         success:function(response){
+    //             $.each(response, function(key,value){
+    //                 if($('input[name='+value.code+']:checked').val() != null){
+    //                     name = value.code;
+    //                     value = $('input[name='+value.code+']:checked').val();
+    //                     inputObject[name] = value;
+    //                 }
+    //             });
+    //         }
+    //     });
+    //     return inputObject;
+    // }
 
     function getQuantity(){
         name = 'quantity';
@@ -537,11 +601,11 @@ $(document).ready(function() {
         inputObject[name] = value;
     }
 
-    function getProductDesignId(){
-        name = 'design_id';
-        value = product_id;
-        inputObject[name] = value;
-    }
+    // function getProductDesignId(){
+    //     name = 'design_id';
+    //     value = product_id;
+    //     inputObject[name] = value;
+    // }
 
     function getFabricId(){
         name = 'fabric_id';
@@ -595,7 +659,7 @@ $(document).ready(function() {
         event.preventDefault();
         getMonogramValues(product_id);
         getMeasurementValues(product_id);
-        getProductAttributeValues(product_id);
+        // getProductAttributeValues(product_id);
         getQuantity();
         getMeasurementProfile();
         setTimeout(function(){
@@ -606,13 +670,14 @@ $(document).ready(function() {
 
 
     $('#addToCart').on('click', function(event) {
+        testGlobaleVariables()
         event.preventDefault();
         var mval = validateMeasurementInput();
         if(mval == 1)
         {
             getMonogramValues(product_id);
             getMeasurementValues(product_id);
-            getProductAttributeValues(product_id);
+            // getProductAttributeValues(product_id);
             getQuantity();
             getMeasurementProfile();
             getProductPrice();
@@ -638,6 +703,12 @@ $(document).ready(function() {
         }else{
             return 1;
         }
+    }
+
+    function testGlobaleVariables() {
+        console.log(currentProduct_id);
+        console.log(currentProduct_fabric_id);
+        console.log(currentProduct_price);
     }
 
  });

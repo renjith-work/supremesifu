@@ -22,18 +22,38 @@
                 <div class="col-lg-5 col-md-5">
                    <!-- Product Details Left -->
                     <div class="product-details-left ssifu-sticky-top">
-                        <div class="product-details-images slider-lg-image-1" id="product_detail_images"></div>
-                        <div class="product-details-thumbs slider-thumbs-1" id="product_detail_thumbs"></div>
+                        <div class="product-details-images slider-lg-image-1" id="product_detail_images">
+                        @foreach ($product->images as $image)
+                            @if($image->position_id == 1) 
+                                <div class="lg-image"><a href="/images/product/product/{{$image->name}}" class="img-poppu"><img src="/images/product/product/{{$image->name}}" alt="{{$image->name}}"></a></div>
+                            @elseif ($image->position_id == 2)
+                                <div class="lg-image"><a href="/images/product/product/{{$image->name}}" class="img-poppu"><img src="/images/product/product/{{$image->name}}" alt="{{$image->name}}"></a></div>
+                            @else
+                                <div class="lg-image"><a href="/images/product/product/{{$image->name}}" class="img-poppu"><img src="/images/product/product/{{$image->name}}" alt="{{$image->name}}"></a></div>
+                            @endif
+                        @endforeach
+                        </div>
+                        <div class="product-details-thumbs slider-thumbs-1" id="product_detail_thumbs">
+                            @foreach ($product->images as $image)
+                            @if($image->position_id == 1) 
+                                <div class="sm-image"><img src="/images/product/product/{{$image->name}}" alt="product image thumb"></div>
+                            @elseif ($image->position_id == 2)
+                                <div class="sm-image"><img src="/images/product/product/{{$image->name}}" alt="product image thumb"></div>
+                            @else
+                                <div class="sm-image"><img src="/images/product/product/{{$image->name}}" alt="product image thumb"></div>
+                            @endif
+                        @endforeach
+                        </div>
                     </div>
                     <!--// Product Details Left -->
 
                 </div>
                 <div class="col-md-6 offset-md-1">
                     <div class="shirt-content-cover">
-                        <div class="shirt-content-title" id="product_detail_title"></div>
+                    <div class="shirt-content-title" id="product_detail_title">{{$product->name}}</div>
                         <div class="shirt-content-price">
-                            <div class="product_price" id="product_price"></div>
-                            <div class="product_og_price" id="product_og_price"></div>
+                        <div class="product_price" id="product_price">@if(isset($productPrice->price)) MYR {{$productPrice->price}} @endif</div>
+                            <div class="product_og_price" id="product_og_price">@if(isset($productPrice->old_price)) MYR {{$productPrice->old_price}} @endif</div>
                             <br>
                         </div>
                         
@@ -41,10 +61,27 @@
                             <div class="product-details-section-head">FABRIC DETAILS</div>
                             <div class="row">
                                 <div class="col-md-7">
-                                    <div class="fabric-details-body" id="fabric_details_body"></div>
+                                    <div class="fabric-details-body" id="fabric_details_body">
+                                        <div class="row fabric-detail-item">
+                                            <div class="col-md-5 fabric-detail-head">Name</div>
+                                            <div class="col-md-7 fabric-detail-body">{{$product->fabric->name}}</div>
+                                        </div>
+                                        <div class="row fabric-detail-item">
+                                            <div class="col-md-5 fabric-detail-head">Class</div>
+                                            <div class="col-md-7 fabric-detail-body">{{$product->fabric->class->name}}</div>
+                                        </div>
+                                        @foreach($product->fabric->fabricAttributeValues as $attributeValue)
+                                        <div class="row fabric-detail-item">
+                                        <div class="col-md-5 fabric-detail-head">{{$attributeValue->fabricAttribute->name}}</div>
+                                            <div class="col-md-7 fabric-detail-body">{{$attributeValue->value}}</div>
+                                        </div>
+                                        @endforeach
+                                    </div>
                                 </div>
                                 <div class="col-md-4 offset-md-1">
-                                    <div class="product-detail-fabric-image" id="product_detail_fabric_image"></div>
+                                    <div class="product-detail-fabric-image" id="product_detail_fabric_image">
+                                    <img src="/images/product/fabric/{{$product->fabric->image}}" alt="">
+                                    </div>
                                 </div>
                             </div>
                             <div class="product-detail-change-fabric">
@@ -58,18 +95,39 @@
                         </div>
                         <div class="product-detail-section">
                             <div class="product-details-section-head">MONOGRAMS</div>
-                            <div class="row" id="monogram_cover"></div>
+                            <div class="row" id="monogram_cover">
+                                @foreach($product->attributeSet->monograms as $monogram)
+                                <div class="col-md-6">
+                                    <div class="monogram-item">
+                                        <div class="measurement-head">
+                                            <div class="modal-input-label">{{$monogram->name}} </div> 
+                                            <div class="modal-input-instruction">
+                                            <a href="{{$monogram->tutorial_id}}" class="mt-link"><span>instruction</span> <i class="fa fa-info-circle"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="monogram-body mt--5">
+                                        <input type="text" id="{{$monogram->code}}" name="{{$monogram->code}}" class="monogram-input" placeholder="Maximum Of {{$monogram->letter}} Letters">
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
                         </div>
                         <div class="product-detail-section">
                             <div class="product-details-section-head">POCKETS</div>
-                            <div class="row pocket-counter-cover" id="design_pocket"></div>
+                            <div class="row pocket-counter-cover" id="design_pocket">
+                                @foreach($shirtPockets as $pocket)
+                                <div class="col-md-4">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="shirt-pocket" id="pocket_{{$pocket->id}}" value="{{$pocket->id}}" checked="checked">
+                                        <label class="form-check-label">{{$pocket->value}}</label>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
                         </div>
                         <div class="product-detail-section">
                             <div class="product-details-section-head">MEASUREMENTS</div>
-                            <div class="measurement-save-cover alert alert-success"" id="measurement-save-cover">
-                                <b>Congrats !!!</b>  You have measured yourself for a perfect fit.<br>
-                                Would you like to <a id="ldSMeasurement" href="">save this measurement</a> for future refference. 
-                            </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="measurement-head">
@@ -77,18 +135,61 @@
                                     </div>
                                     <div class="measurement-body">
                                         <select name="measurement_profile" id="measureProfile" >
-                                            
+                                            @if(isset($defaultMeasurementProfile))
+                                            <option selected="true" disabled="disabled">Standard Measurement Profiles</option>
+                                            @foreach($defaultMeasurementProfile as $profile)
+                                            <option value="{{$profile->id}}">{{$profile->name}}</option>
+                                            @endforeach
+                                            @endif
+                                            @if(isset($userMeasurementProfile))
+                                            <option selected="true" disabled="disabled">User saved Profiles</option>
+                                            @foreach($userMeasurementProfile as $profile)
+                                            <option value="{{$profile->id}}">{{$profile->name}}</option>
+                                            @endforeach
+                                            @endif
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="measurement-set-cover pt--20 pb--20">
-                                <div class="row" id="measurement_attribute_cover"></div>
+                                <div class="row" id="measurement_attribute_cover">
+                                    @foreach($product->attributeSet->measurementAttributes as $mAttribute)
+                                    @if($mAttribute->measurement_category_id == 1)
+                                        <div class="col-6 col-md-6">
+                                            <div class="measurement-head">
+                                                <div class="modal-input-label">{{$mAttribute->name}}</div> 
+                                                <div class="modal-input-instruction">
+                                                    <a href="{{$mAttribute->tutorial_id}}" class="mt-link"><span>instruction</span> <i class="fa fa-info-circle"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="measurement-body">
+                                                <input type="number" name="{{$mAttribute->code}}" id="{{$mAttribute->code}}" step="any" class="measurement-input" placeholder="..inches">
+                                            </div>
+                                        </div>
+                                    @endif
+                                    @endforeach
+                                </div>
                                 <div class="direct-measure-cover">
                                     <div class="pt--40 pb--30">
                                         <p>For a better finish for you shirt, you can also provide measurement from your favorite shirt that fits you perfectly. </p>
                                     </div>
-                                    <div class="row" id="measurement_ddattribute_cover" class=""></div>
+                                    <div class="row" id="measurement_ddattribute_cover" class="">
+                                        @foreach($product->attributeSet->measurementAttributes as $mAttribute)
+                                        @if($mAttribute->measurement_category_id == 2)
+                                            <div class="col-6 col-md-6">
+                                                <div class="measurement-head">
+                                                    <div class="modal-input-label">{{$mAttribute->name}}</div> 
+                                                    <div class="modal-input-instruction">
+                                                        <a href="{{$mAttribute->tutorial_id}}" class="mt-link"><span>instruction</span> <i class="fa fa-info-circle"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="measurement-body">
+                                                    <input type="number" name="{{$mAttribute->code}}" id="{{$mAttribute->code}}" step="any" class="measurement-input" placeholder="..inches">
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                         </div>  
@@ -120,6 +221,9 @@
                             <div class="col-md-6">
                                 <a id="addToCart" href="#" class="dress-content-place-order">ADD To CART</a>
                             </div>
+                            <div class="col-md-6">
+                                <a id="testButton" href="#" class="dress-content-place-order">Test Button</a>
+                            </div>
                         </div>      
                     </div>
                 </div>
@@ -134,13 +238,12 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-    var fabric_id  = {!!json_encode($product->fabric->id)!!};
     var product_id  = {!!json_encode($product->id)!!};
-    var product_name  = {!!json_encode($product->name)!!};
-    var product_price = {!!json_encode($product->price)!!};
-    var measurement_id  = {!!json_encode($product->u_mp_id)!!};
+    var currentProduct_id = {!!json_encode($product->id)!!};
+    var currentProduct_fabric_id  = {!!json_encode($product->fabric->id)!!};
+    var currentProduct_price  = {!!json_encode($productPrice->price)!!};
 </script>
 {{--     var mp_name  = {!!json_encode($product->umprofile->name)!!};
     var product_design_name  = {!!json_encode($product->design->name)!!}; --}}
-<script type="text/javascript" src="/front/code/js/productDetail.js?version=<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
+<script type="text/javascript" src="/front/code/js/shirt/shirtDetail.js?version=<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 @endsection

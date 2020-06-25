@@ -13,4 +13,9 @@ class UserMeasurementProfileValue extends Model
     public function umprofile(){
     	return $this->belongs('App\Models\Measurement\UserMeasurementProfile',  'u_mp_id');
     }
+
+    public function profile()
+    {
+        return $this->belongsTo('App\Models\Measurement\UserMeasurementProfile',  'u_mp_id');
+    }
 }

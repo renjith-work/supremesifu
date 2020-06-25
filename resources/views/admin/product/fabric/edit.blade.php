@@ -103,7 +103,46 @@
                                     <option value="0" @if($fabric->status == 0) selected @endif>In-Active</option>
                                 </select>
                                 @error('status') <p class="error-p">{{$errors->first('status')}}</p> @enderror
-                            </div> 
+                            </div>
+                            <div class="section-sub-title">Fabric Product Price</div>
+                            <div class="fabric-price-cover">
+                                <div class="fabric-price-table-cover">
+                                    <div class="box-body list-items">
+                                        <table class="table table-bordered ss-data-table">
+                                            <tr class="table_header">
+                                                <th style="width: 30px">#</th>
+                                                <th>Product Type</th>
+                                                <th>Price</th>
+                                                <th>Promo Price</th>
+                                                <th>Promo Start Date</th>
+                                                <th>Promo End Date</th>
+                                                <th style="width: 150px">Action</th>
+                                            </tr>
+                                            @foreach($fabric_prices as $fabric_price)
+                                            <tr>
+                                                <td>{{$fabric_price->id }}</td>
+                                                <td>{{$fabric_price->product->name }}</td>
+                                                <td>{{$fabric_price->price }}</td>
+                                                <td>{{$fabric_price->splPrice }}</td>
+                                                <td>{{$fabric_price->startDate }}</td>
+                                                <td>{{$fabric_price->endDate }}</td>
+                                                <td style="width: 150px;">
+                                                    <div class="action-ul-cover">
+                                                        <ul>
+                                                            <li><a href="/admin/product/fabric/price/{{$fabric_price->id}}/edit " class="crud-ab-cover ab-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+                                                            <li><a href="/admin/product/fabric/price/{{$fabric_price->id}}/delete" class="crud-ab-cover ab-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="fabric-add-more-cover">
+                                    <a href="/admin/product/fabric/{{$fabric->id}}/price/create" class="btn btn-success btn-fabric-add">Add Price</a>
+                                </div>
+                            </div>
                             <div class="box-footer">
                                 <input id="submitTag" type="Submit" value="Submit" class="btn btn-success btn-lg pull-right submit-button btn-submit">
                             </div>
