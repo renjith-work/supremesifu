@@ -265,13 +265,15 @@ Route::group(['prefix'  =>   'custom-shirt'], function() {
 	Route::get('/fabric/class', 'Front\Product\Fabric\FabricController@classList')->name('custom-shirt.fabric.class');
 	Route::get('/fabric/{id}/list', 'Front\Product\Fabric\FabricController@listFabrics')->name('custom-shirt.fabrics');
 	Route::get('/design/{id}/list', 'Front\Product\Design\Shirt\DesignController@listshirtDesigns')->name('custom-shirt.design.list');
-	Route::post('/create', 'Front\Product\ProductController@createProduct')->name('custom-shirt.create');
+	Route::post('/create', 'Front\Product\Product\Custom\CreateShirtController@createShirt')->name('custom-shirt.create');
 	Route::post('/measurement', 'Front\Measurement\MeasurementController@saveMeasurement')->name('custom-shirt.measurements');
+	Route::post('/measurement/save-profile', 'Front\Measurement\MeasurementController@saveProfile')->name('custom-shirt.measurement.save.profile');
 });
 
 // Api End Points
 Route::post('/fabric/class/find', 'Front\Product\Fabric\FabricController@find');
-Route::post('/fabric/details', 'Front\Product\Fabric\FabricController@fabricDetails');
+// Route::post('/fabric/details', 'Front\Product\Fabric\FabricController@fabricDetails');
+Route::post('/fabric/details', 'Front\Api\Product\Fabric\FabricController@fabricDetails');
 Route::get('/fabric/class/list', 'Front\Product\Fabric\ClassController@index');
 Route::post('/design/load', 'Front\Product\Design\Shirt\DesignController@load');
 Route::get('/design/shirt/pocket/list', 'Front\Product\AttributeController@list');
@@ -358,6 +360,13 @@ Route::post('/design/shirt/new/add-to-cart', 'Ecommerce\ProductController@cartAd
 // Route::get('/product/shirt/{id}/details', 'Front\Product\ProductController@detail');
 Route::get('/product/shirt/{slug}', 'Front\Product\ProductController@detail');
 Route::get('product/design/jso/{id}', 'Front\Product\ProductDesignController@jso');
+Route::get('/product/shirt/save-measurement/{product}/{measurementResponse}', 'Front\Measurement\MeasurementController@csuMeasurement');
+Route::get('/product/{id}/edit', 'Front\Product\Product\EditProductController@edit');
+
+// Revised ECommerce Routes
+// Product Detial Page - Submit and Create Product.
+Route::post('/front/product/custom-shirt/create', 'Front\Product\Product\Custom\CreateShirtMeasurementController@createShirt')->name('front.product.custom-shirt.create');
+Route::post('/front/product/create', 'Front\Product\Product\CreateProductController@createProduct');
 
 // Product Details API End Points
 Route::post('/front/api/product/detail', 'Front\Api\Product\ProductController@detail');
@@ -366,6 +375,7 @@ Route::post('/front/api/product/shirt/pocket', 'Front\Api\Product\Attribute\Attr
 Route::post('/front/api/measurement/profile/attributes', 'Front\Api\Measurement\MeasurementProfileController@loadAttributeValues');
 Route::post('/front/api/monogram/list', 'Front\Api\Monogram\MonogramController@loadMonograms');
 Route::post('/front/api/measurement/product/attributes', 'Front\Api\Measurement\MeasurementAttributeController@loadAttributes');
+
 
 // Test Endpoints - To be deleted.
 Route::get('/front/api/product/fabrics', 'Front\Api\Product\Fabric\FabricController@details');

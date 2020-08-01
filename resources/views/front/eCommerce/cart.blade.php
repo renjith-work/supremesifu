@@ -36,6 +36,9 @@
                     <div class="sifu-cart-table-cover">
                         <div class="sifu-cart-table-head">
                             <div class="row">
+                                <div class="col-1 ssifu-table-border">
+                                    <h3>#</h3>
+                                </div>
                                 <div class="col-2 ssifu-table-border">
                                     <h3>IMAGE</h3>
                                 </div>
@@ -45,7 +48,7 @@
                                 <div class="col-2 ssifu-table-border">
                                     <h3>PRICE</h3>
                                 </div>
-                                <div class="col-2 ssifu-table-border">
+                                <div class="col-1 ssifu-table-border">
                                     <h3>QTY</h3>
                                 </div>
                                 <div class="col-2 ssifu-table-border bd-right-non">
@@ -57,14 +60,30 @@
                             </div>
                         </div>
                         <div class="sifu-cart-table-body">
+                            <?php $cartNo = 1; ?>
                             @foreach(\Cart::getContent() as $item)
                             <div class="row">
-                                <div class="col-4 col-md-2">
-                                    <div class="product-content-center"><a href="#"><img src="/images/product/design/{{$item->attributes->folder}}/{{$item->attributes->image}}" alt="product image"></a></div>
+                                <div class="col-1 col-md-1 scol-right-border">
+                                    <div class="product-content-center pcd-dktp">{{$cartNo}}</div>
                                 </div>
-                                <div class="col-8 col-md-3">
+                                <div class="col-4 col-md-2 scol-right-border">
+                                    @if($item->attributes->user == 1)
+                                        @foreach($item->attributes->images as $image)
+                                            @if($image->position_id == 1)
+                                                <img src="/images/product/design/{{$image->name}}">
+                                            @endif
+                                        @endforeach
+                                    @else
+                                        @foreach($item->attributes->images as $image)
+                                            @if($image->position_id == 1)
+                                                <img src="/images/product/design/{{$image->name}}"> 
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </div>
+                                <div class="col-3 col-md-3 scol-right-border">
                                     <div class="product-content-left">
-                                        <div class="product-content-name"><a href="#">{{ Str::words($item->name,20) }}</a></div>
+                                        <div class="product-content-name"><a href="/produc{{$item->id}}/edit">{{ Str::words($item->name,20) }}</a></div>
                                         <div class="product-content-details">
                                             <div class="product-content-details-item row">
                                                 <div class="col-4"><span>Price</span></div>
@@ -87,7 +106,7 @@
                                 <div class="col-4 col-md-2">
                                     <div class="product-content-center pcd-dktp"><span class="amount">{{ config('settings.currency_symbol')}} {{$item->price}}</span></div>
                                 </div>
-                                <div class="col-4 col-md-2">
+                                <div class="col-4 col-md-1">
                                     <div class="product-content-center pcd-dktp">{{ $item->quantity }}</div>
                                 </div>
                                 <div class="col-4 col-md-2">
@@ -97,7 +116,11 @@
                                     <div class="product-content-center"><a href="{{ route('checkout.cart.remove', $item->id) }}" class="btn"><i class="fa fa-close"></i> </a></div>
                                 </div>
                             </div>
+                            @if($item->attributes->user != 1)
+                                    <div class="cart-image-alert">**This image is a refference for the design selected and not the actual product.</div>
+                                @endif
                             <div class="pdc-border"></div>
+                            <?php $cartNo++; ?>
                             @endforeach
                         </div>
                     </div>

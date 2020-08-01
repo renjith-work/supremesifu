@@ -33,24 +33,24 @@
                    <!-- Product Details Left -->
                     <div class="product-details-left ssifu-sticky-top">
                         <div class="product-details-images slider-lg-image-1" id="product_detail_images">
-                        @foreach ($product->images as $image)
+                        @foreach ($design->images as $image)
                             @if($image->position_id == 1) 
-                                <div class="lg-image"><a href="/images/product/product/{{$image->name}}" class="img-poppu"><img src="/images/product/product/{{$image->name}}" alt="{{$image->name}}"></a></div>
+                                <div class="lg-image"><a href="/images/product/design/{{$image->name}}" class="img-poppu"><img src="/images/product/design/{{$image->name}}" alt="{{$image->name}}"></a></div>
                             @elseif ($image->position_id == 2)
-                                <div class="lg-image"><a href="/images/product/product/{{$image->name}}" class="img-poppu"><img src="/images/product/product/{{$image->name}}" alt="{{$image->name}}"></a></div>
+                                <div class="lg-image"><a href="/images/product/design/{{$image->name}}" class="img-poppu"><img src="/images/product/design/{{$image->name}}" alt="{{$image->name}}"></a></div>
                             @else
-                                <div class="lg-image"><a href="/images/product/product/{{$image->name}}" class="img-poppu"><img src="/images/product/product/{{$image->name}}" alt="{{$image->name}}"></a></div>
+                                <div class="lg-image"><a href="/images/product/design/{{$image->name}}" class="img-poppu"><img src="/images/product/design/{{$image->name}}" alt="{{$image->name}}"></a></div>
                             @endif
                         @endforeach
                         </div>
                         <div class="product-details-thumbs slider-thumbs-1" id="product_detail_thumbs">
-                            @foreach ($product->images as $image)
+                            @foreach ($design->images as $image)
                             @if($image->position_id == 1) 
-                                <div class="sm-image"><img src="/images/product/product/{{$image->name}}" alt="product image thumb"></div>
+                                <div class="sm-image"><img src="/images/product/design/{{$image->name}}" alt="product image thumb"></div>
                             @elseif ($image->position_id == 2)
-                                <div class="sm-image"><img src="/images/product/product/{{$image->name}}" alt="product image thumb"></div>
+                                <div class="sm-image"><img src="/images/product/design/{{$image->name}}" alt="product image thumb"></div>
                             @else
-                                <div class="sm-image"><img src="/images/product/product/{{$image->name}}" alt="product image thumb"></div>
+                                <div class="sm-image"><img src="/images/product/design/{{$image->name}}" alt="product image thumb"></div>
                             @endif
                         @endforeach
                         </div>
@@ -65,6 +65,7 @@
                         <div class="product_price" id="product_price">@if(isset($productPrice->price)) MYR {{$productPrice->price}} @endif</div>
                             <div class="product_og_price" id="product_og_price">@if(isset($productPrice->old_price)) MYR {{$productPrice->old_price}} @endif</div>
                             <br>
+                            <div class="pd-btn-instr">**The displayed image is not of the final product but a representation of the design of the product.</div>
                         </div>
                         
                         <div class="product-detail-section">
@@ -100,13 +101,13 @@
                                         <btn class="btn btn-lg pd-btn" id="loadFabricButton">CHANGE FABRIC</btn>  
                                     </div>
                                 </div>
-                                <div class="pd-btn-instr">Any change in the class of the fabric will reflect in the pricing of the product.</div>
+                                <div class="pd-btn-instr">**Any change in the class of the fabric will reflect in the pricing of the product.</div>
                             </div>
                         </div>
                         <div class="product-detail-section">
                             <div class="product-details-section-head">MONOGRAMS</div>
                             <div class="row" id="monogram_cover">
-                                @foreach($product->attributeSet->monograms as $monogram)
+                                @foreach($monograms as $monogram)
                                 <div class="col-md-6">
                                     <div class="monogram-item">
                                         <div class="measurement-head">
@@ -116,7 +117,7 @@
                                             </div>
                                         </div>
                                         <div class="monogram-body mt--5">
-                                        <input type="text" id="{{$monogram->code}}" name="{{$monogram->code}}" class="monogram-input" placeholder="Maximum Of {{$monogram->letter}} Letters">
+                                        <input type="text" id="{{$monogram->code}}" name="{{$monogram->code}}" class="monogram-input" placeholder="Maximum Of {{$monogram->letter}} Letters" value="{{$monogram->value}}">
                                         </div>
                                     </div>
                                 </div>
@@ -148,13 +149,13 @@
                                             @if(!empty($defaultMeasurementProfile))
                                             <option selected="true" disabled="disabled">Standard Measurement Profiles</option>
                                             @foreach($defaultMeasurementProfile as $profile)
-                                            <option value="{{$profile->id}}">{{$profile->name}}</option>
+                                            <option value="{{$profile->id}}" @if($profile->id == $productMeasurementProfile) selected @endif>{{$profile->name}}</option>
                                             @endforeach
                                             @endif
                                             @if(!empty($userMeasurementProfile))
                                             <option selected="true" disabled="disabled">User saved Profiles</option>
                                             @foreach($userMeasurementProfile as $profile)
-                                            <option value="{{$profile->id}}">{{$profile->name}}</option>
+                                            <option value="{{$profile->id}}" @if($profile->id == $productMeasurementProfile) selected @endif>{{$profile->name}}</option>
                                             @endforeach
                                             @endif
                                         </select>
@@ -163,17 +164,17 @@
                             </div>
                             <div class="measurement-set-cover pt--20 pb--20">
                                 <div class="row" id="measurement_attribute_cover">
-                                    @foreach($product->attributeSet->measurementAttributes as $mAttribute)
-                                    @if($mAttribute->measurement_category_id == 1)
+                                    @foreach($productMeasurements as $measurement)
+                                        @if($measurement->category == 1)
                                         <div class="col-6 col-md-6">
                                             <div class="measurement-head">
-                                                <div class="modal-input-label">{{$mAttribute->name}}</div> 
+                                                <div class="modal-input-label">{{$measurement->name}}</div> 
                                                 <div class="modal-input-instruction">
-                                                    <a href="{{$mAttribute->tutorial_id}}" class="mt-link"><span>instruction</span> <i class="fa fa-info-circle"></i></a>
+                                                    <a href="{{$measurement->tutorial_id}}" class="mt-link"><span>instruction</span> <i class="fa fa-info-circle"></i></a>
                                                 </div>
                                             </div>
                                             <div class="measurement-body">
-                                                <input type="number" name="{{$mAttribute->code}}" id="{{$mAttribute->code}}" step="any" class="measurement-input" placeholder="..inches">
+                                            <input type="number" name="{{$measurement->code}}" id="{{$measurement->code}}" step="any" class="measurement-input" placeholder="..inches" value="{{$measurement->value}}">
                                             </div>
                                         </div>
                                     @endif
@@ -184,21 +185,21 @@
                                         <p>For a better finish for you shirt, you can also provide measurement from your favorite shirt that fits you perfectly. </p>
                                     </div>
                                     <div class="row" id="measurement_ddattribute_cover" class="">
-                                        @foreach($product->attributeSet->measurementAttributes as $mAttribute)
-                                        @if($mAttribute->measurement_category_id == 2)
-                                            <div class="col-6 col-md-6">
-                                                <div class="measurement-head">
-                                                    <div class="modal-input-label">{{$mAttribute->name}}</div> 
-                                                    <div class="modal-input-instruction">
-                                                        <a href="{{$mAttribute->tutorial_id}}" class="mt-link"><span>instruction</span> <i class="fa fa-info-circle"></i></a>
+                                        @foreach($productMeasurements as $measurement)
+                                            @if($measurement->category == 2)
+                                                <div class="col-6 col-md-6">
+                                                    <div class="measurement-head">
+                                                        <div class="modal-input-label">{{$measurement->name}}</div> 
+                                                        <div class="modal-input-instruction">
+                                                            <a href="{{$measurement->tutorial_id}}" class="mt-link"><span>instruction</span> <i class="fa fa-info-circle"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="measurement-body">
+                                                    <input type="number" name="{{$measurement->code}}" id="{{$measurement->code}}" step="any" class="measurement-input" placeholder="..inches" value="{{$measurement->value}}">
                                                     </div>
                                                 </div>
-                                                <div class="measurement-body">
-                                                    <input type="number" name="{{$mAttribute->code}}" id="{{$mAttribute->code}}" step="any" class="measurement-input" placeholder="..inches">
-                                                </div>
-                                            </div>
-                                        @endif
-                                        @endforeach
+                                            @endif
+                                    @endforeach
                                     </div>
                                 </div>
                             </div>

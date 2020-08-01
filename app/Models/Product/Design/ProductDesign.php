@@ -11,6 +11,11 @@ class ProductDesign extends Model
         return $this->belongsTo('App\Models\Product\ProductAttributeSet', 'product_attribute_set_id');
     }
 
+    public function attributes()
+    {
+        return $this->hasMany('App\Models\Product\Design\ProductDesignAttributeValueSave', 'product_design_id');
+    }
+
     public function fabric()
     {
         return $this->belongsTo('App\Models\Product\Fabric\Fabric', 'fabric_id');
@@ -34,5 +39,15 @@ class ProductDesign extends Model
     public function videos()
     {
         return $this->hasMany('App\Models\Product\Design\ProductDesignVideo', 'product_design_id');
+    }
+
+    public function weight()
+    {
+        return $this->hasOne('App\Models\Product\Design\ProductDesignWeight', 'product_design_id');
+    }
+
+    public function products()
+    {
+        return $this->hasMany('App\Models\Product\Product', 'product_design_id');
     }
 }

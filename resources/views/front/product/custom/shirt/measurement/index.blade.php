@@ -42,7 +42,18 @@
                                                 </div>
                                                 <div class="measurement-body">
                                                     <select name="measurement_profile" id="measureProfile" >
-                                                        <option>Select Measurement Profile</option>
+                                                        @if(!empty($defaultMeasurementProfile))
+                                                        <option selected="true" disabled="disabled">Standard Measurement Profiles</option>
+                                                        @foreach($defaultMeasurementProfile as $profile)
+                                                        <option value="{{$profile->id}}">{{$profile->name}}</option>
+                                                        @endforeach
+                                                        @endif
+                                                        @if(!empty($userMeasurementProfile))
+                                                        <option selected="true" disabled="disabled">User saved Profiles</option>
+                                                        @foreach($userMeasurementProfile as $profile)
+                                                        <option value="{{$profile->id}}">{{$profile->name}}</option>
+                                                        @endforeach
+                                                        @endif
                                                     </select>
                                                 </div>
                                             </div>
@@ -77,8 +88,7 @@
         </div>
     </div>
     <!-- Modal -->
-    @include('front.modals.class-compare')
-    @include('front.modals.load-design')
+    @include('front.modals.load-tutorial')
 @endsection
 @section('script')
     <script type="text/javascript" src="/front/code/js/shirt/selectMeasurement.js?version=<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>

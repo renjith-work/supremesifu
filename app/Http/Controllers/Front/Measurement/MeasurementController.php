@@ -6,6 +6,7 @@ use App\Models\Product\Product;
 use App\Models\Measurement\MeasurementAttribute;
 use App\Models\Measurement\UserMeasurementProfile;
 use App\Models\Measurement\UserMeasurementProfileValue;
+use App\Models\Measurement\UserProductMeasurement;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,19 +20,106 @@ class MeasurementController extends Controller
          $this->middleware(['auth']);
     }
 
+    public function csuMeasurement($currentProduct, $measurementResponse)
+    {
+        $product = Product::find($currentProduct);
+        return view('front.product.custom.completeProduct')->with('product', $product)->with('measurementResponse', $measurementResponse);
+    }
+
+    public function test()
+    {
+        $measurementResponse = 1;
+        $product = Product::find(47);
+        return view('front.product.custom.completeProduct')->with('product', $product)->with('measurementResponse', $measurementResponse);
+    }
+
     public function saveMeasurement(Request $request)
     {	
-    	$input = $request->all();
+        $input = $request->all();
+        $product = Product::find($input['product']);
+        $measurementResponse = $this->checkMeasurementProfile($input);
+        $this->saveProductMeasurement($input);
+        $this->addToCart($product);
+        return view('front.product.custom.completeProduct')->with('product', $product)->with('measurementResponse', $measurementResponse);
+    }
 
-    	$inp_mp = UserMeasurementProfile::find($input['measurement_profile']); //Get the measurement profile based on the input profile.
-        $inp_mp_id = $inp_mp->id; 	//Get the id of the measurement profile
-        $ms_profile =  $this->loadMeasurements($inp_mp_id, $input); //Get the profile id to be saved in product table
+    private function addToCart($product)
+    {
+        Cart::add(array(
+            'id' => $product->id,
+            'name' => $product->name,
+            'quantity' => 1,
+            'price' => $product->price->price,
+            'attributes' => array(
+                'fabric' => $product->fabric->name,
+                'user'   => $product->user_id,
+                'images' => $product->design->images
+            )
+        ));
+    }
+
+    private function saveProductMeasurement($input)
+    {
+        $product_measeurement_array = array();
+        $attributes = MeasurementAttribute::where('product_attribute_set_id', 1)->get();
+        foreach($attributes as $attribute)
+        {
+            if (array_key_exists($attribute->code, $input)) 
+            {
+                if (isset($input[$attribute->code])) 
+                {
+                    $product_measeurement_array[] = array(
+                                                    'ump_id' => $input['measurement_profile'],
+                                                    'product_id' => $input['product'],
+                                                    'm_at_id' => $attribute->id,
+                                                    'value' => $input[$attribute->code]
+                    );
+                } 
+            }
+        }
+        UserProductMeasurement::insert($product_measeurement_array);
+        return $product_measeurement_array;
+    }
+
+    private function checkMeasurementProfile($input)
+    {
+        $response_value = 0;
+        $profile_id = $input['measurement_profile'];
+        $profile_values = UserMeasurementProfileValue::where('u_mp_id', $profile_id)->get();
+        foreach($profile_values as $profile_value)
+        {
+            if($profile_value->value != $input[$profile_value->measurementAttribute->code])
+            {
+                $response_value++;
+            }
+        }
+        return $response_value;
+    }
+
+    public function saveProfile(Request $request)
+    {
+        $product = Product::find($request->id);
         
-        $product = Product::find($input['product']); //Find the product.
-        $product->u_mp_id = $ms_profile; //Save the measurement profile in the product table.
-        $product->save(); 
+        // Save User Profile
+        $userProfile = new UserMeasurementProfile;
+        $userProfile->user_id = Auth::user()->id;
+        $userProfile->product_attribute_set_id = $product->product_attribute_set_id;
+        $userProfile->name = $request->name;
+        $userProfile->save();
 
-        return redirect("/design/confirm/$product->id");
+        // Save UserProfile Values
+        $measurement_array = array();
+        foreach($product->measurements as $measurement)
+        {
+            $measurement_array[] = array(
+                                    'u_mp_id' => $userProfile->id,
+                                    'm_at_id' => $measurement->m_at_id,
+                                    'value'   => $measurement->value,
+            );
+        }
+        UserMeasurementProfileValue::insert($measurement_array);
+        UserProductMeasurement::where('product_id', $product->id)->update(['ump_id' => $userProfile->id]);
+        return response()->json($userProfile->name);
     }
 
     // public function loadMeasurements($inp_mp_id, $input){

@@ -6,11 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    public function monogram()
-    {
-        return $this->belongsToMany('App\Models\Product\ProductMonogram', 'product_monograms', 'product_id', 'monogram_id');
-    }
-
     public function attributeValue()
     {
         return $this->belongsToMany('App\Models\Product\ProductAttributeValue', 'product_product_attributes', 'product_id', 'product_attribute_value_id');
@@ -87,6 +82,21 @@ class Product extends Model
     public function weight()
     {
         return $this->hasOne('App\Models\Product\Weight\ProductWeight', 'product_id');
+    }
+
+    public function design()
+    {
+        return $this->belongsTo('App\Models\Product\Design\ProductDesign', 'product_design_id');
+    }
+
+    public function measurements()
+    {
+        return $this->hasMany('App\Models\Measurement\UserProductMeasurement', 'product_id');
+    }
+
+    public function monograms()
+    {
+        return $this->hasMany('App\Models\Product\ProductMonogram', 'product_monograms', 'product_id', 'monogram_id');
     }
 
 }

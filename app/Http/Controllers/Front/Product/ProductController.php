@@ -47,22 +47,26 @@ class ProductController extends Controller
     {
         $measurementProfiles = $product->attributeSet->measurementProfiles;
         $measurementProfile_array = array();
-        foreach($measurementProfiles as $profile)
+        foreach($measurementProfiles as $profile) 
         {
-            $dmProfile = new stdClass();
-            $dmProfile->id = $profile->id;
-            $dmProfile->name = $profile->name;
-            $measurementProfile_array[] = $dmProfile;
+            if ($profile->user_id == 1) {
+                $dmProfile = new stdClass();
+                $dmProfile->id = $profile->id;
+                $dmProfile->name = $profile->name;
+                $measurementProfile_array[] = $dmProfile;
+            }
         }
-        return $measurementProfiles;
+        return $measurementProfile_array;
     }
 
     private function userMeasurementProfile($product)
     {
+        if (Auth::check()) {
         $measurementProfiles = $product->attributeSet->measurementProfiles;
         $user_id = Auth::user()->id;
         $measurementProfile_array = array();
-        foreach ($measurementProfiles as $profile) {
+        foreach ($measurementProfiles as $profile) 
+        {
             if($profile->user_id == $user_id)
             {
                 $dmProfile = new stdClass();
@@ -71,7 +75,8 @@ class ProductController extends Controller
                 $measurementProfile_array[] = $dmProfile;
             }
         }
-        return $measurementProfiles;
+        return $measurementProfile_array;
+        }
     }
 
     private function shirtPrice($product)

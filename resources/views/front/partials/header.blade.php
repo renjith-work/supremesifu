@@ -38,7 +38,10 @@
 </head>
 
 <body>
-
+<div id="loading-overlay">
+    {{-- <div class="loading-icon"></div> --}}
+    <div class="fa fa-cog fa-icon"></div>
+</div>  
 <!-- Main Wrapper Start -->
 <div class="main-wrapper">
     <!-- header-area start -->

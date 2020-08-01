@@ -4,12 +4,16 @@ namespace App\Http\Controllers\Front\Product\Fabric;
 
 use App\Models\Product\Fabric\Fabric;
 use App\Models\Product\Fabric\FabricClass;
+Use App\Models\Product\ProductCategory;
 use App\Models\Product\Fabric\FabricAttribute;
 use App\Models\Product\Fabric\FabricAttributeValue;
 use App\Models\Brand;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
+use stdClass;
+use Carbon\Carbon;
 
 class FabricController extends Controller
 {
@@ -19,9 +23,54 @@ class FabricController extends Controller
     }
 
     public function listFabrics($id){
-        $fabrics = Fabric::where('fabric_class_id', $id)->get();
+        $category = ProductCategory::find(3);
+        $fabrics = array();
+        foreach($category->fabrics as $fabric)
+        {
+            if($fabric->fabric_class_id == $id)
+            {
+                $data = new stdClass();
+                $data->id = $fabric->id;
+                $data->name = $fabric->name;
+                $data->description = $fabric->description;
+                $data->image = $fabric->image;
+                $data->brand_id = $fabric->brand_id;
+                $data->price = $this->price($fabric);
+                $data->attributes = $this->attributes($fabric);
+                $fabrics[] = $data;
+            }
+        }
         $class = FabricClass::find($id);
         return view('front.product.custom.shirt.fabric.index')->with('fabrics', $fabrics)->with('class', $class);
+    }
+
+    private function attributes($fabric)
+    {   $attributes = array();
+        foreach($fabric->fabricAttributeValues as $attribute)
+        {
+            $attributes[] = $attribute->value;
+
+        }
+        return $attributes;
+    }
+
+    private function price($fabric)
+    {   
+        foreach ($fabric->prices as $price) {
+            if ($price->product_attribute_set_id == 1) {
+                $startDate = Carbon::create($price->startDate);
+                $endDate = Carbon::create($price->endDate);
+                $fabric_price = new stdClass();
+                if (Carbon::now()->between($startDate, $endDate)) {
+                    $fabric_price->price = $price->splPrice;
+                    $fabric_price->old_price = $price->price;
+                } else {
+                    $fabric_price->price = $price->price;
+                    $fabric_price->old_price = null;
+                }
+                return $fabric_price;
+            }
+        }
     }
 
     public function find(Request $request){

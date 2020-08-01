@@ -15,9 +15,19 @@
                                 <div id="modal-fabric-detail-image"></div>
                             </div>
                             <div class="col-md-6">
-                                <div id="modal-fabric-detail-content">
-                                    
+                                <div class="modal-fabric-name" id="modal-fabric-name"></div>
+                                <div class="modal-fabric-price-cover">
+                                    <div class="row">
+                                        <div class="col-6 col-md-6">
+                                            <div id="modal-fabric-price" class="modal-fabric-price"></div>
+                                        </div>
+                                        <div class="col-6 col-md-6">
+                                            <div id="modal-fabric-ogPrice" class="modal-fabric-ogPrice"></div>
+                                        </div>
+                                    </div>
                                 </div>
+                                <div class="modal-fabric-price-underline"></div>
+                                <div id="modal-fabric-detail-content"></div>
                                 <div id="modal-fabric-detail-content-select"><a href="#" class="mob-next-button">Select Fabric</a></div>
                             </div>
                         </div>

@@ -23,7 +23,7 @@ class ProductAttributeSet extends Model
 
     public function measurementProfiles()
     {
-        return $this->hasMany('App\Models\Measurement\MeasurementProfile', 'product_attribute_set_id');
+        return $this->hasMany('App\Models\Measurement\UserMeasurementProfile', 'product_attribute_set_id');
     }
 
     public function measurementAttributes()

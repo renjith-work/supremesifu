@@ -20,14 +20,15 @@
                             </div>
                             <div class="col-md-6">
                                 <div id="modal-design-detail-content">
-                                    <div class="modal-design-name"></div>
-                                    <div class="modal-design-price"> <span></span></div>
+                                    <div class="modal-design-name" id="modal-design-name"></div>
+                                    <div class="modal-design-price" id="modal-design-price"> <span></span></div>
                                     <div class="modal-design-description"></div>
                                 </div>
                                 <form action="{{route('custom-shirt.create')}}" method="POST" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                     <input type="hidden" value="" id="productDesign" name="design">
                                     <input type="hidden" value="" id="productFabric" name="fabric">
+                                    <input type="hidden" value="" id="formFabricPrice" name="price">
                                     <div class="modal-pocket-title">Number Of Pockets</div>
                                     <div id="design_pocket" class="row modal-pocket"></div>
                                     <div class="modal-pocket-title">Monograms</div>

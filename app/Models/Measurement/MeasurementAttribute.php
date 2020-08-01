@@ -22,6 +22,6 @@ class MeasurementAttribute extends Model
 
 	public function productAttributeSet()
 	{
-		return $this->belongsTo('App\Models\Product\roductAttributeSet', 'product_attribute_set_id');
+		return $this->belongsTo('App\Models\Product\ProductAttributeSet', 'product_attribute_set_id');
 	}
 }

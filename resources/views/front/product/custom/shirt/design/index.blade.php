@@ -27,11 +27,16 @@
                     <p>Select from our shirt designs and continue to customize your shirt. </p>
                 </div>
                 <div id="product-design-list-cover" class="row">
-                    @foreach($data['designs'] as $design)
+                    @foreach($data->designs as $design)
                     <div class="col-12 col-md-3">
                         <div class="product-design-list-item">
                             <a href="{{$design->id}}" class="load-design-modal">
-                                <div class="product-design-image"><img src="/images/product/design/{{$design->folder}}/{{$design->p_image}}" alt="Gold Class"></div>
+                                @foreach($design->images as $image)
+                                    @if($image->position_id == 1)
+                                        <div class="product-design-image"><img src="/images/product/design/{{$image->name}}" alt="{{$image->name}}"></div>
+                                    @endif
+                                @endforeach
+                                
                                 <div class="product-design-name">{{$design->name}}</div>
                                 <div class="product-design-description">{{$design->summary}}</div>
                             </a>
@@ -48,7 +53,10 @@
 @endsection
 @section('script')
     <script type="text/javascript">
-        var fabric_id  = {!! json_encode($data['fabric']) !!};
+        var fabric_id  = {!! json_encode($data->fabric->id) !!};
+        var design_id  = null;
+        var price  = {!! json_encode($data->fabric->price->price) !!};
+        var old_price  = {!! json_encode($data->fabric->price->old_price) !!};
     </script>
     <script type="text/javascript" src="/front/code/js/shirt/selectShirtDesign.js?version=<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 @endsection

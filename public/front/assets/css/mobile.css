@@ -55,7 +55,18 @@
 .single-fabric-price{
 	text-align: right;
 	font-size: 13px;
-	font-weight: 500;
+	color:#c1903e;
+	font-weight: 600;
+}
+
+.single-fabric-price span{
+    color: #191919;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.single-fabric-price span{
+    text-decoration: line-through;
 }
 
 .single-fabric-details{
@@ -385,6 +396,19 @@
     color: #000;
 }
 
+.login-message-body-sps{
+    letter-spacing: 1px;
+}
+
+.login-message-body-sps a {
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.login-message-body-sps a:hover{
+    color: #000;
+}
+
 #modal-fabric-detail-image img{
     margin-bottom: 30px;
 }
@@ -407,14 +431,53 @@
     color: #191919;
 }
 
-
-
-
-
-
-
 .create-shirt__steps-container.sticky {
     position: fixed;
     left: 0;
     right: 0;
+}
+
+.modal-fabric-name{
+    font-size: 18px;
+    line-height: 17px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 13px;
+}
+
+.modal-fabric-price {
+    display: inline-block;
+    color: #c1903e;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.modal-fabric-ogPrice {
+    display: inline-block;
+    text-decoration: line-through;
+    font-size: 13px;
+    padding-left: 10px;
+    color: #191919;
+}
+
+.modal-fabric-price-underline{
+    background: #191919;
+    height: 1px;
+    width: 100%;
+    margin: 0px 0px 25px;
+}
+
+.mt-mb-link{
+    float: right;
+}
+
+
+.measurement-body select option{
+    padding: 50px 50px 50px 50px !important;
+        line-height: 20px;
+
+}
+
+.scol-right-border{
+    border-right: 1px solid #efefef;
 }

@@ -26,27 +26,33 @@
                 <div class="instruction-content custom-design-instruction">
                     <p>Start building your <b>Supreme Sifu</b> custom shirt by selecting from our collection of fabrics. The color of the fabric may be slightly different from what you see because of the difference in screen resolutions and brightness. The price of the finished product depends on the price of the fabric you have selected.</p>
                 </div>
-                <div id="load-class-dropdown">
+                {{-- <div id="load-class-dropdown">
                     <div class="measurement-body">
                         <select id="classSelect" name="classSelect" class="col-12 col-md-6">
                             <option value="">Select Class</option>
                         </select>
                     </div>
-                </div>
+                </div> --}}
                 <div id="mobile-load-class" class="row">
                     @foreach($fabrics as $fabric)
                         <div class="col-md-3"> 
-                            <a href="/custom-shirt/design/{{$fabric->id}}/list" class="load-fabric-modal"> 
+                            <a href="{{$fabric->id}}" class="load-fabric-modal"> 
                                 <div class="single-fabric-cover"> 
                                     <div class="single-fabric-image">
                                         <img src="/images/product/fabric/{{$fabric->image}}" alt="{{$fabric->name}}"> 
                                     </div>
                                     <div class="single-fabric-content"> 
                                         <div class="single-fabric-name">{{$fabric->name}}</div>
-                                        <div class="single-fabric-price">MYR {{$fabric->price}}/ Meter</div>
+                                        <div class="single-fabric-price">
+                                            MYR {{$fabric->price->price}}/Shirt 
+                                            @if($fabric->price->old_price != null)
+                                            <span>MYR {{$fabric->price->old_price}}</span>
+                                            @endif
+                                        </div>
                                         <div class="single-fabric-details">
-                                            @foreach($fabric->fabricAttributeValues as $attribute)
-                                                {{$attribute->value }},
+                                            
+                                            @foreach($fabric->attributes as $attribute)
+                                                {{$attribute }},
                                             @endforeach
                                         </div>
                                     </div>

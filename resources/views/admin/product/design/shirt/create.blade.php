@@ -10,7 +10,7 @@
     <section class="content-header">
         <ol class="breadcrumb">
             <li><a href="/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="admin/product/design/shirt/">Shirt Design Management</a></li>
+            <li><a href="/admin/product/design/shirt/">Shirt Design Management</a></li>
             <li class="active">Create Shirt Design</li>
         </ol>
     </section>
@@ -55,6 +55,27 @@
                                         </select>
                                         @error('attributeSet') <p class="error-p">{{$errors->first('attributeSet')}}</p> @enderror
                                     </div>  
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="weight">Product Weight</label>
+                                                <input type="number" name="weight" class="form-control @error('weight') is-invalid @enderror" id="weight" maxlength="255" value="{{ old('weight') }}">
+                                                @error('weight') <p class="error-p">{{$errors->first('weight')}}</p> @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="weightUnit">Weight Unit</label>
+                                                <select id="weightUnit" class="form-control custom-select mt-15 @error('weightUnit') is-invalid @enderror" name="weightUnit">
+                                                    <option disabled selected>Select an unit</option>
+                                                    @foreach($weightUnits as $unit)
+                                                        <option value="{{ $unit->id }}"> {{ $unit->name }} </option>                                            
+                                                    @endforeach
+                                                </select>
+                                                @error('weightUnit') <p class="error-p">{{$errors->first('weightUnit')}}</p> @enderror
+                                            </div>  
+                                        </div>
+                                    </div>
                                     <div class="section-sub-title">Product Descriptions</div>
                                     <div class="form-group">
                                         <label for="description">Product Description</label>

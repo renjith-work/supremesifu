@@ -9,12 +9,21 @@ $(document).ready(function () {
 
     $('.measure-learn-link').css('display', 'block');
 
+    loginCheckMessage();
+    function loginCheckMessage()
+    {
+        if (AuthUser == '') {
+            $('#login-check-message').removeClass("hide_content");
+        }
+    }
 
-    function loadProductPrice(productPromoPrice, productPrice) {
+    function loadProductPrice(productPrice, productOldPrice) {
         $('#product_price').html('');
         $('#product_og_price').html('');
-        $('#product_price').append('MYR ' + productPromoPrice);
-        $('#product_og_price').append('MYR ' + productPrice);
+        $('#product_price').append('MYR ' + productPrice);
+        if (productOldPrice != null) {
+            $('#product_og_price').append('MYR ' + productOldPrice);
+        }
     }
 
     function loadProductFabricDetails(productFabric) {
@@ -34,7 +43,7 @@ $(document).ready(function () {
     }
 
     function loadFabricImage(productFabricImage) {
-        $('#product-detail-fabric-image').html('');
+        $('#product_detail_fabric_image').html(' ');
         $('#product_detail_fabric_image').append('<img src="/images/product/fabric/' + productFabricImage + '" alt="">')
     }
 
@@ -49,7 +58,6 @@ $(document).ready(function () {
     // Loading the class on to the fabric change modal
 
     function loadClass() {
-        console.log('Load Fabric CLasses');
         $('#class_cover').html('');
         $('#modal_instruction').html('');
         $('#md_ld_fabclass').css({ display: 'none' });
@@ -68,7 +76,6 @@ $(document).ready(function () {
 
     // Load the fabric from the fabric class selected.
     $(document).on('change', 'input[type=radio][name=fabric_class]', function () {
-        console.log('Load Fabrics');
         var cat_id = $("input[name='fabric_class']:checked").val();
         var cat_name = $("input[name='fabric_class']:checked").parent("div").find(".class-content-title").text();
         var _token = $("input[name='_token']").val();
@@ -106,10 +113,10 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (response) {
                 loadProductFabricDetails(response);
-                loadProductPrice(response[0].price[0].price, response[0].price[0].old_price);
+                loadProductPrice(response[0].price.price, response[0].price.old_price);
                 // Feeding Global Variables
                 currentProduct_fabric_id = response[0].id;
-                currentProduct_price = response[0].price[0].price;
+                currentProduct_price = response[0].price.price;
             }
         });
     }
@@ -177,7 +184,6 @@ $(document).ready(function () {
         $('#tutorial-video').html('');
         $('#tutorial-body').html('');
         var _token = $("input[name='_token']").val();
-        console.log(id);
         $.ajax({
             url: "/admin/guide/load",
             type: 'POST',
@@ -198,23 +204,33 @@ $(document).ready(function () {
 
     var inputObject = {};
 
-    $('#testButton').on('click', function (event) {
+    $('#addToCart').on('click', function (event) {
         event.preventDefault();
-        var mval = validateMeasurementInput();
-        if (mval == 1) {
-            getCurrentProduct(currentProduct_id);
-            getCurrentFabric(currentProduct_fabric_id);
-            getCurrentPrice(currentProduct_price);
-            getMonogramValues(currentProduct_id);
-            getMeasurementValues(currentProduct_id);
-            getMeasurementProfile();
-            getQuantity();
-            setTimeout(function () { 
-                createProduct(inputObject);
-            }, 500);
+        if (AuthUser != '') {
+            var mval = validateMeasurementInput();
+            if (mval == 1) {
+                getCurrentProduct(currentProduct_id);
+                getCurrentFabric(currentProduct_fabric_id);
+                getCurrentPrice(currentProduct_price);
+                getMonogramValues(currentProduct_id);
+                getMeasurementValues(currentProduct_id);
+                getMeasurementProfile();
+                getQuantity();
+                getPocket();
+                setTimeout(function () { 
+                    createProduct(inputObject);
+                }, 500);
+            }
+        }else{
+            loginAlert();
         }
 
     });
+
+    function loginAlert()
+    {
+        $('#login-error-instruction').removeClass("hide_content");
+    }
 
     function validateMeasurementInput() {
         var value = $('.measurement-input').filter(function () {
@@ -222,7 +238,6 @@ $(document).ready(function () {
         });
         if (value.length <= 0) {
             event.preventDefault();
-            console.log("Please enter measurements or select a standard measurement.");
             $('#measurement-error-instruction').removeClass("hide_content");
             return 0;
         } else {
@@ -233,12 +248,12 @@ $(document).ready(function () {
 
     function getCurrentProduct(id)
     {
-        inputObject['product_id'] = id;
+        inputObject['product'] = id;
         return inputObject;
     }
 
     function getCurrentFabric(id) {
-        inputObject['fabric_id'] = id;
+        inputObject['fabric'] = id;
         return inputObject;
     }
 
@@ -293,6 +308,12 @@ $(document).ready(function () {
         inputObject[name] = value;
     }
 
+    function getPocket(){
+        var name = 'shirt-pocket';
+        var value = $('input[name="shirt-pocket"]:checked').val();
+        inputObject[name] = value;
+    }
+
     function goToCart(data) {
         $.ajax({
             url: "/design/shirt/buy-now",
@@ -307,21 +328,23 @@ $(document).ready(function () {
     }
 
     function createProduct(data) {
-        console.log(data);
-        // $('#addCartName').html('');
-        // $.ajax({
-        //     url: "/design/shirt/new/add-to-cart",
-        //     type:'POST',
-        //     data: {_token:_token, data:data},
-        //     dataType: 'json',
-        //     success:function(response){
-        //         $('#addCartName').text(response);
-        //         $('#addToCartModal').modal('show');
-        //     }
-        // });
+        //  $("#loading-overlay").show();
+        $.ajax({
+            url: "/front/product/custom-shirt/create",
+            type:'POST',
+            data: {_token:_token, data:data},
+            dataType: 'json',
+            beforeSend: function(){
+                $("#loading-overlay").show();
+            },
+            success:function(response){
+                $("#loading-overlay").hide();
+                redirectUrl = '/product/shirt/save-measurement/' + response.product.id + '/' + response.measurementResponse+ '/';
+                console.log(redirectUrl);
+                window.location.href = redirectUrl;
+            }
+        });
     }
-
-
 
 
 });

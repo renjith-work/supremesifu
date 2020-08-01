@@ -10,6 +10,8 @@ use App\Models\Product\Tax\TaxClass;
 use App\Models\Product\ProductAttribute;
 use App\Models\Product\ProductAttributeSet;
 use App\Models\Product\Design\ProductDesignAttributeValueSave;
+use App\Models\Product\Design\ProductDesignWeight;
+use App\Models\Product\Inventory\InventoryUnit;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -48,7 +50,8 @@ class ShirtController extends Controller
     {
         $attributeSets = ProductAttributeSet::orderBy('id', 'asc')->get();
         $taxClasses = TaxClass::orderBy('id', 'asc')->get();
-        return view('admin.product.design.shirt.create')->with('attributeSets', $attributeSets)->with('taxClasses', $taxClasses);
+        $weightUnits = InventoryUnit::where('type_id', 2)->get();
+        return view('admin.product.design.shirt.create')->with('attributeSets', $attributeSets)->with('taxClasses', $taxClasses)->with('weightUnits', $weightUnits);
     }
 
     /**
@@ -62,8 +65,10 @@ class ShirtController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'name' => 'required|min:5|max:255|unique:products,name',
+                'name' => 'required|min:5|max:255|unique:product_designs,name',
                 'attributeSet' => 'required',
+                'weight' => 'required',
+                'weightUnit' => 'required',
                 'description' => 'required',
                 'summary' => 'required',
                 'price' => 'required',
@@ -106,6 +111,7 @@ class ShirtController extends Controller
             $this->priceSave($request, $design->id);
             $this->videoSave($request, $design->id);
             $this->imageSave($request, $design->id);
+            $this->weightSave($request, $design->id);
 
             // return response()->json($request->all());
             Session::flash('success', 'The data was successfully inserted.');
@@ -137,7 +143,8 @@ class ShirtController extends Controller
         $attributeSets = ProductAttributeSet::orderBy('id', 'asc')->get();
         $taxClasses = TaxClass::orderBy('id', 'asc')->get();
         $design = ProductDesign::find($id);
-        return view('admin.product.design.shirt.edit')->with('design', $design)->with('attributeSets', $attributeSets)->with('taxClasses', $taxClasses);
+        $weightUnits = InventoryUnit::where('type_id', 2)->get();
+        return view('admin.product.design.shirt.edit')->with('design', $design)->with('attributeSets', $attributeSets)->with('taxClasses', $taxClasses)->with('weightUnits', $weightUnits);
     }
 
     /**
@@ -152,8 +159,10 @@ class ShirtController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'name' => "required|min:5|max:255|unique:products,name, $id",
+                'name' => "required|min:5|max:255|unique:product_designs,name, $id",
                 'attributeSet' => 'required',
+                'weight' => 'required',
+                'weightUnit' => 'required',
                 'description' => 'required',
                 'summary' => 'required',
                 'price' => 'required',
@@ -196,6 +205,7 @@ class ShirtController extends Controller
             $this->priceSaveEdit($request, $design->id, $design->price->id);
             $this->videoSaveEdit($request, $design->id);
             $this->imageSaveEdit($request, $design->id);
+            $this->weightSaveEdit($request, $design->id, $design->weight->id);
 
             // return response()->json($request->all());
             Session::flash('success', 'The data was successfully updated.');
@@ -335,6 +345,26 @@ class ShirtController extends Controller
                 ]);
             }
         }
+    }
+
+    private function weightSave($input, $design_id)
+    {
+        $weight = new ProductDesignWeight;
+        $weight->product_design_id = $design_id;
+        $weight->inventory_unit_id = $input->weightUnit;
+        $weight->weight = $input->weight;
+        $weight->save();
+        return $weight;
+    }
+
+    private function weightSaveEdit($input, $design_id, $id)
+    {
+        $weight = ProductDesignWeight::find($id);
+        $weight->product_id =   $design_id;
+        $weight->inventory_unit_id = $input->weightUnit;
+        $weight->weight = $input->weight;
+        $weight->save();
+        return $weight;
     }
 
     private function imageSave($request, $design_id)
