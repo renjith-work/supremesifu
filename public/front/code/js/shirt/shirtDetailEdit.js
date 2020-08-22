@@ -10,8 +10,7 @@ $(document).ready(function () {
     $('.measure-learn-link').css('display', 'block');
 
     loginCheckMessage();
-    function loginCheckMessage()
-    {
+    function loginCheckMessage() {
         if (AuthUser == '') {
             $('#login-check-message').removeClass("hide_content");
         }
@@ -111,7 +110,6 @@ $(document).ready(function () {
             data: { _token: _token, id: id, attr: attr },
             dataType: 'json',
             success: function (response) {
-                console.log(response);
                 loadProductFabricDetails(response);
                 loadProductPrice(response.price.price, response.price.old_price);
                 // Feeding Global Variables
@@ -177,7 +175,7 @@ $(document).ready(function () {
         var id = $(this).attr('href');
         loadTutorialModal(id);
     });
-    
+
     function loadTutorialModal(id) {
         $('#modalTitle').html('');
         $('#tutorial-image').html('');
@@ -217,18 +215,17 @@ $(document).ready(function () {
                 getMeasurementProfile();
                 getQuantity();
                 getPocket();
-                setTimeout(function () { 
-                    createProduct(inputObject);
+                setTimeout(function () {
+                    updateProduct(inputObject);
                 }, 500);
             }
-        }else{
+        } else {
             loginAlert();
         }
 
     });
 
-    function loginAlert()
-    {
+    function loginAlert() {
         $('#login-error-instruction').removeClass("hide_content");
     }
 
@@ -246,8 +243,7 @@ $(document).ready(function () {
         }
     }
 
-    function getCurrentProduct(id)
-    {
+    function getCurrentProduct(id) {
         inputObject['product'] = id;
         return inputObject;
     }
@@ -308,7 +304,7 @@ $(document).ready(function () {
         inputObject[name] = value;
     }
 
-    function getPocket(){
+    function getPocket() {
         var name = 'shirt-pocket';
         var value = $('input[name="shirt-pocket"]:checked').val();
         inputObject[name] = value;
@@ -326,20 +322,42 @@ $(document).ready(function () {
             }
         });
     }
-
+    function updateProduct(data)
+    {
+        $.ajax({
+            url: "/front/product/custom-shirt/edit",
+            type: 'POST',
+            data: { _token: _token, data: data },
+            dataType: 'json',
+            beforeSend: function () {
+                $("#loading-overlay").show();
+            },
+            success: function (response) {
+                console.log(response);
+                $("#loading-overlay").hide();
+                if (response.measurementResponse == 0)
+                {
+                    redirectUrl = '/cart';
+                }else{
+                    redirectUrl = '/product/shirt/update-measurement/' + response.product.id + '/' + response.measurementResponse + '/'; 
+                }
+                window.location.href = redirectUrl;
+            }
+        });
+    }
     function createProduct(data) {
         //  $("#loading-overlay").show();
         $.ajax({
             url: "/front/product/custom-shirt/create",
-            type:'POST',
-            data: {_token:_token, data:data},
+            type: 'POST',
+            data: { _token: _token, data: data },
             dataType: 'json',
-            beforeSend: function(){
+            beforeSend: function () {
                 $("#loading-overlay").show();
             },
-            success:function(response){
+            success: function (response) {
                 $("#loading-overlay").hide();
-                redirectUrl = '/product/shirt/save-measurement/' + response.product.id + '/' + response.measurementResponse+ '/';
+                redirectUrl = '/product/shirt/save-measurement/' + response.product.id + '/' + response.measurementResponse + '/';
                 console.log(redirectUrl);
                 window.location.href = redirectUrl;
             }

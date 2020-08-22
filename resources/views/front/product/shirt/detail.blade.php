@@ -208,7 +208,7 @@
                                 <div class="measurement-head">SELECT QUANTITY</div>
                                 <div class="measurement-body">
                                     <div class="cart-plus-minus">
-                                        <input class="cart-plus-minus-box" id="quantity" value="1" type="text">
+                                        <input class="cart-plus-minus-box" id="quantity" value="1" type="text" name="quantity">
                                         <div class="quantity-cover">
                                             <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                             <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>

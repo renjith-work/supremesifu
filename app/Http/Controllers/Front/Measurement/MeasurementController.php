@@ -26,11 +26,17 @@ class MeasurementController extends Controller
         return view('front.product.custom.completeProduct')->with('product', $product)->with('measurementResponse', $measurementResponse);
     }
 
+    public function updMeasurement($currentProduct, $measurementResponse)
+    {
+        $product = Product::find($currentProduct);
+        return view('front.product.custom.updateCompleteProduct')->with('product', $product)->with('measurementResponse', $measurementResponse);
+    }
+
     public function test()
     {
         $measurementResponse = 1;
         $product = Product::find(47);
-        return view('front.product.custom.completeProduct')->with('product', $product)->with('measurementResponse', $measurementResponse);
+        return view('front.product.custom.updateCompleteProduct')->with('product', $product)->with('measurementResponse', $measurementResponse);
     }
 
     public function saveMeasurement(Request $request)

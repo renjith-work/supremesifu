@@ -24,9 +24,10 @@ use Carbon\Carbon;
 
 class EditProductController extends Controller
 {
-    public function edit($id)
+    public function edit($id, $qty)
     {
         $product = Product::find($id);
+        $quantity = $qty;
         $design = ProductDesign::find($product->product_design_id);
         $shirtPockets = $this->shirtPocket($product);
         $productPrice = $this->shirtPrice($product);
@@ -46,7 +47,8 @@ class EditProductController extends Controller
                 ->with('monograms', $monograms)
                 ->with('design', $design)
                 ->with('productMeasurements', $productMeasurements)
-                ->with('productMeasurementProfile', $productMeasurementProfile);
+                ->with('productMeasurementProfile', $productMeasurementProfile)
+                ->with('quantity', $quantity);
     }
 
     private function productMeasurementProfile($product)

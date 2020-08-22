@@ -209,7 +209,7 @@
                                 <div class="measurement-head">SELECT QUANTITY</div>
                                 <div class="measurement-body">
                                     <div class="cart-plus-minus">
-                                        <input class="cart-plus-minus-box" id="quantity" value="1" type="text">
+                                    <input class="cart-plus-minus-box" id="quantity" value="{{$quantity}}" type="text">
                                         <div class="quantity-cover">
                                             <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                             <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
@@ -230,7 +230,7 @@
                         </div>
                         <div class="row shirt-content-place-order-cover pt--20">   
                             <div class="col-md-12">
-                                <a id="addToCart" href="#" class="dress-content-place-order">ADD To CART</a>
+                                <a id="addToCart" href="#" class="dress-content-place-order">UPDATE CART</a>
                             </div>
                         </div>      
                     </div>
@@ -246,7 +246,7 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-    var product_id  = {!!json_encode($product->id)!!};
+    // var product_id  = {!!json_encode($product->id)!!};
     var product_attr_set_id  = {!!json_encode($product->product_attribute_set_id)!!};
     var currentProduct_id = {!!json_encode($product->id)!!};
     var currentProduct_fabric_id  = {!!json_encode($product->fabric->id)!!};
@@ -255,5 +255,5 @@
 </script>
 {{--     var mp_name  = {!!json_encode($product->umprofile->name)!!};
     var product_design_name  = {!!json_encode($product->design->name)!!}; --}}
-<script type="text/javascript" src="/front/code/js/shirt/shirtDetail.js?version=<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
+<script type="text/javascript" src="/front/code/js/shirt/shirtDetailEdit.js?version=<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 @endsection

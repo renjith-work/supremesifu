@@ -1,3 +1,10 @@
+/* Media Breakpoints Common */
+@media only screen and (min-width : 320px) {}
+@media only screen and (min-width : 480px) {}
+@media only screen and (min-width : 768px) {}
+@media only screen and (min-width : 992px) {}
+@media only screen and (min-width : 1200px) {}
+
 .justify-text{
 	text-align: justify;
 }
@@ -481,3 +488,194 @@
 .scol-right-border{
     border-right: 1px solid #efefef;
 }
+
+.sifu-cart-table-mobile-head {
+    background: #000;
+    margin: -1px;
+}
+
+.sifu-cart-table-mobile-head h3 {
+    font-size: 12px;
+    text-align: center;
+    font-weight: 600;
+    color: #fff;
+    padding: 6px 0px 0px 0px;
+    letter-spacing: 1px;
+}
+
+.cart-mobile-product-name{
+    font-weight: 800;
+}
+
+.sifu-cart-table-mobile-body{
+    padding-top: 30px;
+}
+
+.cart-mobile-product-price{
+    margin-top: 30px;
+}
+
+.cart-mobile-i-price{
+    font-family: 'GothamMedium';
+    font-size: 14px;
+}
+
+.cart-mobile-i-price span{
+    font-family: 'GothamBold';
+    font-weight: 600;
+    /* color: #c1903e; */
+    font-size: 14px;;
+}
+
+.cart-mobile-f-price{
+    font-family: 'GothamMedium';
+    font-size: 14px;
+}
+
+.cart-mobile-f-price span{
+    font-family: 'GothamBold';
+    font-weight: 600;
+    color: #c1903e;
+    font-size: 16px;;
+}
+
+
+.cart-qty-top-button{
+    border: 1px solid #696868;
+    padding: 10px;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.cart-mobile-quantity-cover{
+    margin: 30px 0px 30px 0px;
+}
+
+.qty-decrease{
+    float: left;
+}
+
+.qty-increase{
+    float: left;
+}
+
+.cart-qty-input-value{
+    width: 40px;
+    border: 1px solid #ddd;
+    color: #333;
+    padding: 5px;
+    text-align: center;
+    display: block;
+    margin: -2px auto 0px auto;
+}
+
+.cart-qty-button{
+    border: 1px solid #efefef;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.cart-mobile-top-checkout{
+    padding: 7px 10px;
+    text-align: center;
+    background: #191919;
+    color: #fff;
+    width: 100%;
+    letter-spacing: 1px;
+}
+
+
+/* .mobile-cart-body-cover > .cart-product-name > a{ */
+.mobile-cart-product-name > a{
+    font-size: 12px !important;
+    font-family: 'GothamMedium';
+}
+
+.mobile-cart-unit-price{
+    margin-top: 30px;
+    font-size: 12px !important;
+    font-family: 'GothamMedium';
+    color: #c1903e;
+}
+
+.mobile-cart-product-item-total{
+    font-size: 13px !important;
+    font-family: 'GothamMedium';
+    text-align: center;
+}
+
+.cart-mobile-quantity-cover{
+    text-align: center;
+}
+
+.mobile-cart-qty-button {
+    width: 40px;
+    background: #000;
+    color: #fff;
+    font-weight: 900;
+    text-align: center;
+    height: 27px;
+    padding-top: 3px;
+    border: none;
+}
+
+.mobile-cart-qty-button i {
+    font-size: 17px;
+    font-weight: 900;
+}
+
+.mobile-cart-qty-input{
+    margin-top: -2px;
+}
+
+.sifu-cart-table-mobile-body{
+    border: 1px solid #efefef;
+}
+
+.mobile-cart-image-alert{
+    font-size: 10px;
+    line-height: 16px;
+    font-style: italic;
+    color: #c1903e;
+    margin: 10px 0px 10px 0px;
+    padding: 0px 10px 0px 10px;
+}
+
+#cartSubTotal{
+    font-size: 14px;
+    font-style: normal;
+}
+
+#cartTotal{
+    font-size: 14px;
+    font-style: normal;
+}
+
+.cart-prduct-table-cover{
+    margin: 0px 0px 70px 0px;
+}
+
+/* Media Breakpoints Cart */
+@media only screen and (min-width : 320px) {
+    .cart-body-cover{
+        display: none;
+    }
+
+    .mobile-cart-body-cover{
+        display: block;
+    }
+}
+@media only screen and (min-width : 480px) {}
+@media only screen and (min-width : 768px) {}
+@media only screen and (min-width : 992px) {
+    .cart-body-cover{
+        display: block;
+    }
+
+    .mobile-cart-body-cover{
+        display: none;
+    }
+}
+@media only screen and (min-width : 1200px) {}

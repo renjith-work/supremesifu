@@ -91,6 +91,13 @@ text-transform: uppercase;
 	border-bottom: 1px solid #ddd8d8;
 }
 
+.no-padding-right{
+	padding-right: 0px !important;
+}
+
+.no-padding-left{
+	padding-left: 0px !important;
+}
 
 
 /*.logo {

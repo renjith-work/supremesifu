@@ -339,6 +339,7 @@ Route::group(['prefix'  =>   'front/fabric'], function() {
 Route::get('/cart', 'Ecommerce\CartController@getCart')->name('checkout.cart');
 Route::get('/cart/item/{id}/remove', 'Ecommerce\CartController@removeItem')->name('checkout.cart.remove');
 Route::get('/cart/clear', 'Ecommerce\CartController@clearCart')->name('checkout.cart.clear');
+Route::post('/cart/update', 'Ecommerce\CartUpdateController@update');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/checkout', 'Ecommerce\CheckoutController@getCheckout')->name('checkout.index');
@@ -361,12 +362,14 @@ Route::post('/design/shirt/new/add-to-cart', 'Ecommerce\ProductController@cartAd
 Route::get('/product/shirt/{slug}', 'Front\Product\ProductController@detail');
 Route::get('product/design/jso/{id}', 'Front\Product\ProductDesignController@jso');
 Route::get('/product/shirt/save-measurement/{product}/{measurementResponse}', 'Front\Measurement\MeasurementController@csuMeasurement');
-Route::get('/product/{id}/edit', 'Front\Product\Product\EditProductController@edit');
+Route::get('/product/shirt/update-measurement/{product}/{measurementResponse}', 'Front\Measurement\MeasurementController@updMeasurement');
 
 // Revised ECommerce Routes
 // Product Detial Page - Submit and Create Product.
 Route::post('/front/product/custom-shirt/create', 'Front\Product\Product\Custom\CreateShirtMeasurementController@createShirt')->name('front.product.custom-shirt.create');
+Route::post('/front/product/custom-shirt/edit', 'Front\Product\Product\Custom\EditShirtMeasurementController@editShirt')->name('front.product.custom-shirt.edit');
 Route::post('/front/product/create', 'Front\Product\Product\CreateProductController@createProduct');
+Route::get('/cart/product/{id}/edit/qty/{qty}', 'Front\Product\Product\EditProductController@edit');
 
 // Product Details API End Points
 Route::post('/front/api/product/detail', 'Front\Api\Product\ProductController@detail');

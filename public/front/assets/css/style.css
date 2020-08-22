@@ -3644,9 +3644,9 @@ body.box-body {
 .cart-plus-minus .cart-plus-minus-box {
   border: 1px solid #ddd;
   color: #333;
-  height: 46px;
+  padding: 9px;
   text-align: center;
-  width: 48px;
+  /* width: 48px; */
   width: 3rem;
 }
 .cart-plus-minus .dec.qtybutton, .cart-plus-minus .inc.qtybutton {

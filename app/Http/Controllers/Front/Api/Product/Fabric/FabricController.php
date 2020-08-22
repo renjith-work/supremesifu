@@ -21,10 +21,10 @@ class FabricController extends Controller
 
         $fabricAttributes = $fabric->fabricAttributeValues;
 
-        $attributeValue = new stdClass();
-        $attributeValue->name = "Name";
-        $attributeValue->value = $fabric->name;
-        $fabricAttributeValue_array[] = $attributeValue;
+        // $attributeValue = new stdClass();
+        // $attributeValue->name = "Name";
+        // $attributeValue->value = $fabric->name;
+        // $fabricAttributeValue_array[] = $attributeValue;
 
         foreach ($fabricAttributes as $fabricAttribute) {
             $attributeValue = new stdClass();

@@ -58,7 +58,7 @@ class CreateShirtMeasurementController extends Controller
 
             $measurementResponse = $this->checkMeasurementProfile($input);
             $this->saveProductMeasurement($input, $product->id);
-            $this->addToCart($product);
+            $this->addToCart($product, $input['quantity']);
 
 
             $data = new stdClass();
@@ -135,12 +135,12 @@ class CreateShirtMeasurementController extends Controller
         return $productAttributes;
     }
 
-    private function addToCart($product)
+    private function addToCart($product, $quantity)
     {
         Cart::add(array(
             'id' => $product->id,
             'name' => $product->name,
-            'quantity' => 1,
+            'quantity' => $quantity,
             'price' => $product->price->price,
             'attributes' => array(
                 'fabric' => $product->fabric->name,
