@@ -14,14 +14,14 @@ class AddressTypeTableSeeder extends Seeder
     {
         DB::table('address_types')->insert([
             [
-            	'name' => 'Billing Address',
-            	'code' => 'billing_address',
+            	'name' => 'Default Billing Address',
+            	'code' => 'default_billing_address',
 	            'created_at' => Carbon::now(),
 	            'updated_at' => Carbon::now(),
             ],
             [
-            	'name' => 'Shipping Address',
-            	'code' => 'shipping_address',
+            	'name' => 'Default Shipping Address',
+            	'code' => 'default_shipping_address',
 	            'created_at' => Carbon::now(),
 	            'updated_at' => Carbon::now(),
             ],

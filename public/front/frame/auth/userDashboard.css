@@ -6,7 +6,7 @@
 }
 
 .px-account-dashboard{
-	margin: 100px 0px 100px 0px;
+	margin: 30px 0px 100px 0px;
 }
 
 .px-dashboard-list {
@@ -132,4 +132,36 @@
 .add-tab-action a{
     font-size: 13px;
     color: #c1903e;
+}
+
+.adb-radio-cover{
+    display: inline-block;
+}
+
+.adb-radio-input{
+    position: absolute;
+    margin-top: 7px;
+    margin-left: -1.25rem;
+}
+
+.adb-radio-label{
+    padding-left: 10px;
+}
+
+.adb-label-head{
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #ebebeb;
+    margin: 20px 0px 30px 0px;
+}
+
+.adb-label-instruction{
+    font-size: 12px;
+    font-style: italic;
+}
+
+.adb-label-body-cover{
+    margin: 30px 0px 0px 20px;
 }

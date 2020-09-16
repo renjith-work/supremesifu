@@ -47,6 +47,10 @@ $(document).ready(function () {
     {
         $('#cart-product-total-price-'+id).html('');
         $('#cart-product-total-price-'+id).append(price);
+        
+        $('#cart-product-total-wd-price-'+id).html('');
+        $('#cart-product-total-wd-price-'+id).append(price);
+
     }
 
     function updateSubTotal(price)

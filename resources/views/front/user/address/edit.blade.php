@@ -94,7 +94,32 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+                                                    <div class="adb-label-cover">
+                                                        <div class="adb-label-head">Address Label</div>
+                                                        <div class="adb-label-instruction">
+                                                            You can set an address as default billing and shipping address. At a time you can have only one default billing address and one default shipping address. You may save the same address as default billing and shipping address.
+                                                        </div>
+                                                        <div class="adb-label-body-cover">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-check adb-radio-cover">
+                                                                        <input class="form-check-input adb-radio-input" type="checkbox" name="billing_address" id="billing_address" value="1" @if($billing_address == 1) checked @endif>
+                                                                        <label class="form-check-label adb-radio-label" for="billing_address">Default Billing Address</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-check adb-radio-cover">
+                                                                        <input class="form-check-input adb-radio-input" type="checkbox" name="shipping_address" id="shipping_address" value="1" @if($shipping_address == 1) checked @endif>
+                                                                        <label class="form-check-label adb-radio-label" for="shipping_address">Default Shipping Address</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="adb-label-instruction">
+                                                            *if you have previouly set another address as default billing or shipping address, the default status of that address will be removed and the current address will be set as default.
+                                                        </div>
+                                                    </div>
                                                     <div class="px-customer-dashboard-submit-cover">
                                                         <input type="Submit" value="Update Address" class="btn px-black-btn">
                                                     </div>

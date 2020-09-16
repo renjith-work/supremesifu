@@ -1,4 +1,7 @@
 @extends('front.layout')
+@section('header')
+    <link rel="stylesheet" href="/front/assets/css/checkout.css">
+@endsection
 @section('content')
     <!-- breadcrumb-area start -->
     <div class="breadcrumb-area bg-grey">
@@ -16,12 +19,69 @@
     <!-- breadcrumb-area end -->
 
     <!-- content-wraper start -->
-    <div class="content-wraper">
-        <div class="container">
+    <div class="mobile-container">
             <!-- checkout-details-wrapper start -->
             @if (Session::has('error'))
                 <p class="alert alert-danger">{{ Session::get('error') }}</p>
             @endif
+            <div class="sp-checkout-cover">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="sp-checkout-address-cover">
+                            <div class="sp-checkout-main-title">Billing & Shipping</div>
+                            <div class="spc-ad-item-cover">
+                                <div class="spc-ad-item-head">Billing Adress</div>
+                                <div class="spc-ad-item-body">
+                                    <div class="spc-ad-item">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="spc-form-input">
+                                                    <label>First name</label>
+                                                    <input type="text" class="form-control" name="first_name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="spc-ad-item">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="spc-form-input">
+                                                    <label for="email">Email address *</label>
+                                                    <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" id="emai1" name="email" placeholder="">
+                                                    @error('email') <p class="error-p">{{ $errors->first('email') }}</p> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="spc-form-input">
+                                                    <label for="phone">Phone Number *</label>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <select class="form-control @error('phone') is-invalid @enderror" id="phoneCode" name="phoneCode">
+                                                                {{-- @foreach($phoneCodes as $phoneCode)
+                                                                <option value="{{$phoneCode->id}}">{{$phoneCode->code}}</option>
+                                                                @endforeach --}}
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-8 no-padding-left">
+                                                            <input type="text" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}" id="phone" name="phone" placeholder="">
+                                                        </div>
+                                                    </div>
+                                                    @error('phone') <p class="error-p">{{ $errors->first('phone') }}</p> @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="sp-checkout-address-od-cover">
+                            <div class="sp-checkout-main-title">Order Details</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="checkout-details-wrapper">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
@@ -163,7 +223,6 @@
                 </div>
             </div>
             <!-- checkout-details-wrapper end -->
-        </div>
     </div>
     <!-- content-wraper end -->
 @endsection

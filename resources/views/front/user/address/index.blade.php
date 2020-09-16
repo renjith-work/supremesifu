@@ -49,7 +49,15 @@
                                                             <td>{{$address->address}}</td>
                                                             <td>{{$address->postcode}}</td>
                                                             <td>{{$address->phoneCode->value}}{{$address->phone}}</td>
-                                                            <td><span class="badge badge-light">Billing Address</span></td>
+                                                            <td>
+                                                                @if($address->userAddressTypes)
+                                                                @foreach($address->userAddressTypes as $addressType)
+                                                                    @if($addressType->address_type_id == 1) <span class="badge badge-light">Default Billing Address</span> @endif
+                                                                    @if($addressType->address_type_id == 2) <span class="badge badge-light">Default Shipping Address</span> @endif
+                                                                @endforeach
+                                                                @endif
+                                                            </td>
+                                                            {{-- <td><span class="badge badge-light">Billing Address</span></td> --}}
                                                             <td><div class="add-tab-action"><a href="/user/address/{{$address->id}}/edit">Edit</a></div></td>
                                                         </tr>
                                                         @endforeach

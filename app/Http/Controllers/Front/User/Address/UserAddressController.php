@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front\User\Address;
 
 use App\Models\User\Address\UserAddress;       
+use App\Models\User\Address\UserAddressType;       
 use App\Models\User\Address\PhoneCode;       
 use App\Models\Settings\Zone;       
 use App\Models\Settings\Country;       
@@ -101,6 +102,7 @@ class UserAddressController extends Controller
             $address->postcode = $request->postcode;
             $address->save();
 
+            $this->saveUserAddressLabel($address->id, $address->user_id, $request);
             Session::flash('success', 'The address has been saved to your profile.');
             return redirect('/user/address');
         }else{
@@ -131,7 +133,14 @@ class UserAddressController extends Controller
         $codes = PhoneCode::all();
         $phoneCodes = $this->phoneCode($codes);
         $address = UserAddress::find($id);
-        return view('front.user.address.edit')->with('countries', $countries)->with('phoneCodes', $phoneCodes)->with('address', $address);    }
+        $billing_address = $this->checkBillingAddress($address);
+        $shipping_address = $this->checkShippingAddress($address);
+        return view('front.user.address.edit')->with('countries', $countries)
+                                            ->with('phoneCodes', $phoneCodes)
+                                            ->with('address', $address)    
+                                            ->with('billing_address', $billing_address) 
+                                            ->with('shipping_address', $shipping_address);    
+    }
 
     /**
      * Update the specified resource in storage.
@@ -182,6 +191,7 @@ class UserAddressController extends Controller
             $address->postcode = $request->postcode;
             $address->save();
 
+            $this->saveUserAddressLabel($address->id, $address->user_id, $request);
             Session::flash('success', 'The address has been updated.');
             return redirect('/user/address');
         } else {
@@ -213,5 +223,67 @@ class UserAddressController extends Controller
             }
         }
         return $phoneCodes;
+    }
+
+    private function saveUserAddressLabel($address_id, $user_id, $request)
+    {
+        $input = $request->all();
+        if(array_key_exists('billing_address', $input))
+        {
+            $this->deleteUserAddressType($user_id, 1);
+            $this->saveUserAddressType($address_id, $user_id, 1);
+        }
+
+        if (array_key_exists('shipping_address', $input)) 
+        {
+            $this->deleteUserAddressType($user_id, 2);
+            $this->saveUserAddressType($address_id, $user_id, 2);
+        }
+        
+    }
+
+    private function saveUserAddressType($address_id, $user_id, $type_id)
+    {
+        $us_ad_t = new UserAddressType;
+        $us_ad_t->user_id = $user_id;
+        $us_ad_t->user_address_id = $address_id;
+        $us_ad_t->address_type_id = $type_id;
+        $us_ad_t->save();
+    }
+
+    private function deleteUserAddressType($user_id, $type_id)
+    {
+        UserAddressType::where('user_id', $user_id)
+                        ->where('address_type_id', $type_id)
+                        ->delete();
+    }
+
+    private function checkBillingAddress($address)
+    {
+        $check = UserAddressType::where('user_address_id', $address->id)
+                                ->where('address_type_id', 1)
+                                ->get();
+        if(count($check) > 0)
+        {
+            $value = 1;
+        }else{
+            $value = 0;
+        }
+
+        return $value;
+    }
+
+    private function checkShippingAddress($address)
+    {
+        $check = UserAddressType::where('user_address_id', $address->id)
+                                ->where('address_type_id', 2)
+                                ->get();
+        if (count($check) > 0) {
+            $value = 1;
+        } else {
+            $value = 0;
+        }
+
+        return $value;
     }
 }

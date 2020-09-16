@@ -38,6 +38,16 @@ class UsersTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
+            [
+                'fname' => 'Gan',
+                'lname' => 'Willy',
+                'email' => 'gan@supremesifu.com',
+                'email_verified_at' => Carbon::now(),
+                'state' => '1',
+                'password' => bcrypt('password'),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
         ]);
 
         // factory(App\User::class, 10)->create();

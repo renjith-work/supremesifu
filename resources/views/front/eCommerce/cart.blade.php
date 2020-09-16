@@ -88,7 +88,7 @@
                                     </div>
                                 </div>
                                 <div class="col-4 col-md-2 scol-right-border">
-                                    <div class="product-content-center pcd-dktp wd-cart-margin"><span class="amount">{{ config('settings.currency_symbol')}} {{$item->getPriceSum()}} </span></div>
+                                    <div class="product-content-center pcd-dktp wd-cart-margin"><span class="amount" id="cart-product-total-wd-price-{{$item->id}}">{{ config('settings.currency_symbol')}} {{$item->getPriceSum()}} </span></div>
                                 </div>
                                 <div class="col-12 col-md-1">
                                     <div class="wd-cart-cancel"><a href="{{ route('checkout.cart.remove', $item->id) }}" class="btn"><i class="fa fa-close"></i> </a></div>
