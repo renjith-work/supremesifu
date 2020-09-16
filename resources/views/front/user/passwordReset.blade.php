@@ -18,12 +18,7 @@
                         @endif
                         <div class="row">
                             <div class="col-md-12 col-lg-3">
-                                <!-- Nav tabs -->
-                                <ul class="nav flex-column px-dashboard-list">
-                                    <li><a href="/user/dashboard">Dashboard</a></li>
-                                    <li> <a href="/user/account-details">Account Details</a></li>
-                                    <li> <a href="/user/password-reset" class="active">Password Reset</a></li>
-                                </ul>
+                                @include('front.user.dashboard_sidebar')
                             </div>
                             <div class="col-md-12 col-lg-9">
                                 <!-- Tab panes -->

@@ -72,6 +72,16 @@
                                         </select>
                                         @error('attributeSet') <p class="error-p">{{$errors->first('attributeSet')}}</p> @enderror
                                     </div>  
+                                    <div class="form-group">
+                                        <label for="productDesign">Product Design</label>
+                                        <select id="productDesign" class="form-control custom-select mt-15 @error('productDesign') is-invalid @enderror" name="productDesign">
+                                            <option disabled selected>Select a product design</option>
+                                            @foreach($productDesigns as $design)
+                                                <option value="{{ $design->id }}"> {{ $design->name }} </option>                                            
+                                            @endforeach
+                                        </select>
+                                        @error('productDesign') <p class="error-p">{{$errors->first('productDesign')}}</p> @enderror
+                                    </div>  
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">

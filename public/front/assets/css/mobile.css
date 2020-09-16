@@ -657,6 +657,39 @@
     margin: 0px 0px 70px 0px;
 }
 
+.wide-cart-qty-button{
+    color: #000;
+    border: none;
+    background: none;
+}
+
+.wd-c-dec{
+    float: left;
+    margin-top: 6px;
+    font-size: 20px;
+}
+
+.wd-c-inc{
+    float: right;
+    margin-top: 6px;
+    font-size: 20px;
+}
+
+
+.wd-qty-cover {
+    width: 93px;
+    margin: 0px auto 0px auto;
+}
+
+.wd-cart-cancel{
+    margin: 30px auto 0px -15px;
+    text-align: center;
+}
+
+.wd-cart-margin{
+    margin-top: 10px !important;
+}
+
 /* Media Breakpoints Cart */
 @media only screen and (min-width : 320px) {
     .cart-body-cover{
@@ -664,6 +697,14 @@
     }
 
     .mobile-cart-body-cover{
+        display: block;
+    }
+
+    .cart-table-wide{
+        display: none;
+    }
+
+    .cart-table-mobile{
         display: block;
     }
 }
@@ -676,6 +717,18 @@
 
     .mobile-cart-body-cover{
         display: none;
+    }
+
+    .cart-table-wide{
+        display: block;
+    }
+
+    .cart-table-mobile{
+        display: none;
+    }
+
+    .cart-qty-input-value{
+        display: inline !important;
     }
 }
 @media only screen and (min-width : 1200px) {}

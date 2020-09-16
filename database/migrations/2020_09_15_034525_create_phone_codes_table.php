@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddDesignIdToProductsTable extends Migration
+class CreatePhoneCodesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddDesignIdToProductsTable extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->bigInteger('product_design_id')->nullable();
+        Schema::create('phone_codes', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('value');
+            $table->string('code');
+            $table->bigInteger('country_id');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddDesignIdToProductsTable extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('product_design_id');
-        });
+        Schema::dropIfExists('phone_codes');
     }
 }

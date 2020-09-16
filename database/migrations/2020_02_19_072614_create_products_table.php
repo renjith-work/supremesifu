@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('name')->unique()->nullable();
             $table->string('slug')->unique()->nullable();
             $table->string('sku')->unique()->nullable();
+            $table->bigInteger('product_design_id')->nullable();
             $table->bigInteger('product_attribute_set_id')->nullable();
             $table->bigInteger('fabric_id')->nullable();
             $table->bigInteger('brand_id')->nullable();

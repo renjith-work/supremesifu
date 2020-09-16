@@ -15,4 +15,9 @@ class FabricPrice extends Model
     {
         return $this->belongsTo('App\Models\Product\Fabric\Fabric', 'fabric_id');
     }
+
+    public function unit()
+    {
+        return $this->belongsTo('App\Models\Product\Inventory\InventoryUnit', 'inventory_unit_id');
+    }
 }

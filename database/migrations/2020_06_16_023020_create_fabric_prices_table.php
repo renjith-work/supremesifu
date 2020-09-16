@@ -19,6 +19,8 @@ class CreateFabricPricesTable extends Migration
             $table->bigInteger('product_attribute_set_id');
             $table->decimal('price', 9, 2);
             $table->decimal('splPrice', 9, 2)->nullable();
+            $table->decimal('weight', 12, 2);
+            $table->bigInteger('inventory_unit_id')->nullable();
             $table->date('startDate')->nullable();
             $table->date('endDate')->nullable();
             $table->timestamps();

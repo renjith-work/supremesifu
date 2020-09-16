@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Product\Fabric;
 use App\Models\Product\Fabric\FabricPrice;
 use App\Models\Product\ProductAttributeSet;
 use App\Models\Product\Fabric\Fabric;
+use App\Models\Product\Inventory\InventoryUnit;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -40,7 +41,8 @@ class FabricPriceController extends Controller
     {   
         $attribute_sets = ProductAttributeSet::all();
         $fabric_id = $id;
-        return view('admin.product.fabric.price.create')->with('fabric_id', $fabric_id)->with('attribute_sets', $attribute_sets);
+        $weightUnits = InventoryUnit::where('type_id', 2)->get();
+        return view('admin.product.fabric.price.create')->with('fabric_id', $fabric_id)->with('attribute_sets', $attribute_sets)->with('weightUnits', $weightUnits);
     }
 
     /**
@@ -54,9 +56,12 @@ class FabricPriceController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
+                'product_set' => 'required',
                 'price' => 'required',
                 'startDate' => 'required_with:splPrice',
                 'endDate' => 'required_with:splPrice',
+                'weight' => 'required',
+                'weightUnit' => 'required',
             ]
         );
 
@@ -69,6 +74,8 @@ class FabricPriceController extends Controller
             $price->splPrice = $request->splPrice;
             $price->startDate = $request->startDate;
             $price->endDate = $request->endDate;
+            $price->inventory_unit_id = $request->weightUnit;
+            $price->weight = $request->weight;
             $price->save();
 
             $url = '/admin/product/fabric/'.$price->fabric_id.'/edit';
@@ -101,7 +108,9 @@ class FabricPriceController extends Controller
         $fabric_price = FabricPrice::find($id);
         $attribute_sets = ProductAttributeSet::all();
         $fabric_id = $fabric_price->fabric_id;
-        return view('admin.product.fabric.price.edit')->with('fabric_price', $fabric_price)->with('fabric_id', $fabric_id)->with('attribute_sets', $attribute_sets);
+        $weightUnits = InventoryUnit::where('type_id', 2)->get();
+        // return response()->json($fabric_price);
+        return view('admin.product.fabric.price.edit')->with('fabric_price', $fabric_price)->with('fabric_id', $fabric_id)->with('attribute_sets', $attribute_sets)->with('weightUnits', $weightUnits);
 
     }
 
@@ -117,7 +126,10 @@ class FabricPriceController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
+                'product_set' => 'required',
                 'price' => 'required',
+                'weight' => 'required',
+                'weightUnit' => 'required',
                 'startDate' => 'required_with:splPrice',
                 'endDate' => 'required_with:splPrice',
             ]
@@ -132,6 +144,8 @@ class FabricPriceController extends Controller
             $price->splPrice = $request->splPrice;
             $price->startDate = $request->startDate;
             $price->endDate = $request->endDate;
+            $price->inventory_unit_id = $request->weightUnit;
+            $price->weight = $request->weight;
             $price->save();
 
             $url = '/admin/product/fabric/' . $price->fabric_id . '/edit';

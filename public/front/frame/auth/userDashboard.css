@@ -72,10 +72,21 @@
 
 .px-customer-dashboard-form-cover label{
 	font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 0px !important;
 }
 
 .px-customer-dashboard-form-cover input{
-	padding: 20px 10px;
+    padding: 10px 10px;
+    font-size: 15px;
+}
+
+.px-customer-dashboard-form-cover select{
+    font-size: 15px;
+    height: 45px !important;
+    padding: 10px;
 }
 
 .px-customer-dashboard-form-cover .form-group{
@@ -94,4 +105,31 @@
 	text-transform: uppercase;
 	padding: 10px 40px 10px 40px !important;
 	letter-spacing: 1px;
+}
+
+.address-book-table-cover{
+    padding: 0px 20px 20px 0px;
+}
+
+.address-label-cover{
+    font-size: 10px;
+}
+
+.add-tab-head{
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.add-tab-body{
+    font-size: 13px;
+}
+
+.add-tab-action{
+    text-align: center;
+}
+.add-tab-action a{
+    font-size: 13px;
+    color: #c1903e;
 }

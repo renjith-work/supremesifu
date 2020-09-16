@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Product\Product;
 use App\Models\Product\Product;
 use App\Models\Product\ProductCategory;
 use App\Models\Product\ProductAttributeSet;
+use App\Models\Product\Design\ProductDesign;
 use App\Models\Product\Brand;
 use App\Models\Settings\Country;
 use App\Models\Product\Fabric\FabricClass;
@@ -21,7 +22,6 @@ use App\Models\Product\File\ProductDocument;
 use App\Models\Product\Fabric\Fabric;
 use App\Models\Product\Monogram;
 use App\Models\Product\ProductMonogram;
-use App\Models\Product\ProductDesign;
 use App\Models\MeasurementAttribute;
 use App\Models\UserMeasurementProfile;
 use App\Models\UMProfileValue;
@@ -51,8 +51,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::orderBy('id', 'asc')->paginate(15);
-         return view('admin.product.product.index')->with('products', $products);
+        $products = Product::where('user_id', 1)->orderBy('id', 'asc')->paginate(15);
+        return view('admin.product.product.index')->with('products', $products);
     }
 
     /**
@@ -69,7 +69,8 @@ class ProductController extends Controller
         $fabricClasses = FabricClass::orderBy('id', 'asc')->get();
         $taxClasses = TaxClass::orderBy('id', 'asc')->get();
         $weightUnits = InventoryUnit::where('type_id', 2)->get();
-        return view('admin.product.product.create')->with('categories', $categories)->with('brands', $brands)->with('attributeSets', $attributeSets)->with('countries', $countries)->with('fabricClasses', $fabricClasses)->with('taxClasses', $taxClasses)->with('weightUnits', $weightUnits);
+        $productDesigns = ProductDesign::all();
+        return view('admin.product.product.create')->with('categories', $categories)->with('brands', $brands)->with('attributeSets', $attributeSets)->with('countries', $countries)->with('fabricClasses', $fabricClasses)->with('taxClasses', $taxClasses)->with('weightUnits', $weightUnits)->with('productDesigns', $productDesigns);
     }
 
     /**
@@ -130,6 +131,7 @@ class ProductController extends Controller
             $product->slug = Str::slug($request->name, '-');
             $product->sku = $request->sku;
             $product->product_attribute_set_id = $request->attributeSet;
+            $product->product_design_id = $request->productDesign;
             $product->brand_id = $request->brand;
             $product->country_id = $request->country;
             $product->description = $request->description;
@@ -194,13 +196,14 @@ class ProductController extends Controller
         $taxClasses = TaxClass::orderBy('id', 'asc')->get();
         $weightUnits = InventoryUnit::where('type_id', 2)->get();
         $product = Product::find($id);
+        $productDesigns = ProductDesign::all();
 
         $sel_categories = array();
         foreach ($product->categories as $category) {
             $sel_categories[] = $category->id;
         }
 
-        return view('admin.product.product.edit')->with('categories', $categories)->with('brands', $brands)->with('attributeSets', $attributeSets)->with('countries', $countries)->with('fabricClasses', $fabricClasses)->with('taxClasses', $taxClasses)->with('weightUnits', $weightUnits)->with('product', $product)->with('sel_categories', $sel_categories);
+        return view('admin.product.product.edit')->with('categories', $categories)->with('brands', $brands)->with('attributeSets', $attributeSets)->with('countries', $countries)->with('fabricClasses', $fabricClasses)->with('taxClasses', $taxClasses)->with('weightUnits', $weightUnits)->with('product', $product)->with('sel_categories', $sel_categories)->with('productDesigns', $productDesigns);
     }
 
     /**
@@ -261,6 +264,7 @@ class ProductController extends Controller
             $product->slug = Str::slug($request->name, '-');
             $product->sku = $request->sku;
             $product->product_attribute_set_id = $request->attributeSet;
+            $product->product_design_id = $request->productDesign;
             $product->brand_id = $request->brand;
             $product->country_id = $request->country;
             $product->description = $request->description;

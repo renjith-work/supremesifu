@@ -227,8 +227,8 @@ Route::group(['prefix'  =>   'admin/product/custom', 'as' => 'admin.product.cust
 Route::group(['prefix'  =>   'admin/product/design', 'as' => 'admin.product.design.'], function () {
 	Route::resource('shirt', 'Admin\Product\Design\ShirtController');
 	Route::get('shirt/{id}/delete', 'Admin\Product\Design\ShirtController@delete')->name('shirt.delete');
-	Route::get('shirt/image/delete/{id}', 'Admin\Product\Design\ShirtController@imageDel')->name('shirt.image.delete');;
-	Route::get('shirt/video/delete/{id}', 'Admin\Product\Design\ShirtController@videoDel')->name('shirt.video.delete');;
+	Route::get('shirt/image/delete/{id}', 'Admin\Product\Design\ShirtController@imageDel')->name('shirt.image.delete');
+	Route::get('shirt/video/delete/{id}', 'Admin\Product\Design\ShirtController@videoDel')->name('shirt.video.delete');
 });
 
 
@@ -249,6 +249,18 @@ Route::get('/about-us/terms-and-conditions', 'Front\Page\PageController@termsCon
 Route::get('/about-us/privacy-policy', 'Front\Page\PageController@privacy');
 Route::get('/about-us/frequently-asked-questions-faq', 'Front\Page\PageController@faq');
 Route::get('/collection/shirts', 'Front\Product\ProductController@index');
+
+// User Administration Routes
+Route::group(['prefix'  =>   'user', 'as' => 'front.user.'], function () {
+	Route::resource('address','Front\User\Address\UserAddressController');
+	// Country and Zones Api end points
+	Route::post('country', 'Front\User\Address\CountryController@getZones');
+	// Route::get('address', 'Front\User\Address\UserAddressController@index')->name('address');
+	// Route::get('address/create', 'Front\User\Address\UserAddressController@create')->name('address.create');
+	// Route::get('address/edit', 'Front\User\Address\UserAddressController@edit')->name('address.edit');
+});
+
+
 
 // Blog Routes
 Route::group(['prefix'  =>   'blog', 'as' => 'blog.'], function() {

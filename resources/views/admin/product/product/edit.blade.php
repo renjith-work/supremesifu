@@ -71,7 +71,17 @@
                                             @endforeach
                                         </select>
                                         @error('attributeSet') <p class="error-p">{{$errors->first('attributeSet')}}</p> @enderror
-                                    </div>  
+                                    </div> 
+                                    <div class="form-group">
+                                        <label for="productDesign">Product Design</label>
+                                        <select id="productDesign" class="form-control custom-select mt-15 @error('productDesign') is-invalid @enderror" name="productDesign">
+                                            <option value="">Select a product design</option>
+                                            @foreach($productDesigns as $design)
+                                                <option value="{{ $design->id }}" @if(!empty($product->product_design_id)) @if($design->id == $product->design->id) selected @endif @endif> {{ $design->name }} </option>                                            
+                                            @endforeach
+                                        </select>
+                                        @error('productDesign') <p class="error-p">{{$errors->first('productDesign')}}</p> @enderror
+                                    </div>   
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
