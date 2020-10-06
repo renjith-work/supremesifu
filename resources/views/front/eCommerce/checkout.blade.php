@@ -9,8 +9,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <ul class="breadcrumb-list">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active">Checkout Page</li>
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/cart">Cart</a></li>
+                        <li class="breadcrumb-item active">Checkout</li>
                     </ul>
                 </div>
             </div>
@@ -26,203 +27,225 @@
             @endif
             <div class="sp-checkout-cover">
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="sp-checkout-address-cover">
-                            <div class="sp-checkout-main-title">Billing & Shipping</div>
-                            <div class="spc-ad-item-cover">
-                                <div class="spc-ad-item-head">Billing Adress</div>
-                                <div class="spc-ad-item-body">
-                                    <div class="spc-ad-item">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="spc-form-input">
-                                                    <label>First name</label>
-                                                    <input type="text" class="form-control" name="first_name">
-                                                </div>
+                    <div class="col-md-7">
+                        <h3 class="shoping-checkboxt-title">Item Details</h3>
+                        <div class="cart-table-wide">
+                            <div class="sifu-cart-table-cover">
+                            <div class="sifu-cart-table-head">
+                                <div class="row">
+                                    <div class="col-1 ssifu-table-border">
+                                        <h3>#</h3>
+                                    </div>
+                                    <div class="col-2 ssifu-table-border">
+                                        <h3>IMAGE</h3>
+                                    </div>
+                                    <div class="col-4 ssifu-table-border">
+                                        <h3>PRODUCT</h3>
+                                    </div>
+                                    <div class="col-3 ssifu-table-border">
+                                        <h3>PRICE</h3>
+                                    </div>
+                                    <div class="col-2 ssifu-table-border">
+                                        <h3>QTY</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sifu-cart-table-body">
+                                <?php $cartNo = 1; ?>
+                                @foreach(\Cart::getContent() as $item)
+                                <div class="row">
+                                    <div class="col-1 col-md-1 scol-right-border">
+                                        <div class="product-content-center pcd-dktp">{{$cartNo}}</div>
+                                    </div>
+                                    <div class="col-4 col-md-2 scol-right-border">
+                                        @if($item->attributes->user == 1)
+                                            @foreach($item->attributes->images as $image)
+                                                @if($image->position_id == 1)
+                                                    <img src="/images/product/design/{{$image->name}}">
+                                                @endif
+                                            @endforeach
+                                        @else
+                                            @foreach($item->attributes->images as $image)
+                                                @if($image->position_id == 1)
+                                                    <img src="/images/product/design/{{$image->name}}"> 
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                    <div class="col-4 col-md-4 scol-right-border">
+                                        <div class="product-content-left">
+                                            <div class="product-content-name"><a href="/cart/product/{{$item->id}}/edit/qty/{{ $item->quantity }}">{{ Str::words($item->name,20) }}</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-md-3 scol-right-border">
+                                        <div class="product-content-center pcd-dktp wd-cart-margin">
+                                            <span class="amount">{{ config('settings.currency_symbol')}} {{$item->getPriceSum()}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-md-2">
+                                        <div class="product-content-center pcd-dktp wd-cart-margin"><span class="amount">{{ $item->quantity }}</span></div>
+                                    </div>
+                                </div>
+                                <div class="pdc-border"></div>
+                                <?php $cartNo++; ?>
+                                @endforeach
+                            </div>
+                            </div>
+                        </div>
+                        <div class="cart-table-mobile">
+                            <div class="sifu-cart-table-cover">
+                                <a href="#" class="cart-mobile-top-checkout">CHECKOUT</a>
+                            </div>
+                            <div class="sifu-cart-table-mobile-body">
+                                @foreach(\Cart::getContent() as $item)
+                                <div class="cart-product-item">
+                                    <div class="row">
+                                        <div class="col-4 col-md-4 scol-right-border no-padding-right">
+                                            <div class="cart-product-image">
+                                                @if($item->attributes->user == 1)
+                                                    @foreach($item->attributes->images as $image)
+                                                        @if($image->position_id == 1)
+                                                            <img src="/images/product/design/{{$image->name}}">
+                                                        @endif
+                                                    @endforeach
+                                                @else
+                                                    @foreach($item->attributes->images as $image)
+                                                        @if($image->position_id == 1)
+                                                            <img src="/images/product/design/{{$image->name}}"> 
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-5 col-md-5 scol-right-border">
+                                            <div class="mobile-cart-product-name cart-product-name">
+                                                <a href="/cart/product/{{$item->id}}/edit/qty/{{ $item->quantity }}">{{ Str::words($item->name,20) }}</a>
+                                            </div>
+                                            <div class="mobile-cart-unit-price">
+                                                {{ config('settings.currency_symbol')}} {{$item->price}} / Unit
+                                            </div>                                
+                                        </div>
+                                        <div class="col-3 col-md-3 no-padding-left">
+                                            <div class="mobile-cart-product-item-total">
+                                            {{ config('settings.currency_symbol')}} <span id="cart-product-total-price-{{$item->id}}">{{$item->getPriceSum()}}</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="spc-ad-item">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="spc-form-input">
-                                                    <label for="email">Email address *</label>
-                                                    <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" id="emai1" name="email" placeholder="">
-                                                    @error('email') <p class="error-p">{{ $errors->first('email') }}</p> @enderror
-                                                </div>
+                                    @if($item->attributes->user == 1)
+                                        <div class="mobile-cart-image-alert">**This image is a refference for the design selected and not of the final product.</div>
+                                    @endif
+                                    <div class="pdc-border"></div>
+                                </div>
+                                
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <h3 class="shoping-checkboxt-title">Shipping Details</h3>
+                        <div class="spc-shpd-cover">
+                            <div class="your-order-wrapper">
+                                <div class="your-order-wrap">
+                                    <div class="spc-shpd-item-wrap">
+                                        <div class="spc-shpd-item-cover">
+                                            <div class="spc-shpd-item-head">
+                                                <div class="spc-shpd-item-title">Shipping Address</div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="spc-form-input">
-                                                    <label for="phone">Phone Number *</label>
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <select class="form-control @error('phone') is-invalid @enderror" id="phoneCode" name="phoneCode">
-                                                                {{-- @foreach($phoneCodes as $phoneCode)
-                                                                <option value="{{$phoneCode->id}}">{{$phoneCode->code}}</option>
-                                                                @endforeach --}}
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-8 no-padding-left">
-                                                            <input type="text" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}" id="phone" name="phone" placeholder="">
+                                            <div class="spc-shpd-item-body" id="spc-shipping-address-body">
+                                                <div class="shpd-add-name">{{$shipping_address->name}}</div>
+                                                <div class="shpd-add-add">{{$shipping_address->address}}, {{$shipping_address->city}}, {{$shipping_address->postcode}}, {{$shipping_address->zone->country->name}}.</div>
+                                            </div>
+                                            <div class="spc-shpd-edit-link"><a href="2" class="spc-add-edit-a">Edit</a></div>
+                                        </div>
+                                        <div class="spc-shpd-item-cover">
+                                            <div class="spc-shpd-item-head">
+                                                <div class="spc-shpd-item-title">Billing Address</div>
+                                            </div>
+                                            <div class="spc-shpd-item-body" id="spc-billing-address-body">
+                                                <div class="shpd-add-name">{{$billing_address->name}}</div>
+                                                <div class="shpd-add-add">{{$billing_address->address}}, {{$billing_address->city}}, {{$billing_address->postcode}}, {{$billing_address->zone->country->name}}.</div>
+                                            </div>
+                                            <div class="spc-shpd-edit-link"><a href="1" class="spc-add-edit-a">Edit</a></div>
+                                        </div>
+                                        <div class="spc-shpd-item-cover">
+                                            <div class="spc-shpd-item-head">
+                                                <div class="spc-shpd-item-title">Order Summary</div>
+                                            </div>
+                                            <div class="spc-shpd-item-body">
+                                                <div class="shpd-ods-cover">
+                                                    <div class="shpd-ods-item">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="spc-shpd-ods-title">Subtotal <span> ( {{ \Cart::getTotalQuantity() }} items)</span></div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="spc-shpd-ods-price">{{ config('settings.currency_symbol') }} {{ \Cart::getSubTotal() }}</div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    @error('phone') <p class="error-p">{{ $errors->first('phone') }}</p> @enderror
+                                                    <div class="shpd-ods-item">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="spc-shpd-ods-title">Shipping Fee <span></span></div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="spc-shpd-ods-price">22.00 MYR</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="spc-shpd-ods-border"></div>
+                                                     <div class="shpd-ods-item shpd-ods-item-total">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="spc-shpd-ods-title">Total <span></span></div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="spc-shpd-ods-price spc-shpd-ods-price-total">{{ config('settings.currency_symbol') }} {{ \Cart::getTotal() }}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- your-order-wrap end -->
+                                    <div class="payment-method">
+                                        <div class="payment-accordion">
+                                            <!-- ACCORDION START -->
+                                            <h3>PayPal <img src="/front/assets/images/icon/4.png" alt="" /></h3>
+                                            <div class="payment-content">
+                                                <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
+                                            </div>
+                                            <!-- ACCORDION END -->                                  
+                                        </div>
+                                        <form action="{{ route('checkout.place.order') }}" method="POST" role="form">
+                                            @csrf
+                                            <div class="fomt-hidden-input">
+                                                <input type ="hidden" name="billing_address" id="form_billing_address" value="{{$billing_address->id}}">
+                                                <input type ="hidden" name="shipping_address" id="form_shipping_address" value="{{$shipping_address->id}}">
+                                            </div>
+                                            <div class="order-button-payment">
+                                                <input type="submit" value="Place order" />
+                                            </div>
+                                        </form>
+                                    </div>                                  
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="sp-checkout-address-od-cover">
-                            <div class="sp-checkout-main-title">Order Details</div>
-                        </div>
-                    </div>
                 </div>
             </div>
-            <div class="checkout-details-wrapper">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <!-- billing-details-wrap start -->
-                        <form action="{{ route('checkout.place.order') }}" method="POST" role="form">
-                        @csrf
-                        <div class="billing-details-wrap">
-                                <h3 class="shoping-checkboxt-title">Billing Details</h3>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <p class="single-form-row">
-                                            <label>First name</label>
-                                            <input type="text" class="form-control" name="first_name">
-                                        </p>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <p class="single-form-row">
-                                            <label>Last name</label>
-                                            <input type="text" class="form-control" name="last_name">
-                                        </p>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <p class="single-form-row">
-                                            <label>Email Address</label>
-                                            <input type="email" class="form-control" name="email" value="{{ auth()->user()->email }}" disabled>
-                                            <small class="form-text text-muted">We'll never share your email with anyone else.</small>
-                                        </p>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <p class="single-form-row">
-                                            <label>Address</label>
-                                            <input type="text" class="form-control" name="address">
-                                        </p>
-                                    </div>
-                                    <div class="col-lg-6">
-                                            <label>City</label>
-                                            <input type="text" class="form-control" name="city">
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <label>Country</label>
-                                        <div class="nice-select wide">
-                                            <select class="form-control" name="country">
-                                                <option value="Malaysia" selected="true">Malaysia</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12"><div class="address-form-devider"></div></div>
-                                    <div class="col-lg-12">
-                                        <p class="single-form-row">
-                                            <label>Postcode / ZIP <span class="required">*</span></label>
-                                            <input type="text" class="form-control" name="post_code">
-                                        </p>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <p class="single-form-row">
-                                            <label>Phone</label>
-                                            <input type="text" class="form-control" name="phone_number">
-                                        </p>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <p class="single-form-row">
-                                            <label>Order Notes</label>
-                                            <textarea class="form-control" name="notes" rows="6"></textarea>
-                                        </p>
-                                    </div>
-                                </div>
-                            
-                        </div>
-                        <!-- billing-details-wrap end -->
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <!-- your-order-wrapper start -->
-                        <div class="your-order-wrapper">
-                            <h3 class="shoping-checkboxt-title">Your Order</h3>
-                            <!-- your-order-wrap start-->
-                            <div class="your-order-wrap">
-                                <!-- your-order-table start -->
-                                <div class="your-order-table table-responsive">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th class="product-name">Product</th>
-                                                <th class="product-total">Total</th>
-                                            </tr>                           
-                                        </thead>
-                                        <tbody>
-                                            @foreach(\Cart::getContent() as $item)
-                                            <tr class="cart_item">
-                                                <td class="product-name">
-                                                    {{ Str::words($item->name,20) }} <strong class="product-quantity"> × {{ $item->quantity }}</strong>
-                                                </td>
-                                                <td class="product-total">
-                                                    <span class="amount">{{ config('settings.currency_symbol')}} {{$item->getPriceSum()}}</span>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                        <tfoot>
-                                            <tr class="cart-subtotal">
-                                                <th>Cart Subtotal</th>
-                                                <td><span class="amount">{{ config('settings.currency_symbol') }}{{ \Cart::getSubTotal() }}</span></td>
-                                            </tr>
-                                            <tr class="shipping">
-                                                <th>Shipping</th>
-                                                <td>
-                                                    Free
-                                                </td>
-                                            </tr>
-                                            <tr class="order-total">
-                                                <th>Order Total</th>
-                                                <td><strong><span class="amount">{{ config('settings.currency_symbol') }}{{ \Cart::getTotal() }}</span></strong>
-                                                </td>
-                                            </tr>                               
-                                        </tfoot>
-                                    </table>
-                                </div>
-                                <!-- your-order-table end -->
-                                
-                                <!-- your-order-wrap end -->
-                                <div class="payment-method">
-                                    <div class="payment-accordion">
-                                        <!-- ACCORDION START -->
-                                        <h3>PayPal <img src="/front/assets/images/icon/4.png" alt="" /></h3>
-                                        <div class="payment-content">
-                                            <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
-                                        </div>
-                                        <!-- ACCORDION END -->                                  
-                                    </div>
-                                    <div class="order-button-payment">
-                                        <input type="submit" value="Place order" />
-                                    </div>
-                                </div>
-                                <!-- your-order-wrapper start -->
-                                
-                            </div>
-                        </div>
-                    </div>
-                    </form>
-                </div>
-            </div>
-            <!-- checkout-details-wrapper end -->
     </div>
     <!-- content-wraper end -->
+    @include('front.modals.change-address-modal')
+@endsection
+@section('script')
+    <script type="text/javascript">
+        var billing_address  = {!! json_encode($billing_address->id) !!};
+        var shipping_name  = {!! json_encode($shipping_address->id) !!};
+    </script>
+    <script type="text/javascript" src="/front/code/js/eCommerce/checkout.js"></script>
 @endsection

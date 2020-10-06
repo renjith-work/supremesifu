@@ -17,7 +17,7 @@ class CreateFabricAttributeValuesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('fabric_attribute_id')->unsinged();
             $table->text('value');
-            $table->decimal('price', 8, 2)->nullable();
+            $table->decimal('price', 20, 6)->nullable();
             $table->timestamps();
         });
     }

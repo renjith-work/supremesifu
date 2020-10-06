@@ -65,6 +65,10 @@ class DatabaseSeeder extends Seeder
             // Measurement
             MonogramTableSeeder::class,
             StatusTableSeeder::class,
+            // Address
+            ZoneTableSeeder::class,
+            PhoneCodeSeeder::class,
+            AddressTypeTableSeeder::class,
 
         ]);
     }

@@ -10,6 +10,10 @@ use App\Models\OrderItem;
 use Cart;
 use App\Services\PayPalService;
 
+use App\User;
+use Auth;
+use App\Models\User\Address\UserAddress;  
+use App\Models\User\Address\UserAddressType;  
 
 class CheckoutController extends Controller
 {
@@ -22,11 +26,52 @@ class CheckoutController extends Controller
 
     public function getCheckout()
     {
-        return view('front.eCommerce.checkout');
-    }
+		$user_id = Auth::user()->id;
+		$user = User::find($user_id);
+		
+		$shippng_address = NULL;
+
+		$billing_address = $this->getBillingAddress($user);
+		$shipping_address = $this->getShippingAddress($user);
+
+        return view('front.eCommerce.checkout')->with('billing_address', $billing_address)->with('shipping_address', $shipping_address);
+	}
+	
+	private function getBillingAddress($user)
+	{
+		$billing_address = NULL;
+		$b_address = null;
+		foreach ($user->addresses as $address) {
+			$b_address = UserAddressType::where('user_id', $user->id)
+										->where('address_type_id', 1)->first();
+			if ($b_address != null) {
+				$billing_address = UserAddress::find($b_address->user_address_id);
+				break;
+			}
+		}
+		return $billing_address;
+	}
+
+	private function getShippingAddress($user)
+	{
+		$shipping_address = NULL;
+		$b_address = null;
+		foreach ($user->addresses as $address) {
+			$b_address = UserAddressType::where('user_id', $user->id)
+										->where('address_type_id', 2)->first();
+			if ($b_address != null) {
+				$shipping_address = UserAddress::find($b_address->user_address_id);
+				break;
+			}
+		}
+		return $shipping_address;
+	}
 
     public function placeOrder(Request $request)
     {
+		
+		$billing_address = UserAddress::find($request->billing_address);
+		$shipping_address = UserAddress::find($request->shipping_address);
     	// var_dump($request);
         // Before storing the order we should implement the
         // request validation which I leave it to you
@@ -36,21 +81,22 @@ class CheckoutController extends Controller
         
         $order = Order::create([
 	        'order_number'      =>  'ORD-'.strtoupper(uniqid()),
-	        'user_id'           => auth()->user()->id,
+	        'user_id'           => 	auth()->user()->id,
 	        'status'            =>  'pending',
 	        'grand_total'       =>  Cart::getSubTotal(),
 	        'item_count'        =>  Cart::getTotalQuantity(),
 	        'payment_status'    =>  0,
 	        'payment_method'    =>  null,
-	        'first_name'        =>  $request->first_name,
-	        'last_name'         =>  $request->last_name,
-	        'address'           =>  $request->address,
-	        'city'              =>  $request->city,
-	        'country'           =>  $request->country,
-	        'post_code'         =>  $request->post_code,
-	        'phone_number'      =>  $request->phone_number,
-	        'notes'             =>  $request->notes
-	    ]);
+	        'first_name'        =>  $billing_address->name,
+	        // 'last_name'         =>  $request->last_name,
+	        'address'           =>  $billing_address->address,
+	        'city'              =>  $billing_address->city,
+	        'country'           =>  $billing_address->zone->country->name,
+	        'post_code'         =>  $billing_address->postcode,
+	        'phone_number'      =>  $billing_address->phoneCode->value. $billing_address->phone,
+		]);
+
+		return response()->json($order);
 
         if ($order) {
 

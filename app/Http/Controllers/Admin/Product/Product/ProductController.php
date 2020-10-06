@@ -96,7 +96,7 @@ class ProductController extends Controller
                 'summary' => 'required',
                 'fabric_class' => 'required',
                 'fabric' => 'required',
-                'price' => 'required',
+                'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
                 'startDate' => 'required_with:splPrice',
                 'endDate' => 'required_with:splPrice',
                 'taxClass'=> 'required_if:taxable,==,1',

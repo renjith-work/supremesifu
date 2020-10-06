@@ -17,7 +17,7 @@
     <section class="content">
         <div class="admin-footer-error">@include('admin.partials.flashErrorMessage')</div>
         <div class="global-settings-cover">
-            <form action="{{ route('admin.product.design.shirt.update', $design->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.product.design.shirt.update', $design->id) }}" method="POST" enctype="multipart/form-data" novalidate>
                 {{ csrf_field() }} {{ method_field('PUT') }}
                 <div class="row user">
                     <div class="col-md-3">
@@ -25,7 +25,6 @@
                             <ul class="nav nav-stacked gb-nav">
                                 <li class="nav-item active" id="liMain"><a class="nav-link active" href="#mainPane" id="mainTab" data-toggle="tab">MAIN CONTENT</a></li>
                                 <li class="nav-item" id="liAttr"><a class="nav-link" href="#attrPane" id="attrTab" data-toggle="tab">ATTRIBUTES</a></li>
-                                <li class="nav-item" id="liPrice"><a class="nav-link" href="#pricePane" id="priceTab" data-toggle="tab">PRICE</a></li>
                                 <li class="nav-item" id="liImage"><a class="nav-link" href="#imagePane" id="imageTab" data-toggle="tab">MEDIA CONTENT</a></li>
                                 <li class="nav-item" id="liSeo"><a class="nav-link" href="#seoPane" id="seoTab" data-toggle="tab">SEO CONTENT</a></li>
                             </ul>
@@ -55,27 +54,6 @@
                                         </select>
                                         @error('attributeSet') <p class="error-p">{{$errors->first('attributeSet')}}</p> @enderror
                                     </div>  
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="weight">Product Weight</label>
-                                                <input type="number" name="weight" class="form-control @error('weight') is-invalid @enderror" id="weight" maxlength="255" value="{{ old('weight', $design->weight->weight) }}">
-                                                @error('weight') <p class="error-p">{{$errors->first('weight')}}</p> @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="weightUnit">Weight Unit</label>
-                                                <select id="weightUnit" class="form-control custom-select mt-15 @error('weightUnit') is-invalid @enderror" name="weightUnit">
-                                                    <option disabled selected>Select an unit</option>
-                                                    @foreach($weightUnits as $unit)
-                                                        <option value="{{ $unit->id }}" @if($unit->id == $design->weight->inventory_unit_id) selected @endif> {{ $unit->name }} </option>                                            
-                                                    @endforeach
-                                                </select>
-                                                @error('weightUnit') <p class="error-p">{{$errors->first('weightUnit')}}</p> @enderror
-                                            </div>  
-                                        </div>
-                                    </div>
                                     <div class="section-sub-title">Design Descriptions</div>
                                     <div class="form-group">
                                         <label for="description">Design Description</label>
@@ -135,6 +113,12 @@
                                             Please select a product category to load the product attributes.
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="price">Design Customization Price</label>
+                                        <div class="form-instruction">This price is any extrta amount required for the particular style.</div>
+                                        <input  type="number" name="price" class="form-control @error('price') is-invalid @enderror" id="price" maxlength="255" value="120" >
+                                        @error('price') <p class="error-p">{{$errors->first('price')}}</p> @enderror
+                                    </div>
                                 </div>
                                 <div class="tile-footer">
                                     <div class="row d-print-none mt-2">
@@ -143,72 +127,6 @@
                                         </div>
                                         <div class="col-md-6 text-right">
                                             <a class="btn btn-success" href="#" id="section2N"><i class="fa fa-fw fa-lg fa-arrow-circle-right"></i> &nbsp;Next</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="pricePane">
-                                <div class="box-header">
-                                    <h3 class="box-title">PRICE & TAX</h3>
-                                </div>
-                                <div class="gb-body">
-                                    <div class="section-sub-title">Price Details</div>
-                                    <div class="form-group">
-                                        <label for="price">Product Price</label>
-                                        <div class="form-instruction">Enter your product price here.</div>
-                                        <input type="number" name="price" class="form-control @error('price') is-invalid @enderror" id="price" maxlength="255" value="{{ old('price', $design->price->price) }}">
-                                        @error('price') <p class="error-p">{{$errors->first('price')}}</p> @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="splPrice">Product Special Price</label>
-                                        <div class="form-instruction">If you want to provide a special offer price for the product, please enter it here.</div>
-                                        <input type="number" name="splPrice" class="form-control @error('splPrice') is-invalid @enderror" id="splPrice" maxlength="255" value="{{ old('splPrice', $design->price->splPrice) }}">
-                                        @error('splPrice') <p class="error-p">{{$errors->first('splPrice')}}</p> @enderror
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="startDate">Special Price - Begin Date</label>
-                                                <input type="date" name="startDate" class="form-control @error('startDate') is-invalid @enderror" id="startDate" maxlength="255" value="{{ old('startDate', $design->price->startDate) }}">
-                                                @error('startDate') <p class="error-p">{{$errors->first('startDate')}}</p> @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="endDate">Special Price - End Date</label>
-                                                <input type="date" name="endDate" class="form-control @error('endDate') is-invalid @enderror" id="endDate" maxlength="255" value="{{ old('endDate', $design->price->endDate) }}">
-                                                @error('endDate') <p class="error-p">{{$errors->first('endDate')}}</p> @enderror
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="section-sub-title">Tax Details</div>
-                                    <div class="form-group">
-                                        <label for="taxable">Taxable Product</label>
-                                        <select id="taxable" class="form-control custom-select mt-15 @error('taxable') is-invalid @enderror" name="taxable">
-                                            <option value="1" @if(!empty($design->tax_class_id)) selected @endif>Taxable</option>
-                                            <option value="0" @if(empty($design->tax_class_id)) selected @endif>Non Taxable</option>
-                                        </select>
-                                        @error('taxable') <p class="error-p">{{$errors->first('taxable')}}</p> @enderror
-                                    </div>  
-                                    <div class="form-group">
-                                        <label for="taxClass">Tax Class</label>
-                                        <select id="taxClass" class="form-control custom-select mt-15 @error('taxClass') is-invalid @enderror" name="taxClass">
-                                            <option disabled selected>Select a tax class</option>
-                                            @foreach($taxClasses as $taxClass)
-                                                <option value="{{ $taxClass->id }}" @if($taxClass->id == $design->tax_class_id) selected @endif> {{ $taxClass->name }} </option>                                            
-                                            @endforeach
-                                        </select>
-                                        @error('taxClass') <p class="error-p">{{$errors->first('taxClass')}}</p> @enderror
-                                    </div>
-                                </div>
-
-                                <div class="tile-footer">
-                                    <div class="row d-print-none mt-2">
-                                        <div class="col-md-6 text-left">
-                                            <a class="btn btn-success" href="#" id="section3P"><i class="fa fa-fw fa-lg fa-arrow-circle-left"></i> &nbsp;Previous</a>
-                                        </div>
-                                        <div class="col-md-6 text-right">
-                                            <a class="btn btn-success" href="#" id="section3N"><i class="fa fa-fw fa-lg fa-arrow-circle-right"></i> &nbsp;Next</a>
                                         </div>
                                     </div>
                                 </div>

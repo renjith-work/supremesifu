@@ -40,7 +40,7 @@
                                     @endforeach
                                 <td>{{$design->name }}</td>
                                 <td>{{$design->slug }}</td>
-                                <td>MYR {{$design->price->price }}</td>
+                                <td>MYR {{$design->price }}</td>
                                 <td>@if($design->status == 0)
                                     <span class="label label-danger label-pixtent-success">Inactive</span>
                                     @elseif($design->status == 1)

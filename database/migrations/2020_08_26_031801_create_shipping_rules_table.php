@@ -18,7 +18,7 @@ class CreateShippingRulesTable extends Migration
             $table->bigInteger('zone_id')->nullable();
             $table->decimal('min_weight', 12, 2);
             $table->decimal('max_weight', 12, 2);
-            $table->decimal('price', 9, 2);
+            $table->decimal('price', 20, 2);
             $table->timestamps();
         });
     }

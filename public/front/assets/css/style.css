@@ -4847,7 +4847,7 @@ body.box-body {
 }
 
 .payment-method {
-  padding: 20px 30px;
+  padding: 0px 30px 20px 30px;
 }
 
 .payment-accordion h3 a {

@@ -4,6 +4,8 @@ $(document).ready(function () {
         $('.select2').select2()
     });
 
+    var designPrice = 0;
+
     tinymce.init({
         selector: '.wysiwyg',
         theme: 'modern',
@@ -63,7 +65,7 @@ $(document).ready(function () {
             success: function (response) {
                 // console.log(response);
                 $.each(response, function (key, value) {
-                    $('#prd-attr-cover').append('<div class="form-group"><label for="' + value.code + '">' + value.name + '</label><select id="' + value.code + '" class="form-control custom-select mt-15" name="' + value.code + '"></select></div>');
+                    $('#prd-attr-cover').append('<div class="form-group"><label for="' + value.code + '">' + value.name + '</label><select id="' + value.code + '" class="form-control custom-select mt-15" name="' + value.code + '"><option selected disabled>Select ' + value.name + ' Style</option></select></div>');
                 });
             }
         });
@@ -142,6 +144,13 @@ $(document).ready(function () {
         window.scrollTo(0, 0);
     }
 
+    // Price Calculation
+    loadPrice(designPrice);
+    function loadPrice(price)
+    {
+        $('#price').val(price);
+    }
+
     // Switching Between Tabs
 
     $('#section1N').click(function (e) {
@@ -173,13 +182,13 @@ $(document).ready(function () {
     $('#section2N').click(function (e) {
         e.preventDefault();
         $('#attrPane').removeClass("active");
-        $('#pricePane').addClass("active");
+        $('#imagePane').addClass("active");
 
         $('#attrTab').removeClass("active");
-        $('#priceTab').addClass("active");
+        $('#imageTab').addClass("active");
 
         $('#liAttr').removeClass("active");
-        $('#liPrice').addClass("active");
+        $('#liImage').addClass("active");
         scrollToTop()
     })
 
@@ -212,13 +221,13 @@ $(document).ready(function () {
     $('#section5P').click(function (e) {
         e.preventDefault();
         $('#imagePane').removeClass("active");
-        $('#pricePane').addClass("active");
+        $('#attrPane').addClass("active");
 
         $('#imageTab').removeClass("active");
-        $('#priceTab').addClass("active");
+        $('#attrTab').addClass("active");
 
         $('#liImage').removeClass("active");
-        $('#liPrice').addClass("active");
+        $('#liAttr').addClass("active");
         scrollToTop()
     })
 

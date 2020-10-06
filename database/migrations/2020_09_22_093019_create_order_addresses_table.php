@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductDesignPricesTable extends Migration
+class CreateOrderAddressesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateProductDesignPricesTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_design_prices', function (Blueprint $table) {
+        Schema::create('order_addresses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('product_design_id');
-            $table->decimal('price', 9, 2);
-            $table->decimal('splPrice', 9, 2)->nullable();
-            $table->date('startDate')->nullable();
-            $table->date('endDate')->nullable();
+            $table->unsignedInteger('billing_address_id');
+            $table->unsignedInteger('shipping_address_id');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateProductDesignPricesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_design_prices');
+        Schema::dropIfExists('order_addresses');
     }
 }

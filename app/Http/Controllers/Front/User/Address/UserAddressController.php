@@ -65,7 +65,8 @@ class UserAddressController extends Controller
     {
         $validator = Validator::make( $request->all(),
             [
-                'name' => 'required|min:3|max:255',
+                'first_name' => 'required|min:3|max:255',
+                'last_name' => 'required|min:1|max:255',
                 'email'=>'required|email',
                 'phone'=>'required|digits_between:5,15',
                 'country' => 'required',
@@ -75,7 +76,8 @@ class UserAddressController extends Controller
                 'postcode' => 'required'
             ],
             [
-                'name.required' => 'Please provide the full name.',
+                'first_name.required' => 'Please provide the first name.',
+                'last_name.required' => 'Please provide the last name.',
                 'email.required' => 'Please provide an email address.',
                 'email.email' => 'Please provide a valid email address.',
                 'phone.required' => 'Please provide a phone number.',
@@ -92,13 +94,15 @@ class UserAddressController extends Controller
 
             $address = new UserAddress;
             $address->user_id = Auth::user()->id;
-            $address->name = $request->name;
+            $address->first_name = $request->first_name;
+            $address->last_name = $request->last_name;
             $address->email = $request->email;
             $address->phone_code_id = $request->phoneCode;
             $address->phone = $request->phone;
             $address->zone_id = $request->zone;
             $address->address = $request->address;
             $address->city = $request->city;
+            $address->country_id = $request->country;
             $address->postcode = $request->postcode;
             $address->save();
 
@@ -154,7 +158,8 @@ class UserAddressController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'name' => 'required|min:3|max:255',
+                'first_name' => 'required|min:3|max:255',
+                'last_name' => 'required|min:1|max:255',
                 'email' => 'required|email',
                 'phone' => 'required|digits_between:5,15',
                 'country' => 'required',
@@ -164,7 +169,8 @@ class UserAddressController extends Controller
                 'postcode' => 'required'
             ],
             [
-                'name.required' => 'Please provide the full name.',
+                'first_name.required' => 'Please provide the first name.',
+                'last_name.required' => 'Please provide the last name.',
                 'email.required' => 'Please provide an email address.',
                 'email.email' => 'Please provide a valid email address.',
                 'phone.required' => 'Please provide a phone number.',
@@ -181,13 +187,15 @@ class UserAddressController extends Controller
 
             $address = UserAddress::find($id);
             $address->user_id = Auth::user()->id;
-            $address->name = $request->name;
+            $address->first_name = $request->first_name;
+            $address->last_name = $request->last_name;
             $address->email = $request->email;
             $address->phone_code_id = $request->phoneCode;
             $address->phone = $request->phone;
             $address->zone_id = $request->zone;
             $address->address = $request->address;
             $address->city = $request->city;
+            $address->country_id = $request->country;
             $address->postcode = $request->postcode;
             $address->save();
 

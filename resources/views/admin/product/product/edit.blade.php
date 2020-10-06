@@ -1,6 +1,5 @@
 @extends('admin.layout')
 @section('header')
-    <link rel="stylesheet" type="text/css" href="/cmadmin/parsley/parsley.css">
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=olg2smjmsqjy5ogdk1zogy9sj5qginfm4e5ozpvxrm5ecfek"></script>
     <link rel="stylesheet" href="/cmadmin/bower_components/select2/dist/css/select2.min.css">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -17,7 +16,7 @@
     <section class="content">
         <div class="admin-footer-error">@include('admin.partials.flashErrorMessage')</div>
         <div class="global-settings-cover">
-            <form action="{{ route('admin.product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.product.update', $product->id) }}" method="POST" enctype="multipart/form-data" novalidate>
                 {{ csrf_field() }} {{ method_field('PUT') }}
                 <div class="row user">
                     <div class="col-md-3">
@@ -487,7 +486,6 @@
 
 @section('footer')
     <script src="/cmadmin/bower_components/select2/dist/js/select2.full.min.js"></script>
-    <script src="/cmadmin/parsley/parsley.js"></script>
     <script type="text/javascript">
         var product_id  = {!! json_encode($product->id) !!};
         var fabric_id  = {!! json_encode($product->fabric->id) !!};

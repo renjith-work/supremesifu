@@ -21,8 +21,14 @@ class UserAddress extends Model
         return $this->belongsTo('App\Models\User\Address\PhoneCode', 'phone_code_id');
     }
 
+    public function country()
+    {
+        return $this->belongsTo('App\Models\Settings\Country', 'country_id');
+    }
+
     public function userAddressTypes()
     {
         return $this->hasMany('App\Models\User\Address\UserAddressType', 'user_address_id');
     }
+    
 }

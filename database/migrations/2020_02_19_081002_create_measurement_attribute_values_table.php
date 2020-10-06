@@ -16,7 +16,7 @@ class CreateMeasurementAttributeValuesTable extends Migration
         Schema::create('measurement_attribute_values', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('measurement_attribute_id')->nullable();
-            $table->decimal('value',9,2)->nullable();
+            $table->decimal('value', 20, 2)->nullable();
             $table->timestamps();
         });
     }

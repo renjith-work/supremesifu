@@ -18,7 +18,7 @@ class CreateProductAttributeValuesTable extends Migration
             $table->bigInteger('product_attribute_id')->nullable();
             $table->string('value');
             $table->text('description');
-            $table->decimal('price',9,2)->nullable();
+            $table->decimal('price', 20, 2)->nullable();
             $table->string('d_image');
             $table->string('d_drawing');
             $table->string('c_image');

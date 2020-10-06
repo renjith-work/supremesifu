@@ -17,7 +17,7 @@ class CreateProductDesignWeightsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('product_design_id')->nullable();
             $table->bigInteger('inventory_unit_id')->nullable();
-            $table->decimal('weight', 12, 2);
+            $table->decimal('weight', 20, 2);
             $table->timestamps();
         });
     }

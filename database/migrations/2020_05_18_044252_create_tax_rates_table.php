@@ -17,7 +17,7 @@ class CreateTaxRatesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('tax_class_id');
             $table->bigInteger('tax_zone_id');
-            $table->decimal('rate', 7, 4);
+            $table->decimal('rate', 20, 2);
             $table->text('description');
             $table->boolean('status')->nullable()->default(0);
             $table->timestamps();

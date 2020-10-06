@@ -21,7 +21,7 @@ class CreateProductDesignsTable extends Migration
             $table->bigInteger('fabric_id')->nullable();
             $table->text('description')->nullable();
             $table->text('summary')->nullable();
-            $table->bigInteger('tax_class_id')->nullable();
+            $table->decimal('price', 20, 2)->nullable();
             $table->string('pageTitle');
             $table->text('metatag');
             $table->text('metadescp');

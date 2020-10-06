@@ -45,8 +45,8 @@
                                                     <tbody>
                                                         @foreach($addresses as $address)
                                                         <tr class="add-tab-body">
-                                                            <th><div class="add-tab-name">{{$address->name}}</div></th>
-                                                            <td>{{$address->address}}</td>
+                                                            <th><div class="add-tab-name">{{$address->first_name}} {{$address->last_name}}</div></th>
+                                                            <td>{{$address->address}}, {{$address->city}}, {{$address->country->name}}.</td>
                                                             <td>{{$address->postcode}}</td>
                                                             <td>{{$address->phoneCode->value}}{{$address->phone}}</td>
                                                             <td>
@@ -57,7 +57,6 @@
                                                                 @endforeach
                                                                 @endif
                                                             </td>
-                                                            {{-- <td><span class="badge badge-light">Billing Address</span></td> --}}
                                                             <td><div class="add-tab-action"><a href="/user/address/{{$address->id}}/edit">Edit</a></div></td>
                                                         </tr>
                                                         @endforeach

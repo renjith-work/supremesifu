@@ -17,7 +17,7 @@ class CreateUserMeasurementProfileValuesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('u_mp_id')->nullable(); //User measurement Profile ID
             $table->bigInteger('m_at_id')->nullable(); //User measurement profile attribute ID
-            $table->decimal('value',9,2);
+            $table->decimal('value', 20, 2);
             $table->timestamps();
         });
     }

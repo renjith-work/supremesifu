@@ -18,7 +18,7 @@ class CreateFabricsTable extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description');
-            $table->decimal('price',9,2);
+            $table->decimal('price', 20, 2);
             $table->string('image');
             $table->bigInteger('fabric_class_id')->nullable();
             $table->bigInteger('brand_id')->nullable();

@@ -18,7 +18,7 @@ class CreateUserProductMeasurementsTable extends Migration
             $table->bigInteger('ump_id')->nullable(); 
             $table->bigInteger('product_id')->nullable(); 
             $table->bigInteger('m_at_id')->nullable(); //User measurement profile attribute ID
-            $table->decimal('value', 9, 2);
+            $table->decimal('value', 20, 2);
             $table->timestamps();
         });
     }

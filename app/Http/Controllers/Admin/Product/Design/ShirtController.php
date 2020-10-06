@@ -67,14 +67,9 @@ class ShirtController extends Controller
             [
                 'name' => 'required|min:5|max:255|unique:product_designs,name',
                 'attributeSet' => 'required',
-                'weight' => 'required',
-                'weightUnit' => 'required',
                 'description' => 'required',
                 'summary' => 'required',
                 'price' => 'required',
-                'startDate' => 'required_with:splPrice',
-                'endDate' => 'required_with:splPrice',
-                'taxClass' => 'required_if:taxable,==,1',
                 'document' => 'mimes:pdf|max:10000',
                 'p_image' =>   'required|image|mimes:jpeg,png,jpg,gif,svg|max:2000',
                 's_image' =>   'required|image|mimes:jpeg,png,jpg,gif,svg|max:2000',
@@ -84,7 +79,6 @@ class ShirtController extends Controller
                 'metadescp' => 'required',
             ],
             [
-                'taxClass.required_if' => 'Please select a tax class if the product is taxable.',
                 'p_image.max' => 'Max image upload size is 2 MB.',
                 's_image.max' => 'Max image upload size is 2 MB.',
                 'album.max' => 'Max image upload size is 2 MB.',
@@ -100,7 +94,7 @@ class ShirtController extends Controller
             $design->summary = $request->summary;
             $design->featured = $request->featured;
             $design->menu = $request->menu;
-            $design->tax_class_id = $request->taxClass;
+            $design->price = $request->price;
             $design->pageTitle = $request->pageTitle;
             $design->metatag = $request->metatag;
             $design->metadescp = $request->metadescp;
@@ -108,10 +102,8 @@ class ShirtController extends Controller
             $design->save();
 
             $this->attributeSave($request, $design->id);
-            $this->priceSave($request, $design->id);
             $this->videoSave($request, $design->id);
             $this->imageSave($request, $design->id);
-            $this->weightSave($request, $design->id);
 
             // return response()->json($request->all());
             Session::flash('success', 'The data was successfully inserted.');
@@ -156,19 +148,16 @@ class ShirtController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        return response()->json($request->all());
         $validator = Validator::make(
             $request->all(),
             [
                 'name' => "required|min:5|max:255|unique:product_designs,name, $id",
                 'attributeSet' => 'required',
-                'weight' => 'required',
-                'weightUnit' => 'required',
                 'description' => 'required',
                 'summary' => 'required',
                 'price' => 'required',
-                'startDate' => 'required_with:splPrice',
-                'endDate' => 'required_with:splPrice',
-                'taxClass' => 'required_if:taxable,==,1',
                 'document' => 'mimes:pdf|max:10000',
                 'p_image' =>   'image|mimes:jpeg,png,jpg,gif,svg|max:2000',
                 's_image' =>   'image|mimes:jpeg,png,jpg,gif,svg|max:2000',
@@ -178,7 +167,6 @@ class ShirtController extends Controller
                 'metadescp' => 'required',
             ],
             [
-                'taxClass.required_if' => 'Please select a tax class if the product is taxable.',
                 'p_image.max' => 'Max image upload size is 2 MB.',
                 's_image.max' => 'Max image upload size is 2 MB.',
                 'album.max' => 'Max image upload size is 2 MB.',
@@ -205,7 +193,6 @@ class ShirtController extends Controller
             $this->priceSaveEdit($request, $design->id, $design->price->id);
             $this->videoSaveEdit($request, $design->id);
             $this->imageSaveEdit($request, $design->id);
-            $this->weightSaveEdit($request, $design->id, $design->weight->id);
 
             // return response()->json($request->all());
             Session::flash('success', 'The data was successfully updated.');

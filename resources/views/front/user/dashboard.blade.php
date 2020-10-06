@@ -27,7 +27,7 @@
                                         <h3>Customer Dashboard </h3>
                                         <div class="px-customer-dasboard-body">
                                             <div class="px-dashboard-instruciton">
-                                                From your account dashboard. you can easily check &amp; view your <a href="#">recent orders</a>, manage your <a href="#">shipping and billing addresses</a> and <a href="#">edit your password and account details.</a>
+                                                From your account dashboard. you can easily check &amp; view your <a href="#">recent orders</a>, manage your <a href="/user/address">shipping and billing addresses</a> and <a href="/user/password-reset">edit your password and account details.</a>
                                             </div>
                                         </div>
                                     </div>

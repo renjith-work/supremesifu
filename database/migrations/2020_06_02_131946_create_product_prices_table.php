@@ -16,9 +16,9 @@ class CreateProductPricesTable extends Migration
         Schema::create('product_prices', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('product_id');
-            $table->decimal('price', 9, 2);
-            $table->decimal('splPrice', 9, 2)->nullable();
-            $table->decimal('mfdPrice', 9, 2)->nullable();
+            $table->decimal('price', 20, 2);
+            $table->decimal('splPrice', 20, 2)->nullable();
+            $table->decimal('mfdPrice', 20, 2)->nullable();
             $table->date('startDate')->nullable();
             $table->date('endDate')->nullable();
             $table->timestamps();
