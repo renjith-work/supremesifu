@@ -27,11 +27,11 @@ $(document).ready(function () {
         var prdCats = $("#category").val();
         if (typeof prdCats != 'undefined' && prdCats)
         {
-            console.log(prdCats);
+
             loadFabric(fabricClass, prdCats);
         }else{
             console.log('no categories selected');
-            $('#fabric-select-error').append('<p class="error-p">This category does not habe any categories associated with it.')
+            $('#fabric-select-error').append('<p class="error-p">This category does not have any categories associated with it.')
         }
     });
 
@@ -44,6 +44,7 @@ $(document).ready(function () {
             data: { _token: _token, id: id, cats: cats},
             dataType: 'json',
             success: function (response) {
+                console.log(response);
                 $('#fabric').append('<option disabled selected>Select a fabric</option>');
                 $.each(response, function (key, value) {
                     $('#fabric').append('<option value="' + value.id + '">' + value.name + '</option>');

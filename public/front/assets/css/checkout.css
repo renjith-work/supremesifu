@@ -25,10 +25,15 @@
 
 .spc-shpd-edit-link a{
     text-transform: uppercase;
+    text-decoration: underline;
     font-size: 12px;
     font-family: 'GothamMedium';
     float: right;
     color: #c1903e;
+}
+
+.spc-add-address-cover{
+    padding: 15px 0px 0px 0px;
 }
 
 .spc-shpd-ods-title{
@@ -79,6 +84,65 @@
     font-size: 12px;
 }
 
+
+.address-modal-form-cover{
+    padding: 30px;
+}
+
+.address-modal-form-cover label{
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.fc-modal {
+    font-size: 13px !important;
+}
+
+select.fc-modal:not([size]):not([multiple]){
+    height: 35px !important;
+}
+
+/* Address Label */
+.adb-radio-cover{
+    display: inline-block;
+}
+
+.adb-radio-input{
+    position: absolute;
+    margin-top: 7px;
+    margin-left: -1.25rem;
+}
+
+.adb-radio-label{
+    padding-left: 10px;
+}
+
+.adb-label-head{
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #ebebeb;
+    margin: 20px 0px 20px 0px;
+}
+
+.adb-label-instruction{
+    font-size: 12px;
+    font-style: italic;
+}
+
+.adb-label-body-cover{
+    margin: 30px 0px 0px 20px;
+}
+
+.modal-error {
+    color: #dc3545!important;
+    font-size: 12px;
+    margin-left: 10px;
+}
+/* Edn Address Label */
 /*==========  Mobile First Method  ==========*/
 
 /* Custom, iPhone Retina */ 

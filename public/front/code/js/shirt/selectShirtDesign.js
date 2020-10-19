@@ -13,7 +13,8 @@ $(document).ready(function() {
     });
 
     function loadDesignModal(id, fabric){
-
+        console.log(id);
+        console.log(fabric);
         $.ajax({
             url: "/design/load",
             type:'POST',

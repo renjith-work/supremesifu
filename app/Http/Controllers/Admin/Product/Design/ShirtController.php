@@ -149,7 +149,6 @@ class ShirtController extends Controller
     public function update(Request $request, $id)
     {
 
-        return response()->json($request->all());
         $validator = Validator::make(
             $request->all(),
             [
@@ -182,7 +181,6 @@ class ShirtController extends Controller
             $design->summary = $request->summary;
             $design->featured = $request->featured;
             $design->menu = $request->menu;
-            $design->tax_class_id = $request->taxClass;
             $design->pageTitle = $request->pageTitle;
             $design->metatag = $request->metatag;
             $design->metadescp = $request->metadescp;
@@ -190,7 +188,6 @@ class ShirtController extends Controller
             $design->save();
 
             $this->attributeSaveEdit($request, $design->id);
-            $this->priceSaveEdit($request, $design->id, $design->price->id);
             $this->videoSaveEdit($request, $design->id);
             $this->imageSaveEdit($request, $design->id);
 
@@ -216,7 +213,6 @@ class ShirtController extends Controller
     public function delete($id)
     {
         $design = ProductDesign::find($id);
-        ProductDesignPrice::where('product_design_id', $design->id)->delete();
         ProductDesignVideo::where('product_design_id', $design->id)->delete();
 
         $images = ProductDesignImage::where('product_design_id', $design->id)->get();
@@ -285,29 +281,29 @@ class ShirtController extends Controller
         ProductDesignAttributeValueSave::insert($productAttribute_array);
     }
 
-    private function priceSave($input, $design_id)
-    {
-        $price = new ProductDesignPrice;
-        $price->product_design_id = $design_id;
-        $price->price = $input->price;
-        $price->splPrice = $input->splPrice;
-        $price->startDate = $input->startDate;
-        $price->endDate = $input->endDate;
-        $price->save();
-        return $price;
-    }
+    // private function priceSave($input, $design_id)
+    // {
+    //     $price = new ProductDesignPrice;
+    //     $price->product_design_id = $design_id;
+    //     $price->price = $input->price;
+    //     $price->splPrice = $input->splPrice;
+    //     $price->startDate = $input->startDate;
+    //     $price->endDate = $input->endDate;
+    //     $price->save();
+    //     return $price;
+    // }
 
-    private function priceSaveEdit($input, $design_id, $id)
-    {
-        $price = ProductDesignPrice::find($id);
-        $price->product_design_id = $design_id;
-        $price->price = $input->price;
-        $price->splPrice = $input->splPrice;
-        $price->startDate = $input->startDate;
-        $price->endDate = $input->endDate;
-        $price->save();
-        return $price;
-    }
+    // private function priceSaveEdit($input, $design_id, $id)
+    // {
+    //     $price = ProductDesignPrice::find($id);
+    //     $price->product_design_id = $design_id;
+    //     $price->price = $input->price;
+    //     $price->splPrice = $input->splPrice;
+    //     $price->startDate = $input->startDate;
+    //     $price->endDate = $input->endDate;
+    //     $price->save();
+    //     return $price;
+    // }
 
     private function videoSave($input, $design_id)
     {

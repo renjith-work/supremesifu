@@ -217,7 +217,7 @@ $(document).ready(function () {
                 getMeasurementProfile();
                 getQuantity();
                 getPocket();
-                setTimeout(function () { 
+                setTimeout(function () {
                     createProduct(inputObject);
                 }, 500);
             }
@@ -338,6 +338,7 @@ $(document).ready(function () {
                 $("#loading-overlay").show();
             },
             success:function(response){
+                console.log(response);
                 $("#loading-overlay").hide();
                 redirectUrl = '/product/shirt/save-measurement/' + response.product.id + '/' + response.measurementResponse+ '/';
                 console.log(redirectUrl);

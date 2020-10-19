@@ -7,7 +7,147 @@ $(document).ready(function () {
 
     var _token = $("input[name='_token']").val();
 
+    // Change Address
+    $(document).on('click', '.spc-add-edit-a', function (event) {
+        event.preventDefault();
+        $('#changeAddress').modal('show');
+    });
 
+
+    // Address Managemenet Section
+    
+    var modal_address_type_id = '';
+    //Create new Address
+    $(document).on('click', '.spc-add-address', function (event) {
+        event.preventDefault();
+        var id = $(this).attr('href');
+        console.log(id);
+        loadAddAddressModal(id);
+    });
+
+    function loadAddAddressModal(address_type_id) {
+        $('#addAddress').modal('show');
+        modal_address_type_id = address_type_id;
+        loadCountries();
+    }
+
+    function loadCountries()
+    {
+        $.ajax({
+            url: "/front/api/user/addresses/countries",
+            type: 'get',
+            dataType: 'json',
+            success: function (response) {
+                $.each(response, function (key, value) {
+                    $('#country').append('<option value="' + value.id + '">' + value.name + '</option>');
+                });
+            }
+        });
+    }
+
+    $(document).on('change', '#country', function () {
+        var country_id = $("#country").val();
+        loadZones(country_id);
+        loadMobileCodes(country_id);
+    });
+    
+    function loadZones(id) {
+        $('#zone').html('');
+        $.ajax({
+            url: "/user/country",
+            type: 'POST',
+            data: { _token: _token, id: id },
+            dataType: 'json',
+            success: function (response) {
+                $('#zone').append('<option disabled>Please select a zone..</option>')
+                $.each(response, function (key, value) {
+                    $('#zone').append('<option value="' + value.id + '">' + value.name + '</option>');
+                });
+            }
+        });
+    }
+    
+    $(document).on('click', '#submitAddress', function (event) {
+        event.preventDefault();
+        testModal();
+        // submitAddress();
+    });
+
+    function testModal()
+    {
+        // $('#addAddress').modal('hide');
+        $('#changeAddress').modal('show');
+        // input_name = 'spc-add-inp-billing';
+        // loadChangeAddressModal(input_name);
+    }
+
+    function submitAddress()
+    {
+        var postAddress = collectAddForm();
+        $('.modal-error').html("");
+        $('.form-control').removeClass("is-invalid");
+        $.ajax({
+            url: "/front/api/user/addresses/save",
+            type: 'POST',
+            data: postAddress,
+            dataType: 'json',
+            success: function (response) {
+                if(response.success == 0){
+                    if (response.errors) {
+                        $.each(response.errors, function (key, value) {
+                            $('#' + key).addClass("is-invalid");
+                            $('#error_' + key).append(value[0]);
+                        });
+                    }
+                } else if(response.success == 1) {
+                    // console.log(response);
+                    // console.log(modal_address_type_id);
+                    
+                    if (modal_address_type_id == 1) {
+                        $('#addAddress').modal('hide');
+                        input_name = 'spc-add-inp-billing';
+                        loadChangeAddressModal(input_name);
+                    } else if (modal_address_type_id == 2) {
+                        $('#addAddress').modal('hide');
+                        input_name = 'spc-add-inp-shipping';
+                        loadChangeAddressModal(input_name);
+                    }
+                }          
+            }
+        });
+    }
+
+    function collectAddForm(){
+        var addObj = {};
+        addObj["_token"] = _token;
+        addObj["first_name"]  = $('#first_name').val();
+        addObj["last_name"]   = $('#last_name').val();
+        addObj["email"]       = $('#email').val();
+        addObj["country"]     = $('#country').val();
+        addObj["phoneCode"]   = $('#phoneCode').val();
+        addObj["phone"]       = $('#phone').val();
+        addObj["zone"]        = $('#zone').val();
+        addObj["address"]     = $('#address').val();
+        addObj["city"]        = $('#city').val();
+        addObj["postcode"]    = $('#postcode').val();
+        return addObj;
+    }
+
+    function loadMobileCodes(id)
+    {
+        $('#phoneCode').html('');
+        $.ajax({
+            url: "/front/api/user/addresses/phone-code/find",
+            type: 'POST',
+            data: { _token: _token, id:id },
+            dataType: 'json',
+            success: function (response) {
+                $('#phoneCode').append('<option value="' + response.id + '">' + response.value + '</option>');
+            }
+        });
+    }
+
+    // Change Address
     $(document).on('click', '.spc-add-edit-a', function (event) {
         event.preventDefault();
         var id = $(this).attr('href');
@@ -20,6 +160,8 @@ $(document).ready(function () {
             loadChangeAddressModal(input_name);
         }
     });
+
+
     
     function loadChangeAddressModal(input_name)
     {

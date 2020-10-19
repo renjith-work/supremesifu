@@ -30,6 +30,7 @@ class CheckoutController extends Controller
 		$user = User::find($user_id);
 		
 		$shippng_address = NULL;
+		$billing_address = NULL;
 
 		$billing_address = $this->getBillingAddress($user);
 		$shipping_address = $this->getShippingAddress($user);

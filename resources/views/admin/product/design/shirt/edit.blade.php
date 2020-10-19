@@ -116,9 +116,10 @@
                                     <div class="form-group">
                                         <label for="price">Design Customization Price</label>
                                         <div class="form-instruction">This price is any extrta amount required for the particular style.</div>
-                                        <input  type="number" name="price" class="form-control @error('price') is-invalid @enderror" id="price" maxlength="255" value="120" >
+                                        <input  type="number" name="price"  value="{{$design->price}}" class="form-control @error('price') is-invalid @enderror">
                                         @error('price') <p class="error-p">{{$errors->first('price')}}</p> @enderror
                                     </div>
+                                    
                                 </div>
                                 <div class="tile-footer">
                                     <div class="row d-print-none mt-2">

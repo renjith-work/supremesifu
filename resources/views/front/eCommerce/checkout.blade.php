@@ -152,21 +152,31 @@
                                             <div class="spc-shpd-item-head">
                                                 <div class="spc-shpd-item-title">Shipping Address</div>
                                             </div>
+
+                                            @if($shipping_address != NULL)
                                             <div class="spc-shpd-item-body" id="spc-shipping-address-body">
                                                 <div class="shpd-add-name">{{$shipping_address->name}}</div>
                                                 <div class="shpd-add-add">{{$shipping_address->address}}, {{$shipping_address->city}}, {{$shipping_address->postcode}}, {{$shipping_address->zone->country->name}}.</div>
                                             </div>
-                                            <div class="spc-shpd-edit-link"><a href="2" class="spc-add-edit-a">Edit</a></div>
+                                            <div class="spc-shpd-edit-link"><a href="2" class="spc-add-edit-a">Edit</a> </div>
+                                            @else
+                                            <div class="spc-add-address-cover"><div class="spc-shpd-edit-link"><a href="2" class="spc-add-address">Add Shipping Address</a></div></div>
+                                            @endif
                                         </div>
+                                        <a href="2" class="spc-add-edit-a">Edit</a>
                                         <div class="spc-shpd-item-cover">
                                             <div class="spc-shpd-item-head">
                                                 <div class="spc-shpd-item-title">Billing Address</div>
                                             </div>
+                                            @if($billing_address != NULL)
                                             <div class="spc-shpd-item-body" id="spc-billing-address-body">
                                                 <div class="shpd-add-name">{{$billing_address->name}}</div>
                                                 <div class="shpd-add-add">{{$billing_address->address}}, {{$billing_address->city}}, {{$billing_address->postcode}}, {{$billing_address->zone->country->name}}.</div>
                                             </div>
                                             <div class="spc-shpd-edit-link"><a href="1" class="spc-add-edit-a">Edit</a></div>
+                                             @else
+                                            <div class="spc-add-address-cover"><div class="spc-shpd-edit-link"><a href="1" class="spc-add-address">Add Billing Address</a></div></div>
+                                            @endif
                                         </div>
                                         <div class="spc-shpd-item-cover">
                                             <div class="spc-shpd-item-head">
@@ -223,8 +233,8 @@
                                         <form action="{{ route('checkout.place.order') }}" method="POST" role="form">
                                             @csrf
                                             <div class="fomt-hidden-input">
-                                                <input type ="hidden" name="billing_address" id="form_billing_address" value="{{$billing_address->id}}">
-                                                <input type ="hidden" name="shipping_address" id="form_shipping_address" value="{{$shipping_address->id}}">
+                                                <input type ="hidden" name="billing_address" id="form_billing_address" value="@if($billing_address != NULL){{$billing_address->id}} @endif">
+                                                <input type ="hidden" name="shipping_address" id="form_shipping_address" value="@if($shipping_address != NULL) {{$shipping_address->id}} @endif">
                                             </div>
                                             <div class="order-button-payment">
                                                 <input type="submit" value="Place order" />
@@ -241,11 +251,12 @@
     </div>
     <!-- content-wraper end -->
     @include('front.modals.change-address-modal')
+    @include('front.modals.add-address-modal')
 @endsection
 @section('script')
     <script type="text/javascript">
-        var billing_address  = {!! json_encode($billing_address->id) !!};
-        var shipping_name  = {!! json_encode($shipping_address->id) !!};
+        var billing_address  = @if($billing_address != NULL){!! json_encode($billing_address->id) !!} @endif;
+        var shipping_name  = @if($shipping_address != NULL) {!! json_encode($shipping_address->id) !!} @endif;
     </script>
     <script type="text/javascript" src="/front/code/js/eCommerce/checkout.js"></script>
 @endsection

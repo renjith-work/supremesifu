@@ -145,11 +145,11 @@ $(document).ready(function () {
     }
 
     // Price Calculation
-    loadPrice(designPrice);
-    function loadPrice(price)
-    {
-        $('#price').val(price);
-    }
+    // loadPrice(designPrice);
+    // function loadPrice(price)
+    // {
+    //     $('#price').val(price);
+    // }
 
     // Switching Between Tabs
 
