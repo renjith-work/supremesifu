@@ -23,6 +23,7 @@ class UserAddressController extends Controller
         $user = User::find($user_id);
         $user_address_array = array();
 
+        return response()->json($user->addresses);
         return response()->json($this->setAddress($user));
     }
 
@@ -76,7 +77,7 @@ class UserAddressController extends Controller
     {
         $address = new stdClass();
         $address->id = $add->id;
-        $address->name = $add->name;
+        $address->name = $add->first_name.' '.$add->last_name;
         $address->address = $add->address . ', ' . $add->city . ', ' . $add->postcode . ', ' . $add->zone->country->name;
         $address->phone = $add->phoneCode->value.$add->phone;
         $address->label = $label;
@@ -128,6 +129,7 @@ class UserAddressController extends Controller
             $address->postcode = $request->postcode;
             $address->save();
 
+            $this->saveUserAddressLabel($address->id, $address->user_id, $request);
             return response()->json([ 'success' => 1]);
 
         } else {
@@ -136,5 +138,35 @@ class UserAddressController extends Controller
                 'errors' => $validator->errors()
                 ]);
         }
+    }
+
+    private function saveUserAddressLabel($address_id, $user_id, $request)
+    {
+        $input = $request->all();
+        if (array_key_exists('billing_address', $input)) {
+            $this->deleteUserAddressType($user_id, 1);
+            $this->saveUserAddressType($address_id, $user_id, 1);
+        }
+
+        if (array_key_exists('shipping_address', $input)) {
+            $this->deleteUserAddressType($user_id, 2);
+            $this->saveUserAddressType($address_id, $user_id, 2);
+        }
+    }
+
+    private function saveUserAddressType($address_id, $user_id, $type_id)
+    {
+        $us_ad_t = new UserAddressType;
+        $us_ad_t->user_id = $user_id;
+        $us_ad_t->user_address_id = $address_id;
+        $us_ad_t->address_type_id = $type_id;
+        $us_ad_t->save();
+    }
+
+    private function deleteUserAddressType($user_id, $type_id)
+    {
+        UserAddressType::where('user_id', $user_id)
+            ->where('address_type_id', $type_id)
+            ->delete();
     }
 }

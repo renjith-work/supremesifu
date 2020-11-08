@@ -70,6 +70,8 @@ class DatabaseSeeder extends Seeder
             PhoneCodeSeeder::class,
             AddressTypeTableSeeder::class,
 
+            // Order Seeder
+            OrderStatusesTableSeeder::class,
         ]);
     }
 }

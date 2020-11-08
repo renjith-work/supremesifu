@@ -1,5 +1,6 @@
 <?php
 
+use App\Mail\InvoiceMail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -350,15 +351,15 @@ Route::group(['prefix'  =>   'front/fabric'], function() {
 
 // Shopping Cart Routes
 
-Route::get('/cart', 'Ecommerce\CartController@getCart')->name('checkout.cart');
+Route::get('/cart', 'Ecommerce\CartController@getCart')->name('checkout.cart')->middleware('verified');;
 Route::get('/cart/item/{id}/remove', 'Ecommerce\CartController@removeItem')->name('checkout.cart.remove');
 Route::get('/cart/clear', 'Ecommerce\CartController@clearCart')->name('checkout.cart.clear');
 Route::post('/cart/update', 'Ecommerce\CartUpdateController@update');
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/checkout', 'Ecommerce\CheckoutController@getCheckout')->name('checkout.index');
-    Route::post('/checkout/order', 'Ecommerce\CheckoutController@placeOrder')->name('checkout.place.order');
-    Route::get('/checkout/payment/complete', 'Ecommerce\CheckoutController@complete')->name('checkout.payment.complete');
+    Route::get('/checkout', 'Ecommerce\CheckoutController@getCheckout')->name('checkout.index')->middleware('verified');;
+    Route::post('/checkout/order', 'Ecommerce\CheckoutProcessingController@placeOrder')->name('checkout.place.order');
+    Route::get('/checkout/payment/complete', 'Ecommerce\CheckoutProcessingController@complete')->name('checkout.payment.complete');
     Route::get('/account/orders', 'Ecommerce\AccountController@getOrders')->name('account.orders');
 });
 
@@ -404,7 +405,12 @@ Route::post('/front/api/user/addresses/phone-code/find', 'Front\Api\User\Address
 // get Countries
 Route::get('/front/api/user/addresses/countries', 'Front\Api\User\Address\CountryController@getCountries');
 // Submit UserAddress
-Route::post('/front/api/user/addresses/save', 'Front\Api\User\Address\UserAddressController@saveAddress');
+Route::post('/front/api/user/addresses/save', 'Front\Api\Checkout\Address\AddressAddController@save');
+
+// Checkout get address list
+Route::post('/front/api/user/addresses/list', 'Front\Api\Checkout\Address\AddressListController@listAll');
+Route::post('/front/api/user/addresses/get-address', 'Front\Api\Checkout\Address\AddressListController@getAddress');
+Route::post('/front/api/user/addresses/check', 'Front\Api\Checkout\Address\AddressListController@check');
 
 // Test Endpoints - To be deleted.
 Route::get('/front/api/product/fabrics', 'Front\Api\Product\Fabric\FabricController@details');
@@ -412,4 +418,13 @@ Route::get('/front/api/product/details', 'Front\Api\Product\ProductController@de
 Route::get('/front/api/product/shirt/pockets', 'Front\Api\Product\Attribute\AttributeController@loadShirtPockets');
 Route::get('/front/api/measurement/profile/getattributes', 'Front\Api\Measurement\MeasurementProfileController@attributeValues');
 Route::get('/front/api/monogram/lists', 'Front\Api\Monogram\MonogramController@loadMonogramz');
+Route::get('/checkout/test', 'Ecommerce\CheckoutProcessingController@test');
+Route::get('/checkout/order/complete', 'Ecommerce\CheckoutProcessingController@completeOrder');
+Route::get('/checkout/order/pdf', 'Ecommerce\CheckoutProcessingController@pdfgenerator');
+Route::get('/checkout/order/pdf-view', 'Ecommerce\CheckoutProcessingController@pdfView');
+Route::get('/checkout/order/{id}/generate/invoice-pdf', 'Front\Pdf\InvoicePdfController@generateInvoicePdf');
+Route::get('/checkout/order/invoice/email-view', function (){
+		return new InvoiceMail();
+	}
+);
 

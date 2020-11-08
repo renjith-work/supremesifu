@@ -22,9 +22,7 @@
     <!-- content-wraper start -->
     <div class="mobile-container">
             <!-- checkout-details-wrapper start -->
-            @if (Session::has('error'))
-                <p class="alert alert-danger">{{ Session::get('error') }}</p>
-            @endif
+            @include('front.flash.flashErrorMessage')
             <div class="sp-checkout-cover">
                 <div class="row">
                     <div class="col-md-7">
@@ -153,30 +151,38 @@
                                                 <div class="spc-shpd-item-title">Shipping Address</div>
                                             </div>
 
-                                            @if($shipping_address != NULL)
+                                            
                                             <div class="spc-shpd-item-body" id="spc-shipping-address-body">
-                                                <div class="shpd-add-name">{{$shipping_address->name}}</div>
-                                                <div class="shpd-add-add">{{$shipping_address->address}}, {{$shipping_address->city}}, {{$shipping_address->postcode}}, {{$shipping_address->zone->country->name}}.</div>
+                                                @if($shipping_address != NULL)
+                                                    <div class="shpd-add-name">{{$shipping_address->first_name}} {{$shipping_address->last_name}}</div>
+                                                    <div class="shpd-add-add">{{$shipping_address->address}}, {{$shipping_address->city}}, {{$shipping_address->postcode}}, {{$shipping_address->zone->country->name}}.</div>
+                                                @endif
                                             </div>
-                                            <div class="spc-shpd-edit-link"><a href="2" class="spc-add-edit-a">Edit</a> </div>
-                                            @else
-                                            <div class="spc-add-address-cover"><div class="spc-shpd-edit-link"><a href="2" class="spc-add-address">Add Shipping Address</a></div></div>
-                                            @endif
+                                            <div id="chk-shp-edit-add-ads-cover">
+                                                @if(count($user->addresses) < 1)
+                                                    <div class="spc-add-address-cover"><div class="spc-shpd-edit-link"><a href="2" class="spc-add-address">Add Shipping Address</a></div></div>
+                                                @else
+                                                    <div class="spc-shpd-edit-link"><a href="2" class="spc-add-edit-a">Select Shipping Address</a> </div>
+                                                @endif
+                                            </div>
                                         </div>
-                                        <a href="2" class="spc-add-edit-a">Edit</a>
                                         <div class="spc-shpd-item-cover">
                                             <div class="spc-shpd-item-head">
                                                 <div class="spc-shpd-item-title">Billing Address</div>
                                             </div>
-                                            @if($billing_address != NULL)
                                             <div class="spc-shpd-item-body" id="spc-billing-address-body">
-                                                <div class="shpd-add-name">{{$billing_address->name}}</div>
-                                                <div class="shpd-add-add">{{$billing_address->address}}, {{$billing_address->city}}, {{$billing_address->postcode}}, {{$billing_address->zone->country->name}}.</div>
+                                                @if($billing_address != NULL)
+                                                    <div class="shpd-add-name">{{$billing_address->first_name}} {{$billing_address->last_name}}</div>
+                                                    <div class="shpd-add-add">{{$billing_address->address}}, {{$billing_address->city}}, {{$billing_address->postcode}}, {{$billing_address->zone->country->name}}.</div>
+                                                @endif    
                                             </div>
-                                            <div class="spc-shpd-edit-link"><a href="1" class="spc-add-edit-a">Edit</a></div>
-                                             @else
-                                            <div class="spc-add-address-cover"><div class="spc-shpd-edit-link"><a href="1" class="spc-add-address">Add Billing Address</a></div></div>
-                                            @endif
+                                            <div id="chk-bllng-edit-add-ads-cover">
+                                                @if(count($user->addresses) < 1)
+                                                    <div class="spc-add-address-cover"><div class="spc-shpd-edit-link"><a href="1" class="spc-add-address">Add Billing Address</a></div></div>
+                                                @else
+                                                    <div class="spc-shpd-edit-link"><a href="1" class="spc-add-edit-a">Select Billing Address</a></div>
+                                                @endif
+                                            </div>
                                         </div>
                                         <div class="spc-shpd-item-cover">
                                             <div class="spc-shpd-item-head">
@@ -190,7 +196,7 @@
                                                                 <div class="spc-shpd-ods-title">Subtotal <span> ( {{ \Cart::getTotalQuantity() }} items)</span></div>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <div class="spc-shpd-ods-price">{{ config('settings.currency_symbol') }} {{ \Cart::getSubTotal() }}</div>
+                                                                <div class="spc-shpd-ods-price">{{ config('settings.currency_symbol') }} {{ number_format(\Cart::getSubTotal(), 2) }}</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -200,7 +206,7 @@
                                                                 <div class="spc-shpd-ods-title">Shipping Fee <span></span></div>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <div class="spc-shpd-ods-price">22.00 MYR</div>
+                                                                <div class="spc-shpd-ods-price">{{ config('settings.currency_symbol') }} 10.00</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -211,7 +217,7 @@
                                                                 <div class="spc-shpd-ods-title">Total <span></span></div>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <div class="spc-shpd-ods-price spc-shpd-ods-price-total">{{ config('settings.currency_symbol') }} {{ \Cart::getTotal() }}</div>
+                                                                <div class="spc-shpd-ods-price spc-shpd-ods-price-total">{{ config('settings.currency_symbol') }} {{ number_format(\Cart::getTotal(), 2) }}</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -255,8 +261,8 @@
 @endsection
 @section('script')
     <script type="text/javascript">
-        var billing_address  = @if($billing_address != NULL){!! json_encode($billing_address->id) !!} @endif;
-        var shipping_name  = @if($shipping_address != NULL) {!! json_encode($shipping_address->id) !!} @endif;
+        var billing_address  = @if($billing_address != NULL){!! json_encode($billing_address->id) !!} @else '' @endif;
+        var shipping_address  = @if($shipping_address != NULL) {!! json_encode($shipping_address->id) !!} @else '' @endif;
     </script>
     <script type="text/javascript" src="/front/code/js/eCommerce/checkout.js"></script>
 @endsection

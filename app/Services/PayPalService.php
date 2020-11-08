@@ -44,9 +44,9 @@ class PayPalService
 	public function processPayment($order)
 	{
 		// Add shipping amount if you want to charge for shipping
-		$shipping = sprintf('%0.2f', 0);
+		$shipping = sprintf('%0.2f', $order->payment->shipping);
 		// Add any tax amount if you want to apply any tax rule
-		$tax = sprintf('%0.2f', 0);
+		$tax = sprintf('%0.2f', $order->payment->tax);
 
 		$payer = new Payer();
 		$payer->setPaymentMethod("paypal");
@@ -70,19 +70,19 @@ class PayPalService
 		$details = new Details();
 		$details->setShipping($shipping)
 		    ->setTax($tax)
-		    ->setSubtotal(sprintf('%0.2f', $order->grand_total));
+		    ->setSubtotal(sprintf('%0.2f', $order->payment->grand_total));
 
 		// Create chargeable amount    
 		$amount = new Amount();
 		$amount->setCurrency(config('settings.currency_code'))
-		        ->setTotal(sprintf('%0.2f', $order->grand_total))
+		        ->setTotal(sprintf('%0.2f', $order->payment->total))
 		        ->setDetails($details);
 
 		// Creating a transaction
 		$transaction = new Transaction();
 		$transaction->setAmount($amount)
 		        ->setItemList($itemList)
-		        ->setDescription($order->user->full_name)
+		        ->setDescription($order->user->fname . ' ' . $order->user->lname)
 		        ->setInvoiceNumber($order->order_number);
 
 		// Setting up redirection urls
@@ -120,7 +120,7 @@ class PayPalService
 
 	public function completePayment($paymentId, $payerId)
 	{
-	    $payment = Payment::get($paymentId, $this->payPal);
+		$payment = Payment::get($paymentId, $this->payPal);
 	    $execute = new PaymentExecution();
 	    $execute->setPayerId($payerId);
 

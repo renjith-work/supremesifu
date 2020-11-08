@@ -23,6 +23,10 @@
     font-family: 'GothamMedium';
 }
 
+.spc-shpd-edit-link{
+    padding: 20px 0px 0px 0px;
+}
+
 .spc-shpd-edit-link a{
     text-transform: uppercase;
     text-decoration: underline;
@@ -141,6 +145,22 @@ select.fc-modal:not([size]):not([multiple]){
     color: #dc3545!important;
     font-size: 12px;
     margin-left: 10px;
+}
+
+.checkout-modal-footer{
+    padding: 20px 15px 20px 15px;
+}
+
+.checkout-add-address-button{
+    padding: 10px;
+    text-transform: uppercase;
+    border: none;
+    letter-spacing: 1px;;
+}
+
+.badge-checkout-label{
+    background: #e2e2e2 !important;
+    padding: 6px 4px !important;
 }
 /* Edn Address Label */
 /*==========  Mobile First Method  ==========*/

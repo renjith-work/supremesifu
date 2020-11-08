@@ -17,34 +17,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="spc-add-tab-body">
-                                <th><div class="add-tab-name">{{$billing_address->name}}</div></th>
-                                <td>{{$billing_address->address}},{{$billing_address->city}}, {{$billing_address->postcode}}, {{$billing_address->zone->country->name}}.</td>
-                                <td>{{$billing_address->phoneCode->value}}{{$billing_address->phone}}</td>
-                                <td><span class="badge badge-light">Billing Address</span></td>
-                                <td><div class="spc-add-tab-action"><input type="radio" name="billing_address"></div></td>
-                            </tr>
-                            <tr class="spc-add-tab-body">
-                                <th><div class="add-tab-name">{{$shipping_address->name}}</div></th>
-                                <td>{{$shipping_address->address}},{{$shipping_address->city}}, {{$shipping_address->postcode}}, {{$shipping_address->zone->country->name}}.</td>
-                                <td>{{$shipping_address->phoneCode->value}}{{$shipping_address->phone}}</td>
-                                <td><span class="badge badge-light">Billing Address</span></td>
-                                <td><div class="spc-add-tab-action"><input type="radio" name="billing_address"></div></td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
           </div>
+           <div class="modal-footer checkout-modal-footer">
+                <a href="#" class="btn btn-secondary col-12 col-md-4 checkout-add-address-button" id="chk-chng-add-adrs">Add New Address</a>
+            </div>
         </div>
       </div>
     </div>
-
-{{-- <tr class="spc-add-tab-body">
-<th><div class="add-tab-name">+ 'address.name' +</div></th>
-<td>+'address.address'+</td>
-<td>+'address.phone'+</td>
-<td><span class="badge badge-light">+'address.label'+</span></td>
-<td><div class="spc-add-tab-action"><input type="radio" name="address" value="+'address.label'+"></div></td>
-</tr>
-
-<tr class="spc-add-tab-body"><th><div class="add-tab-name">+ 'address.name' +</div></th><td>+'address.address'+</td><td>+'address.phone'+</td><td><span class="badge badge-light">+'address.label'+</span></td><td><div class="spc-add-tab-action"><input type="radio" name="address" value="+'address.label'+"></div></td></tr> --}}

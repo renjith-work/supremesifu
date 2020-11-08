@@ -1,0 +1,7 @@
+@media print {
+    .spinv-head1{
+        background: #000 !important;
+        color: #fff !important;
+        -webkit-print-color-adjust: exact; 
+    }
+}

@@ -7,8 +7,8 @@
                     <div class="address-modal-form-cover">
                         <form action="{{route('front.user.address.store')}}" method="POST" enctype="multipart/form-data">
                             {{csrf_field()}}
-                            <div class="row">
-                                <div class="col-md-6">
+                            <div class="row" id="chk-address-form-cover">
+                                {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="first_name">First Name *</label><span class="modal-error" id="error_first_name"></span>
                                         <input type="text" class="form-control fc-modal" id="first_name" name="first_name" />
@@ -56,39 +56,14 @@
                                         <label for="postcode">Post Code *</label> <span class="modal-error" id="error_postcode"></span>
                                         <input type="text" class="form-control fc-modal" id="postcode" name="postcode" /> 
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
-                            <div class="adb-label-cover">
-                                <div class="adb-label-head">Address Label</div>
-                                <div class="adb-label-instruction">
-                                    You can set an address as default billing and shipping address. At a time you can have only one default billing address and one default shipping address. You may save the same address as default billing
-                                    and shipping address.
-                                </div>
-                                <div class="adb-label-body-cover">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-check adb-radio-cover">
-                                                <input class="form-check-input adb-radio-input" type="checkbox" name="billing_address" id="billing_address" value="1" />
-                                                <label class="form-check-label adb-radio-label" for="billing_address">Default Billing Address</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-check adb-radio-cover">
-                                                <input class="form-check-input adb-radio-input" type="checkbox" name="shipping_address" id="shipping_address" value="1" />
-                                                <label class="form-check-label adb-radio-label" for="shipping_address">Default Shipping Address</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br />
-                                <div class="adb-label-instruction">
-                                    *if you have previouly set another address as default billing or shipping address, the default status of that address will be removed and the current address will be set as default.
-                                </div>
-                            </div>
-                            <div class="px-customer-dashboard-submit-cover"><input type="Submit" id="submitAddress" value="Save Address" class="btn px-black-btn pull-right" /></div>
                         </form>
                     </div>
                 </div>
+            </div>
+            <div class="modal-footer checkout-modal-footer">
+                <div class="px-customer-dashboard-submit-cover"><input type="Submit" id="submitAddress" value="Save Address" class="btn px-black-btn pull-right" /></div>
             </div>
         </div>
     </div>

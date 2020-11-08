@@ -22,7 +22,7 @@ $(document).ready(function () {
             data: { _token: _token, id: id },
             dataType: 'json',
             success: function (response) {
-               $('#zone').append('<option>Please select a zone..</option>')
+               $('#zone').append('<option disabled>Please select a zone..</option>')
                 $.each(response, function (key, value) {
                     $('#zone').append('<option value="' + value.id + '">' + value.name +'</option>');
                 });

@@ -92,7 +92,6 @@ class UserAddressController extends Controller
 
         if ($validator->passes()) {
 
-            return response()->json($request->all());
             $address = new UserAddress;
             $address->user_id = Auth::user()->id;
             $address->first_name = $request->first_name;

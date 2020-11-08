@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Ecommerce;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Order;
-use App\Models\Product;
-use App\Models\OrderItem;
+use App\Models\Ecommerce\Order\Order;
+use App\Models\Product\Product;
+use App\Models\Ecommerce\Order\OrderItem;
 use Cart;
 use App\Services\PayPalService;
 
@@ -21,13 +21,16 @@ class CheckoutController extends Controller
 
 	public function __construct(PayPalService $payPal)
     {
-        $this->payPal = $payPal;
+		$this->payPal = $payPal;
+		$this->middleware(['auth']);
     }
 
     public function getCheckout()
     {
 		$user_id = Auth::user()->id;
 		$user = User::find($user_id);
+
+		$user = Auth::user();
 		
 		$shippng_address = NULL;
 		$billing_address = NULL;
@@ -35,7 +38,21 @@ class CheckoutController extends Controller
 		$billing_address = $this->getBillingAddress($user);
 		$shipping_address = $this->getShippingAddress($user);
 
-        return view('front.eCommerce.checkout')->with('billing_address', $billing_address)->with('shipping_address', $shipping_address);
+		$this->updateShipping();
+		
+        return view('front.eCommerce.checkout')->with('billing_address', $billing_address)->with('shipping_address', $shipping_address)->with('user', $user);
+	}
+
+	private function updateShipping()
+	{
+		$condition = new \Darryldecode\Cart\CartCondition(array(
+			'name' => 'Express Shipping RM 10',
+			'type' => 'shipping',
+			'target' => 'total', // this condition will be applied to cart's total when getTotal() is called.
+			'value' => '+10',
+			'order' => 1 // the order of calculation of cart base conditions. The bigger the later to be applied.
+		));
+		Cart::condition($condition);
 	}
 	
 	private function getBillingAddress($user)
@@ -68,8 +85,10 @@ class CheckoutController extends Controller
 		return $shipping_address;
 	}
 
+
     public function placeOrder(Request $request)
     {
+		return response()->json();
 		
 		$billing_address = UserAddress::find($request->billing_address);
 		$shipping_address = UserAddress::find($request->shipping_address);
@@ -78,7 +97,9 @@ class CheckoutController extends Controller
         // request validation which I leave it to you
         // $order = $this->orderRepository->storeOrderDetails($request->all());
 
-        // dd($order);
+		// dd($order);
+		
+
         
         $order = Order::create([
 	        'order_number'      =>  'ORD-'.strtoupper(uniqid()),

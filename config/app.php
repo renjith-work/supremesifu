@@ -182,6 +182,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Darryldecode\Cart\CartServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -239,7 +240,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
-
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

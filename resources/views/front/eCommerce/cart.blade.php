@@ -76,7 +76,7 @@
                                     </div>
                                 </div>
                                 <div class="col-4 col-md-1 scol-right-border">
-                                    <div class="product-content-center pcd-dktp wd-cart-margin"><span class="amount">{{ config('settings.currency_symbol')}} {{$item->price}}</span></div>
+                                    <div class="product-content-center pcd-dktp wd-cart-margin"><span class="amount">{{number_format($item->price, 2)}}</span></div>
                                 </div>
                                 <div class="col-4 col-md-2 scol-right-border">
                                     <div class="cart-mobile-quantity-cover">
@@ -88,7 +88,7 @@
                                     </div>
                                 </div>
                                 <div class="col-4 col-md-2 scol-right-border">
-                                    <div class="product-content-center pcd-dktp wd-cart-margin"><span class="amount" id="cart-product-total-wd-price-{{$item->id}}">{{ config('settings.currency_symbol')}} {{$item->getPriceSum()}} </span></div>
+                                    <div class="product-content-center pcd-dktp wd-cart-margin"><span class="amount" id="cart-product-total-wd-price-{{$item->id}}">{{ config('settings.currency_symbol')}} {{number_format($item->getPriceSum(), 2)}} </span></div>
                                 </div>
                                 <div class="col-12 col-md-1">
                                     <div class="wd-cart-cancel"><a href="{{ route('checkout.cart.remove', $item->id) }}" class="btn"><i class="fa fa-close"></i> </a></div>
@@ -134,12 +134,12 @@
                                         <a href="/cart/product/{{$item->id}}/edit/qty/{{ $item->quantity }}">{{ Str::words($item->name,20) }}</a>
                                     </div>
                                     <div class="mobile-cart-unit-price">
-                                        {{ config('settings.currency_symbol')}} {{$item->price}} / Unit
+                                        {{ config('settings.currency_symbol')}} {{number_format($item->price, 2)}} / Unit
                                     </div>                                
                                 </div>
                                 <div class="col-3 col-md-3 no-padding-left">
                                     <div class="mobile-cart-product-item-total">
-                                    {{ config('settings.currency_symbol')}} <span id="cart-product-total-price-{{$item->id}}">{{$item->getPriceSum()}}</span>
+                                    {{ config('settings.currency_symbol')}} <span id="cart-product-total-price-{{$item->id}}">{{number_format($item->getPriceSum(), 2)}}</span>
                                     </div>
                                     <div class="cart-mobile-quantity-cover">
                                         <button class="mobile-cart-qty-button mobile-qty-increase"><i class="fa fa-angle-up"></i></button>
@@ -168,7 +168,7 @@
                                 <td>Subtotal: <br>
                                     <span>Inclusive of all Taxes</span>
                                 </td>
-                                <td>{{ config('settings.currency_symbol') }} <span id="cartSubTotal">{{ \Cart::getSubTotal() }}</span></td>
+                                <td>{{ config('settings.currency_symbol') }} <span id="cartSubTotal">{{ number_format(\Cart::getSubTotal(), 2) }}</span></td>
                             </tr><!-- End .summary-subtotal -->
                             {{-- <tr class="summary-shipping">
                                 <td>Shipping:</td>
@@ -177,7 +177,7 @@
 
                             <tr class="summary-total">
                                 <td>Total:</td>
-                                <td>{{ config('settings.currency_symbol') }} <span id="cartTotal">{{ \Cart::getSubTotal() }}</span></td>
+                                <td>{{ config('settings.currency_symbol') }} <span id="cartTotal">{{ number_format(\Cart::getSubTotal(), 2) }}</span></td>
                             </tr><!-- End .summary-total -->
                         </tbody>
                     </table><!-- End .table table-summary -->
