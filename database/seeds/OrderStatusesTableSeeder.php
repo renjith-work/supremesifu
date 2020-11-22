@@ -24,10 +24,23 @@ class OrderStatusesTableSeeder extends Seeder
 		        'description'   =>  'Processing',
 		        'created_at' => Carbon::now(),
 	            'updated_at' => Carbon::now(),
+            ],
+            [
+                'name'      => 'Shipped',
+                'description'   =>  'Shipped',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ], 
             [
-            	'name'      => 'Completed',
-		        'description'   =>  'Completed',
+                'name'      => 'Transit',
+                'description'   =>  'Transit',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ], 
+            
+            [
+            	'name'      => 'Delivered',
+		        'description'   =>  'Delivered',
 		        'created_at' => Carbon::now(),
 	            'updated_at' => Carbon::now(),
             ], 

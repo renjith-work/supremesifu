@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front\Product\Design\Shirt;
 
 use App\Models\Product\Design\ProductDesign;
+use App\Models\Product\Design\ProductDesignAttributeValueSave;
 use App\Models\Product\Monogram;
 Use App\Models\Product\Fabric\Fabric;
 
@@ -17,14 +18,50 @@ class DesignController extends Controller
     public function listshirtDesigns($id)
  	{
         $attr = 1; //Attribute Set for shirt.
-        $designs = ProductDesign::where('product_attribute_set_id', $attr)->orderBy('id', 'asc')->get();
-        
-        $data = new stdClass;
+        $data = new stdClass();
         $data->fabric = $this->getFabric($id, $attr);
-        $data->designs = $designs;
-        
+        $data->designs = $this->getDesigns($attr);
+
         // return response()->json($data);
         return view('front.product.custom.shirt.design.index')->with('data', $data);
+    }
+
+    private function getDesigns($attr)
+    {
+        $selDesigns = ProductDesign::where('product_attribute_set_id', $attr)->orderBy('id', 'asc')->get();
+        $designs_array = array();
+        foreach($selDesigns as $selDesign)
+        {
+            $design = new stdClass();
+            $design->id = $selDesign->id;
+            $design->name = $selDesign->name;
+            foreach ($selDesign->images as $image) {
+                if ($image->position_id == 1) {
+                    $design->primary_image = '/images/product/design/' . $image->name;
+                } elseif ($image->position_id == 2) {
+                    $design->secondary_image = '/images/product/design/' . $image->name;
+                }
+            }
+            $design->attributes = $this->designAttributes($selDesign->id);
+            $design->summary = $this->substrwords($selDesign->summary, 80);
+            $designs_array[] = $design;
+        }
+        return $designs_array;
+        return $selDesigns;
+    }
+
+    private function designAttributes($id)
+    {
+        $attr_values = ProductDesignAttributeValueSave::where('product_design_id', $id)->get();
+        $attr_array = array();
+        foreach($attr_values as $attr_value)
+        {
+            $data = new stdClass();
+            $data->name = $attr_value->productAttribute->name;
+            $data->value = $attr_value->value->value;
+            $attr_array[] = $data;
+        }
+        return $attr_array;
     }
 
     private function getFabric($id, $attr)
@@ -148,6 +185,28 @@ class DesignController extends Controller
     {
         $monograms = Monogram::where('product_attribute_set_id', $design->product_attribute_set_id)->get();
         return $monograms;
+    }
+
+    private function substrwords($text, $maxchar, $end = '...')
+    {
+        if (strlen($text) > $maxchar || $text == '') {
+            $words = preg_split('/\s/', $text);
+            $output = '';
+            $i      = 0;
+            while (1) {
+                $length = strlen($output) + strlen($words[$i]);
+                if ($length > $maxchar) {
+                    break;
+                } else {
+                    $output .= " " . $words[$i];
+                    ++$i;
+                }
+            }
+            $output .= $end;
+        } else {
+            $output = $text;
+        }
+        return $output;
     }
 
 }

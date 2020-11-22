@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front\Product\Product\Custom;
 
 use App\Models\Product\Product;
 use App\Models\Product\Fabric\Fabric;
+use App\Models\Product\Fabric\FabricPrice;
 use App\Models\Product\Monogram;
 use App\Models\Product\ProductMonogram;
 use App\Models\Product\ProductAttribute;
@@ -29,7 +30,6 @@ class CreateShirtController extends Controller
 
             $user_id = Auth::user()->id;
             $input = $request->all();
-            return response()->json($input);
             $design = ProductDesign::find($input['design']);
             $fabric = Fabric::find($input['fabric']);
 
@@ -49,7 +49,8 @@ class CreateShirtController extends Controller
 
             $this->attributeSave($product->id, $input['shirt-pocket'], $design->attributes);
             $this->priceSave($input, $product->id);
-            $this->weightSave($input, $product->id, $design);
+            // $this->weightSave($input, $product->id, $design);
+            $this->weightSave($input, $product->id, $design, $fabric);
             $this->monogramSave($input, $product->id);
 
             $defaultMeasurementProfile = $this->defaultMeasurementProfile($product);
@@ -78,15 +79,28 @@ class CreateShirtController extends Controller
         }
     }
 
-    private function weightSave($input, $product_id, $design)
+    private function weightSave($input, $product_id, $design, $fabric)
     {
+        $fabric_price = FabricPrice::where('fabric_id', $fabric->id)
+            ->where('product_attribute_set_id', $design->product_attribute_set_id)
+            ->first();
         $weight = new ProductWeight;
         $weight->product_id = $product_id;
-        $weight->inventory_unit_id = $design->weight->inventory_unit_id;
-        $weight->weight = $design->weight->weight;
+        $weight->inventory_unit_id = $fabric_price->inventory_unit_id;
+        $weight->weight = $fabric_price->weight;
         $weight->save();
         return $weight;
     }
+
+    // private function weightSave($input, $product_id, $design)
+    // {
+    //     $weight = new ProductWeight;
+    //     $weight->product_id = $product_id;
+    //     $weight->inventory_unit_id = $design->weight->inventory_unit_id;
+    //     $weight->weight = $design->weight->weight;
+    //     $weight->save();
+    //     return $weight;
+    // }
 
     private function priceSave($input, $product_id)
     {

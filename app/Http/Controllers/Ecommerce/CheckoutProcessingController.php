@@ -206,8 +206,6 @@ class CheckoutProcessingController extends Controller
     private function mailInvoice()
     {
 
-        
-
         $data["email"] = 'test@test.com';
         $data["client_name"] = 'Renjith';
         $data["subject"] = 'Test invoice mail';

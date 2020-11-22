@@ -30,16 +30,22 @@
                     @foreach($data->designs as $design)
                     <div class="col-12 col-md-3">
                         <div class="product-design-list-item">
-                            <a href="{{$design->id}}" class="load-design-modal">
-                                @foreach($design->images as $image)
-                                    @if($image->position_id == 1)
-                                        <div class="product-design-image"><img src="/images/product/design/{{$image->name}}" alt="{{$image->name}}"></div>
-                                    @endif
-                                @endforeach
-                                
-                                <div class="product-design-name">{{$design->name}}</div>
-                                <div class="product-design-description">{{$design->summary}}</div>
-                            </a>
+                            <div class="product-design-image"><a href="{{$design->id}}" class="load-design-modal"><img src="{{$design->primary_image}}" alt="{{$design->primary_image}}"></a></div>
+                            <div class="product-design-name"><a href="{{$design->id}}" class="load-design-modal">{{$design->name}}</a></div>
+                            <div class="product-design-description">
+                                {{$design->summary}}
+                                <div class="design-attr-section">
+                                    @foreach($design->attributes as $attribute)
+                                    <div class="row">
+                                        <div class="col-6"><div class="ds-atrr-name">{{$attribute->name}}</div></div>
+                                        <div class="col-6">- {{$attribute->value}}</div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="product-design-select-cover">
+                                <a href="{{$design->id}}" class="load-design-modal">SELECT DESIGN</a>
+                            </div>
                         </div>
                     </div>
                     @endforeach

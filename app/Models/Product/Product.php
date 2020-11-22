@@ -99,4 +99,9 @@ class Product extends Model
         return $this->hasMany('App\Models\Product\ProductMonogram', 'product_monograms', 'product_id', 'monogram_id');
     }
 
+    public function productAttrValSaves()
+    {
+        return $this->hasMany('App\Models\Product\ProductAttributeValueSave',  'product_attribute_value_saves', 'product_id', 'product_attribute_id', 'product_attribute_value_id');
+    }
+
 }

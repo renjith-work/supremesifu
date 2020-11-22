@@ -3507,3 +3507,29 @@ box-shadow: 0px 0px 5px 0px rgba(112,112,112,1);
     letter-spacing: 1px;
 }
 
+.ds-atrr-name{
+	font-family: 'GothamMedium';
+}
+
+.design-attr-section{
+	margin: 10px 0px 0px 0px;
+}
+
+.product-design-select-cover{
+	padding: 5px 10px;
+}
+
+.product-design-select-cover a{
+	background: #000 !important;
+	width:100% !important;
+	font-size: 13px;
+	color: #fff;
+	text-align: center;
+	letter-spacing: 1px;
+	font-family: 'GothamMedium';
+	padding: 5px;
+}
+
+.product-design-select-cover a:hover, .product-design-select-cover a:active{
+	color: #c1903e;
+}

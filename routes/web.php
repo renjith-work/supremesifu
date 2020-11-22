@@ -263,6 +263,11 @@ Route::group(['prefix'  =>   'user', 'as' => 'front.user.'], function () {
 	// Route::get('address/edit', 'Front\User\Address\UserAddressController@edit')->name('address.edit');
 });
 
+// User Dashboard Order Management
+Route::get('/user/order-management', 'Front\User\Order\OrderManagementController@index')->name('user.order-management');
+Route::get('/user/order-management/{id}/details', 'Front\User\Order\OrderManagementController@details')->name('user.order-management.details');
+Route::get('/user/order-management/{id}/product/{product_id}', 'Front\User\Order\OrderManagementController@product')->name('user.order-management.product');
+
 
 
 // Blog Routes

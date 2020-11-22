@@ -1,6 +1,7 @@
 @extends('front.layout')
 @section('header')
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" href="/front/assets/css/homePage.css">
 @endsection
 @section('content')
     <!-- Hero Slider start -->
@@ -208,7 +209,7 @@
                     <!-- section-title end -->
                 </div>
             </div>
-            <div class="product-wrapper">
+            {{-- <div class="product-wrapper">
                 <div class="row">
                     @foreach($products as $product)
                     <div class="col-md-3 col-6">
@@ -232,7 +233,7 @@
                     </div>    
                     @endforeach                                    
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
     <!-- Product Area Start -->
@@ -246,186 +247,38 @@
                     </div>
                 </div>
             </div>
-            <!-- product-wrapper start -->
-            <div class="product-wrapper pt--30">
-                <div class="row product-slider">
+            <div class="sps-home-product-cover">
+                <div class="row">
                     @foreach($products as $product)
                     <div class="col-md-3 col-6">
-                        <div class="single-product-wrap home-spwrap">
-                            <div class="product-image">
-                                <a href="/product/shirt/{{$product->slug}}">
-                                    @foreach($product->images as $image) @if($image->position_id == 1)
-                                    <img src="/images/product/product/{{$image->name}}" alt="{{$image->name}}">
-                                    @endif @endforeach
+                        <div class="sps-home-prd-cover">
+                            <div class="sps-home-prd-item-image">
+                                <a href="{{$product->slug}}">
+                                    <img src="{{$product->primary_image}}" alt="{{$product->primary_image}}">
                                 </a>
-                                <span class="label-product label-new">new</span>
                             </div>
-                            <div class="product-content home-sp-pc">
-                                <h3 class="home-sp-h3"><a href="/product/shirt/{{$product->slug}}">{{$product->name}}</a></h3>
-                                <div class="home-price-box">
-                                    <span class="new-price">{{$product->price->price}}</span>
-                                    {{-- <span class="old-price">{{$product->og_price}}</span> --}}
+                            <div class="sps-home-prd-item-body">
+                                <div class="sps-home-prd-item-rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
                                 </div>
+                                <div class="sps-home-prd-item-head"><a href="{{$product->slug}}">{{$product->name}}</a></div>
+                                <div class="sps-home-prd-item-price">{!! $product->price !!}</div>
                             </div>
                         </div>
                     </div>
-                    @endforeach     
-                    @foreach($products as $product)
-                    <div class="col-md-3 col-6">
-                        <div class="single-product-wrap home-spwrap">
-                            <div class="product-image">
-                                <a href="/product/shirt/{{$product->slug}}">
-                                    @foreach($product->images as $image) @if($image->position_id == 1)
-                                    <img src="/images/product/product/{{$image->name}}" alt="{{$image->name}}">
-                                    @endif @endforeach
-                                </a>
-                                <span class="label-product label-new">new</span>
-                            </div>
-                            <div class="product-content home-sp-pc">
-                                <h3 class="home-sp-h3"><a href="/product/shirt/{{$product->slug}}">{{$product->name}}</a></h3>
-                                <div class="home-price-box">
-                                    <span class="new-price">{{$product->price->price}}</span>
-                                    {{-- <span class="old-price">{{$product->og_price}}</span> --}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach 
-                    @foreach($products as $product)
-                    <div class="col-md-3 col-6">
-                        <div class="single-product-wrap home-spwrap">
-                            <div class="product-image">
-                                <a href="/product/shirt/{{$product->slug}}">
-                                    @foreach($product->images as $image) @if($image->position_id == 1)
-                                    <img src="/images/product/product/{{$image->name}}" alt="{{$image->name}}">
-                                    @endif @endforeach
-                                </a>
-                                <span class="label-product label-new">new</span>
-                            </div>
-                            <div class="product-content home-sp-pc">
-                                <h3 class="home-sp-h3"><a href="/product/shirt/{{$product->slug}}">{{$product->name}}</a></h3>
-                                <div class="home-price-box">
-                                    <span class="new-price">{{$product->price->price}}</span>
-                                    {{-- <span class="old-price">{{$product->og_price}}</span> --}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach 
-                    @foreach($products as $product)
-                    <div class="col-md-3 col-6">
-                        <div class="single-product-wrap home-spwrap">
-                            <div class="product-image">
-                                <a href="/product/shirt/{{$product->slug}}">
-                                    @foreach($product->images as $image) @if($image->position_id == 1)
-                                    <img src="/images/product/product/{{$image->name}}" alt="{{$image->name}}">
-                                    @endif @endforeach
-                                </a>
-                                <span class="label-product label-new">new</span>
-                            </div>
-                            <div class="product-content home-sp-pc">
-                                <h3 class="home-sp-h3"><a href="/product/shirt/{{$product->slug}}">{{$product->name}}</a></h3>
-                                <div class="home-price-box">
-                                    <span class="new-price">{{$product->price->price}}</span>
-                                    {{-- <span class="old-price">{{$product->og_price}}</span> --}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach 
-                    @foreach($products as $product)
-                    <div class="col-md-3 col-6">
-                        <div class="single-product-wrap home-spwrap">
-                            <div class="product-image">
-                                <a href="/product/shirt/{{$product->slug}}">
-                                    @foreach($product->images as $image) @if($image->position_id == 1)
-                                    <img src="/images/product/product/{{$image->name}}" alt="{{$image->name}}">
-                                    @endif @endforeach
-                                </a>
-                                <span class="label-product label-new">new</span>
-                            </div>
-                            <div class="product-content home-sp-pc">
-                                <h3 class="home-sp-h3"><a href="/product/shirt/{{$product->slug}}">{{$product->name}}</a></h3>
-                                <div class="home-price-box">
-                                    <span class="new-price">{{$product->price->price}}</span>
-                                    {{-- <span class="old-price">{{$product->og_price}}</span> --}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach 
-                    @foreach($products as $product)
-                    <div class="col-md-3 col-6">
-                        <div class="single-product-wrap home-spwrap">
-                            <div class="product-image">
-                                <a href="/product/shirt/{{$product->slug}}">
-                                    @foreach($product->images as $image) @if($image->position_id == 1)
-                                    <img src="/images/product/product/{{$image->name}}" alt="{{$image->name}}">
-                                    @endif @endforeach
-                                </a>
-                                <span class="label-product label-new">new</span>
-                            </div>
-                            <div class="product-content home-sp-pc">
-                                <h3 class="home-sp-h3"><a href="/product/shirt/{{$product->slug}}">{{$product->name}}</a></h3>
-                                <div class="home-price-box">
-                                    <span class="new-price">{{$product->price->price}}</span>
-                                    {{-- <span class="old-price">{{$product->og_price}}</span> --}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach 
-                    @foreach($products as $product)
-                    <div class="col-md-3 col-6">
-                        <div class="single-product-wrap home-spwrap">
-                            <div class="product-image">
-                                <a href="/product/shirt/{{$product->slug}}">
-                                    @foreach($product->images as $image) @if($image->position_id == 1)
-                                    <img src="/images/product/product/{{$image->name}}" alt="{{$image->name}}">
-                                    @endif @endforeach
-                                </a>
-                                <span class="label-product label-new">new</span>
-                            </div>
-                            <div class="product-content home-sp-pc">
-                                <h3 class="home-sp-h3"><a href="/product/shirt/{{$product->slug}}">{{$product->name}}</a></h3>
-                                <div class="home-price-box">
-                                    <span class="new-price">{{$product->price->price}}</span>
-                                    {{-- <span class="old-price">{{$product->og_price}}</span> --}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach 
-                    @foreach($products as $product)
-                    <div class="col-md-3 col-6">
-                        <div class="single-product-wrap home-spwrap">
-                            <div class="product-image">
-                                <a href="/product/shirt/{{$product->slug}}">
-                                    @foreach($product->images as $image) @if($image->position_id == 1)
-                                    <img src="/images/product/product/{{$image->name}}" alt="{{$image->name}}">
-                                    @endif @endforeach
-                                </a>
-                                <span class="label-product label-new">new</span>
-                            </div>
-                            <div class="product-content home-sp-pc">
-                                <h3 class="home-sp-h3"><a href="/product/shirt/{{$product->slug}}">{{$product->name}}</a></h3>
-                                <div class="home-price-box">
-                                    <span class="new-price">{{$product->price->price}}</span>
-                                    {{-- <span class="old-price">{{$product->og_price}}</span> --}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach                
+                    @endforeach
                 </div>
             </div>
-            <!-- product-wrapper end -->
         </div>
     </div>
     <!-- Product Area End -->
         <!-- Product Area Start -->
 
-{{--     <div class="home-promotion-cover">
+    <div class="home-promotion-cover">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 offset-md-6">
@@ -501,7 +354,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
     <div class="home-info-area-cover">
         <div class="top-container"></div>
             <div class="row no-margin">

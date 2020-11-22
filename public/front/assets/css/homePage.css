@@ -1,0 +1,31 @@
+.sps-home-product-cover{
+    padding: 40px 0px 40px 0px;
+}
+
+.sps-home-prd-item-head{
+    font-family: 'Gothammedium';
+    font-size: 15px;
+    margin-top: 7px;
+}
+
+.sps-home-prd-item-rating i{
+    color: #c1903e;
+}
+
+.sps-home-prd-item-body{
+    padding: 4px 2px 5px 2px;
+}
+
+.sps-home-prd-item-price{
+    margin: 10px 0px 5px 0px;
+    color: #c1903e;
+    font-family: 'Gothammedium';
+    font-size: 16px;
+}
+
+.sps-home-prd-item-price span{
+    font-family: 'GothamBook';
+    color: #8e8e8e;
+    text-decoration: line-through;
+    font-size: 14px;
+}
